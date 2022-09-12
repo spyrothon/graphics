@@ -1,0 +1,21 @@
+.input {
+  flex: 4 1 auto;
+  display: block;
+  width: 100%;
+  padding: 0.625em 1em;
+  border: none;
+  background: transparent;
+  font-size: 1em;
+  color: var(--foreground-1);
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+.multiline {
+  font-family: var(--font-primary);
+  resize: vertical;
+  min-height: 64px;
+}

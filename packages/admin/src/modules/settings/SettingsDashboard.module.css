@@ -1,0 +1,17 @@
+.sidebar {
+  height: 100%;
+  width: 240px;
+  padding: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.main {
+  height: 100%;
+  overflow: scroll;
+  padding: 16px;
+}
+
+.section {
+  margin-bottom: 48px;
+}

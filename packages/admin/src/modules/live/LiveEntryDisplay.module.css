@@ -1,0 +1,14 @@
+.container {
+  background-color: var(--background-tertiary);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.notes {
+  margin: 16px 0 0 0;
+  white-space: pre;
+}

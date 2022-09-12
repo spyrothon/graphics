@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  width: 380px;
+  height: 240px;
+  padding: 16px;
+  border: var(--border-primary);
+  border-radius: 4px;
+}

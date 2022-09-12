@@ -1,0 +1,52 @@
+.sidebar {
+  height: 100%;
+  width: clamp(360px, 28vw, 440px);
+  padding: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.main {
+  height: 100%;
+  min-width: 520px;
+  overflow: scroll;
+  padding: 16px;
+}
+
+.entrySelector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.transitions {
+  padding: 16px;
+}
+
+.transitionActions {
+  display: flex;
+  gap: 8px;
+}
+
+.setCurrentButton {
+  flex: 1 1 200px;
+}
+
+.panels {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 16px;
+}
+
+.panel {
+  flex: 1 1 auto;
+  min-width: min-content;
+  border: var(--border-primary);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.transitionPanel {
+  flex: 1 0 100%;
+}

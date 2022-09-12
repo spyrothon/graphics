@@ -1,0 +1,5 @@
+.panel {
+  padding: 16px;
+  border: var(--border-primary);
+  position: relative;
+}

@@ -1,0 +1,7 @@
+.splits {
+  display: flex;
+}
+
+.split {
+  flex: 1 1 50%;
+}

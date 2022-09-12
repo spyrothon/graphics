@@ -1,0 +1,22 @@
+.container {
+  background-color: var(--background-tertiary);
+  padding: 16px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.stream {
+  margin: 8px 0;
+}
+
+.streamKey {
+  font-weight: 700;
+}
+
+.uptime {
+  color: var(--text-muted);
+}
+
+.bitrate {
+  margin-right: 4px;
+}

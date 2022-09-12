@@ -1,0 +1,19 @@
+.preview {
+  width: 100%;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: var(--background-tertiary);
+}
+
+.previewExtra {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.editButton {
+  flex: 0 1 auto;
+}

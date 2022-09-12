@@ -1,0 +1,26 @@
+.container {
+  background-color: var(--background-tertiary);
+  padding: 16px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.currentScenes {
+  display: flex;
+  gap: 16px;
+}
+
+.volumeMeter {
+  &[aria-disabled="true"] {
+    opacity: 0.4;
+  }
+}
+
+.volumeMeterName {
+  font-size: 14px;
+}
+
+.volumeMeterBar {
+  width: 100%;
+  display: block;
+}

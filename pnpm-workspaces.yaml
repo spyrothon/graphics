@@ -1,0 +1,7 @@
+packages:
+  - "admin"
+  - "api"
+  - "app"
+  - "graphics"
+  - "obs-websocket-js"
+  - "uikit"

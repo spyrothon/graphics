@@ -1,0 +1,8 @@
+.dates {
+  display: flex;
+  gap: 8px;
+}
+
+.date {
+  flex: 1 1 auto;
+}

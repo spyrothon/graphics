@@ -1,0 +1,57 @@
+.text {
+  font-weight: 400;
+  font-family: var(--font-primary);
+  line-height: 1.4em;
+  margin-bottom: 1rem;
+
+  & strong {
+    font-weight: 700;
+  }
+}
+
+.oneline {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.smallCaps {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.marginless {
+  margin-bottom: 0;
+}
+
+.size32 {
+  font-size: 32px;
+}
+
+.size24 {
+  font-size: 24px;
+}
+
+.size20 {
+  font-size: 20px;
+}
+
+.size16 {
+  font-size: 16px;
+}
+
+.size14 {
+  font-size: 14px;
+}
+
+.size12 {
+  font-size: 12px;
+}
+
+.colorNormal {
+  color: var(--text-normal);
+}
+
+.colorMuted {
+  color: var(--text-muted);
+}

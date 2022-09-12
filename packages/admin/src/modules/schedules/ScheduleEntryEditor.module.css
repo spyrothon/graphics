@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+}
+
+.saveButton {
+  margin-left: 16px;
+}
+
+.editor {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-height: 100%;
+  gap: 16px;
+  padding: 16px;
+}
+
+.transitions {
+  flex: 1 1 600px;
+}
+
+.addTransitionButton {
+  float: right;
+}
+
+.header:not(:first-child) {
+  margin-top: 32px;
+}

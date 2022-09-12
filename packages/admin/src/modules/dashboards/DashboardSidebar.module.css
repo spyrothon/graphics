@@ -1,0 +1,14 @@
+.container {
+  padding: 16px;
+  background-color: var(--background-secondary);
+}
+
+.navItem {
+  margin: 2px 0;
+  width: 100%;
+  text-align: left;
+}
+
+.logout {
+  margin-top: 64px;
+}

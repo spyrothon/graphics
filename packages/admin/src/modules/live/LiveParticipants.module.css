@@ -1,0 +1,19 @@
+.columns {
+  display: flex;
+}
+
+.checkboxes {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+
+.participantVisibility {
+  font-weight: 700;
+}
+
+.participantWebcam {
+  margin-left: 32px;
+}
