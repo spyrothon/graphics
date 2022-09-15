@@ -1,0 +1,34 @@
+.container {
+  background: radial-gradient(circle, var(--primary-bg-200) 0%, var(--primary-bg-300) 100%);
+  padding: 6px 16px;
+  box-shadow: 0 0 4px #000;
+}
+
+.name {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--primary-bg);
+  text-shadow: 0 0 4px var(--primary-bg-100);
+}
+
+.pronouns {
+  display: inline-block;
+  height: 18px;
+  line-height: 12px;
+  font-size: 12px;
+  padding: 3px 6px;
+  margin-left: 4px;
+  vertical-align: 1px;
+  background: radial-gradient(circle, var(--secondary-100) 0%, var(--secondary) 100%);
+}
+
+.time {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--primary);
+  text-shadow: 0 0 3px var(--primary-bg-100);
+}

@@ -1,0 +1,30 @@
+.omnibar {
+  display: flex;
+  height: 56px;
+  width: 100%;
+  border-top: 2px solid #000;
+  background: radial-gradient(circle, var(--primary-bg-alt) 0%, var(--primary-bg) 90%);
+}
+
+.logo {
+  flex: 0 0 max-content;
+  padding: 0 16px;
+  margin-top: -2px;
+}
+
+.mainContent {
+  flex: 1 1 auto;
+  position: relative;
+}
+
+.section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+}
+
+.textEmphasis {
+  color: var(--secondary);
+}

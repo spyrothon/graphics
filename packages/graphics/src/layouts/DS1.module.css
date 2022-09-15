@@ -1,0 +1,72 @@
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  width: 473px;
+}
+
+.gameInfo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 240px;
+  width: 100%;
+  padding-bottom: 4px;
+}
+
+.webcam {
+  position: absolute;
+  top: 240px;
+  left: -2px;
+  width: 100%;
+  height: 345px;
+}
+
+.participantsTimer {
+  position: absolute;
+  top: 587px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.runners {
+  flex: 1 1 auto;
+}
+
+.timer {
+  flex: 0 0 auto;
+  justify-self: start;
+  margin: 0 -2px;
+  width: calc(100% + 4px);
+}
+
+.commentaryArea {
+  flex: 1 1 auto;
+}
+
+.commentators {
+  height: 100%;
+}
+
+.game1 {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 1125px;
+  height: 844px;
+}
+
+.omnibar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  width: 100%;
+}

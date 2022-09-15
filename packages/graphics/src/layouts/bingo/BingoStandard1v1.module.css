@@ -1,0 +1,102 @@
+.game1 {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 586px;
+  height: 439px;
+}
+
+.bingoBoard {
+  position: absolute;
+  top: 18px;
+  left: 586px;
+  width: 424px;
+  height: 400px;
+}
+
+.game2 {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 586px;
+  height: 439px;
+}
+
+.centerStack {
+  position: absolute;
+  top: 422px;
+  height: 148px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border-bottom: 2px solid #000;
+  z-index: -1;
+}
+
+.participantsTimer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 16px auto 0 auto;
+  height: 120px;
+}
+
+.nameplateLeft,
+.nameplateRight {
+  position: relative;
+  width: 360px;
+}
+
+.timer {
+  width: 396px;
+  height: 65px;
+  z-index: 2;
+}
+
+.infoRow {
+  position: absolute;
+  top: 570px;
+  bottom: 56px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.gameInfo {
+  flex: 0 1 520px;
+}
+
+.commentaryArea {
+  flex: 0 1 480px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.commentators {
+  width: 380px;
+  min-height: 50%;
+}
+
+.artRotation {
+  flex: 0 1 auto;
+  width: 538px;
+  height: 100%;
+  padding: 16px;
+}
+
+.omnibar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  width: 100%;
+}

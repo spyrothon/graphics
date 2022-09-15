@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.gameName {
+  flex: 2 1 auto;
+  min-height: 120px;
+  width: 100%;
+  padding: 16px 24px;
+}
+
+.categoryName {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.runInfo {
+  flex: 1 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.platform,
+.releaseYear,
+.estimate {
+  flex: 1 1 auto;
+  text-align: center;
+  color: var(--text-inverted);
+  font-weight: 900;
+  font-size: 14px;
+  text-shadow: 0 0 8px #000;
+  margin: 0 8px;
+
+  & .descriptor {
+    font-weight: 400;
+  }
+
+  & .value {
+    display: inline-block;
+  }
+}

@@ -5,7 +5,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import "@spyrothon/uikit/style.css";
+// import "@spyrothon/uikit/style.css";
 
 import { ThemeProvider } from "@spyrothon/uikit";
 import App from "./App";

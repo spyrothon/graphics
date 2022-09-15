@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title {
+  flex: 2 0 auto;
+  align-self: flex-start;
+  justify-self: start;
+  padding: 8px;
+  color: var(--text-inverted);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px #000;
+}
+
+.participants {
+  flex: 3 1 auto;
+  justify-self: center;
+  width: 100%;
+  padding: 0 32px;
+}
+
+.nameplate {
+  margin-bottom: 4px;
+}

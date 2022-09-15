@@ -7,18 +7,6 @@
     "dist"
   ],
   "main": "./src/index.tsx",
-  "source": "./src/index.tsx",
-  "exports": {
-    ".": {
-      "import": "./dist/uikit.js",
-      "require": "./dist/uikit.umd.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "tsc": "tsc --watch",

@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.layout {
+  position: relative;
+  width: 1600px;
+  height: 900px;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  width: 1600px;
+  height: 900px;
+  filter: url(#sharpBlur) saturate(0.7);
+  z-index: -1;
+}

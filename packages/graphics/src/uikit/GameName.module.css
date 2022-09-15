@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+}
+
+.verticalPositioner {
+  width: 100%;
+  align-self: center;
+}
+
+.text {
+  color: #f8e8f0;
+  font-family: "Overlock";
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  filter: url(#stroke);
+}

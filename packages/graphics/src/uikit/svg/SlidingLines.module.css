@@ -1,0 +1,21 @@
+.container {
+  display: block;
+}
+
+.stack {
+  position: relative;
+  animation: slide ease-in-out infinite;
+  animation-delay: calc(0.5ms * var(--randomDelay, 1));
+  animation-duration: calc(1s * var(--randomTime, 1));
+  animation-direction: var(--randomDirection);
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(calc(-1 * var(--stackHeight, 40%)));
+  }
+}

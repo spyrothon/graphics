@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+}
+
+.participant {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.participantScore {
+  font-size: 72px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--text-inverted);
+  text-shadow: 0 0 8px #000;
+}
+
+.participantName {
+  width: 80%;
+  background: radial-gradient(circle, var(--primary-bg-200) 0%, var(--primary-bg-300) 100%);
+  padding: 6px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-bg);
+  text-shadow: 0 0 4px var(--primary-bg-100);
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 0 4px #000;
+  z-index: 1;
+}

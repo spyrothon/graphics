@@ -1,0 +1,58 @@
+.container {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.entry {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.image {
+  flex: 1 0 auto;
+  width: 80%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 16px #000);
+}
+
+.character {
+  flex: 0 0 auto;
+  width: 80%;
+  background: radial-gradient(circle, var(--primary-bg-200) 0%, var(--primary-bg-300) 100%);
+  padding: 6px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-bg);
+  text-shadow: 0 0 4px var(--primary-bg-100);
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 0 4px #000;
+  z-index: 1;
+}
+
+.credit {
+  flex: 0 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-inverted);
+  text-align: center;
+  text-shadow: 0 0 4px #000;
+}
+
+.artistName,
+.artistTwitter {
+  font-weight: 700;
+}

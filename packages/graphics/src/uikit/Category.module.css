@@ -1,0 +1,14 @@
+.container {
+  background: radial-gradient(circle, var(--primary-bg-200) 0%, var(--primary-bg-300) 100%);
+  padding: 6px 16px;
+  box-shadow: 0 0 4px #000;
+}
+
+.text {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--primary-bg);
+  text-shadow: 0 0 4px var(--primary-bg-100);
+}

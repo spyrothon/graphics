@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes as RouterRoutes, Route, useRoutes } from "react-router-dom";
+import { Routes as RouterRoutes, Route } from "react-router-dom";
 
 import { APIClient } from "@spyrothon/api";
 

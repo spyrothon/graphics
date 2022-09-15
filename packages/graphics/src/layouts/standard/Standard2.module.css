@@ -1,0 +1,102 @@
+.game1 {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 799px;
+  height: 599px;
+}
+.game2 {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 799px;
+  height: 599px;
+}
+
+.gameInfo {
+  position: absolute;
+  top: 640px;
+  left: 0;
+  width: 586px;
+  bottom: 56px;
+  padding-bottom: 4px;
+}
+
+.centerStack {
+  position: absolute;
+  top: 599px;
+  height: 247px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.participantsTimer {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: auto;
+  height: 65px;
+}
+
+.nameplateLeft,
+.nameplateRight {
+  position: relative;
+  top: 2px;
+  width: 360px;
+}
+
+.timer {
+  width: 428px;
+  height: 65px;
+  z-index: 2;
+}
+
+.webcam {
+  position: relative;
+  margin-top: -2px;
+  width: 424px;
+  height: 180px;
+}
+
+.commentaryArea {
+  position: relative;
+  margin-top: 0px;
+  width: 428px;
+  height: 182px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-top: none;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.artRotation {
+  flex: 1 0 266px;
+  width: 100%;
+  margin: 8px 0;
+  position: absolute;
+  top: 640px;
+  right: 0;
+  bottom: 56px;
+  width: 586px;
+}
+
+.commentators {
+  width: 380px;
+  min-height: 50%;
+}
+
+.omnibar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  width: 100%;
+}

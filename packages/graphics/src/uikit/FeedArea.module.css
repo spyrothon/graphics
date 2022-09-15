@@ -1,0 +1,43 @@
+.feed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: initial;
+  border: 2px solid #000;
+  background-color: #00ff00;
+  z-index: 999;
+}
+
+.sizeText {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.topLeft {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 14px;
+}
+
+.topRight {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+}
+
+.bottomLeft {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 14px;
+}
+
+.bottomRight {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 14px;
+}

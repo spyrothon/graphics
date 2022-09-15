@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  width: 380px;
+  background: radial-gradient(circle, var(--primary-bg-200) 0%, var(--primary-bg-300) 100%);
+  padding: 6px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-bg);
+  text-shadow: 0 0 4px var(--primary-bg-100);
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 0 4px #000;
+}
+
+.runContainer {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px;
+  margin: 2px 0;
+  border-radius: 4px;
+  color: var(--text-inverted);
+  text-shadow: 0 1px 6px #000;
+  font-size: 18px;
+
+  .reverse & {
+    flex-direction: row-reverse;
+  }
+}
+
+.interviewContainer {
+  text-align: center;
+  width: 40%;
+  min-width: 520px;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 4px;
+  color: var(--text-inverted);
+  text-shadow: 0 1px 6px #000;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.startTime {
+  flex: 0 0 96px;
+  text-align: right;
+  margin-right: 16px;
+  font-size: 20px;
+}
+
+.runLeft {
+  flex: 1 1 50%;
+  padding: 0 16px;
+  text-align: right;
+
+  .reverse & {
+    text-align: left;
+  }
+}
+
+.runRight {
+  flex: 1 1 50%;
+  border-left: 3px solid var(--primary-bg-200);
+  padding: 0 16px;
+
+  .reverse & {
+    text-align: right;
+    border-left: none;
+    border-right: 3px solid var(--primary-bg-200);
+  }
+}
+
+.runGame {
+  color: var(--text-inverted);
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-brand);
+  margin-bottom: 2px;
+}
+
+.runCategory {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: var(--font-brand);
+  color: var(--text-inverted);
+}
+
+.runParticipants {
+  color: var(--primary-bg-200);
+}
+
+.runEstimate {
+  color: var(--primary-bg-200);
+}
