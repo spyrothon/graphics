@@ -5,4 +5,5 @@ export * from "./src/Endpoints";
 export { default as HTTPUtils } from "./src/HTTPUtils";
 
 export { default as SyncSocket } from "./src/socket/SyncSocket";
+export type { ConnectionChangeHandler } from "./src/socket/SyncSocket";
 export * from "./src/socket/SyncSocketTypes";

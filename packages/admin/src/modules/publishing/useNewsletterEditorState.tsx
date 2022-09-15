@@ -1,6 +1,7 @@
 import * as React from "react";
+import {v4 as uuid} from 'uuid';
 
-import type { Newsletter, InitialPublication } from "@spyrothon/api";
+import type { Newsletter, InitialPublication, Publication } from "@spyrothon/api";
 
 type NewsletterEditorState = {
   baseNewsletter?: Newsletter;
@@ -39,8 +40,11 @@ function newsletterEditorReducer(state: NewsletterEditorState, action: Newslette
 export type NewsletterEditorsStateValue = {
   state: NewsletterEditorState;
   setBaseNewsletter: (newsletter?: Newsletter) => unknown;
-  updateField: <F extends keyof Newsletter>(field: F, value: Newsletter[F]) => unknown;
-  getField: <F extends keyof Newsletter>(field: F) => Newsletter[F] | undefined;
+  updateField<F extends keyof Newsletter>(field: F, value: Newsletter[F]): unknown;
+  getField<F extends keyof Newsletter>(field: F): Newsletter[F] | undefined;
+  updatePublication(publication: InitialPublication, index: number): unknown;
+  addPublication(): unknown;
+  removePublication(index: number): unknown;
   getEditedNewsletter: () => Newsletter;
   hasChanges: () => boolean;
 };
@@ -65,7 +69,7 @@ export default function useNewsletterEditorState(): NewsletterEditorsStateValue 
   }
   function updatePublication(newPublication: InitialPublication, index: number) {
     const publications = getField("publications") ?? [];
-    publications[index] = newPublication;
+    publications[index] = newPublication as Publication;
     updateField("publications", publications);
   }
 
@@ -77,7 +81,7 @@ export default function useNewsletterEditorState(): NewsletterEditorsStateValue 
 
   function addPublication() {
     const publications = Array.from(getField("publications") ?? []);
-    publications.push({ id: uuid() });
+    publications.push({ id: uuid() } as Publication);
     updateField("publications", publications);
   }
   function getEditedNewsletter(): Newsletter {

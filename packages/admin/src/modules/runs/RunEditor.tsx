@@ -209,19 +209,18 @@ export default function RunEditor(props: RunEditorProps) {
             />
           </div>
           <TextInput
+            type="textarea"
             label="Notes"
             value={editor.getField("notes")}
             note={getNote("notes")}
-            multiline
             onChange={(event) => editor.updateField("notes", event.target.value)}
           />
           <Header className={styles.header}>Layout Information</Header>
           <TextInput
+            type="textarea"
             label="Formatted Game Name"
             note="Use newlines to adjust how the game name looks on stream."
             value={editor.getField("gameNameFormatted")}
-            multiline
-            // @ts-expect-error TextInput needs to handle textarea props
             rows={2}
             onChange={(event) => editor.updateField("gameNameFormatted", event.target.value)}
           />

@@ -1,40 +1,56 @@
 import * as React from "react";
 import classNames from "classnames";
 
-import { InputWrapper, InputWrapperPassthroughProps } from "./InputWrapper";
+import {
+  InputWrapper,
+  InputWrapperPassthroughProps,
+  withoutInputWrapperProps,
+} from "./InputWrapper";
 
 import styles from "./TextInput.module.css";
 
-type TextInputType = "text" | "email" | "password";
+type TextInputType = "text" | "email" | "password" | "textarea";
 
-export type TextInputProps = React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> & {
-  type?: TextInputType;
+type CommonProps = {
   value?: string;
   placeholder?: string;
   label?: string;
-  multiline?: boolean;
-} & InputWrapperPassthroughProps;
+};
+
+export type TextInputProps = (
+  | ({ type?: "text" | "email" | "password" } & React.InputHTMLAttributes<HTMLInputElement>)
+  | ({ type: "textarea" } & React.TextareaHTMLAttributes<HTMLTextAreaElement>)
+) &
+  CommonProps &
+  InputWrapperPassthroughProps;
 
 export function TextInput(props: TextInputProps) {
-  const {
-    name,
-    label,
-    type = "text",
-    note,
-    className,
-    value,
-    multiline = false,
-    marginless,
-    ...inputProps
-  } = props;
+  const { name, label, type = "text", note, className, value, marginless, ...inputProps } = props;
 
-  const Tag = multiline ? "textarea" : "input";
-
-  const typeProps = multiline
-    ? {
-        rows: 4,
-      }
-    : {};
+  const input = (() => {
+    switch (props.type) {
+      case "textarea":
+        return (
+          <textarea
+            className={classNames(styles.input, styles.multiline)}
+            name={name}
+            rows={props.rows ?? 4}
+            value={value ?? ""}
+            {...withoutInputWrapperProps(props)}
+          />
+        );
+      default:
+        return (
+          <input
+            className={styles.input}
+            name={name}
+            type={type}
+            value={value ?? ""}
+            {...withoutInputWrapperProps(props)}
+          />
+        );
+    }
+  })();
 
   return (
     <InputWrapper
@@ -44,14 +60,7 @@ export function TextInput(props: TextInputProps) {
       className={className}
       marginless={marginless}
       {...inputProps}>
-      <Tag
-        className={classNames(styles.input, { [styles.multiline]: multiline })}
-        name={name}
-        type={type}
-        value={value ?? ""}
-        {...typeProps}
-        {...inputProps}
-      />
+      {input}
     </InputWrapper>
   );
 }

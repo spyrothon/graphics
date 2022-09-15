@@ -97,7 +97,7 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
           <OBSSceneSelector
             selectedSceneName={editedEntry.obsSceneName}
             note="Name of the scene to use for this run in OBS."
-            onChange={(scene) => setEditedEntry({ ...editedEntry, obsSceneName: scene?.name })}
+            onChange={(scene) => setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })}
           />
         </div>
 

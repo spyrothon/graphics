@@ -6,6 +6,8 @@
   "files": [
     "dist"
   ],
+  "main": "./src/index.tsx",
+  "source": "./src/index.tsx",
   "exports": {
     ".": {
       "import": "./dist/uikit.js",
@@ -25,8 +27,8 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "16.8 - 18",
+    "react-dom": "16.8 - 18"
   },
   "dependencies": {
     "classnames": "^2.3.1",

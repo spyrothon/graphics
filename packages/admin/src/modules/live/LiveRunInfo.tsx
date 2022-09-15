@@ -31,11 +31,10 @@ export default function LiveRunInfo(props: LiveRunInfoProps) {
     <div className={classNames(className)}>
       <Header size={Header.Sizes.H4}>Layout Run Info</Header>
       <TextInput
+        type="textarea"
         label="Formatted Game Name"
         note="Use newlines to adjust how the game name looks on stream."
         value={gameNameFormatted}
-        multiline
-        // @ts-expect-error TextInput needs to handle textarea props
         rows={2}
         onChange={(event) => setGameNameFormatted(event.target.value)}
       />

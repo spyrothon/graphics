@@ -59,8 +59,8 @@ export default function ArticleEditor(props: ArticleEditorProps) {
           onChange={(event) => setEdited({ ...edited, authorName: event.target.value })}
         />
         <TextInput
+          type="textarea"
           label="Content"
-          multiline
           rows={12}
           value={edited.content}
           onChange={(event) => setEdited({ ...edited, content: event.target.value })}

@@ -149,7 +149,7 @@ export default function NewsletterEditor(props: NewsletterEditorProps) {
         />
         <TextInput
           label="Introduction"
-          multiline
+          type="textarea"
           rows={12}
           value={edited.introduction}
           onChange={(event) => setEdited({ ...edited, introduction: event.target.value })}

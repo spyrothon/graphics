@@ -1,6 +1,5 @@
 import { APP_HOST } from "@spyrothon/api";
-import { AppRoutes } from "@admin/Constants";
 
-export default function getPublicAppURL(route: typeof AppRoutes[keyof typeof AppRoutes]) {
+export default function getPublicAppURL(route: string) {
   return `${APP_HOST}${route}`;
 }

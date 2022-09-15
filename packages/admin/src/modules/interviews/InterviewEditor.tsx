@@ -186,11 +186,11 @@ export default function InterviewEditor(props: InterviewEditorProps) {
             onChange={(value) => editor.updateField("estimateSeconds", value)}
           />
           <TextInput
+            type="textarea"
             label="Notes"
             value={editor.getField("notes")}
             note={getNote("notes")}
             onChange={(event) => editor.updateField("notes", event.target.value)}
-            multiline
           />
           <Header className={styles.header}>Questions</Header>
           {renderQuestionFields(0)}
