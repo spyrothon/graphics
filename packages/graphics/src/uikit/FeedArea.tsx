@@ -3,8 +3,9 @@ import classNames from "classnames";
 
 import { useSafeSelector } from "@graphics/Store";
 
-import styles from "./FeedArea.module.css";
 import ScheduleStore from "../modules/schedules/ScheduleStore";
+
+import styles from "./FeedArea.module.css";
 
 type GameFeedAreaProps = {
   className: string;
@@ -48,6 +49,8 @@ export default function FeedArea(props: GameFeedAreaProps) {
         left,
       });
     }
+    // `position` should probably be a ref, but eh
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [width, height] = size;

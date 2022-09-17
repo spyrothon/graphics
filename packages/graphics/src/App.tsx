@@ -1,24 +1,22 @@
 import * as React from "react";
 import { BrowserRouter, Route, Routes as RouterRoutes } from "react-router-dom";
-
 import { APIClient } from "@spyrothon/api";
 
-import { Routes } from "./Constants";
 import useSafeDispatch from "./hooks/useDispatch";
-import DS1 from "./layouts/DS1";
-import FiveFour1 from "./layouts/FiveFour1";
-import GBA1 from "./layouts/GBA1";
-import OmnibarOnly from "./layouts/OmnibarOnly";
 import BingoStandard1v1 from "./layouts/bingo/BingoStandard1v1";
 import BingoStandard2v2 from "./layouts/bingo/BingoStandard2v2";
 import BreakCountdown from "./layouts/breaks/BreakCountdown";
 import BreakLeft from "./layouts/breaks/BreakLeft";
-import BreakRight from "./layouts/breaks/BreakRight";
 import BreakOutro from "./layouts/breaks/BreakOutro";
+import BreakRight from "./layouts/breaks/BreakRight";
+import DS1 from "./layouts/DS1";
+import FiveFour1 from "./layouts/FiveFour1";
+import GBA1 from "./layouts/GBA1";
 import HD1 from "./layouts/hd/HD1";
 import HD2 from "./layouts/hd/HD2";
 import InterviewOpen from "./layouts/interview/InterviewOpen";
 import QuizCorner from "./layouts/interview/QuizCorner";
+import OmnibarOnly from "./layouts/OmnibarOnly";
 import Standard1 from "./layouts/standard/Standard1";
 import Standard2 from "./layouts/standard/Standard2";
 import Standard3 from "./layouts/standard/Standard3";
@@ -26,6 +24,7 @@ import Standard4 from "./layouts/standard/Standard4";
 import { fetchSchedule } from "./modules/schedules/ScheduleActions";
 import SyncSocketManager from "./modules/sync/SyncSocketManager";
 import SVGLibrary from "./uikit/svg/SVGLibrary";
+import { Routes } from "./Constants";
 
 export default function App() {
   React.useEffect(() => {
@@ -42,7 +41,7 @@ export default function App() {
       const { scheduleId } = await APIClient.fetchInit();
       dispatch(fetchSchedule(scheduleId));
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

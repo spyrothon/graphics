@@ -1,6 +1,6 @@
 // import { Routes as AppRoutes } from "@app/Constants";
 const AppRoutes = {
-  NEWSLETTER: (newsletterId: string) => "#",
+  NEWSLETTER: (_newsletterId: string) => "#",
 };
 
 export const Routes = {

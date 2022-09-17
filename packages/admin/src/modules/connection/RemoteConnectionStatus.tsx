@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Header, StatusDot } from "@spyrothon/uikit";
 
-import styles from "./RemoteConnectionStatus.module.css";
-import { useOBSConnected, useOBSBusy } from "../obs/OBSStore";
+import { useOBSBusy,useOBSConnected } from "../obs/OBSStore";
 import SyncSocketManager from "../sync/SyncSocketManager";
+
+import styles from "./RemoteConnectionStatus.module.css";
 
 export default function RemoteConnectionStatus() {
   const [obsConnected] = useOBSConnected();

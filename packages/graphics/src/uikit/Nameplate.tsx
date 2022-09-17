@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
-
 import { RunParticipant } from "@spyrothon/api";
+
 import DurationUtils from "../modules/time/DurationUtils";
 
 import styles from "./Nameplate.module.css";

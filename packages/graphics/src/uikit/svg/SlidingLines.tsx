@@ -138,7 +138,7 @@ export default function SlidingLines(props: SlidingLinesProps) {
     }
 
     setStacks(stacks);
-  }, [lineWidth, width, height]);
+  }, [lineWidth, width, height, renderedHeight]);
 
   return (
     <svg

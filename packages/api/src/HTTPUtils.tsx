@@ -121,7 +121,7 @@ export async function del(url: string, opts: DeleteOptions = {}) {
   });
 }
 
-export async function send<T>(
+export async function send(
   verb: HTTPVerb.DELETE,
   url: string,
   options?: RequestInit,

@@ -1,4 +1,4 @@
-import type { Newsletter, Article } from "@spyrothon/api";
+import type { Article,Newsletter } from "@spyrothon/api";
 
 export enum PublishingActionType {
   PUBLISHING_UPDATE_NEWSLETTER = "PUBLISHING_UPDATE_NEWSLETTER",

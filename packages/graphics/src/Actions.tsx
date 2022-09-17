@@ -1,7 +1,7 @@
 import { InterviewAction, InterviewActionType } from "./modules/interviews/InterviewTypes";
-import { ScheduleAction, ScheduleActionType } from "./modules/schedules/ScheduleTypes";
 import { RemoteAction, RemoteActionType } from "./modules/remote/RemoteTypes";
 import { RunAction, RunActionType } from "./modules/runs/RunsTypes";
+import { ScheduleAction, ScheduleActionType } from "./modules/schedules/ScheduleTypes";
 
 export const ActionTypes = {
   ...InterviewActionType,

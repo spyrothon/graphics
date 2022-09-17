@@ -1,9 +1,9 @@
 import * as React from "react";
 import classNames from "classnames";
 
-import styles from "./Layout.module.css";
-
 import backgroundVideo from "@graphics/res/BT1.mp4";
+
+import styles from "./Layout.module.css";
 
 type LayoutProps = {
   className?: string;

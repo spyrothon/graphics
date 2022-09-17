@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { formatDuration, parseDuration } from "./utils/DurationUtils";
-import { TextInput, TextInputProps } from "./TextInput";
 import { InputWrapperPassthroughProps } from "./InputWrapper";
+import { TextInput } from "./TextInput";
 
 type CommonProps = {
   value?: number;
@@ -11,10 +11,12 @@ type CommonProps = {
   onChange: (value: number) => unknown;
 };
 
-type DurationInputProps = 
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | keyof CommonProps> &
+type DurationInputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "type" | keyof CommonProps
+> &
   CommonProps &
-  InputWrapperPassthroughProps;;
+  InputWrapperPassthroughProps;
 
 export function DurationInput(props: DurationInputProps) {
   const { value, onChange, ...otherProps } = props;

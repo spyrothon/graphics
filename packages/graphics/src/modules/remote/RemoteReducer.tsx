@@ -1,5 +1,6 @@
+import { Action,ActionFor } from "@graphics/Actions";
+
 import { RemoteActionType } from "./RemoteTypes";
-import { ActionFor, Action } from "@graphics/Actions";
 
 type RemoteReducerState = {
   connected: boolean;

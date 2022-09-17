@@ -1,6 +1,7 @@
 import { APIClient, Interview } from "@spyrothon/api";
 
 import { SafeDispatch } from "@graphics/hooks/useDispatch";
+
 import { InterviewAction, InterviewActionType } from "./InterviewTypes";
 
 export function updateInterview(interview: Interview): InterviewAction {

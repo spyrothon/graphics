@@ -1,9 +1,10 @@
 import { APIClient, Schedule, ScheduleEntry } from "@spyrothon/api";
 
 import { SafeDispatch } from "@graphics/hooks/useDispatch";
+
 import { fetchInterviewsSuccess } from "../interviews/InterviewActions";
 import { fetchRunsSuccess } from "../runs/RunActions";
-import { ScheduleActionType, ScheduleAction } from "./ScheduleTypes";
+import { ScheduleAction,ScheduleActionType } from "./ScheduleTypes";
 
 export function selectScheduleEntry(entryId?: string): ScheduleAction {
   return {

@@ -1,0 +1,63 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "simple-import-sort"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended"],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["node_modules/", "public/", "dist/"],
+  "rules": {
+    "camelcase": ["error", { "allow": ["^_"] }],
+    "no-labels": ["error", { "allowLoop": true }],
+    // TypeScript-replaced rules
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true, "allowTaggedTemplates": true }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "warn",
+      { "variables": true, "classes": true, "functions": false, "typedefs": false }
+    ],
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+
+    // TypeScript handles these errors
+    "no-dupe-class-members": "off",
+    "no-undef": "off",
+    "no-redeclare": "off",
+    "react/prop-types": "off",
+
+    // Enforce import orders
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // React and classnames first, then any 3rd party packages, then our 1st party packages
+          ["^react$", "^classnames$", "^[a-z]", "^@spyrothon/"],
+          // Aliased imports (like `@app`, `@admin`, etc.)
+          ["^@"],
+          // Relative imports, starting from the furthest up the tree (`../../`),
+          // to direct siblings (`./`).
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$", "^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // CSS
+          ["^.+(\\.module)?\\.css$"],
+          // Assets
+          ["^.+\\.(png|gif|jpe?g|webm|mov|svg)$"],
+          // Side effects
+          ["^\\u0000"]
+        ]
+      }
+    ]
+  }
+}

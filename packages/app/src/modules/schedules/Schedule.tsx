@@ -1,19 +1,19 @@
 import * as React from "react";
 import { DateTime } from "luxon";
-
 import { RunParticipant } from "@spyrothon/api";
 import { Anchor, formatDuration } from "@spyrothon/uikit";
+
 import { useSafeSelector } from "../../Store";
 import PublicHelmet from "../core/PublicHelmet";
 import { getInterview } from "../interviews/InterviewStore";
-import { getEntriesWithStartTimes, getSchedule } from "../schedules/ScheduleStore";
 import { getRun } from "../runs/RunStore";
+import { getEntriesWithStartTimes, getSchedule } from "../schedules/ScheduleStore";
 import { ScheduleEntryWithTimes } from "../schedules/ScheduleTypes";
 
 import styles from "./Schedule.module.css";
 
-import backgroundVideo from "../../res/schedule_background.webm";
 import backgroundPoster from "../../res/schedule_background.png";
+import backgroundVideo from "../../res/schedule_background.webm";
 
 function renderNameList(participants: RunParticipant[]) {
   return participants.map((runner, index) => (
@@ -95,7 +95,7 @@ export default function Schedule() {
 
   const startTime = React.useMemo(
     () => (schedule != null ? DateTime.fromJSDate(schedule.startTime) : undefined),
-    [schedule?.startTime],
+    [schedule],
   );
 
   function renderEntry(entry: ScheduleEntryWithTimes) {

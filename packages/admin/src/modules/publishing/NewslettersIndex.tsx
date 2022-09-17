@@ -1,14 +1,15 @@
 import * as React from "react";
+import { Newsletter } from "@spyrothon/api";
 import { Anchor, Header, NavLink, Text } from "@spyrothon/uikit";
 
-import { Newsletter } from "@spyrothon/api";
-import { useSafeSelector } from "@admin/Store";
+import { Routes } from "@admin/Constants";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+import { useSafeSelector } from "@admin/Store";
+
 import { fetchNewsletters } from "./PublishingActions";
 import * as PublishingStore from "./PublishingStore";
 
 import styles from "./NewslettersIndex.module.css";
-import { Routes } from "@admin/Constants";
 
 interface NewsletterPreviewProps {
   newsletter: Newsletter;
@@ -40,7 +41,7 @@ export default function NewslettersIndex() {
 
   React.useEffect(() => {
     dispatch(fetchNewsletters());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

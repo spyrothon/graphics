@@ -13,10 +13,8 @@ export default function OBSButton(props: React.ComponentProps<typeof Button> & O
   const { busy } = useOBSBusy();
 
   return (
-    <Button
-      {...props}
-      disabled={disabled || busy}
-      children={busy ? busyText ?? children : children}
-    />
+    <Button {...props} disabled={disabled || busy}>
+      {busy ? busyText ?? children : children}
+    </Button>
   );
 }

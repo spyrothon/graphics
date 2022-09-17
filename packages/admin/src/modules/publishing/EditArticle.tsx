@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Header } from "@spyrothon/uikit";
 
-import { useSafeSelector } from "@admin/Store";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+import { useSafeSelector } from "@admin/Store";
+
+import ArticleEditor from "./ArticleEditor";
 import { fetchArticle } from "./PublishingActions";
 import * as PublishingStore from "./PublishingStore";
-import ArticleEditor from "./ArticleEditor";
 
 interface EditArticleProps {
   articleId: string;
@@ -19,7 +20,7 @@ export default function EditArticle(props: EditArticleProps) {
 
   React.useEffect(() => {
     dispatch(fetchArticle(articleId));
-  }, [articleId]);
+  }, [dispatch, articleId]);
 
   if (newsletter == null) return null;
 

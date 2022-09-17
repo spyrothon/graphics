@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
-
 import { APIClient, HTTPUtils, User } from "@spyrothon/api";
+
 import { SafeDispatch } from "@admin/hooks/useDispatch";
-import { AuthActionType, AuthAction } from "./AuthTypes";
+
+import { AuthAction,AuthActionType } from "./AuthTypes";
 
 const AUTH_COOKIE_ID = "session";
 

@@ -1,15 +1,16 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Loader, Check, Circle } from "react-feather";
+import { Check, Circle,Loader } from "react-feather";
+import { Transition, TransitionSet, TransitionState } from "@spyrothon/api";
 import { Button, Text } from "@spyrothon/uikit";
 
-import { Transition, TransitionSet, TransitionState } from "@spyrothon/api";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import OBS from "../obs/OBS";
+import { useOBSConnected } from "../obs/OBSStore";
 import { resetTransitionSet } from "../schedules/ScheduleActions";
 
 import styles from "./LiveTransitionSection.module.css";
-import { useOBSConnected } from "../obs/OBSStore";
 
 function getIconForTransitionState(state?: TransitionState) {
   switch (state) {

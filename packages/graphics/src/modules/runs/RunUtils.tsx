@@ -1,4 +1,4 @@
-import { RunParticipant, Run } from "@spyrothon/api";
+import { Run,RunParticipant } from "@spyrothon/api";
 
 function getVisibleParticipants(participants: RunParticipant[]) {
   return participants.filter((participant) => participant.visible);

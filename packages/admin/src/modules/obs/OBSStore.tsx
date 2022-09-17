@@ -1,6 +1,6 @@
 import create from "zustand";
 
-import type { OBSTransition, OBSScene, OBSInput, OBSInputState, OBSSceneItem } from "./OBSTypes";
+import type { OBSInput, OBSInputState, OBSScene, OBSSceneItem,OBSTransition } from "./OBSTypes";
 
 interface OBSStoreState {
   connected: boolean;

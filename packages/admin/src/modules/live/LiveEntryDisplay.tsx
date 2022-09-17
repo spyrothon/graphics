@@ -1,8 +1,8 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Header, Text, formatDuration } from "@spyrothon/uikit";
+import { Interview,Run } from "@spyrothon/api";
+import { formatDuration,Header, Text } from "@spyrothon/uikit";
 
-import { Run, Interview } from "@spyrothon/api";
 import { ScheduleEntryWithDependants } from "../schedules/ScheduleTypes";
 
 import styles from "./LiveEntryDisplay.module.css";

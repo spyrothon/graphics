@@ -1,10 +1,10 @@
 import * as React from "react";
 import classNames from "classnames";
-
 import { RunParticipant } from "@spyrothon/api";
 
-import styles from "./NameplateGroup.module.css";
 import Nameplate from "./Nameplate";
+
+import styles from "./NameplateGroup.module.css";
 
 type NameplateGroupProps = {
   participants: RunParticipant[];

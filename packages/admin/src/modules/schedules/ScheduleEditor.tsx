@@ -1,14 +1,14 @@
 import * as React from "react";
 import { ScheduleEntryType } from "@spyrothon/api";
-import { Tabs, Tab } from "@spyrothon/uikit";
+import { Tab,Tabs } from "@spyrothon/uikit";
 
 import { useSafeSelector } from "../../Store";
 import Dashboard from "../dashboards/Dashboard";
 import InterviewEditor from "../interviews/InterviewEditor";
 import RunEditor from "../runs/RunEditor";
+import ScheduleEntryEditor from "./ScheduleEntryEditor";
 import ScheduleList from "./ScheduleList";
 import * as ScheduleStore from "./ScheduleStore";
-import ScheduleEntryEditor from "./ScheduleEntryEditor";
 
 import styles from "./ScheduleEditor.module.css";
 

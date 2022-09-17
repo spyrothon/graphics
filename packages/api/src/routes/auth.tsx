@@ -1,7 +1,6 @@
-import HTTPUtils from "../HTTPUtils";
-import Endpoints from "../Endpoints";
-
 import type { SessionToken, User } from "../APITypes";
+import Endpoints from "../Endpoints";
+import HTTPUtils from "../HTTPUtils";
 
 interface LoginResponse {
   user: User;

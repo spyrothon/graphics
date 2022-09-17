@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Square, CheckSquare } from "react-feather";
+import { CheckSquare,Square } from "react-feather";
 
 import { Text } from "./Text";
 

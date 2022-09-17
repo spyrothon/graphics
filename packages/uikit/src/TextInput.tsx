@@ -9,8 +9,6 @@ import {
 
 import styles from "./TextInput.module.css";
 
-type TextInputType = "text" | "email" | "password" | "textarea";
-
 type CommonProps = {
   value?: string;
   placeholder?: string;

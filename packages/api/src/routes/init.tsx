@@ -1,7 +1,6 @@
-import HTTPUtils from "../HTTPUtils";
-import Endpoints from "../Endpoints";
-
 import type { InitPayload } from "../APITypes";
+import Endpoints from "../Endpoints";
+import HTTPUtils from "../HTTPUtils";
 
 export async function fetchInit() {
   return await HTTPUtils.get<InitPayload>(Endpoints.INIT);

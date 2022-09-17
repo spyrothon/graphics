@@ -1,6 +1,5 @@
 import * as React from "react";
 import classNames from "classnames";
-
 import { Run } from "@spyrothon/api";
 
 import Category from "@graphics/uikit/Category";

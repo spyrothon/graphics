@@ -1,16 +1,16 @@
 import * as React from "react";
 import { BrowserRouter, Route, Routes as RouterRoutes, useParams } from "react-router-dom";
-
 import { APIClient } from "@spyrothon/api";
+
 import useSafeDispatch from "@app/hooks/useDispatch";
 
-import { Routes } from "./Constants";
 import Newsletter from "./modules/newsletters/Newsletter";
 import Newsletters from "./modules/newsletters/Newsletters";
 import CurrentScheduleContext from "./modules/schedules/CurrentScheduleContext";
+import Schedule from "./modules/schedules/Schedule";
 import { fetchSchedule } from "./modules/schedules/ScheduleActions";
 import * as ScheduleStore from "./modules/schedules/ScheduleStore";
-import Schedule from "./modules/schedules/Schedule";
+import { Routes } from "./Constants";
 import { useSafeSelector } from "./Store";
 
 function Render(props: { render: () => JSX.Element }) {
@@ -26,7 +26,7 @@ export default function App() {
       const { scheduleId } = await APIClient.fetchInit();
       dispatch(fetchSchedule(scheduleId));
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <CurrentScheduleContext.Provider value={{ scheduleId: schedule?.id ?? "-1", schedule }}>
@@ -38,6 +38,7 @@ export default function App() {
             element={
               <Render
                 render={() => {
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
                   const params = useParams<{ id: string }>();
                   return <Newsletter newsletterId={params.id!} />;
                 }}

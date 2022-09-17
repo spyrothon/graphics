@@ -1,7 +1,6 @@
-import HTTPUtils from "../HTTPUtils";
+import type { Article, InitialArticle, InitialNewsletter,Newsletter } from "../APITypes";
 import Endpoints from "../Endpoints";
-
-import type { Article, InitialArticle, Newsletter, InitialNewsletter } from "../APITypes";
+import HTTPUtils from "../HTTPUtils";
 
 export async function fetchNewsletters() {
   return await HTTPUtils.get<Newsletter[]>(Endpoints.NEWSLETTERS);

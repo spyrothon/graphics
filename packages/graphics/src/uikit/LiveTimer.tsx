@@ -1,8 +1,8 @@
 import * as React from "react";
-
 import { Run } from "@spyrothon/api";
 
 import { useAnimationFrame } from "@graphics/hooks/useAnimationFrame";
+
 import getElapsedRunSeconds from "../modules/runs/getElapsedRunSeconds";
 import * as DurationUtils from "../modules/time/DurationUtils";
 

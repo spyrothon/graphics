@@ -1,12 +1,12 @@
 import * as React from "react";
 import classNames from "classnames";
-
-import type { InterviewQuestion, Interview } from "@spyrothon/api";
-import {Button, Header, NumberInput, SelectInput, Text} from '@spyrothon/uikit';
+import type { Interview, InterviewQuestion } from "@spyrothon/api";
+import { Button, Header, NumberInput, SelectInput, Text } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
-import { useSafeSelector } from "../../Store";
+
 import * as InterviewStore from "../../modules/interviews/InterviewStore";
+import { useSafeSelector } from "../../Store";
 import { persistInterview } from "../interviews/InterviewActions";
 
 import styles from "./LiveInterviewInfo.module.css";
@@ -34,12 +34,12 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
 
   React.useEffect(() => {
     setSelectedQuestion(
-      interview?.questions.find((question) => question.question === currentQuestion),
+      interview?.questions.find((question) => question.question === interview?.currentQuestion),
     );
   }, [interview]);
 
   if (interview == null) return null;
-  const { questions, currentQuestion, interviewees } = interview;
+  const { questions, interviewees } = interview;
 
   function setQuestion(newQuestion?: InterviewQuestion) {
     if (newQuestion == null) {

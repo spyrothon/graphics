@@ -1,19 +1,20 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Pause, Repeat, Flag, Play, Icon } from "react-feather";
+import { Flag, Icon,Pause, Play, Repeat } from "react-feather";
 import type { Run, RunParticipant } from "@spyrothon/api";
 import {Button, formatDuration, Header, Text, useAnimationFrame} from '@spyrothon/uikit';
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
+
 import getRunState from "../runs/getRunState";
 import {
   finishRun,
-  startRun,
+  finishRunParticipant,
   pauseRun,
   resetRun,
-  finishRunParticipant,
   resumeRun,
   resumeRunParticipant,
+  startRun,
 } from "../runs/RunActions";
 
 import styles from "./LiveRunTimers.module.css";

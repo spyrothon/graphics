@@ -1,10 +1,10 @@
 import * as React from "react";
-
 import { Schedule } from "@spyrothon/api";
+
 import { useAnimationFrame } from "@graphics/hooks/useAnimationFrame";
-import { useSafeSelector } from "@graphics/Store";
 import ScheduleStore from "@graphics/modules/schedules/ScheduleStore";
 import DurationUtils from "@graphics/modules/time/DurationUtils";
+import { useSafeSelector } from "@graphics/Store";
 import Layout from "@graphics/uikit/Layout";
 
 import styles from "./Break.module.css";

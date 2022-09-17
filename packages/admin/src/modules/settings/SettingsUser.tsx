@@ -2,9 +2,10 @@ import * as React from "react";
 import { Button, Header, TextInput, useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { useSafeSelector } from "../../Store";
-import AuthStore from "../auth/AuthStore";
 import { updateMe } from "../auth/AuthActions";
+import AuthStore from "../auth/AuthStore";
 
 export default function SettingsUser() {
   const dispatch = useSafeDispatch();

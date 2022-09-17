@@ -1,7 +1,7 @@
-import { createSelector } from "reselect";
 import createCachedSelector from "re-reselect";
+import { createSelector } from "reselect";
 
-import { StoreState, getProp } from "../../Store";
+import { getProp,StoreState } from "../../Store";
 
 const getRunsState = (globalState: StoreState) => globalState.runs;
 

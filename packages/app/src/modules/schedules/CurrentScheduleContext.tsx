@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Schedule } from "@spyrothon/api";
 
 interface ScheduleContextState {

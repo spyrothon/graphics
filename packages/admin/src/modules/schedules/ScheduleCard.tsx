@@ -1,8 +1,8 @@
 import * as React from "react";
 import classNames from "classnames";
+import { Schedule } from "@spyrothon/api";
 import { Anchor, Button, Text } from "@spyrothon/uikit";
 
-import { Schedule } from "@spyrothon/api";
 import CurrentScheduleContext from "./CurrentScheduleContext";
 
 import styles from "./ScheduleCard.module.css";

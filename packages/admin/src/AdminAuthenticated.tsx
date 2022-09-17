@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
+import AuthStore from "./modules/auth/AuthStore";
 import SyncSocketManager from "./modules/sync/SyncSocketManager";
 import AdminHelmet from "./AdminHelmet";
 import { Routes } from "./Constants";
 import { useSafeSelector } from "./Store";
-import AuthStore from "./modules/auth/AuthStore";
 
 export default function Dashboards() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Dashboards() {
     if (!isLoggedIn) {
       navigate(Routes.LOGIN, { replace: true });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   React.useEffect(() => {
     SyncSocketManager.init();

@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import { useSelector, TypedUseSelectorHook } from "react-redux";
+import { TypedUseSelectorHook,useSelector } from "react-redux";
+import { applyMiddleware, combineReducers,compose, createStore } from "redux";
 import thunk from "redux-thunk";
 
 import authReducer from "./modules/auth/AuthReducer";

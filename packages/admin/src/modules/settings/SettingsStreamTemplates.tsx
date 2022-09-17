@@ -2,8 +2,9 @@ import * as React from "react";
 import { Button, Header, Text, TextInput, useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
-import { updateSchedule } from "../schedules/ScheduleActions";
+
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
+import { updateSchedule } from "../schedules/ScheduleActions";
 
 import styles from "./SettingsDashboard.module.css";
 

@@ -1,14 +1,13 @@
-import HTTPUtils from "../HTTPUtils";
-import Endpoints from "../Endpoints";
-
 import type {
-  Schedule,
-  ScheduleResponse,
   InitialSchedule,
   InitialScheduleEntry,
-  ScheduleEntry,
   OBSWebsocketConfig,
+  Schedule,
+  ScheduleEntry,
+  ScheduleResponse,
 } from "../APITypes";
+import Endpoints from "../Endpoints";
+import HTTPUtils from "../HTTPUtils";
 
 export async function fetchSchedules() {
   return await HTTPUtils.get<ScheduleResponse[]>(Endpoints.SCHEDULES);

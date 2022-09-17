@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Remark } from "react-remark";
-
 import { APIClient, Article as ArticleType, Newsletter as NewsletterType } from "@spyrothon/api";
 import { Anchor, Header, Text } from "@spyrothon/uikit";
+
 import FixedWidthLayout from "../layouts/FixedWidthLayout";
 
 import styles from "./Newsletter.module.css";

@@ -1,5 +1,6 @@
-import { Schedule, OBSWebsocketConfig } from "@spyrothon/api";
-import { ActionFor, Action } from "../../Actions";
+import { OBSWebsocketConfig,Schedule } from "@spyrothon/api";
+
+import { Action,ActionFor } from "../../Actions";
 import { ScheduleActionType } from "./ScheduleTypes";
 
 type ScheduleReducerState = {

@@ -1,6 +1,5 @@
 import * as React from "react";
 import classNames from "classnames";
-
 import { Interview } from "@spyrothon/api";
 
 import styles from "./QuizCornerScores.module.css";

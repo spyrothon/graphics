@@ -1,8 +1,9 @@
 import * as React from "react";
 import classNames from "classnames";
 
-import styles from "./Panel.module.css";
 import { Header } from "./Header";
+
+import styles from "./Panel.module.css";
 
 type PanelProps = {
   name?: string;

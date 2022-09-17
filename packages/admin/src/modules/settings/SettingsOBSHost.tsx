@@ -2,9 +2,10 @@ import * as React from "react";
 import { Button, Header, NumberInput, Text, TextInput, useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { useSafeSelector } from "../../Store";
-import { fetchScheduleOBSConfig, updateScheduleOBSConfig } from "../schedules/ScheduleActions";
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
+import { fetchScheduleOBSConfig, updateScheduleOBSConfig } from "../schedules/ScheduleActions";
 import * as ScheduleStore from "../schedules/ScheduleStore";
 
 import styles from "./SettingsDashboard.module.css";
@@ -15,7 +16,7 @@ export default function ConfigOBSHost() {
 
   React.useEffect(() => {
     dispatch(fetchScheduleOBSConfig(scheduleId));
-  }, [scheduleId]);
+  }, [dispatch, scheduleId]);
 
   const obsConfig = useSafeSelector(ScheduleStore.getOBSConfig);
   const [host, setHost] = React.useState(obsConfig?.host || "");

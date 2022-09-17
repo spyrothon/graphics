@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Button, TextInput, DateTimeInput, useSaveable } from "@spyrothon/uikit";
-
 import { InitialSchedule } from "@spyrothon/api";
+import { Button, DateTimeInput, TextInput, useSaveable } from "@spyrothon/uikit";
+
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { createSchedule } from "./ScheduleActions";
 
 interface ScheduleFormProps {

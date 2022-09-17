@@ -3,13 +3,14 @@ import classNames from "classnames";
 import { Text } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { useSafeSelector } from "../../Store";
-import { selectScheduleEntry, reorderScheduleEntries } from "./ScheduleActions";
+import AddEntryButton from "./AddEntryButton";
+import { reorderScheduleEntries,selectScheduleEntry } from "./ScheduleActions";
 import ScheduleListEntry from "./ScheduleListEntry";
 import * as ScheduleStore from "./ScheduleStore";
 
 import styles from "./ScheduleList.module.css";
-import AddEntryButton from "./AddEntryButton";
 
 type RunListProps = {
   className?: string;

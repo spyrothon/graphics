@@ -1,5 +1,7 @@
 import { Schedule } from "@spyrothon/api";
-import { ActionFor, Action } from "@graphics/Actions";
+
+import { Action,ActionFor } from "@graphics/Actions";
+
 import { ScheduleActionType } from "./ScheduleTypes";
 
 type ScheduleReducerState = {

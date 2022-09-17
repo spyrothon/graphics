@@ -1,11 +1,11 @@
 import * as React from "react";
 import classNames from "classnames";
+import type { Run } from "@spyrothon/api";
 import {Button, Header, TextInput} from '@spyrothon/uikit';
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
-import { persistRun } from "../runs/RunActions";
 
-import type { Run } from "@spyrothon/api";
+import { persistRun } from "../runs/RunActions";
 
 type LiveRunInfoProps = {
   run: Run;

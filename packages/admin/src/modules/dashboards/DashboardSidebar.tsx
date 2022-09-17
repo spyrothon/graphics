@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
-import { LogOut, Icon } from "react-feather";
-
+import { Icon,LogOut } from "react-feather";
+import { RouteObject } from "react-router-dom";
 import { Button, NavLink, Text } from "@spyrothon/uikit";
 
 import { Routes } from "../../Constants";
@@ -9,7 +9,6 @@ import { useSafeSelector } from "../../Store";
 import AuthStore from "../auth/AuthStore";
 
 import styles from "./DashboardSidebar.module.css";
-import { RouteObject } from "react-router-dom";
 
 const ICON_STYLE = { marginRight: 8, marginBottom: -2.5 };
 

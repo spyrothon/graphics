@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Twitch, Settings, Airplay, PlusCircle, Icon, User, Edit } from "react-feather";
-import { RouteObject } from "react-router-dom";
+import { Airplay, Edit, PlusCircle, Settings, Twitch, User } from "react-feather";
 
 import { Routes } from "../../Constants";
 import { DashboardSidebarRoute } from "../dashboards/DashboardSidebar";

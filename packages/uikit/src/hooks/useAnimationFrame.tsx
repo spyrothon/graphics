@@ -15,6 +15,8 @@ export function useAnimationFrame<T>(callback: () => T, callbackDeps: any[] = []
     return () => {
       rafId.current != null && cancelAnimationFrame(rafId.current);
     };
+    // only care about callback _deps_, not the function itself.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...callbackDeps]);
 
   return result.current;

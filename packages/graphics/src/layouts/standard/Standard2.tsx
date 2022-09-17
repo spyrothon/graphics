@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { useSafeSelector } from "@graphics/Store";
 import ArtRotation from "@graphics/modules/art/ArtRotation";
 import GameInfo from "@graphics/modules/game-info/GameInfo";
 import Omnibar from "@graphics/modules/omnibar/Omnibar";
@@ -8,6 +7,7 @@ import RunStore from "@graphics/modules/runs/RunStore";
 import RunUtils from "@graphics/modules/runs/RunUtils";
 import ScheduleStore from "@graphics/modules/schedules/ScheduleStore";
 import RunTimer from "@graphics/modules/time/RunTimer";
+import { useSafeSelector } from "@graphics/Store";
 import FeedArea from "@graphics/uikit/FeedArea";
 import Layout from "@graphics/uikit/Layout";
 import Nameplate from "@graphics/uikit/Nameplate";

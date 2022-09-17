@@ -1,19 +1,20 @@
 import * as React from "react";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { useSafeSelector } from "../../Store";
 import Dashboard from "../dashboards/Dashboard";
+import { transitionToSecheduleEntry } from "../schedules/ScheduleActions";
 import * as ScheduleStore from "../schedules/ScheduleStore";
 import LiveEntryControl from "./LiveEntryControl";
 import LiveInterviewInfo from "./LiveInterviewInfo";
 import LiveParticipants from "./LiveParticipants";
-import LiveRunTimers from "./LiveRunTimers";
 import LiveRunInfo from "./LiveRunInfo";
+import LiveRunTimers from "./LiveRunTimers";
 import LiveSidebar from "./LiveSidebar";
 import LiveTransitionSection from "./LiveTransitionSection";
 
 import styles from "./LiveDashboard.module.css";
-import { transitionToSecheduleEntry } from "../schedules/ScheduleActions";
 
 export default function LiveDashboard() {
   const dispatch = useSafeDispatch();
@@ -31,7 +32,7 @@ export default function LiveDashboard() {
     if (schedule == null || !hasEntries) return;
 
     dispatch(transitionToSecheduleEntry(schedule.id, schedule.scheduleEntries[0].id));
-  }, [schedule]);
+  }, [currentEntry, dispatch, schedule]);
 
   function renderContentSections() {
     if (currentEntry?.run != null) {

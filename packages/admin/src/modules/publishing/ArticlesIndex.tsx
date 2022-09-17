@@ -1,10 +1,11 @@
 import * as React from "react";
+import { Article } from "@spyrothon/api";
 import { Anchor, Header, NavLink, Text } from "@spyrothon/uikit";
 
-import { Article } from "@spyrothon/api";
 import { Routes } from "@admin/Constants";
-import { useSafeSelector } from "@admin/Store";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+import { useSafeSelector } from "@admin/Store";
+
 import { fetchArticles } from "./PublishingActions";
 import * as PublishingStore from "./PublishingStore";
 
@@ -40,7 +41,7 @@ export default function ArticlesIndex() {
 
   React.useEffect(() => {
     dispatch(fetchArticles());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

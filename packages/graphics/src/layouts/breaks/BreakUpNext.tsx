@@ -1,14 +1,13 @@
 import * as React from "react";
 import classNames from "classnames";
 import { DateTime } from "luxon";
-
 import { RunParticipant } from "@spyrothon/api";
 
-import { useSafeSelector } from "@graphics/Store";
 import InterviewStore from "@graphics/modules/interviews/InterviewStore";
 import RunStore from "@graphics/modules/runs/RunStore";
 import ScheduleStore from "@graphics/modules/schedules/ScheduleStore";
 import DurationUtils from "@graphics/modules/time/DurationUtils";
+import { useSafeSelector } from "@graphics/Store";
 
 import styles from "./BreakUpNext.module.css";
 

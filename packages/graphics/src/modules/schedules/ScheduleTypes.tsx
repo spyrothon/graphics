@@ -1,5 +1,4 @@
 import type { DateTime } from "luxon";
-
 import { Schedule, ScheduleEntry } from "@spyrothon/api";
 
 export enum ScheduleActionType {

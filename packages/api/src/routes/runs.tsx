@@ -1,7 +1,6 @@
-import HTTPUtils from "../HTTPUtils";
+import type { InitialRun,Run } from "../APITypes";
 import Endpoints from "../Endpoints";
-
-import type { Run, InitialRun } from "../APITypes";
+import HTTPUtils from "../HTTPUtils";
 
 export async function fetchRuns() {
   return await HTTPUtils.get<Run[]>(Endpoints.RUNS);

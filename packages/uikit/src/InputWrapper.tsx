@@ -29,6 +29,7 @@ export type InputWrapperPassthroughProps = Omit<InputWrapperProps, "children">;
 export function withoutInputWrapperProps<T extends InputWrapperPassthroughProps>(
   props: T,
 ): Omit<T, keyof InputWrapperPassthroughProps> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { size, label, name, required, note, leader, trailer, marginless, className, ...rest } =
     props;
   return rest;

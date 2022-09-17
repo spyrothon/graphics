@@ -1,4 +1,4 @@
-import { Schedule, Interview, Run } from "../APITypes";
+import { Interview, Run,Schedule } from "../APITypes";
 
 export type SyncSocketMessage =
   | { type: "ping" }

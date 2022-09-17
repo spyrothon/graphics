@@ -1,19 +1,20 @@
 import * as React from "react";
 import classNames from "classnames";
+import { Interview, ScheduleEntry } from "@spyrothon/api";
 import {
   Anchor,
   Button,
   DurationInput,
-  Header,
-  TextInput,
-  NumberInput,
   formatDuration,
-  useSaveable,
+  Header,
+  NumberInput,
   SaveState,
+  TextInput,
+  useSaveable,
 } from "@spyrothon/uikit";
 
-import { Interview, ScheduleEntry } from "@spyrothon/api";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { useSafeSelector } from "../../Store";
 import { persistInterview } from "./InterviewActions";
 import * as InterviewStore from "./InterviewStore";
@@ -36,7 +37,7 @@ export default function InterviewEditor(props: InterviewEditorProps) {
 
   React.useEffect(() => {
     editor.setBase(interview);
-  }, [interview]);
+  }, [editor, interview]);
 
   const [handleSave, getSaveText, saveState] = useSaveable(async () => {
     const interview = editor.getEditedInterview();

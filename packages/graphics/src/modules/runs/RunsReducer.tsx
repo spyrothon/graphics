@@ -1,5 +1,7 @@
 import { Run } from "@spyrothon/api";
-import { ActionFor, Action } from "@graphics/Actions";
+
+import { Action,ActionFor } from "@graphics/Actions";
+
 import { RunActionType } from "./RunsTypes";
 
 type RunMap = { [id: string]: Run };

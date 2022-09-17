@@ -1,6 +1,5 @@
 import type { DateTime } from "luxon";
-
-import type { Schedule, ScheduleEntry, Run, Interview } from "@spyrothon/api";
+import type { Interview,Run, Schedule, ScheduleEntry } from "@spyrothon/api";
 
 export enum ScheduleActionType {
   SCHEDULES_ENTRY_SELECTED = "SCHEDULES_ENTRY_SELECTED",

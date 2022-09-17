@@ -2,10 +2,10 @@ import * as React from "react";
 import classNames from "classnames";
 import { Header, Text } from "@spyrothon/uikit";
 
+import OBS from "../obs/OBS";
 import { useOBSStore } from "../obs/OBSStore";
 
 import styles from "./LiveOBSStatus.module.css";
-import OBS from "../obs/OBS";
 
 function VolumeMeters() {
   const audioInputStates = useOBSStore((state) => {

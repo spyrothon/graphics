@@ -1,10 +1,11 @@
 import * as React from "react";
 import classNames from "classnames";
 import { useDrag, useDrop } from "react-dnd";
+import { RunParticipant, ScheduleEntry } from "@spyrothon/api";
 import { formatDuration, Text } from "@spyrothon/uikit";
 
-import { RunParticipant, ScheduleEntry } from "@spyrothon/api";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { useSafeSelector } from "../../Store";
 import * as InterviewStore from "../interviews/InterviewStore";
 import * as RunStore from "../runs/RunStore";

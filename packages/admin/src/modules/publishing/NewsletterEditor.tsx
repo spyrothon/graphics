@@ -1,22 +1,23 @@
 import * as React from "react";
 import classNames from "classnames";
 import { X } from "react-feather";
+import { InitialNewsletter, InitialPublication, Newsletter } from "@spyrothon/api";
 import {
   Anchor,
   Button,
   DateTimeInput,
   NumberInput,
+  SaveState,
   SelectInput,
   TextInput,
   useSaveable,
-  SaveState,
 } from "@spyrothon/uikit";
 
-import { Newsletter, InitialPublication, InitialNewsletter } from "@spyrothon/api";
 import { AppRoutes } from "@admin/Constants";
-import { useSafeSelector } from "@admin/Store";
 import getPublicAppURL from "@admin/hooks/getPublicAppURL";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+import { useSafeSelector } from "@admin/Store";
+
 import { createNewsletter, fetchArticles, persistNewsletter } from "./PublishingActions";
 import * as PublishingStore from "./PublishingStore";
 
@@ -95,7 +96,7 @@ export default function NewsletterEditor(props: NewsletterEditorProps) {
 
   React.useEffect(() => {
     dispatch(fetchArticles());
-  }, []);
+  }, [dispatch]);
 
   function updatePublication(newPublication: InitialPublication, index: number) {
     const publications = Array.from(edited.publications ?? []);

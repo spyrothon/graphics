@@ -1,8 +1,9 @@
 import * as React from "react";
+import { Schedule } from "@spyrothon/api";
 import { Button, DateTimeInput, Header, TextInput, useSaveable } from "@spyrothon/uikit";
 
-import { Schedule } from "@spyrothon/api";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
 import { updateSchedule } from "../schedules/ScheduleActions";
 

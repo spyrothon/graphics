@@ -3,10 +3,10 @@ import OBSWebSocket, {
   OBSResponseTypes,
   RequestBatchRequest,
 } from "obs-websocket-js";
+import { OBSWebsocketConfig, Transition, TransitionSet } from "@spyrothon/api";
 
-import { CropTransform, OBSWebsocketConfig, Transition, TransitionSet } from "@spyrothon/api";
 import SyncSocketManager from "../sync/SyncSocketManager";
-import { setOBSConnected, setOBSFailed, setOBSBusy, setOBSData } from "./OBSStore";
+import { setOBSBusy, setOBSConnected, setOBSData, setOBSFailed } from "./OBSStore";
 import {
   OBSCustomEvent,
   OBSCustomEventTypes,

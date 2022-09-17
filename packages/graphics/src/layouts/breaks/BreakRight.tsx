@@ -1,14 +1,15 @@
 import * as React from "react";
 
-import { useSafeSelector } from "@graphics/Store";
 import ArtRotation from "@graphics/modules/art/ArtRotation";
 import Omnibar from "@graphics/modules/omnibar/Omnibar";
 import ScheduleStore from "@graphics/modules/schedules/ScheduleStore";
+import { useSafeSelector } from "@graphics/Store";
 import Layout from "@graphics/uikit/Layout";
+
+import { BreakMessages } from "./BreakConstants";
 import BreakUpNext from "./BreakUpNext";
 
 import styles from "./Break.module.css";
-import { BreakMessages } from "./BreakConstants";
 
 export default function BreakRight() {
   const schedule = useSafeSelector(ScheduleStore.getSchedule);

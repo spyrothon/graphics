@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import FeedArea from "@graphics/uikit/FeedArea";
 
 type BingoBoardProps = React.ComponentProps<typeof FeedArea>;

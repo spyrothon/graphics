@@ -1,9 +1,9 @@
 import * as React from "react";
-
 import { Run } from "@spyrothon/api";
 
 import { useAnimationFrame } from "@graphics/hooks/useAnimationFrame";
 import Timer from "@graphics/uikit/Timer";
+
 import getElapsedRunSeconds from "../runs/getElapsedRunSeconds";
 
 interface RunTimerProps {

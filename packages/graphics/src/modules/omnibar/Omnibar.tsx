@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { animated, config, useTransition } from "react-spring";
 
 import { useSafeSelector } from "@graphics/Store";
+
 import ScheduleStore from "../schedules/ScheduleStore";
 import OmnibarPlainText from "./OmnibarPlainText";
 import OmnibarUpNext from "./OmnibarUpNext";
@@ -65,8 +66,8 @@ export default function Omnibar(props: OmnibarProps) {
         <OmnibarPlainText
           text={
             <>
-              You're watching <span className={styles.textEmphasis}>Spyrothon 8!</span>, running
-              August 20-21, 2022.
+              You&apos;re watching <span className={styles.textEmphasis}>Spyrothon 8!</span>,
+              running August 20-21, 2022.
             </>
           }
         />

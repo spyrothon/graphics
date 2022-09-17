@@ -1,11 +1,12 @@
 import * as React from "react";
 
-import { useSafeSelector } from "@graphics/Store";
 import ScheduleStore from "@graphics/modules/schedules/ScheduleStore";
+import { useSafeSelector } from "@graphics/Store";
 import Layout from "@graphics/uikit/Layout";
 
-import styles from "./Break.module.css";
 import { BreakMessages } from "./BreakConstants";
+
+import styles from "./Break.module.css";
 
 export default function BreakOutro() {
   const schedule = useSafeSelector(ScheduleStore.getSchedule);

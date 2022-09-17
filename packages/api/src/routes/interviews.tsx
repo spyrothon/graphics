@@ -1,7 +1,6 @@
-import HTTPUtils from "../HTTPUtils";
+import type { InitialInterview,Interview } from "../APITypes";
 import Endpoints from "../Endpoints";
-
-import type { Interview, InitialInterview } from "../APITypes";
+import HTTPUtils from "../HTTPUtils";
 
 export async function fetchInterviews() {
   return await HTTPUtils.get<Interview[]>(Endpoints.INTERVIEWS);

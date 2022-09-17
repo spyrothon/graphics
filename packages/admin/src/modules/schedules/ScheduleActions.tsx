@@ -1,16 +1,18 @@
 import {
   APIClient,
+  InitialSchedule,
+  OBSWebsocketConfig,
   Schedule,
   ScheduleEntry,
-  OBSWebsocketConfig,
-  InitialSchedule,
   ScheduleResponse,
   TransitionSet,
 } from "@spyrothon/api";
+
 import { SafeDispatch } from "@admin/hooks/useDispatch";
-import { fetchRunsSuccess } from "../runs/RunActions";
-import { ScheduleActionType, ScheduleAction } from "./ScheduleTypes";
+
 import { fetchInterviewsSuccess } from "../interviews/InterviewActions";
+import { fetchRunsSuccess } from "../runs/RunActions";
+import { ScheduleAction,ScheduleActionType } from "./ScheduleTypes";
 
 export function selectScheduleEntry(entryId?: string): ScheduleAction {
   return {

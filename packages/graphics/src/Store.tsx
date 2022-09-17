@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import { TypedUseSelectorHook,useSelector } from "react-redux";
+import { applyMiddleware, combineReducers,compose, createStore } from "redux";
 import thunk from "redux-thunk";
-import { useSelector, TypedUseSelectorHook } from "react-redux";
 
 import interviewsReducer from "./modules/interviews/InterviewsReducer";
 import remoteReducer from "./modules/remote/RemoteReducer";

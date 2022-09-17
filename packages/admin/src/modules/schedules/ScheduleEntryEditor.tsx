@@ -1,14 +1,15 @@
 import * as React from "react";
 import { v4 as uuid } from "uuid";
-import { Button, DurationInput, Header, useSaveable, SaveState } from "@spyrothon/uikit";
-
 import {
-  ScheduleEntry,
-  InitialTransition,
   InitialScheduleEntry,
+  InitialTransition,
   InitialTransitionSet,
+  ScheduleEntry,
 } from "@spyrothon/api";
+import { Button, DurationInput, Header, SaveState,useSaveable } from "@spyrothon/uikit";
+
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import OBSSceneSelector from "../obs/OBSSceneSelector";
 import { updateScheduleEntry } from "./ScheduleActions";
 import TransitionEditor from "./TransitionEditor";

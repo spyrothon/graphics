@@ -1,20 +1,21 @@
 import * as React from "react";
 import classNames from "classnames";
+import { Run, ScheduleEntry } from "@spyrothon/api";
 import {
   Anchor,
   Button,
   DurationInput,
+  formatDuration,
   Header,
   NumberInput,
-  TextInput,
-  formatDuration,
-  useSaveable,
   SaveState,
+  TextInput,
+  useSaveable,
 } from "@spyrothon/uikit";
 
-import { Run, ScheduleEntry } from "@spyrothon/api";
-import { useSafeSelector } from "../../Store";
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
+import { useSafeSelector } from "../../Store";
 import { persistRun } from "./RunActions";
 import * as RunStore from "./RunStore";
 import useRunEditorState, { RunEditorStateValue } from "./useRunEditorState";
@@ -55,7 +56,7 @@ export default function RunEditor(props: RunEditorProps) {
 
   React.useEffect(() => {
     editor.setBaseRun(run);
-  }, [run]);
+  }, [editor, run]);
 
   const [handleSaveRun, getSaveText, saveState] = useSaveable(async () =>
     dispatch(persistRun(run.id, editor.getEditedRun())),

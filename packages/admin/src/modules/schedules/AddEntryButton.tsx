@@ -2,10 +2,11 @@ import * as React from "react";
 import { Text } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
-import { addRunToSchedule, addInterviewToSchedule } from "./ScheduleActions";
+
+import CurrentScheduleContext from "./CurrentScheduleContext";
+import { addInterviewToSchedule,addRunToSchedule } from "./ScheduleActions";
 
 import styles from "./ScheduleList.module.css";
-import CurrentScheduleContext from "./CurrentScheduleContext";
 
 export default function AddEntryButtons() {
   const dispatch = useSafeDispatch();

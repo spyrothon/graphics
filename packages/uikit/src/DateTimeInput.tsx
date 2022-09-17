@@ -3,8 +3,8 @@ import DatePicker from "react-datepicker";
 
 import { InputWrapper, InputWrapperPassthroughProps } from "./InputWrapper";
 
-import styles from "./TextInput.module.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import styles from "./TextInput.module.css";
 
 export type DateTimeInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

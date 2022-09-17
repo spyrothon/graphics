@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import type { Run, RunParticipant } from "@spyrothon/api";
 
 type RunEditorState = {

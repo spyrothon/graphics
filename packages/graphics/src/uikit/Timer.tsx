@@ -2,9 +2,9 @@ import * as React from "react";
 import classNames from "classnames";
 
 import * as DurationUtils from "../modules/time/DurationUtils";
+import SlidingLines from "./svg/SlidingLines";
 
 import styles from "./Timer.module.css";
-import SlidingLines from "./svg/SlidingLines";
 
 type TimerProps = {
   elapsedSeconds?: number;

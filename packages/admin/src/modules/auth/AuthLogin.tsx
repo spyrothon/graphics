@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Header, TextInput } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
+
 import { Routes } from "../../Constants";
 import { useSafeSelector } from "../../Store";
 import { login } from "./AuthActions";
@@ -22,7 +23,7 @@ export default function AuthLogin() {
     if (isLoggedIn) {
       navigate(Routes.LIVE_DASHBOARD, { replace: true });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   function handleSubmit() {
     dispatch(login(userName, password));
