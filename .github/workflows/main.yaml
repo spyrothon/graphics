@@ -1,0 +1,38 @@
+name: App
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ESLint:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: ci
+
+    steps:
+      - name: Prerequisites
+        uses: ./.github/actions/prereqs.yaml
+        with:
+          node-version: ${{ matrix.node-version }}
+          pnpm-version: ${{ matrix.pnpm-version }}
+      
+      - name: 'ESLint'
+        run: pnpm eslint
+
+  TypeScript:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: ci
+
+    steps:
+      - name: Prerequisites
+        uses: ./.github/actions/prereqs.yaml
+        with:
+          node-version: ${{ matrix.node-version }}
+          pnpm-version: ${{ matrix.pnpm-version }}
+      
+      - name: 'TypeScript'
+        run: pnpm typescript

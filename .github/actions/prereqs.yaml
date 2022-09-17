@@ -1,0 +1,43 @@
+name: Prerequisites
+description: Checks out the repository and installs Node and pnpm to load dependencies recursively for the repository and set up for execution.
+inputs:
+  node-version:
+    required: false
+    default: 16.11.1
+    description: Version of Node to run on
+  pnpm-version: 
+    required: false
+    default: 7.11.0
+    description: Version of pnpm to install and use
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2.2.2
+      with:
+        version: ${{ matrix.pnpm-version }}
+        run_install: |
+          - recursive: true
+            args: [--frozen-lockfile]
+            
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      run: |
+        echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-

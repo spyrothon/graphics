@@ -12,7 +12,6 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["node_modules/", "public/", "dist/"],
   "rules": {
     "camelcase": ["error", { "allow": ["^_"] }],
     "no-labels": ["error", { "allowLoop": true }],

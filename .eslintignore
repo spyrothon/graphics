@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Source/Build artifacts
+dist/
+public/
+
+# Vendored packages
+packages/obs-websocket-js
