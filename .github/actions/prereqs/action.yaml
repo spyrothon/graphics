@@ -13,15 +13,15 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{ inputs.node-version }}
 
     - name: Install pnpm
       uses: pnpm/action-setup@v2.2.2
       with:
-        version: ${{ matrix.pnpm-version }}
+        version: ${{ inputs.pnpm-version }}
         run_install: |
           - recursive: true
             args: [--frozen-lockfile]
