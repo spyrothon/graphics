@@ -1,5 +1,5 @@
 name: Prerequisites
-description: Checks out the repository and installs Node and pnpm to load dependencies recursively for the repository and set up for execution.
+description: Installs Node and pnpm to load dependencies recursively for the repository and set up for execution.
 inputs:
   node-version:
     required: false
@@ -13,9 +13,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
