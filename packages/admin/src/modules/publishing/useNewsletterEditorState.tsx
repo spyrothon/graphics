@@ -1,5 +1,5 @@
 import * as React from "react";
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from "uuid";
 import type { InitialPublication, Newsletter, Publication } from "@spyrothon/api";
 
 type NewsletterEditorState = {

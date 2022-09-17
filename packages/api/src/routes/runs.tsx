@@ -1,4 +1,4 @@
-import type { InitialRun,Run } from "../APITypes";
+import type { InitialRun, Run } from "../APITypes";
 import Endpoints from "../Endpoints";
 import HTTPUtils from "../HTTPUtils";
 

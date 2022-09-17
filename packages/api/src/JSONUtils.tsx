@@ -36,5 +36,5 @@ function transform(object: JSONable): JSONResult {
 }
 
 export function camelizeJSON<T>(json: { [key: string]: JSONable }): T {
-  return (transform(json) as unknown) as T;
+  return transform(json) as unknown as T;
 }

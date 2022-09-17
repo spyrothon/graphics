@@ -23,7 +23,6 @@ interface InputWrapperProps {
   children: React.ReactNode;
 }
 
-
 export type InputWrapperPassthroughProps = Omit<InputWrapperProps, "children">;
 
 export function withoutInputWrapperProps<T extends InputWrapperPassthroughProps>(

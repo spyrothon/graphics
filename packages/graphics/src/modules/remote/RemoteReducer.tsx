@@ -1,4 +1,4 @@
-import { Action,ActionFor } from "@graphics/Actions";
+import { Action, ActionFor } from "@graphics/Actions";
 
 import { RemoteActionType } from "./RemoteTypes";
 

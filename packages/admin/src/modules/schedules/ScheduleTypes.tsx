@@ -1,5 +1,5 @@
 import type { DateTime } from "luxon";
-import type { Interview, OBSWebsocketConfig,Run, Schedule, ScheduleEntry } from "@spyrothon/api";
+import type { Interview, OBSWebsocketConfig, Run, Schedule, ScheduleEntry } from "@spyrothon/api";
 
 export enum ScheduleActionType {
   SCHEDULES_ENTRY_SELECTED = "SCHEDULES_ENTRY_SELECTED",

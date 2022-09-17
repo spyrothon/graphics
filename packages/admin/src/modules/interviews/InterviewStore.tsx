@@ -1,7 +1,7 @@
 import createCachedSelector from "re-reselect";
 import { createSelector } from "reselect";
 
-import { getProp,StoreState } from "../../Store";
+import { getProp, StoreState } from "../../Store";
 
 const getInterviewsState = (globalState: StoreState) => globalState.interviews;
 

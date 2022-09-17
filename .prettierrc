@@ -6,8 +6,7 @@
   "singleQuote": false,
   "trailingComma": "all",
   "bracketSpacing": true,
-  "jsxBracketSameLine": true,
-  "fluid": false,
+  "bracketSameLine": true,
   "proseWrap": "always",
   "overrides": [
     {

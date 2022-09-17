@@ -1,6 +1,6 @@
 import { SessionToken, User } from "@spyrothon/api";
 
-import { Action,ActionFor } from "../../Actions";
+import { Action, ActionFor } from "../../Actions";
 import { AuthActionType } from "./AuthTypes";
 
 type AuthReducerState = {

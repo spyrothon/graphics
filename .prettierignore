@@ -4,6 +4,8 @@ node_modules/
 # Source/Build artifacts
 dist/
 public/
+*.d.ts
+pnpm-lock.yaml
 
 # Vendored packages
-vendored/obs-websocket-js
+vendored/obs-websocket-js/

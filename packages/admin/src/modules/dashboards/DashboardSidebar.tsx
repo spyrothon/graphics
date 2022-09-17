@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Icon,LogOut } from "react-feather";
+import { Icon, LogOut } from "react-feather";
 import { RouteObject } from "react-router-dom";
 import { Button, NavLink, Text } from "@spyrothon/uikit";
 

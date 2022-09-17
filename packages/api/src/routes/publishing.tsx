@@ -1,4 +1,4 @@
-import type { Article, InitialArticle, InitialNewsletter,Newsletter } from "../APITypes";
+import type { Article, InitialArticle, InitialNewsletter, Newsletter } from "../APITypes";
 import Endpoints from "../Endpoints";
 import HTTPUtils from "../HTTPUtils";
 

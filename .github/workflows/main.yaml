@@ -20,9 +20,26 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           pnpm-version: ${{ matrix.pnpm-version }}
-      
-      - name: 'ESLint'
+
+      - name: "ESLint"
         run: pnpm --filter './packages/*' -r lint
+
+  Prettier:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: ci
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Prerequisites
+        uses: ./.github/actions/prereqs
+        with:
+          node-version: ${{ matrix.node-version }}
+          pnpm-version: ${{ matrix.pnpm-version }}
+
+      - name: "Prettier"
+        run: pnpm prettier . --check
 
   TypeScript:
     runs-on: ubuntu-latest
@@ -31,12 +48,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        
+
       - name: Prerequisites
         uses: ./.github/actions/prereqs
         with:
           node-version: ${{ matrix.node-version }}
           pnpm-version: ${{ matrix.pnpm-version }}
-      
-      - name: 'TypeScript'
+
+      - name: TypeScript
         run: pnpm --filter './packages/*' -r tsc

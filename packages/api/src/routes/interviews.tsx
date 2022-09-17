@@ -1,4 +1,4 @@
-import type { InitialInterview,Interview } from "../APITypes";
+import type { InitialInterview, Interview } from "../APITypes";
 import Endpoints from "../Endpoints";
 import HTTPUtils from "../HTTPUtils";
 

@@ -6,4 +6,4 @@ packages:
   - "uikit"
 
   # Vendored dependencies with local changes
-  - "obs-websocket-js"
+  - "vendored/*"

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Interview, InterviewQuestion,RunParticipant } from "@spyrothon/api";
+import { Interview, InterviewQuestion, RunParticipant } from "@spyrothon/api";
 
 type InterviewEditorState = {
   base?: Interview;

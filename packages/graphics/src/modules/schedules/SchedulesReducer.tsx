@@ -1,6 +1,6 @@
 import { Schedule } from "@spyrothon/api";
 
-import { Action,ActionFor } from "@graphics/Actions";
+import { Action, ActionFor } from "@graphics/Actions";
 
 import { ScheduleActionType } from "./ScheduleTypes";
 

@@ -1,4 +1,4 @@
-import {APIClient} from "@spyrothon/api";
+import { APIClient } from "@spyrothon/api";
 
 const DOM_PARSER = new DOMParser();
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {SelectInput} from "@spyrothon/uikit";
+import { SelectInput } from "@spyrothon/uikit";
 
 import { useOBSStore } from "./OBSStore";
 import type { OBSTransition } from "./OBSTypes";

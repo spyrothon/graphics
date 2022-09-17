@@ -4,7 +4,7 @@ import { Text } from "@spyrothon/uikit";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import CurrentScheduleContext from "./CurrentScheduleContext";
-import { addInterviewToSchedule,addRunToSchedule } from "./ScheduleActions";
+import { addInterviewToSchedule, addRunToSchedule } from "./ScheduleActions";
 
 import styles from "./ScheduleList.module.css";
 

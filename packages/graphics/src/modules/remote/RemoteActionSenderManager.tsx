@@ -2,7 +2,7 @@ import { Action } from "@graphics/Actions";
 import { store } from "@graphics/Store";
 
 import ActionSender from "./ActionSender";
-import { REMOTE_SYNC_HOST,REMOTE_WEBSOCKET_PROTOCOL } from "./RemoteConstants";
+import { REMOTE_SYNC_HOST, REMOTE_WEBSOCKET_PROTOCOL } from "./RemoteConstants";
 
 class RemoteActionSenderManager {
   private sender: ActionSender | undefined;

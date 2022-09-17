@@ -1,6 +1,6 @@
 import { Interview } from "@spyrothon/api";
 
-import { Action,ActionFor } from "@graphics/Actions";
+import { Action, ActionFor } from "@graphics/Actions";
 
 import { InterviewActionType } from "./InterviewTypes";
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Check, Circle,Loader } from "react-feather";
+import { Check, Circle, Loader } from "react-feather";
 import { Transition, TransitionSet, TransitionState } from "@spyrothon/api";
 import { Button, Text } from "@spyrothon/uikit";
 

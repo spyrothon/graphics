@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import type { Run } from "@spyrothon/api";
-import {Button, Checkbox, Header, Text} from "@spyrothon/uikit";
+import { Button, Checkbox, Header, Text } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

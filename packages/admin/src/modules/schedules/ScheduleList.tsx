@@ -6,7 +6,7 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
 import AddEntryButton from "./AddEntryButton";
-import { reorderScheduleEntries,selectScheduleEntry } from "./ScheduleActions";
+import { reorderScheduleEntries, selectScheduleEntry } from "./ScheduleActions";
 import ScheduleListEntry from "./ScheduleListEntry";
 import * as ScheduleStore from "./ScheduleStore";
 

@@ -1,5 +1,5 @@
-import { TypedUseSelectorHook,useSelector } from "react-redux";
-import { applyMiddleware, combineReducers,compose, createStore } from "redux";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 
 import interviewsReducer from "./modules/interviews/InterviewsReducer";
@@ -20,11 +20,10 @@ export const store = createStore(combinedReducer, composeEnhancers(applyMiddlewa
 export type StoreState = ReturnType<typeof combinedReducer>;
 export type Store = typeof store;
 
-export const getProp = <T extends any>(key: string) => (
-  _: StoreState,
-  props: Record<string, any>,
-): T => {
-  return props[key];
-};
+export const getProp =
+  <T extends any>(key: string) =>
+  (_: StoreState, props: Record<string, any>): T => {
+    return props[key];
+  };
 
 export const useSafeSelector: TypedUseSelectorHook<StoreState> = useSelector;

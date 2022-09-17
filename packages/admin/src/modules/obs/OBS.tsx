@@ -53,7 +53,7 @@ class OBS {
     const inputStates = await this.getInputStates(inputs.map((input) => input.inputName));
     console.log(inputStates);
     setOBSData({
-      sceneList: (scenes as unknown) as OBSScene[],
+      sceneList: scenes as unknown as OBSScene[],
       transitionList: transitions,
       inputList: inputs,
       inputStates,
@@ -154,7 +154,7 @@ class OBS {
 
   async getInputs() {
     const response = await obs.call("GetInputList");
-    return (response.inputs as unknown) as OBSInput[];
+    return response.inputs as unknown as OBSInput[];
   }
 
   async getInputStates(inputNames: string[]) {
@@ -221,7 +221,7 @@ class OBS {
 
   async getTransitions() {
     const response = await obs.call("GetSceneTransitionList");
-    return (response.transitions as unknown) as OBSTransition[];
+    return response.transitions as unknown as OBSTransition[];
   }
 
   async getCurrentProgramScene() {

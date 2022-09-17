@@ -44,39 +44,37 @@ const getEntriesWithStartTimes = createSelector(
     let lastActualStartTime = scheduleStart;
     let lastEstimatedStartTime = scheduleStart;
 
-    return entries.map(
-      (entry): ScheduleEntryWithTimes => {
-        const nextActualStartTime = lastActualStartTime.plus({ seconds: entry.setupSeconds ?? 0 });
-        const nextEstimatedStartTime = lastEstimatedStartTime.plus({
-          seconds: entry.setupSeconds ?? 0,
-        });
+    return entries.map((entry): ScheduleEntryWithTimes => {
+      const nextActualStartTime = lastActualStartTime.plus({ seconds: entry.setupSeconds ?? 0 });
+      const nextEstimatedStartTime = lastEstimatedStartTime.plus({
+        seconds: entry.setupSeconds ?? 0,
+      });
 
-        if (entry.runId != null) {
-          const run = runs[entry.runId];
-          if (run != null) {
-            lastActualStartTime = nextActualStartTime.plus({
-              seconds: run.actualSeconds ?? run.estimateSeconds,
-            });
-            lastEstimatedStartTime = nextEstimatedStartTime.plus({ seconds: run.estimateSeconds });
-          }
+      if (entry.runId != null) {
+        const run = runs[entry.runId];
+        if (run != null) {
+          lastActualStartTime = nextActualStartTime.plus({
+            seconds: run.actualSeconds ?? run.estimateSeconds,
+          });
+          lastEstimatedStartTime = nextEstimatedStartTime.plus({ seconds: run.estimateSeconds });
         }
-        if (entry.interviewId != null) {
-          const interview = interviews[entry.interviewId];
-          if (interview != null) {
-            lastActualStartTime = nextActualStartTime.plus({ seconds: interview.estimateSeconds });
-            lastEstimatedStartTime = nextEstimatedStartTime.plus({
-              seconds: interview.estimateSeconds,
-            });
-          }
+      }
+      if (entry.interviewId != null) {
+        const interview = interviews[entry.interviewId];
+        if (interview != null) {
+          lastActualStartTime = nextActualStartTime.plus({ seconds: interview.estimateSeconds });
+          lastEstimatedStartTime = nextEstimatedStartTime.plus({
+            seconds: interview.estimateSeconds,
+          });
         }
+      }
 
-        return {
-          ...entry,
-          actualStartTime: nextActualStartTime,
-          estimatedStartTime: nextEstimatedStartTime,
-        };
-      },
-    );
+      return {
+        ...entry,
+        actualStartTime: nextActualStartTime,
+        estimatedStartTime: nextEstimatedStartTime,
+      };
+    });
   },
 );
 

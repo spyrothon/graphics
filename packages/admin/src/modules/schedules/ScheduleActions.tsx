@@ -12,7 +12,7 @@ import { SafeDispatch } from "@admin/hooks/useDispatch";
 
 import { fetchInterviewsSuccess } from "../interviews/InterviewActions";
 import { fetchRunsSuccess } from "../runs/RunActions";
-import { ScheduleAction,ScheduleActionType } from "./ScheduleTypes";
+import { ScheduleAction, ScheduleActionType } from "./ScheduleTypes";
 
 export function selectScheduleEntry(entryId?: string): ScheduleAction {
   return {

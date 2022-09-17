@@ -1,5 +1,5 @@
-import { TypedUseSelectorHook,useSelector } from "react-redux";
-import { applyMiddleware, combineReducers,compose, createStore } from "redux";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 
 import authReducer from "./modules/auth/AuthReducer";
@@ -23,11 +23,10 @@ export type StoreState = ReturnType<typeof combinedReducer>;
 export type Store = typeof store;
 export type AppDispatch = typeof store.dispatch;
 
-export const getProp = <T extends any>(key: string) => (
-  _: StoreState,
-  props: Record<string, any>,
-): T => {
-  return props[key];
-};
+export const getProp =
+  <T extends any>(key: string) =>
+  (_: StoreState, props: Record<string, any>): T => {
+    return props[key];
+  };
 
 export const useSafeSelector: TypedUseSelectorHook<StoreState> = useSelector;

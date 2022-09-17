@@ -3,7 +3,7 @@ import { APIClient, HTTPUtils, User } from "@spyrothon/api";
 
 import { SafeDispatch } from "@admin/hooks/useDispatch";
 
-import { AuthAction,AuthActionType } from "./AuthTypes";
+import { AuthAction, AuthActionType } from "./AuthTypes";
 
 const AUTH_COOKIE_ID = "session";
 

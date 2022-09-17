@@ -1,7 +1,7 @@
 import * as React from "react";
-import { ArrowRight, ChevronsDown,ChevronsUp, X } from "react-feather";
+import { ArrowRight, ChevronsDown, ChevronsUp, X } from "react-feather";
 import type { InitialTransition } from "@spyrothon/api";
-import {NumberInput} from "@spyrothon/uikit";
+import { NumberInput } from "@spyrothon/uikit";
 
 import OBSMediaSelector from "../obs/OBSMediaSelector";
 import OBSSceneSelector from "../obs/OBSSceneSelector";

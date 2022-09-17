@@ -1,6 +1,6 @@
 import { Interview } from "@spyrothon/api";
 
-import { Action,ActionFor } from "../../Actions";
+import { Action, ActionFor } from "../../Actions";
 import { InterviewActionType } from "./InterviewTypes";
 
 type InterviewMap = { [id: string]: Interview };

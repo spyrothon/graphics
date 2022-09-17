@@ -6,7 +6,7 @@ import {
   InitialTransitionSet,
   ScheduleEntry,
 } from "@spyrothon/api";
-import { Button, DurationInput, Header, SaveState,useSaveable } from "@spyrothon/uikit";
+import { Button, DurationInput, Header, SaveState, useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

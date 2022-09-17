@@ -1,4 +1,4 @@
-import { APIClient, Article, InitialArticle,InitialNewsletter, Newsletter } from "@spyrothon/api";
+import { APIClient, Article, InitialArticle, InitialNewsletter, Newsletter } from "@spyrothon/api";
 
 import { SafeDispatch } from "@admin/hooks/useDispatch";
 

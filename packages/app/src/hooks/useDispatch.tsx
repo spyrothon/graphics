@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { ThunkAction,ThunkDispatch } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
 import { Action } from "../Actions";
 import { StoreState } from "../Store";

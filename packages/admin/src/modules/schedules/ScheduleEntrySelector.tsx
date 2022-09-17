@@ -14,10 +14,10 @@ type ScheduleEntrySelectorProps = {
 
 export default function ScheduleEntrySelector(props: ScheduleEntrySelectorProps) {
   const { label, note, selectedEntryId, entries, className, onChange } = props;
-  const selectedEntry = React.useMemo(() => entries.find((entry) => entry.id === selectedEntryId), [
-    selectedEntryId,
-    entries,
-  ]);
+  const selectedEntry = React.useMemo(
+    () => entries.find((entry) => entry.id === selectedEntryId),
+    [selectedEntryId, entries],
+  );
 
   function getOptionName(entry?: ScheduleEntryWithDependants) {
     if (entry == null) return "";

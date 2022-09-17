@@ -8,11 +8,7 @@ export const ActionTypes = {
   ...ScheduleActionType,
 };
 
-export type Action =
-  | { type: "@@INIT" }
-  | InterviewAction
-  | RunAction
-  | ScheduleAction;
+export type Action = { type: "@@INIT" } | InterviewAction | RunAction | ScheduleAction;
 
 export type ActionFor<T extends keyof typeof ActionTypes> = Extract<
   Action,

@@ -1,6 +1,6 @@
-import { Article,Newsletter } from "@spyrothon/api";
+import { Article, Newsletter } from "@spyrothon/api";
 
-import { Action,ActionFor } from "../../Actions";
+import { Action, ActionFor } from "../../Actions";
 import { PublishingActionType } from "./PublishingTypes";
 
 type NewsletterMap = { [id: string]: Newsletter };

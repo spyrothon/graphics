@@ -1,8 +1,8 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Flag, Icon,Pause, Play, Repeat } from "react-feather";
+import { Flag, Icon, Pause, Play, Repeat } from "react-feather";
 import type { Run, RunParticipant } from "@spyrothon/api";
-import {Button, formatDuration, Header, Text, useAnimationFrame} from '@spyrothon/uikit';
+import { Button, formatDuration, Header, Text, useAnimationFrame } from "@spyrothon/uikit";
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
 
@@ -38,7 +38,6 @@ function getElapsedRunSeconds(run: Run, runnerId?: string, asOf: Date = new Date
   return 0;
 }
 
-
 interface LiveTimerProps {
   run: Run;
   runnerId?: string;
@@ -55,7 +54,6 @@ function LiveTimer(props: LiveTimerProps) {
 
   return <>{formatDuration(time)}</>;
 }
-
 
 interface TimerAction {
   Icon: Icon;
