@@ -1,0 +1,26 @@
+{
+  "javascript.suggestionActions.enabled": false,
+  "editor.suggest.matchOnWordStartOnly": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.formatOnSave": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.codeActionsOnSave.rules": ["simple-import-sort/imports"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "files.insertFinalNewline": true
+}
