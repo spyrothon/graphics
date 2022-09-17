@@ -13,8 +13,7 @@ jobs:
       NODE_ENV: ci
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Prerequisites
         uses: ./.github/actions/prereqs
@@ -31,8 +30,7 @@ jobs:
       NODE_ENV: ci
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         
       - name: Prerequisites
         uses: ./.github/actions/prereqs
