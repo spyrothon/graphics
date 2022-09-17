@@ -11,7 +11,7 @@ interface EditArticleProps {
   articleId: string;
 }
 
-export default function EditNewsletter(props: EditArticleProps) {
+export default function EditArticle(props: EditArticleProps) {
   const dispatch = useSafeDispatch();
   const { articleId } = props;
 

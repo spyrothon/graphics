@@ -14,6 +14,7 @@ import NewslettersIndex from "./NewslettersIndex";
 function Render(props: { render: () => JSX.Element }) {
   return props.render();
 }
+
 const PUBLISHING_ROUTES: DashboardSidebarRoute[] = [
   {
     id: "general",
@@ -59,14 +60,14 @@ const PUBLISHING_ROUTES: DashboardSidebarRoute[] = [
   },
   {
     id: "edit-article",
-    label: "New Article",
+    label: "Edit Article",
     showLink: false,
     path: Routes.PUBLISHING_ARTICLES_EDIT(":id"),
     element: (
       <Render
         render={() => {
           const params = useParams<{ id: string }>();
-          return <EditNewsletter newsletterId={params.id!} />;
+          return <EditArticle articleId={params.id!} />;
         }}
       />
     ),

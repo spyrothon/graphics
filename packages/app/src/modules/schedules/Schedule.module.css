@@ -1,0 +1,150 @@
+.body {
+  margin: 0;
+
+  & * {
+    box-sizing: border-box;
+  }
+}
+
+.background {
+  position: fixed;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: 38% 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.logo {
+  width: 100%;
+  filter: drop-shadow(4px 8px 12px #000);
+}
+
+.eventInfo {
+  width: 100%;
+  max-width: 640px;
+  min-width: 40vw;
+  padding: 32px 16px;
+}
+
+.dates {
+  color: var(--text-inverted);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 0 1px 6px #000;
+}
+
+.timezone {
+  color: var(--text-inverted);
+  text-align: center;
+  font-size: 16px;
+  margin-top: 8px;
+  text-shadow: 0 1px 6px #000;
+}
+
+.schedule {
+  margin: auto;
+  padding: 0 0 96px 0;
+}
+
+.dayMarker {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 640px;
+  min-width: 40vw;
+  padding: 8px 32px;
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-inverted);
+  background-color: rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 6px #000;
+  border-bottom: 2px solid var(--text-inverted);
+}
+
+.entry {
+  width: 100%;
+  max-width: 640px;
+  min-width: 40vw;
+  font-size: 20px;
+}
+
+.runContainer,
+.interviewContainer {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+  color: var(--text-inverted);
+  text-shadow: 0 1px 6px #000;
+}
+
+.interviewContainer {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.startTime {
+  flex: 0 0 96px;
+  text-align: right;
+  margin-right: 16px;
+  font-size: 20px;
+}
+
+.details {
+  flex: 1 1 auto;
+  border-left: 2px solid var(--text-inverted);
+  padding-left: 16px;
+
+  .interviewContainer & {
+    border-color: var(--primary-bg-200);
+  }
+}
+
+.game {
+  color: var(--text-inverted);
+  font-weight: 700;
+  font-family: var(--font-brand);
+  margin-bottom: 2px;
+}
+
+.category {
+  display: inline-block;
+  font-weight: 400;
+  font-family: var(--font-brand);
+  color: var(--text-inverted);
+}
+
+.participants {
+  font-size: 16px;
+}
+
+.anchor {
+  text-decoration: none;
+  color: var(--primary-bg-200);
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+@media (min-width: 1400px) {
+  .schedule {
+    padding: 64px;
+  }
+
+  .eventInfo {
+    position: fixed;
+    top: 64px;
+    right: 5vw;
+    width: 40vw;
+    max-width: 480px;
+    padding: 0;
+  }
+}

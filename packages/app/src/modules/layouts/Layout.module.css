@@ -1,0 +1,7 @@
+.fixedWidth {
+  width: 940px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 8px;
+  margin: auto;
+}
