@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Prerequisites
-        uses: ./.github/actions/prereqs.yaml
+        uses: ./.github/actions/prereqs
         with:
           node-version: ${{ matrix.node-version }}
           pnpm-version: ${{ matrix.pnpm-version }}
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Prerequisites
-        uses: ./.github/actions/prereqs.yaml
+        uses: ./.github/actions/prereqs
         with:
           node-version: ${{ matrix.node-version }}
           pnpm-version: ${{ matrix.pnpm-version }}
