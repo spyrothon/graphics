@@ -43,4 +43,4 @@ runs:
     - name: Compile vendored dependencies
       shell: bash
       run: |
-        cd vendored/obs-websocket-js && npm build
+        cd vendored/obs-websocket-js && npm run build
