@@ -9,7 +9,8 @@
   "main": "./src/index.tsx",
   "scripts": {
     "dev": "vite",
-    "tsc": "tsc --watch",
+    "tsc": "tsc",
+    "lint": "eslint . --ext .tsx",
     "types": "tsc --project tsconfig.json --declaration --noEmit false --emitDeclarationOnly --jsx react --module es6 --moduleResolution node --outDir dist/ --declarationMap",
     "build": "vite build && pnpm types",
     "preview": "vite preview"
@@ -28,6 +29,7 @@
     "@types/react": "^18.0.17",
     "@types/react-datepicker": "^4.4.2",
     "@vitejs/plugin-react": "^2.1.0",
+    "eslint": "^8.23.1",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
   }

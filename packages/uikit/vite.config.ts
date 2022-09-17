@@ -1,6 +1,6 @@
 import { resolve } from "path";
-
 import { defineConfig } from "vite";
+
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
@@ -26,7 +26,7 @@ export default defineConfig({
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "react-router-dom": undefined,
+          "react-router-dom": "ReactRouterDOM",
         },
       },
     },

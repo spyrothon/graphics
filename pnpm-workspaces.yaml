@@ -3,5 +3,7 @@ packages:
   - "api"
   - "app"
   - "graphics"
-  - "obs-websocket-js"
   - "uikit"
+
+  # Vendored dependencies with local changes
+  - "obs-websocket-js"

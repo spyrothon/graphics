@@ -22,7 +22,7 @@ jobs:
           pnpm-version: ${{ matrix.pnpm-version }}
       
       - name: 'ESLint'
-        run: pnpm eslint
+        run: pnpm --filter './packages/*' -r lint
 
   TypeScript:
     runs-on: ubuntu-latest
@@ -39,4 +39,4 @@ jobs:
           pnpm-version: ${{ matrix.pnpm-version }}
       
       - name: 'TypeScript'
-        run: pnpm typescript
+        run: pnpm --filter './packages/*' -r tsc

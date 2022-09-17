@@ -3,7 +3,6 @@ config/*.json
 !config/ci.json
 node_modules/
 
-public/
 build/
 dist/
 

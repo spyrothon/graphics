@@ -1,0 +1,9 @@
+{
+  "__API_BASE__": "http://localhost:4000/api",
+  "__API_VERSION__": "v1",
+  "__SYNC_HOST__": "localhost:3000/socket/sync",
+  "__ASSETS_ENDPOINT__": "//localhost:8081",
+  "__APP_HOST__": "//localhost:8081",
+  "__ADMIN_PATH__": "/admin",
+  "__PAGE_TITLE__": "Spyrothon Admin"
+}
