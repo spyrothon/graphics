@@ -37,7 +37,9 @@ export default function InterviewEditor(props: InterviewEditorProps) {
 
   React.useEffect(() => {
     editor.setBase(interview);
-  }, [editor, interview]);
+    // `editor` is a new object every time, but the state persists
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [interview]);
 
   const [handleSave, getSaveText, saveState] = useSaveable(async () => {
     const interview = editor.getEditedInterview();

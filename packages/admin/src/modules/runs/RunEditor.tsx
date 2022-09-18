@@ -56,7 +56,9 @@ export default function RunEditor(props: RunEditorProps) {
 
   React.useEffect(() => {
     editor.setBaseRun(run);
-  }, [editor, run]);
+    // `editor` is a new object every time, but the state persists
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [run]);
 
   const [handleSaveRun, getSaveText, saveState] = useSaveable(async () =>
     dispatch(persistRun(run.id, editor.getEditedRun())),

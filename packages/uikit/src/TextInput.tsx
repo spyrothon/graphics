@@ -31,20 +31,20 @@ export function TextInput(props: TextInputProps) {
         return (
           <textarea
             className={classNames(styles.input, styles.multiline)}
+            {...withoutInputWrapperProps(props)}
             name={name}
             rows={props.rows ?? 4}
             value={value ?? ""}
-            {...withoutInputWrapperProps(props)}
           />
         );
       default:
         return (
           <input
             className={styles.input}
+            {...withoutInputWrapperProps(props)}
             name={name}
             type={type}
             value={value ?? ""}
-            {...withoutInputWrapperProps(props)}
           />
         );
     }
