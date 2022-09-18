@@ -13,6 +13,6 @@ export default defineConfig({
       "@graphics": resolve(__dirname, "src"),
     },
   },
-  envDir: '../../env',
+  envDir: "../../env",
   plugins: [react()],
 });
