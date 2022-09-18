@@ -1,0 +1,9 @@
+packages:
+  - "packages/admin"
+  - "packages/api"
+  - "packages/app"
+  - "packages/graphics"
+  - "packages/uikit"
+
+  # Vendored dependencies with local changes
+  - "vendored/*"

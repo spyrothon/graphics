@@ -1,9 +1,0 @@
-packages:
-  - "admin"
-  - "api"
-  - "app"
-  - "graphics"
-  - "uikit"
-
-  # Vendored dependencies with local changes
-  - "vendored/*"
