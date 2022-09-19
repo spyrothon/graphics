@@ -5,6 +5,6 @@
       "@admin/*": ["./src/*"]
     }
   },
-  "include": ["./src/**/*", "../../@types/*", "./@types/*"],
+  "include": ["./src/**/*", "../../@types/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
