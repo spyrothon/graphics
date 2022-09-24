@@ -17,6 +17,7 @@ This repository relies on:
 
 - nodejs 16.11.1
 - pnpm 7.11.0
+- postgres 12 (or higher)
 
 which are specified in `.tool-versions` and can easily be installed using `asdf` and their
 respective plugins.
