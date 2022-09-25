@@ -7,6 +7,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   envDir: "../../env",
+  envPrefix: "SPYROTHON_",
   css: {
     postcss: resolve(__dirname, "../../tools/postcss"),
   },

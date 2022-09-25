@@ -14,5 +14,6 @@ export default defineConfig({
     },
   },
   envDir: "../../env",
+  envPrefix: "SPYROTHON_",
   plugins: [react()],
 });
