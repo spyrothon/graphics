@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "description": "Graphics and management system for Spyrothon",
   "homepage": "https://spyrothon.org",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [],
   "author": "Jon Egeland <jonegeland@gmail.com>",
   "license": "MIT",
