@@ -33,6 +33,7 @@
     "dev": "vite",
     "tsc": "tsc",
     "lint": "eslint . --ext .tsx",
+    "prettier": "prettier . --check --ignore-path ../../.prettierignore",
     "types": "tsc --project tsconfig.json --declaration --noEmit false --emitDeclarationOnly --jsx react --module es6 --moduleResolution node --outDir dist/ --declarationMap",
     "build": "vite build && pnpm types",
     "preview": "vite preview"

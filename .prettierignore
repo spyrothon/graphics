@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Non-formatted content
+public/
+
 # Source/Build artifacts
 dist/
 public/

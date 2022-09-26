@@ -21,8 +21,7 @@ runs:
     - name: Compile vendored dependencies
       if: ${{ inputs.needs_vendored_dependencies }}
       shell: bash
-      run: |
-        cd vendored/obs-websocket-js && npm run build
+      run: cd vendored/obs-websocket-js && npm run build
 
     - name: "ESLint"
       shell: bash
@@ -30,8 +29,8 @@ runs:
 
     - name: "Prettier"
       shell: bash
-      run: pnpm --filter ${{inputs.package}} prettier --check
+      run: pnpm --filter ${{inputs.package}} -r prettier
 
     - name: "TypeScript"
       shell: bash
-      run: pnpm --filter ${{inputs.package}} tsc
+      run: pnpm --filter ${{inputs.package}} -r tsc

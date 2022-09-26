@@ -7,7 +7,7 @@
     "dev": "vite",
     "tsc": "tsc",
     "lint": "eslint . --ext .tsx",
-    "prettier": "prettier .",
+    "prettier": "prettier . --check --ignore-path ../../.prettierignore",
     "build": "vite build",
     "preview": "vite preview"
   },
