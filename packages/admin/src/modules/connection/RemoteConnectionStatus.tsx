@@ -24,7 +24,7 @@ export default function RemoteConnectionStatus() {
       <div className={styles.items}>
         <div className={styles.item}>
           <StatusDot boolean={isConnected} />
-          <span className={styles.itemName}>API Sync</span>
+          <span className={styles.itemName}>API</span>
         </div>
         <div className={styles.item}>
           <StatusDot boolean={obsConnected} busy={obsBusy} />
