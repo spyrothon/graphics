@@ -21,8 +21,8 @@ jobs:
       - name: Frontend Checks
         uses: ./.github/actions/frontend-checks
         with:
-          package: \'./packages/graphics\'
-          needs-vendored-dependencies: false
+          package: ./packages/graphics
+          needs_vendored_dependencies: false
 
   deploy:
     runs-on: ubuntu-latest

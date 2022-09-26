@@ -21,8 +21,8 @@ jobs:
       - name: Frontend Checks
         uses: ./.github/actions/frontend-checks
         with:
-          package: \'./packages/admin\'
-          needs-vendored-dependencies: true
+          package: ./packages/admin
+          needs_vendored_dependencies: true
 
   deploy:
     runs-on: ubuntu-latest
