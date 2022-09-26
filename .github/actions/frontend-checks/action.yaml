@@ -23,10 +23,13 @@ runs:
         cd vendored/obs-websocket-js && npm run build
 
     - name: "ESLint"
+      shell: bash
       run: pnpm --filter '{{inputs.package}}' -r lint
 
     - name: "Prettier"
+      shell: bash
       run: pnpm --filter '{{inputs.package}}' prettier --check
 
     - name: "TypeScript"
+      shell: bash
       run: pnpm --filter '{{inputs.package}}' tsc
