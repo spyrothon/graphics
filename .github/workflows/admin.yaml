@@ -19,7 +19,7 @@ jobs:
         uses: ./.github/actions/prereqs
 
       - name: Frontend Checks
-        uses: ./github/actions/frontend-checks
+        uses: ./.github/actions/frontend-checks
         with:
           package: ./packages/admin
           needs-vendored-dependencies: true
