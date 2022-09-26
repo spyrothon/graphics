@@ -3,8 +3,11 @@ name: Spyrothon Admin
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+    paths:
+      - "packages/admin/**"
+      - "packages/api/**"
+      - "packages/uikit/**"
+      - "vendored/**"
 
 jobs:
   build:
