@@ -24,12 +24,12 @@ runs:
 
     - name: "ESLint"
       shell: bash
-      run: pnpm --filter '{{inputs.package}}' -r lint
+      run: pnpm --filter ${{inputs.package}} -r lint
 
     - name: "Prettier"
       shell: bash
-      run: pnpm --filter '{{inputs.package}}' prettier --check
+      run: pnpm --filter ${{inputs.package}} prettier --check
 
     - name: "TypeScript"
       shell: bash
-      run: pnpm --filter '{{inputs.package}}' tsc
+      run: pnpm --filter ${{inputs.package}} tsc
