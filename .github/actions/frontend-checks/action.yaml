@@ -1,0 +1,32 @@
+name: Frontend Checks
+description:
+  "Runs all of the common checks for a frontend application on the specified package: TypeScript,
+  ESLint, and Prettier. The package must be a package the pnpm knows about from
+  `pnpm-workspace.yaml. Multiple packages can also be specified using pnpm's filter syntax (without
+  quotes)"
+inputs:
+  package:
+    required: true
+    description: Package filter to use for running the checks.
+  needs-vendored-dependencies:
+    required: false
+    default: false
+    description: Whether vendored dependencies need to be compiled before running the checks.
+
+runs:
+  using: composite
+  steps:
+    - name: Compile vendored dependencies
+      if: ${{ inputs.needs-vendored-dependencies == true }}
+      shell: bash
+      run: |
+        cd vendored/obs-websocket-js && npm run build
+
+    - name: "ESLint"
+      run: pnpm --filter '{{inputs.package}}' -r lint
+
+    - name: "Prettier"
+      run: pnpm --filter '{{inputs.package}}' prettier --check
+
+    - name: "TypeScript"
+      run: pnpm --filter '{{inputs.package}}' tsc

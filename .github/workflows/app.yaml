@@ -1,0 +1,33 @@
+name: Spyrothon App
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: ci
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Prerequisites
+        uses: ./.github/actions/prereqs
+
+      - name: Frontend Checks
+        uses: ./github/actions/frontend-checks
+        with:
+          package: ./packages/app
+          needs-vendored-dependencies: false
+
+  deploy:
+    needs: build
+    steps:
+      - name: Deploy to Render.com
+        uses: techeca/render-deployHook-action@0.1.0
+        with:
+          deploy-hook: ${{ secrets.APP_DEPLOY_HOOK }}
