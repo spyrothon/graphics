@@ -4,31 +4,31 @@ const AppRoutes = {
 };
 
 export const Routes = {
-  ADMIN_BASE_PATH: "/admin",
-  LOGIN: "/admin/login",
-  LOGOUT: "/admin/logout",
+  BASE_PATH: "/",
+  LOGIN: "/login",
+  LOGOUT: "/logout",
   // DASHBOARDS
-  SCHEDULE_EDITOR: "/admin/schedule-editor",
-  LIVE_DASHBOARD: "/admin/live",
+  SCHEDULE_EDITOR: "/schedule-editor",
+  LIVE_DASHBOARD: "/live",
 
   // SETTINGS
-  SETTINGS: "/admin/settings",
-  SETTINGS_OBS: "/admin/settings/obs",
-  SETTINGS_TWITCH: "/admin/settings/twitch",
-  SETTINGS_CREATE_SCHEDULE: "/admin/settings/create-schedule",
-  SETTINGS_MANAGE_SCHEDULE: "/admin/settings/manage-schedule",
-  SETTINGS_USER: "/admin/settings/user",
+  SETTINGS: "/settings",
+  SETTINGS_OBS: "/settings/obs",
+  SETTINGS_TWITCH: "/settings/twitch",
+  SETTINGS_CREATE_SCHEDULE: "/settings/create-schedule",
+  SETTINGS_MANAGE_SCHEDULE: "/settings/manage-schedule",
+  SETTINGS_USER: "/settings/user",
 
   // Publishing
-  PUBLISHING: "/admin/publishing",
-  PUBLISHING_NEWSLETTERS: "/admin/publishing/newsletters",
-  PUBLISHING_NEWSLETTER: (newsletterId: string) => `/admin/publishing/newsletters/${newsletterId}`,
-  PUBLISHING_NEWSLETTERS_NEW: "/admin/publishing/newsletters/new",
+  PUBLISHING: "/publishing",
+  PUBLISHING_NEWSLETTERS: "/publishing/newsletters",
+  PUBLISHING_NEWSLETTER: (newsletterId: string) => `/publishing/newsletters/${newsletterId}`,
+  PUBLISHING_NEWSLETTERS_NEW: "/publishing/newsletters/new",
   PUBLISHING_NEWSLETTERS_EDIT: (newsletterId: string) =>
-    `/admin/publishing/newsletters/${newsletterId}/edit`,
-  PUBLISHING_ARTICLES: "/admin/publishing/articles",
-  PUBLISHING_ARTICLES_NEW: "/admin/publishing/articles/new",
-  PUBLISHING_ARTICLES_EDIT: (articleId: string) => `/admin/publishing/articles/${articleId}/edit`,
+    `/publishing/newsletters/${newsletterId}/edit`,
+  PUBLISHING_ARTICLES: "/publishing/articles",
+  PUBLISHING_ARTICLES_NEW: "/publishing/articles/new",
+  PUBLISHING_ARTICLES_EDIT: (articleId: string) => `/publishing/articles/${articleId}/edit`,
 };
 
 export { AppRoutes };
