@@ -27,10 +27,7 @@ jobs:
           needs_vendored_dependencies: false
 
   deploy:
-    runs-on: ubuntu-latest
     needs: build
-    steps:
-      - name: Deploy to Render.com
-        uses: techeca/render-deployHook-action@0.1.0
-        with:
-          deploy-hook: ${{ secrets.APP_DEPLOY_HOOK }}
+    uses: ./.github/workflows/deploy-on-render.yaml
+    with:
+      deploy_hook: ${{ secrets.APP_DEPLOY_HOOK }}

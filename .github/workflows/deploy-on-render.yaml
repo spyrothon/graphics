@@ -1,0 +1,17 @@
+deploname: Deploy on Render.com
+
+on:
+  workflow_call:
+    inputs:
+      deploy_hook:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Render.com
+        uses: techeca/render-deployHook-action@0.1.0
+        with:
+          deploy-hook: ${{ inputs.deploy_hook }}
