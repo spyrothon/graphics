@@ -30,5 +30,6 @@ jobs:
     needs: build
     uses: ./.github/workflows/deploy-on-render.yaml
     with:
-      deploy_hook: ${{ secrets.APP_DEPLOY_HOOK }}
       service_name: app
+    secrets:
+      deploy_hook: ${{ secrets.APP_DEPLOY_HOOK }}
