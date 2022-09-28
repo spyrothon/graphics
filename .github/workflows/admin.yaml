@@ -32,3 +32,4 @@ jobs:
     uses: ./.github/workflows/deploy-on-render.yaml
     with:
       deploy_hook: ${{ secrets.ADMIN_DEPLOY_HOOK }}
+      service_name: admin

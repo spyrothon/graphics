@@ -31,3 +31,4 @@ jobs:
     uses: ./.github/workflows/deploy-on-render.yaml
     with:
       deploy_hook: ${{ secrets.GRAPHICS_DEPLOY_HOOK }}
+      service_name: graphics

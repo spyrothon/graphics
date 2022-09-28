@@ -6,12 +6,16 @@ on:
       deploy_hook:
         required: true
         type: string
+      service_name:
+        require: true
+        type: string
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Render.com
-        uses: techeca/render-deployHook-action@0.1.0
+      - name: Deploy `${{ inputs.service_name }}` to Render.com
+        uses: ungnome/render-service-deploy@6cae7802c0367cfb0fa7848e18745ba675b35aef
         with:
-          deploy-hook: ${{ inputs.deploy_hook }}
+          webhook: ${{ inputs.deploy_hook }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
