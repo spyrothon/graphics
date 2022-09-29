@@ -30,73 +30,6 @@ importers:
       react: 18.2.0
       typescript: 4.8.3
 
-  packages/admin:
-    specifiers:
-      '@spyrothon/api': workspace:*
-      '@spyrothon/uikit': workspace:*
-      '@types/js-cookie': ^3.0.2
-      '@types/luxon': ^3.0.1
-      '@types/react': ^18.0.17
-      '@types/react-dom': ^18.0.6
-      '@types/react-helmet': ^6.1.5
-      '@types/react-redux': ^7.1.24
-      '@types/uuid': ^8.3.4
-      '@vitejs/plugin-react': ^2.1.0
-      classnames: ^2.3.1
-      eslint: ^8.23.1
-      js-cookie: ^3.0.1
-      luxon: ^3.0.3
-      obs-websocket-js: workspace:*
-      re-reselect: ^4.0.1
-      react: ^18.2.0
-      react-dnd: ^16.0.1
-      react-dnd-html5-backend: ^16.0.1
-      react-dom: ^18.2.0
-      react-feather: ^2.0.10
-      react-helmet: ^6.1.0
-      react-redux: ^8.0.2
-      react-router-dom: 6.3.0
-      redux: ^4.2.0
-      redux-thunk: ^2.4.1
-      reselect: ^4.1.6
-      typescript: ^4.6.4
-      uuid: ^9.0.0
-      vite: ^3.1.0
-      zustand: ^4.1.1
-    dependencies:
-      '@spyrothon/api': link:../api
-      '@spyrothon/uikit': link:../uikit
-      classnames: 2.3.2
-      js-cookie: 3.0.1
-      luxon: 3.0.3
-      obs-websocket-js: link:../../vendored/obs-websocket-js
-      re-reselect: 4.0.1_reselect@4.1.6
-      react: 18.2.0
-      react-dnd: 16.0.1_w5j4k42lgipnm43s3brx6h3c34
-      react-dnd-html5-backend: 16.0.1
-      react-dom: 18.2.0_react@18.2.0
-      react-feather: 2.0.10_react@18.2.0
-      react-helmet: 6.1.0_react@18.2.0
-      react-redux: 8.0.2_3scyx54fe4cnnff6navzqxutae
-      react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
-      redux: 4.2.0
-      redux-thunk: 2.4.1_redux@4.2.0
-      reselect: 4.1.6
-      uuid: 9.0.0
-      zustand: 4.1.1_react@18.2.0
-    devDependencies:
-      '@types/js-cookie': 3.0.2
-      '@types/luxon': 3.0.1
-      '@types/react': 18.0.20
-      '@types/react-dom': 18.0.6
-      '@types/react-helmet': 6.1.5
-      '@types/react-redux': 7.1.24
-      '@types/uuid': 8.3.4
-      '@vitejs/plugin-react': 2.1.0_vite@3.1.2
-      eslint: 8.23.1
-      typescript: 4.8.3
-      vite: 3.1.2
-
   packages/api:
     specifiers:
       eslint: ^8.23.1
@@ -252,6 +185,73 @@ importers:
     devDependencies:
       '@types/react': 18.0.20
       '@types/react-datepicker': 4.4.2_biqbaboplfbrettd7655fr4n2y
+      '@vitejs/plugin-react': 2.1.0_vite@3.1.2
+      eslint: 8.23.1
+      typescript: 4.8.3
+      vite: 3.1.2
+
+  spyrothon_admin:
+    specifiers:
+      '@spyrothon/api': workspace:*
+      '@spyrothon/uikit': workspace:*
+      '@types/js-cookie': ^3.0.2
+      '@types/luxon': ^3.0.1
+      '@types/react': ^18.0.17
+      '@types/react-dom': ^18.0.6
+      '@types/react-helmet': ^6.1.5
+      '@types/react-redux': ^7.1.24
+      '@types/uuid': ^8.3.4
+      '@vitejs/plugin-react': ^2.1.0
+      classnames: ^2.3.1
+      eslint: ^8.23.1
+      js-cookie: ^3.0.1
+      luxon: ^3.0.3
+      obs-websocket-js: workspace:*
+      re-reselect: ^4.0.1
+      react: ^18.2.0
+      react-dnd: ^16.0.1
+      react-dnd-html5-backend: ^16.0.1
+      react-dom: ^18.2.0
+      react-feather: ^2.0.10
+      react-helmet: ^6.1.0
+      react-redux: ^8.0.2
+      react-router-dom: 6.3.0
+      redux: ^4.2.0
+      redux-thunk: ^2.4.1
+      reselect: ^4.1.6
+      typescript: ^4.6.4
+      uuid: ^9.0.0
+      vite: ^3.1.0
+      zustand: ^4.1.1
+    dependencies:
+      '@spyrothon/api': link:../packages/api
+      '@spyrothon/uikit': link:../packages/uikit
+      classnames: 2.3.2
+      js-cookie: 3.0.1
+      luxon: 3.0.3
+      obs-websocket-js: link:../vendored/obs-websocket-js
+      re-reselect: 4.0.1_reselect@4.1.6
+      react: 18.2.0
+      react-dnd: 16.0.1_w5j4k42lgipnm43s3brx6h3c34
+      react-dnd-html5-backend: 16.0.1
+      react-dom: 18.2.0_react@18.2.0
+      react-feather: 2.0.10_react@18.2.0
+      react-helmet: 6.1.0_react@18.2.0
+      react-redux: 8.0.2_3scyx54fe4cnnff6navzqxutae
+      react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
+      redux: 4.2.0
+      redux-thunk: 2.4.1_redux@4.2.0
+      reselect: 4.1.6
+      uuid: 9.0.0
+      zustand: 4.1.1_react@18.2.0
+    devDependencies:
+      '@types/js-cookie': 3.0.2
+      '@types/luxon': 3.0.1
+      '@types/react': 18.0.20
+      '@types/react-dom': 18.0.6
+      '@types/react-helmet': 6.1.5
+      '@types/react-redux': 7.1.24
+      '@types/uuid': 8.3.4
       '@vitejs/plugin-react': 2.1.0_vite@3.1.2
       eslint: 8.23.1
       typescript: 4.8.3
@@ -1943,7 +1943,7 @@ packages:
       metro-core: 0.72.3
       metro-react-native-babel-transformer: 0.72.1_@babel+core@7.19.1
       metro-resolver: 0.72.3
-      metro-runtime: 0.72.1
+      metro-runtime: 0.72.3
       readline: 1.3.0
     transitivePeerDependencies:
       - '@babel/core'

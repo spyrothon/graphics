@@ -34,7 +34,7 @@ Now, any individual application can be run by `cd`ing into that package and runn
 
 ```zsh
 # Start the `admin` application
-cd packages/admin
+cd spyrothon_admin
 pnpm dev
 ```
 
