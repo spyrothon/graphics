@@ -52,13 +52,13 @@ jobs:
 
       - name: Compress release into tarball
         run: |
-          tar czf /graphics_api.tar.gz ./release/*
+          tar czf ./graphics_api.tar.gz ./release/*
 
       - name: Upload release artifact
         uses: actions/upload-artifact@v3
         with:
           name: graphics_api
-          path: /graphics_api.tar.gz
+          path: ./spyrothon_api/graphics_api.tar.gz
 
   deploy_production:
     runs-on: ubuntu-20.04
