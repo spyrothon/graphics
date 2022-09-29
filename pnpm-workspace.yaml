@@ -1,8 +1,8 @@
 packages:
   - "spyrothon_admin"
   - "spyrothon_app"
+  - "spyrothon_graphics"
   - "packages/api"
-  - "packages/graphics"
   - "packages/uikit"
 
   # Vendored dependencies with local changes
