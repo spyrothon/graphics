@@ -47,51 +47,6 @@ importers:
       typescript: 4.8.3
       vite: 3.1.2
 
-  packages/graphics:
-    specifiers:
-      '@spyrothon/api': workspace:../api
-      '@types/luxon': ^3.0.1
-      '@types/react': ^18.0.17
-      '@types/react-dom': ^18.0.6
-      '@vitejs/plugin-react': ^2.1.0
-      classnames: ^2.3.2
-      eslint: ^8.23.1
-      luxon: ^3.0.3
-      re-reselect: ^4.0.1
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      react-redux: ^8.0.2
-      react-router-dom: ^6.4.0
-      react-spring: ^9.5.4
-      redux: ^4.2.0
-      redux-thunk: ^2.4.1
-      reselect: ^4.1.6
-      sturdy-websocket: ^0.2.1
-      typescript: ^4.6.4
-      vite: ^3.1.0
-    dependencies:
-      '@spyrothon/api': link:../api
-      classnames: 2.3.2
-      luxon: 3.0.3
-      re-reselect: 4.0.1_reselect@4.1.6
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.2_aemdmwlcz5opcibgu44t3w3tw4
-      react-router-dom: 6.4.0_biqbaboplfbrettd7655fr4n2y
-      react-spring: 9.5.4_nj326iay3kvtm6ggzkjbvaodiy
-      redux: 4.2.0
-      redux-thunk: 2.4.1_redux@4.2.0
-      reselect: 4.1.6
-      sturdy-websocket: 0.2.1
-    devDependencies:
-      '@types/luxon': 3.0.1
-      '@types/react': 18.0.20
-      '@types/react-dom': 18.0.6
-      '@vitejs/plugin-react': 2.1.0_vite@3.1.2
-      eslint: 8.23.1
-      typescript: 4.8.3
-      vite: 3.1.2
-
   packages/uikit:
     specifiers:
       '@types/react': ^18.0.17
@@ -252,6 +207,51 @@ importers:
       '@types/react-helmet': 6.1.5
       '@types/react-redux': 7.1.24
       '@types/uuid': 8.3.4
+      '@vitejs/plugin-react': 2.1.0_vite@3.1.2
+      eslint: 8.23.1
+      typescript: 4.8.3
+      vite: 3.1.2
+
+  spyrothon_graphics:
+    specifiers:
+      '@spyrothon/api': workspace:../api
+      '@types/luxon': ^3.0.1
+      '@types/react': ^18.0.17
+      '@types/react-dom': ^18.0.6
+      '@vitejs/plugin-react': ^2.1.0
+      classnames: ^2.3.2
+      eslint: ^8.23.1
+      luxon: ^3.0.3
+      re-reselect: ^4.0.1
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-redux: ^8.0.2
+      react-router-dom: ^6.4.0
+      react-spring: ^9.5.4
+      redux: ^4.2.0
+      redux-thunk: ^2.4.1
+      reselect: ^4.1.6
+      sturdy-websocket: ^0.2.1
+      typescript: ^4.6.4
+      vite: ^3.1.0
+    dependencies:
+      '@spyrothon/api': link:../api
+      classnames: 2.3.2
+      luxon: 3.0.3
+      re-reselect: 4.0.1_reselect@4.1.6
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-redux: 8.0.2_aemdmwlcz5opcibgu44t3w3tw4
+      react-router-dom: 6.4.0_biqbaboplfbrettd7655fr4n2y
+      react-spring: 9.5.4_nj326iay3kvtm6ggzkjbvaodiy
+      redux: 4.2.0
+      redux-thunk: 2.4.1_redux@4.2.0
+      reselect: 4.1.6
+      sturdy-websocket: 0.2.1
+    devDependencies:
+      '@types/luxon': 3.0.1
+      '@types/react': 18.0.20
+      '@types/react-dom': 18.0.6
       '@vitejs/plugin-react': 2.1.0_vite@3.1.2
       eslint: 8.23.1
       typescript: 4.8.3
