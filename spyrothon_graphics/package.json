@@ -12,7 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@spyrothon/api": "workspace:../api",
+    "@spyrothon/api": "workspace:*",
     "classnames": "^2.3.2",
     "luxon": "^3.0.3",
     "re-reselect": "^4.0.1",
