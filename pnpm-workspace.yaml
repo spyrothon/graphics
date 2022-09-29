@@ -1,7 +1,7 @@
 packages:
   - "spyrothon_admin"
+  - "spyrothon_app"
   - "packages/api"
-  - "packages/app"
   - "packages/graphics"
   - "packages/uikit"
 
