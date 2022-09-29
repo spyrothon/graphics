@@ -16,6 +16,9 @@ concurrency:
 
 jobs:
   deploy:
+    name: Deploy to Production
+    if: github.ref == 'main'
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Render.com
