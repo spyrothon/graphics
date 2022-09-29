@@ -37,7 +37,6 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'main'
     uses: ./.github/workflows/deploy-on-render.yaml
     with:
       service_name: graphics
