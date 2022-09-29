@@ -9,20 +9,10 @@ inputs:
     required: true
     type: string
     description: Package filter to use for running the checks.
-  needs_vendored_dependencies:
-    required: false
-    default: false
-    type: boolean
-    description: Whether vendored dependencies need to be compiled before running the checks.
 
 runs:
   using: composite
   steps:
-    - name: Compile vendored dependencies
-      if: ${{ inputs.needs_vendored_dependencies }}
-      shell: bash
-      run: cd vendored/obs-websocket-js && npm run build
-
     - name: "ESLint"
       shell: bash
       run: pnpm --filter ${{inputs.package}} -r lint

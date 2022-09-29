@@ -4,6 +4,3 @@ node_modules/
 # Source/Build artifacts
 dist/
 public/
-
-# Vendored packages
-vendored/obs-websocket-js

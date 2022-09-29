@@ -4,6 +4,3 @@ packages:
   - "spyrothon_graphics"
   - "packages/api"
   - "packages/uikit"
-
-  # Vendored dependencies with local changes
-  - "vendored/*"
