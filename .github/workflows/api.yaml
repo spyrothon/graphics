@@ -1,0 +1,92 @@
+name: Spyrothon API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "spyrothon_api/**"
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: spyrothon_api
+
+jobs:
+  build:
+    name: Build Mix Release
+    runs-on: ubuntu-20.04
+    env:
+      MIX_ENV: prod
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Erlang/Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 24.0.4
+          elixir-version: 1.12.2
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile application
+        run: mix compile
+
+      - name: Build Mix Release
+        run: |
+          mix release graphics_api --path ./release
+
+      - name: Compress release into tarball
+        run: |
+          tar czf /graphics_api.tar.gz ./release/*
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: graphics_api
+          path: /graphics_api.tar.gz
+
+  deploy_production:
+    name: Deploy to Production
+    needs: build
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - name: Download release artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: graphics_api
+          path: ./${{ github.sha }}
+
+      - name: Upload to server
+        uses: appleboy/scp-action@98930d398ce425af0148ea8a0e3295cd04fe2b7a
+        with:
+          host: ${{ secrets.DEPLOYMENT_HOST }}
+          username: ${{ secrets.DEPLOYMENT_USERNAME }}
+          key: ${{ secrets.DEPLOYMENT_SSH_KEY }}
+          source: ./${{ github.sha }}
+          target: artifacts/graphics_api/
+          overwrite: true
+
+      - name: Deploy new release
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          host: ${{ secrets.DEPLOYMENT_HOST }}
+          username: ${{ secrets.DEPLOYMENT_USERNAME }}
+          privateKey: ${{ secrets.DEPLOYMENT_SSH_KEY }}
+          # This is dependent on the server having it's own copy of `deploy.sh`.
+          # It is intentionally _not_ pushed to the server automatically to
+          # prevent any kind of accidental change.
+          command: |
+            GITHUB_SHA=${{ github.sha }} ./deploy.sh

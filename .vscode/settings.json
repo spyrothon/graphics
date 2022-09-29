@@ -22,5 +22,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "elixirLS.projectDir": "./spyrothon_api"
 }
