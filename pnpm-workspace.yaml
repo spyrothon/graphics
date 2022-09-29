@@ -1,5 +1,5 @@
 packages:
-  - "packages/admin"
+  - "spyrothon_admin"
   - "packages/api"
   - "packages/app"
   - "packages/graphics"
