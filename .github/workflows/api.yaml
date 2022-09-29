@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "spyrothon_api/**"
+  pull_request:
+    paths:
+      - "spyrothon_api/**"
 
 concurrency:
   group: ${{ github.ref }}
@@ -49,18 +52,19 @@ jobs:
 
       - name: Compress release into tarball
         run: |
-          tar czf /graphics_api.tar.gz ./release/*
+          tar czf ./graphics_api.tar.gz ./release/*
 
       - name: Upload release artifact
         uses: actions/upload-artifact@v3
         with:
           name: graphics_api
-          path: /graphics_api.tar.gz
+          path: ./spyrothon_api/graphics_api.tar.gz
 
   deploy_production:
+    runs-on: ubuntu-20.04
     name: Deploy to Production
     needs: build
-    runs-on: ubuntu-20.04
+    if: github.ref == 'main'
     environment: production
     steps:
       - name: Download release artifact

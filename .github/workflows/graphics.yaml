@@ -7,6 +7,11 @@ on:
       - "packages/graphics/**"
       - "packages/api/**"
       - "packages/uikit/**"
+  pull_request:
+    paths:
+      - "packages/graphics/**"
+      - "packages/api/**"
+      - "packages/uikit/**"
 
 concurrency:
   group: ${{ github.ref }}
@@ -32,6 +37,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.ref == 'main'
     uses: ./.github/workflows/deploy-on-render.yaml
     with:
       service_name: graphics

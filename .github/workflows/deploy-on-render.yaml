@@ -11,11 +11,13 @@ on:
         required: true
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.ref }}-${{ inputs.service_name }}
   cancel-in-progress: true
 
 jobs:
   deploy:
+    name: Deploy to Production
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Render.com
