@@ -8,6 +8,10 @@ on:
       - "packages/api/**"
       - "packages/uikit/**"
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
