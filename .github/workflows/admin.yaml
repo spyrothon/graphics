@@ -8,6 +8,12 @@ on:
       - "packages/api/**"
       - "packages/uikit/**"
       - "vendored/**"
+  pull_request:
+    paths:
+      - "packages/admin/**"
+      - "packages/api/**"
+      - "packages/uikit/**"
+      - "vendored/**"
 
 concurrency:
   group: ${{ github.ref }}
@@ -33,6 +39,9 @@ jobs:
 
   deploy:
     needs: build
+    name: Deploy to Production
+    if: github.ref == 'main'
+    environment: production
     uses: ./.github/workflows/deploy-on-render.yaml
     with:
       service_name: admin
