@@ -35,7 +35,6 @@ jobs:
         uses: ./.github/actions/frontend-checks
         with:
           package: ./spyrothon_admin
-          needs_vendored_dependencies: true
 
   deploy:
     needs: build

@@ -33,7 +33,6 @@ jobs:
         uses: ./.github/actions/frontend-checks
         with:
           package: ./spyrothon_graphics
-          needs_vendored_dependencies: false
 
   deploy:
     needs: build

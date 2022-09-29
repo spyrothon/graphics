@@ -9,6 +9,3 @@ dist/
 public/
 *.d.ts
 pnpm-lock.yaml
-
-# Vendored packages
-vendored/obs-websocket-js/

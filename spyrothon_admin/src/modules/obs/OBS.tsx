@@ -37,11 +37,16 @@ function handleCustomMessage({ data }: { data: {} }) {
 
 class OBS {
   async connect(config: OBSWebsocketConfig) {
+    setOBSBusy(true);
     await obs
       .connect(`${config.host}:${config.port}`, config.password)
       .then(() => this.synchronize())
       .then(() => this.subscribeToEvents())
-      .catch(() => setOBSFailed());
+      .catch((err) => {
+        console.error(err);
+        setOBSFailed();
+      })
+      .finally(() => setOBSBusy(false));
 
     return this;
   }
@@ -51,7 +56,6 @@ class OBS {
     const transitions = await this.getTransitions();
     const inputs = await this.getInputs();
     const inputStates = await this.getInputStates(inputs.map((input) => input.inputName));
-    console.log(inputStates);
     setOBSData({
       sceneList: scenes as unknown as OBSScene[],
       transitionList: transitions,
@@ -178,7 +182,7 @@ class OBS {
       batch.push(...inputRequests);
     }
 
-    const results = await obs.callBatch(batch, {});
+    const results = await obs.callBatch(batch);
     const states: Record<OBSInput["inputName"], OBSInputState> = {};
 
     for (const response of results) {
@@ -186,28 +190,33 @@ class OBS {
       const data: Record<string, any> = {};
       switch (requestType) {
         case "GetInputVolume": {
-          const res = response.responseData as OBSResponseTypes["GetInputVolume"];
-          data["inputVolumeMul"] = res.inputVolumeMul;
-          data["inputVolumeDb"] = res.inputVolumeDb;
+          const res = response.responseData as OBSResponseTypes["GetInputVolume"] | undefined;
+          if (res == null) break;
+          data["inputVolumeMul"] = res?.inputVolumeMul;
+          data["inputVolumeDb"] = res?.inputVolumeDb;
           break;
         }
         case "GetInputMute": {
-          const res = response.responseData as OBSResponseTypes["GetInputMute"];
+          const res = response.responseData as OBSResponseTypes["GetInputMute"] | undefined;
+          if (res == null) break;
           data["inputMuted"] = res.inputMuted;
           break;
         }
         case "GetInputAudioSyncOffset": {
           const res = response.responseData as OBSResponseTypes["GetInputAudioSyncOffset"];
+          if (res == null) break;
           data["inputAudioSyncOffset"] = res.inputAudioSyncOffset;
           break;
         }
         case "GetMediaInputStatus": {
           const res = response.responseData as OBSResponseTypes["GetMediaInputStatus"];
+          if (res == null) break;
           data["playbackInProgress"] = res.mediaState === "OBS_MEDIA_STATE_PLAYING";
           break;
         }
         case "GetSourceActive": {
           const res = response.responseData as OBSResponseTypes["GetSourceActive"];
+          if (res == null) break;
           data["videoActive"] = res.videoActive;
           data["videoShowing"] = res.videoShowing;
           break;
@@ -267,23 +276,20 @@ class OBS {
 
     // Fallback to forcing the input to play, getting the status,
     // resetting the state, and resetting the cursor.
-    const [, status] = await obs.callBatch(
-      [
-        {
-          requestType: "TriggerMediaInputAction",
-          requestData: { inputName, mediaAction: "OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PLAY" },
-        },
-        {
-          requestType: "GetMediaInputStatus",
-          requestData: { inputName },
-        },
-        {
-          requestType: "TriggerMediaInputAction",
-          requestData: { inputName, mediaAction: resetAction },
-        },
-      ],
-      {},
-    );
+    const [, status] = await obs.callBatch([
+      {
+        requestType: "TriggerMediaInputAction",
+        requestData: { inputName, mediaAction: "OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PLAY" },
+      },
+      {
+        requestType: "GetMediaInputStatus",
+        requestData: { inputName },
+      },
+      {
+        requestType: "TriggerMediaInputAction",
+        requestData: { inputName, mediaAction: resetAction },
+      },
+    ]);
 
     return (status.responseData as OBSResponseTypes["GetMediaInputStatus"]).mediaDuration;
   }
@@ -323,7 +329,6 @@ class OBS {
       },
       {
         requestType: "TriggerStudioModeTransition",
-        requestData: undefined as never,
       },
       {
         requestType: "Sleep",
@@ -332,7 +337,7 @@ class OBS {
       },
     ];
 
-    return obs.callBatch(requests, {});
+    return obs.callBatch(requests);
   }
 
   async executeTransitionSet(transitionSet: TransitionSet) {
