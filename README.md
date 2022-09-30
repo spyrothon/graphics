@@ -76,6 +76,7 @@ you'll want to have:
 - A TypeScript language server for in-editor type checking
 - An ESLint plugin to highlight linting errors
 - A Prettier plugin to automatically format code.
+- An Elixir language server for in-editor type checking, linting, and formatting
 
 If you _don't_ want to use any of the above while working, that's fine. You can also check all of
 these services using their respective `pnpm` commands. Each package should define a `tsc` and `lint`
