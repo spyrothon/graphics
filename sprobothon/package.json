@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite-node ./src/index.tsx",
-    "update-commands": "vite-node --watch ./src/deploy.tsx",
+    "update-commands": "vite-node ./src/deploy.tsx",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
