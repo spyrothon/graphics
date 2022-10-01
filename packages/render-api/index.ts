@@ -2,7 +2,7 @@
 import APICore from "api/dist/core";
 import Oas from "oas";
 
-import definition from "./openapi.json";
+import definition from "./openapi.min.json";
 
 class SDK {
   spec: Oas;

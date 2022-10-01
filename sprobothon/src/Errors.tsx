@@ -12,4 +12,7 @@ export default {
     `You are not in the required group for this command (${group})`,
   EXECUTION_ERROR: "There was an error while executing this command",
   RENDER_SERVICE_FETCH_FAILED: "Unable to fetch services from Render.com",
+  UNKOWN_SERVICE: (service: string) => `"${service}" is not a recognized service name`,
+  NO_SERVICE_SPECIFIED: "No service specified",
+  RENDER_UNABLE_TO_DEPLOY: (service: string) => `Couldn't create a new deploy for "${service}".`,
 };

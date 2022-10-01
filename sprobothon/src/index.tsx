@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { AutocompleteInteraction, ChatInputCommandInteraction, Client } from "discord.js";
 
 import { commands } from "./Commands";
 import config from "./Config";
@@ -13,8 +13,7 @@ client.once("ready", () => {
   console.log("Ready!");
 });
 
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
+async function handleChatCommand(interaction: ChatInputCommandInteraction) {
   const { commandName } = interaction;
   Logger.info(
     `[${interaction.id}] ${interaction.user.tag} in #${interaction.channelId} triggered interaction ${commandName}.`,
@@ -52,6 +51,41 @@ client.on("interactionCreate", async (interaction) => {
       content: Errors.EXECUTION_ERROR,
       ephemeral: true,
     });
+  }
+}
+
+async function handleAutocomplete(interaction: AutocompleteInteraction) {
+  const { commandName } = interaction;
+  Logger.info(
+    `[${interaction.id}] ${interaction.user.tag} in #${interaction.channelId} requested autocomplete for ${commandName}.`,
+  );
+  const command = commands.get(commandName);
+  if (command == null) {
+    Logger.info(`[${interaction.id}] ${commandName} is not a registered command`);
+    return;
+  }
+
+  if (command.autocomplete == null) {
+    Logger.info(`[${interaction.id}] ${commandName} has no registered autocompleters`);
+    return;
+  }
+
+  try {
+    await command.autocomplete(interaction);
+    Logger.info(`[${interaction.id}] successfully ran ${commandName}`);
+  } catch (error) {
+    Logger.error(`[${interaction.id}] failed to run ${commandName}`, error);
+  }
+}
+
+client.on("interactionCreate", async (interaction) => {
+  if (interaction.isChatInputCommand()) {
+    handleChatCommand(interaction);
+    return;
+  }
+  if (interaction.isAutocomplete()) {
+    handleAutocomplete(interaction);
+    return;
   }
 });
 
