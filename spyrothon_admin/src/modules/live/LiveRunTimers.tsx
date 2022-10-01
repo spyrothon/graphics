@@ -56,6 +56,7 @@ function LiveTimer(props: LiveTimerProps) {
 }
 
 interface TimerAction {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   Icon: Icon;
   action: (dispatch: SafeDispatch) => void;
   disabled?: boolean;
