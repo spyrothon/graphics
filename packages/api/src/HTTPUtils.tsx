@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import queryString from "query-string";
 import snakecaseKeys from "snakecase-keys";
 

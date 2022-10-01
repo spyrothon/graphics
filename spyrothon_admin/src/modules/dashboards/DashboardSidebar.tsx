@@ -32,23 +32,26 @@ export default function DashboardSidebar(props: DashboardSidebarProps) {
 
   return (
     <div className={classNames(styles.container, className)}>
-      {routes.map(({ id, path, label, icon: Icon, showLink = true }) =>
-        showLink ? (
-          <NavLink
-            exact
-            key={id}
-            className={styles.navItem}
-            route={path}
-            label={
-              <>
-                {Icon != null ? <Icon size={18} strokeWidth="2" style={ICON_STYLE} /> : null}
-                {label}
-              </>
-            }
-            fullwidth
-          />
-        ) : null,
-      )}
+      {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        routes.map(({ id, path, label, icon: Icon, showLink = true }) =>
+          showLink ? (
+            <NavLink
+              exact
+              key={id}
+              className={styles.navItem}
+              route={path}
+              label={
+                <>
+                  {Icon != null ? <Icon size={18} strokeWidth="2" style={ICON_STYLE} /> : null}
+                  {label}
+                </>
+              }
+              fullwidth
+            />
+          ) : null,
+        )
+      }
       <NavLink
         className={classNames(styles.navItem, styles.logout)}
         route={Routes.LOGOUT}
