@@ -1,6 +1,10 @@
 packages:
+  - "sprobothon"
   - "spyrothon_admin"
   - "spyrothon_app"
   - "spyrothon_graphics"
   - "packages/api"
   - "packages/uikit"
+
+  # Vendored stuff
+  - "packages/render-api"
