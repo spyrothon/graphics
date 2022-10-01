@@ -74,231 +74,6 @@ class SDK {
   }
 
   /**
-   * List authorized users and teams
-   *
-   */
-  get(
-    path: "/owners",
-    metadata?: GetOwnersMetadataParam,
-  ): Promise<
-    | GetOwners_Response_200
-    | GetOwners_Response_401
-    | GetOwners_Response_406
-    | GetOwners_Response_429
-    | GetOwners_Response_500
-    | GetOwners_Response_503
-  >;
-  /**
-   * Retrieve user or team
-   *
-   */
-  get(
-    path: "/owners/{ownerId}",
-    metadata: GetOwnerMetadataParam,
-  ): Promise<
-    | GetOwner_Response_200
-    | GetOwner_Response_401
-    | GetOwner_Response_404
-    | GetOwner_Response_406
-    | GetOwner_Response_410
-    | GetOwner_Response_429
-    | GetOwner_Response_500
-    | GetOwner_Response_503
-  >;
-  /**
-   * List services
-   *
-   */
-  get(
-    path: "/services",
-    metadata?: GetServicesMetadataParam,
-  ): Promise<
-    | GetServices_Response_200
-    | GetServices_Response_401
-    | GetServices_Response_406
-    | GetServices_Response_429
-    | GetServices_Response_500
-    | GetServices_Response_503
-  >;
-  /**
-   * Retrieve service
-   *
-   */
-  get(
-    path: "/services/{serviceId}",
-    metadata: GetServiceMetadataParam,
-  ): Promise<
-    | GetService_Response_200
-    | GetService_Response_401
-    | GetService_Response_403
-    | GetService_Response_404
-    | GetService_Response_406
-    | GetService_Response_410
-    | GetService_Response_429
-    | GetService_Response_500
-    | GetService_Response_503
-  >;
-  /**
-   * List deploys
-   *
-   */
-  get(
-    path: "/services/{serviceId}/deploys",
-    metadata: GetDeploysMetadataParam,
-  ): Promise<
-    | GetDeploys_Response_200
-    | GetDeploys_Response_401
-    | GetDeploys_Response_403
-    | GetDeploys_Response_404
-    | GetDeploys_Response_406
-    | GetDeploys_Response_410
-    | GetDeploys_Response_429
-    | GetDeploys_Response_500
-    | GetDeploys_Response_503
-  >;
-  /**
-   * Retrieve deploy
-   *
-   */
-  get(
-    path: "/services/{serviceId}/deploys/{deployId}",
-    metadata: GetDeployMetadataParam,
-  ): Promise<
-    | GetDeploy_Response_200
-    | GetDeploy_Response_401
-    | GetDeploy_Response_403
-    | GetDeploy_Response_404
-    | GetDeploy_Response_406
-    | GetDeploy_Response_410
-    | GetDeploy_Response_429
-    | GetDeploy_Response_500
-    | GetDeploy_Response_503
-  >;
-  /**
-   * Retrieve environment variables
-   *
-   */
-  get(
-    path: "/services/{serviceId}/env-vars",
-    metadata: GetEnvVarsForServiceMetadataParam,
-  ): Promise<
-    | GetEnvVarsForService_Response_200
-    | GetEnvVarsForService_Response_401
-    | GetEnvVarsForService_Response_403
-    | GetEnvVarsForService_Response_404
-    | GetEnvVarsForService_Response_406
-    | GetEnvVarsForService_Response_410
-    | GetEnvVarsForService_Response_429
-    | GetEnvVarsForService_Response_500
-    | GetEnvVarsForService_Response_503
-  >;
-  /**
-   * Retrieve headers
-   *
-   */
-  get(
-    path: "/services/{serviceId}/headers",
-    metadata: GetHeadersMetadataParam,
-  ): Promise<
-    | GetHeaders_Response_200
-    | GetHeaders_Response_401
-    | GetHeaders_Response_403
-    | GetHeaders_Response_404
-    | GetHeaders_Response_406
-    | GetHeaders_Response_410
-    | GetHeaders_Response_429
-    | GetHeaders_Response_500
-    | GetHeaders_Response_503
-  >;
-  /**
-   * Retrieve redirect and rewrite rules
-   *
-   */
-  get(
-    path: "/services/{serviceId}/routes",
-    metadata: GetRoutesMetadataParam,
-  ): Promise<
-    | GetRoutes_Response_200
-    | GetRoutes_Response_401
-    | GetRoutes_Response_403
-    | GetRoutes_Response_404
-    | GetRoutes_Response_406
-    | GetRoutes_Response_410
-    | GetRoutes_Response_429
-    | GetRoutes_Response_500
-    | GetRoutes_Response_503
-  >;
-  /**
-   * List custom domains
-   *
-   */
-  get(
-    path: "/services/{serviceId}/custom-domains",
-    metadata: GetCustomDomainsMetadataParam,
-  ): Promise<
-    | GetCustomDomains_Response_200
-    | GetCustomDomains_Response_400
-    | GetCustomDomains_Response_401
-    | GetCustomDomains_Response_403
-    | GetCustomDomains_Response_404
-    | GetCustomDomains_Response_406
-    | GetCustomDomains_Response_410
-    | GetCustomDomains_Response_429
-    | GetCustomDomains_Response_500
-    | GetCustomDomains_Response_503
-  >;
-  /**
-   * Retrieve custom domain
-   *
-   */
-  get(
-    path: "/services/{serviceId}/custom-domains/{customDomainIdOrName}",
-    metadata: GetCustomDomainMetadataParam,
-  ): Promise<
-    | GetCustomDomain_Response_200
-    | GetCustomDomain_Response_400
-    | GetCustomDomain_Response_401
-    | GetCustomDomain_Response_403
-    | GetCustomDomain_Response_404
-    | GetCustomDomain_Response_406
-    | GetCustomDomain_Response_410
-    | GetCustomDomain_Response_429
-    | GetCustomDomain_Response_500
-    | GetCustomDomain_Response_503
-  >;
-  /**
-   * List jobs
-   *
-   */
-  get(
-    path: "/services/{serviceId}/jobs",
-    metadata: ListJobMetadataParam,
-  ): Promise<
-    | ListJob_Response_200
-    | ListJob_Response_400
-    | ListJob_Response_401
-    | ListJob_Response_404
-    | ListJob_Response_429
-    | ListJob_Response_500
-    | ListJob_Response_503
-  >;
-  /**
-   * Retrieve job
-   *
-   */
-  get(
-    path: "/services/{serviceId}/jobs/{jobId}",
-    metadata: GetJobMetadataParam,
-  ): Promise<
-    | GetJob_Response_200
-    | GetJob_Response_400
-    | GetJob_Response_401
-    | GetJob_Response_404
-    | GetJob_Response_429
-    | GetJob_Response_500
-    | GetJob_Response_503
-  >;
-  /**
    * Access any GET endpoint on your API.
    *
    * @param path API path to make a request against.
@@ -308,156 +83,6 @@ class SDK {
     return this.core.fetch(path, "get", metadata);
   }
 
-  /**
-   * Create service
-   *
-   */
-  post(
-    path: "/services",
-    body: CreateServiceBodyParam,
-  ): Promise<
-    | CreateService_Response_201
-    | CreateService_Response_400
-    | CreateService_Response_401
-    | CreateService_Response_402
-    | CreateService_Response_406
-    | CreateService_Response_409
-    | CreateService_Response_429
-    | CreateService_Response_500
-    | CreateService_Response_503
-  >;
-  /**
-   * Trigger a deploy
-   *
-   */
-  post(
-    path: "/services/{serviceId}/deploys",
-    body: CreateDeployBodyParam,
-    metadata: CreateDeployMetadataParam,
-  ): Promise<
-    | CreateDeploy_Response_201
-    | CreateDeploy_Response_400
-    | CreateDeploy_Response_401
-    | CreateDeploy_Response_404
-    | CreateDeploy_Response_406
-    | CreateDeploy_Response_409
-    | CreateDeploy_Response_410
-    | CreateDeploy_Response_429
-    | CreateDeploy_Response_500
-    | CreateDeploy_Response_503
-  >;
-  /**
-   * Add custom domain
-   *
-   */
-  post(
-    path: "/services/{serviceId}/custom-domains",
-    body: CreateCustomDomainBodyParam,
-    metadata: CreateCustomDomainMetadataParam,
-  ): Promise<
-    | CreateCustomDomain_Response_201
-    | CreateCustomDomain_Response_400
-    | CreateCustomDomain_Response_401
-    | CreateCustomDomain_Response_402
-    | CreateCustomDomain_Response_403
-    | CreateCustomDomain_Response_404
-    | CreateCustomDomain_Response_406
-    | CreateCustomDomain_Response_409
-    | CreateCustomDomain_Response_410
-    | CreateCustomDomain_Response_429
-    | CreateCustomDomain_Response_500
-    | CreateCustomDomain_Response_503
-  >;
-  /**
-   * Verify DNS configuration
-   *
-   */
-  post(
-    path: "/services/{serviceId}/custom-domains/{customDomainIdOrName}/verify",
-    metadata: RefreshCustomDomainMetadataParam,
-  ): Promise<
-    | RefreshCustomDomain_Response_400
-    | RefreshCustomDomain_Response_401
-    | RefreshCustomDomain_Response_403
-    | RefreshCustomDomain_Response_404
-    | RefreshCustomDomain_Response_406
-    | RefreshCustomDomain_Response_410
-    | RefreshCustomDomain_Response_429
-    | RefreshCustomDomain_Response_500
-    | RefreshCustomDomain_Response_503
-  >;
-  /**
-   * Suspend service
-   *
-   */
-  post(
-    path: "/services/{serviceId}/suspend",
-    metadata: SuspendServiceMetadataParam,
-  ): Promise<
-    | SuspendService_Response_400
-    | SuspendService_Response_401
-    | SuspendService_Response_403
-    | SuspendService_Response_404
-    | SuspendService_Response_406
-    | SuspendService_Response_410
-    | SuspendService_Response_429
-    | SuspendService_Response_500
-    | SuspendService_Response_503
-  >;
-  /**
-   * Resume service
-   *
-   */
-  post(
-    path: "/services/{serviceId}/resume",
-    metadata: ResumeServiceMetadataParam,
-  ): Promise<
-    | ResumeService_Response_400
-    | ResumeService_Response_401
-    | ResumeService_Response_403
-    | ResumeService_Response_404
-    | ResumeService_Response_406
-    | ResumeService_Response_410
-    | ResumeService_Response_429
-    | ResumeService_Response_500
-    | ResumeService_Response_503
-  >;
-  /**
-   * Scale service to desired number of instances
-   *
-   */
-  post(
-    path: "/services/{serviceId}/scale",
-    body: ScaleServiceBodyParam,
-    metadata: ScaleServiceMetadataParam,
-  ): Promise<
-    | ScaleService_Response_400
-    | ScaleService_Response_401
-    | ScaleService_Response_403
-    | ScaleService_Response_404
-    | ScaleService_Response_406
-    | ScaleService_Response_410
-    | ScaleService_Response_429
-    | ScaleService_Response_500
-    | ScaleService_Response_503
-  >;
-  /**
-   * Create job
-   *
-   */
-  post(
-    path: "/services/{serviceId}/jobs",
-    body: PostJobBodyParam,
-    metadata: PostJobMetadataParam,
-  ): Promise<
-    | PostJob_Response_200
-    | PostJob_Response_400
-    | PostJob_Response_401
-    | PostJob_Response_404
-    | PostJob_Response_429
-    | PostJob_Response_500
-    | PostJob_Response_503
-  >;
   /**
    * Access any POST endpoint on your API.
    *
@@ -470,28 +95,6 @@ class SDK {
   }
 
   /**
-   * Update service
-   *
-   */
-  patch(
-    path: "/services/{serviceId}",
-    body: UpdateServiceBodyParam,
-    metadata: UpdateServiceMetadataParam,
-  ): Promise<
-    | UpdateService_Response_200
-    | UpdateService_Response_400
-    | UpdateService_Response_401
-    | UpdateService_Response_402
-    | UpdateService_Response_403
-    | UpdateService_Response_404
-    | UpdateService_Response_406
-    | UpdateService_Response_409
-    | UpdateService_Response_410
-    | UpdateService_Response_429
-    | UpdateService_Response_500
-    | UpdateService_Response_503
-  >;
-  /**
    * Access any PATCH endpoint on your API.
    *
    * @param path API path to make a request against.
@@ -502,41 +105,6 @@ class SDK {
     return this.core.fetch(path, "patch", body, metadata);
   }
 
-  /**
-   * Delete service
-   *
-   */
-  delete(
-    path: "/services/{serviceId}",
-    metadata: DeleteServiceMetadataParam,
-  ): Promise<
-    | DeleteService_Response_401
-    | DeleteService_Response_403
-    | DeleteService_Response_404
-    | DeleteService_Response_406
-    | DeleteService_Response_410
-    | DeleteService_Response_429
-    | DeleteService_Response_500
-    | DeleteService_Response_503
-  >;
-  /**
-   * Delete custom domain
-   *
-   */
-  delete(
-    path: "/services/{serviceId}/custom-domains/{customDomainIdOrName}",
-    metadata: DeleteCustomDomainMetadataParam,
-  ): Promise<
-    | DeleteCustomDomain_Response_400
-    | DeleteCustomDomain_Response_401
-    | DeleteCustomDomain_Response_403
-    | DeleteCustomDomain_Response_404
-    | DeleteCustomDomain_Response_406
-    | DeleteCustomDomain_Response_410
-    | DeleteCustomDomain_Response_429
-    | DeleteCustomDomain_Response_500
-    | DeleteCustomDomain_Response_503
-  >;
   /**
    * Access any DELETE endpoint on your API.
    *
@@ -553,26 +121,6 @@ class SDK {
   }
 
   /**
-   * Update environment variables
-   *
-   */
-  put(
-    path: "/services/{serviceId}/env-vars",
-    body: UpdateEnvVarsForServiceBodyParam,
-    metadata: UpdateEnvVarsForServiceMetadataParam,
-  ): Promise<
-    | UpdateEnvVarsForService_Response_200
-    | UpdateEnvVarsForService_Response_400
-    | UpdateEnvVarsForService_Response_401
-    | UpdateEnvVarsForService_Response_403
-    | UpdateEnvVarsForService_Response_404
-    | UpdateEnvVarsForService_Response_406
-    | UpdateEnvVarsForService_Response_410
-    | UpdateEnvVarsForService_Response_429
-    | UpdateEnvVarsForService_Response_500
-    | UpdateEnvVarsForService_Response_503
-  >;
-  /**
    * Access any PUT endpoint on your API.
    *
    * @param path API path to make a request against.
@@ -587,16 +135,7 @@ class SDK {
    * List authorized users and teams
    *
    */
-  getOwners(
-    metadata?: GetOwnersMetadataParam,
-  ): Promise<
-    | GetOwners_Response_200
-    | GetOwners_Response_401
-    | GetOwners_Response_406
-    | GetOwners_Response_429
-    | GetOwners_Response_500
-    | GetOwners_Response_503
-  > {
+  getOwners(metadata?: GetOwnersParams): Promise<ResponseObject<{ owner: Owner }>[]> {
     return this.core.fetch("/owners", "get", metadata);
   }
 
@@ -604,18 +143,7 @@ class SDK {
    * Retrieve user or team
    *
    */
-  getOwner(
-    metadata: GetOwnerMetadataParam,
-  ): Promise<
-    | GetOwner_Response_200
-    | GetOwner_Response_401
-    | GetOwner_Response_404
-    | GetOwner_Response_406
-    | GetOwner_Response_410
-    | GetOwner_Response_429
-    | GetOwner_Response_500
-    | GetOwner_Response_503
-  > {
+  getOwner(metadata: GetOwnerParams): Promise<Owner> {
     return this.core.fetch("/owners/{ownerId}", "get", metadata);
   }
 
@@ -623,16 +151,7 @@ class SDK {
    * List services
    *
    */
-  getServices(
-    metadata?: GetServicesMetadataParam,
-  ): Promise<
-    | GetServices_Response_200
-    | GetServices_Response_401
-    | GetServices_Response_406
-    | GetServices_Response_429
-    | GetServices_Response_500
-    | GetServices_Response_503
-  > {
+  getServices(metadata?: GetServicesParams): Promise<ResponseObject<{ service: Service }>[]> {
     return this.core.fetch("/services", "get", metadata);
   }
 
@@ -640,19 +159,7 @@ class SDK {
    * Create service
    *
    */
-  createService(
-    body: CreateServiceBodyParam,
-  ): Promise<
-    | CreateService_Response_201
-    | CreateService_Response_400
-    | CreateService_Response_401
-    | CreateService_Response_402
-    | CreateService_Response_406
-    | CreateService_Response_409
-    | CreateService_Response_429
-    | CreateService_Response_500
-    | CreateService_Response_503
-  > {
+  createService(body: CreateServiceBodyParam): Promise<CreateServiceResponse> {
     return this.core.fetch("/services", "post", body);
   }
 
@@ -660,19 +167,7 @@ class SDK {
    * Retrieve service
    *
    */
-  getService(
-    metadata: GetServiceMetadataParam,
-  ): Promise<
-    | GetService_Response_200
-    | GetService_Response_401
-    | GetService_Response_403
-    | GetService_Response_404
-    | GetService_Response_406
-    | GetService_Response_410
-    | GetService_Response_429
-    | GetService_Response_500
-    | GetService_Response_503
-  > {
+  getService(metadata: { serviceId: string }): Promise<Service> {
     return this.core.fetch("/services/{serviceId}", "get", metadata);
   }
 
@@ -680,23 +175,7 @@ class SDK {
    * Update service
    *
    */
-  updateService(
-    body: UpdateServiceBodyParam,
-    metadata: UpdateServiceMetadataParam,
-  ): Promise<
-    | UpdateService_Response_200
-    | UpdateService_Response_400
-    | UpdateService_Response_401
-    | UpdateService_Response_402
-    | UpdateService_Response_403
-    | UpdateService_Response_404
-    | UpdateService_Response_406
-    | UpdateService_Response_409
-    | UpdateService_Response_410
-    | UpdateService_Response_429
-    | UpdateService_Response_500
-    | UpdateService_Response_503
-  > {
+  updateService(body: UpdateServiceBodyParam, metadata: { serviceId: string }): Promise<Service> {
     return this.core.fetch("/services/{serviceId}", "patch", body, metadata);
   }
 
@@ -704,18 +183,7 @@ class SDK {
    * Delete service
    *
    */
-  deleteService(
-    metadata: DeleteServiceMetadataParam,
-  ): Promise<
-    | DeleteService_Response_401
-    | DeleteService_Response_403
-    | DeleteService_Response_404
-    | DeleteService_Response_406
-    | DeleteService_Response_410
-    | DeleteService_Response_429
-    | DeleteService_Response_500
-    | DeleteService_Response_503
-  > {
+  deleteService(metadata: { serviceId: string }): Promise<void> {
     return this.core.fetch("/services/{serviceId}", "delete", metadata);
   }
 
@@ -723,19 +191,7 @@ class SDK {
    * List deploys
    *
    */
-  getDeploys(
-    metadata: GetDeploysMetadataParam,
-  ): Promise<
-    | GetDeploys_Response_200
-    | GetDeploys_Response_401
-    | GetDeploys_Response_403
-    | GetDeploys_Response_404
-    | GetDeploys_Response_406
-    | GetDeploys_Response_410
-    | GetDeploys_Response_429
-    | GetDeploys_Response_500
-    | GetDeploys_Response_503
-  > {
+  getDeploys(metadata: GetDeploysParams): Promise<ResponseObject<{ deploy: Deploy }>[]> {
     return this.core.fetch("/services/{serviceId}/deploys", "get", metadata);
   }
 
@@ -744,20 +200,9 @@ class SDK {
    *
    */
   createDeploy(
-    body: CreateDeployBodyParam,
-    metadata: CreateDeployMetadataParam,
-  ): Promise<
-    | CreateDeploy_Response_201
-    | CreateDeploy_Response_400
-    | CreateDeploy_Response_401
-    | CreateDeploy_Response_404
-    | CreateDeploy_Response_406
-    | CreateDeploy_Response_409
-    | CreateDeploy_Response_410
-    | CreateDeploy_Response_429
-    | CreateDeploy_Response_500
-    | CreateDeploy_Response_503
-  > {
+    body: { clearCache?: "clear" | "do_not_clear" },
+    metadata: { serviceId: string },
+  ): Promise<Deploy> {
     return this.core.fetch("/services/{serviceId}/deploys", "post", body, metadata);
   }
 
@@ -765,19 +210,7 @@ class SDK {
    * Retrieve deploy
    *
    */
-  getDeploy(
-    metadata: GetDeployMetadataParam,
-  ): Promise<
-    | GetDeploy_Response_200
-    | GetDeploy_Response_401
-    | GetDeploy_Response_403
-    | GetDeploy_Response_404
-    | GetDeploy_Response_406
-    | GetDeploy_Response_410
-    | GetDeploy_Response_429
-    | GetDeploy_Response_500
-    | GetDeploy_Response_503
-  > {
+  getDeploy(metadata: { serviceId: string; deployId: string }): Promise<Deploy> {
     return this.core.fetch("/services/{serviceId}/deploys/{deployId}", "get", metadata);
   }
 
@@ -786,18 +219,8 @@ class SDK {
    *
    */
   getEnvVarsForService(
-    metadata: GetEnvVarsForServiceMetadataParam,
-  ): Promise<
-    | GetEnvVarsForService_Response_200
-    | GetEnvVarsForService_Response_401
-    | GetEnvVarsForService_Response_403
-    | GetEnvVarsForService_Response_404
-    | GetEnvVarsForService_Response_406
-    | GetEnvVarsForService_Response_410
-    | GetEnvVarsForService_Response_429
-    | GetEnvVarsForService_Response_500
-    | GetEnvVarsForService_Response_503
-  > {
+    metadata: GetEnvVarsForServiceParams,
+  ): Promise<ResponseObject<{ envVars: EnvVar }>[]> {
     return this.core.fetch("/services/{serviceId}/env-vars", "get", metadata);
   }
 
@@ -806,20 +229,9 @@ class SDK {
    *
    */
   updateEnvVarsForService(
-    body: UpdateEnvVarsForServiceBodyParam,
-    metadata: UpdateEnvVarsForServiceMetadataParam,
-  ): Promise<
-    | UpdateEnvVarsForService_Response_200
-    | UpdateEnvVarsForService_Response_400
-    | UpdateEnvVarsForService_Response_401
-    | UpdateEnvVarsForService_Response_403
-    | UpdateEnvVarsForService_Response_404
-    | UpdateEnvVarsForService_Response_406
-    | UpdateEnvVarsForService_Response_410
-    | UpdateEnvVarsForService_Response_429
-    | UpdateEnvVarsForService_Response_500
-    | UpdateEnvVarsForService_Response_503
-  > {
+    body: EnvVarDefinition[],
+    metadata: { serviceId: string },
+  ): Promise<ResponseObject<{ envVars: EnvVar }>[]> {
     return this.core.fetch("/services/{serviceId}/env-vars", "put", body, metadata);
   }
 
@@ -829,17 +241,7 @@ class SDK {
    */
   getHeaders(
     metadata: GetHeadersMetadataParam,
-  ): Promise<
-    | GetHeaders_Response_200
-    | GetHeaders_Response_401
-    | GetHeaders_Response_403
-    | GetHeaders_Response_404
-    | GetHeaders_Response_406
-    | GetHeaders_Response_410
-    | GetHeaders_Response_429
-    | GetHeaders_Response_500
-    | GetHeaders_Response_503
-  > {
+  ): Promise<ResponseObject<{ headers: ServiceHeaderDefinition }>[]> {
     return this.core.fetch("/services/{serviceId}/headers", "get", metadata);
   }
 
@@ -849,17 +251,7 @@ class SDK {
    */
   getRoutes(
     metadata: GetRoutesMetadataParam,
-  ): Promise<
-    | GetRoutes_Response_200
-    | GetRoutes_Response_401
-    | GetRoutes_Response_403
-    | GetRoutes_Response_404
-    | GetRoutes_Response_406
-    | GetRoutes_Response_410
-    | GetRoutes_Response_429
-    | GetRoutes_Response_500
-    | GetRoutes_Response_503
-  > {
+  ): Promise<ResponseObject<{ routes: ServiceRouteDefinition }>[]> {
     return this.core.fetch("/services/{serviceId}/routes", "get", metadata);
   }
 
@@ -869,18 +261,7 @@ class SDK {
    */
   getCustomDomains(
     metadata: GetCustomDomainsMetadataParam,
-  ): Promise<
-    | GetCustomDomains_Response_200
-    | GetCustomDomains_Response_400
-    | GetCustomDomains_Response_401
-    | GetCustomDomains_Response_403
-    | GetCustomDomains_Response_404
-    | GetCustomDomains_Response_406
-    | GetCustomDomains_Response_410
-    | GetCustomDomains_Response_429
-    | GetCustomDomains_Response_500
-    | GetCustomDomains_Response_503
-  > {
+  ): Promise<ResponseObject<{ customDomain: CustomDomain }>> {
     return this.core.fetch("/services/{serviceId}/custom-domains", "get", metadata);
   }
 
@@ -889,22 +270,9 @@ class SDK {
    *
    */
   createCustomDomain(
-    body: CreateCustomDomainBodyParam,
-    metadata: CreateCustomDomainMetadataParam,
-  ): Promise<
-    | CreateCustomDomain_Response_201
-    | CreateCustomDomain_Response_400
-    | CreateCustomDomain_Response_401
-    | CreateCustomDomain_Response_402
-    | CreateCustomDomain_Response_403
-    | CreateCustomDomain_Response_404
-    | CreateCustomDomain_Response_406
-    | CreateCustomDomain_Response_409
-    | CreateCustomDomain_Response_410
-    | CreateCustomDomain_Response_429
-    | CreateCustomDomain_Response_500
-    | CreateCustomDomain_Response_503
-  > {
+    body: { name: string },
+    metadata: { serviceId: string },
+  ): Promise<CustomDomain[]> {
     return this.core.fetch("/services/{serviceId}/custom-domains", "post", body, metadata);
   }
 
@@ -912,20 +280,7 @@ class SDK {
    * Retrieve custom domain
    *
    */
-  getCustomDomain(
-    metadata: GetCustomDomainMetadataParam,
-  ): Promise<
-    | GetCustomDomain_Response_200
-    | GetCustomDomain_Response_400
-    | GetCustomDomain_Response_401
-    | GetCustomDomain_Response_403
-    | GetCustomDomain_Response_404
-    | GetCustomDomain_Response_406
-    | GetCustomDomain_Response_410
-    | GetCustomDomain_Response_429
-    | GetCustomDomain_Response_500
-    | GetCustomDomain_Response_503
-  > {
+  getCustomDomain(metadata: CustomDomainParams): Promise<CustomDomain> {
     return this.core.fetch(
       "/services/{serviceId}/custom-domains/{customDomainIdOrName}",
       "get",
@@ -937,19 +292,7 @@ class SDK {
    * Delete custom domain
    *
    */
-  deleteCustomDomain(
-    metadata: DeleteCustomDomainMetadataParam,
-  ): Promise<
-    | DeleteCustomDomain_Response_400
-    | DeleteCustomDomain_Response_401
-    | DeleteCustomDomain_Response_403
-    | DeleteCustomDomain_Response_404
-    | DeleteCustomDomain_Response_406
-    | DeleteCustomDomain_Response_410
-    | DeleteCustomDomain_Response_429
-    | DeleteCustomDomain_Response_500
-    | DeleteCustomDomain_Response_503
-  > {
+  deleteCustomDomain(metadata: CustomDomainParams): Promise<void> {
     return this.core.fetch(
       "/services/{serviceId}/custom-domains/{customDomainIdOrName}",
       "delete",
@@ -961,19 +304,7 @@ class SDK {
    * Verify DNS configuration
    *
    */
-  refreshCustomDomain(
-    metadata: RefreshCustomDomainMetadataParam,
-  ): Promise<
-    | RefreshCustomDomain_Response_400
-    | RefreshCustomDomain_Response_401
-    | RefreshCustomDomain_Response_403
-    | RefreshCustomDomain_Response_404
-    | RefreshCustomDomain_Response_406
-    | RefreshCustomDomain_Response_410
-    | RefreshCustomDomain_Response_429
-    | RefreshCustomDomain_Response_500
-    | RefreshCustomDomain_Response_503
-  > {
+  refreshCustomDomain(metadata: CustomDomainParams): Promise<void> {
     return this.core.fetch(
       "/services/{serviceId}/custom-domains/{customDomainIdOrName}/verify",
       "post",
@@ -985,19 +316,7 @@ class SDK {
    * Suspend service
    *
    */
-  suspendService(
-    metadata: SuspendServiceMetadataParam,
-  ): Promise<
-    | SuspendService_Response_400
-    | SuspendService_Response_401
-    | SuspendService_Response_403
-    | SuspendService_Response_404
-    | SuspendService_Response_406
-    | SuspendService_Response_410
-    | SuspendService_Response_429
-    | SuspendService_Response_500
-    | SuspendService_Response_503
-  > {
+  suspendService(metadata: { serviceId: string }): Promise<void> {
     return this.core.fetch("/services/{serviceId}/suspend", "post", metadata);
   }
 
@@ -1005,19 +324,7 @@ class SDK {
    * Resume service
    *
    */
-  resumeService(
-    metadata: ResumeServiceMetadataParam,
-  ): Promise<
-    | ResumeService_Response_400
-    | ResumeService_Response_401
-    | ResumeService_Response_403
-    | ResumeService_Response_404
-    | ResumeService_Response_406
-    | ResumeService_Response_410
-    | ResumeService_Response_429
-    | ResumeService_Response_500
-    | ResumeService_Response_503
-  > {
+  resumeService(metadata: { serviceId: string }): Promise<void> {
     return this.core.fetch("/services/{serviceId}/resume", "post", metadata);
   }
 
@@ -1025,20 +332,7 @@ class SDK {
    * Scale service to desired number of instances
    *
    */
-  scaleService(
-    body: ScaleServiceBodyParam,
-    metadata: ScaleServiceMetadataParam,
-  ): Promise<
-    | ScaleService_Response_400
-    | ScaleService_Response_401
-    | ScaleService_Response_403
-    | ScaleService_Response_404
-    | ScaleService_Response_406
-    | ScaleService_Response_410
-    | ScaleService_Response_429
-    | ScaleService_Response_500
-    | ScaleService_Response_503
-  > {
+  scaleService(body: { numInstances: number }, metadata: { serviceId: string }): Promise<void> {
     return this.core.fetch("/services/{serviceId}/scale", "post", body, metadata);
   }
 
@@ -1046,17 +340,7 @@ class SDK {
    * List jobs
    *
    */
-  listJob(
-    metadata: ListJobMetadataParam,
-  ): Promise<
-    | ListJob_Response_200
-    | ListJob_Response_400
-    | ListJob_Response_401
-    | ListJob_Response_404
-    | ListJob_Response_429
-    | ListJob_Response_500
-    | ListJob_Response_503
-  > {
+  listJob(metadata: ListJobMetadataParam): Promise<ResponseObject<{ job: Job }>[]> {
     return this.core.fetch("/services/{serviceId}/jobs", "get", metadata);
   }
 
@@ -1065,17 +349,12 @@ class SDK {
    *
    */
   postJob(
-    body: PostJobBodyParam,
-    metadata: PostJobMetadataParam,
-  ): Promise<
-    | PostJob_Response_200
-    | PostJob_Response_400
-    | PostJob_Response_401
-    | PostJob_Response_404
-    | PostJob_Response_429
-    | PostJob_Response_500
-    | PostJob_Response_503
-  > {
+    body: {
+      startCommand: string;
+      planId?: string;
+    },
+    metadata: { serviceId: string },
+  ): Promise<Job> {
     return this.core.fetch("/services/{serviceId}/jobs", "post", body, metadata);
   }
 
@@ -1083,17 +362,7 @@ class SDK {
    * Retrieve job
    *
    */
-  getJob(
-    metadata: GetJobMetadataParam,
-  ): Promise<
-    | GetJob_Response_200
-    | GetJob_Response_400
-    | GetJob_Response_401
-    | GetJob_Response_404
-    | GetJob_Response_429
-    | GetJob_Response_500
-    | GetJob_Response_503
-  > {
+  getJob(metadata: { serviceId: string; jobId: string }): Promise<Job> {
     return this.core.fetch("/services/{serviceId}/jobs/{jobId}", "get", metadata);
   }
 }
@@ -1110,7 +379,190 @@ export interface ConfigOptions {
    */
   parseResponse: boolean;
 }
-export type GetOwnersMetadataParam = {
+
+export type ResponseObject<T> = {
+  cursor: string;
+} & T;
+
+export type YesNoString = "yes" | "no";
+export type NotifyOnFail = "default" | "notify" | "ignore";
+export type Disk = { id?: string; name?: string };
+export type EnvVar = { key: string; value: string };
+export type ParentServer = { id?: string; name?: string };
+
+export interface Owner {
+  id: string;
+  name: string;
+  email: string;
+  type: "user" | "team";
+}
+
+export interface Service {
+  id: string;
+  autoDeploy: YesNoString;
+  branch: string;
+  createdAt: string;
+  name: string;
+  notifyOnFail: NotifyOnFail;
+  ownerId: string;
+  repo: string;
+  slug: string;
+  suspended: ServiceSuspendedStatus;
+  suspenders: ServiceSuspender[];
+  type: ServiceType;
+  updatedAt: string;
+  serviceDetails: ServiceDetails;
+}
+
+export type ServiceDetails =
+  | StaticSiteServiceDetails
+  | WebServiceDetails
+  | BackgroundWorkerServiceDetails
+  | CronJobServiceDetails;
+
+export interface StaticSiteServiceDetails {
+  buildCommand: string;
+  parentServer: {
+    id: string;
+    name: string;
+  };
+  publishPath: string;
+  /**
+   * `yes` `no`
+   */
+  pullRequestPreviewsEnabled: YesNoString;
+  url: string;
+}
+
+interface BaseServiceDetails {
+  disk: Disk;
+  env: ServiceEnvironment;
+  envSpecificDetails?: WebServiceEnvDetails;
+  healthCheckPath: string;
+  lastSuccessfulRunAt: string;
+  numInstances: number;
+  openPorts: OpenPort[];
+  parentServer?: ParentServer;
+  plan: ServicePlan;
+  pullRequestPreviewsEnabled?: YesNoString;
+  region: ServiceRegion;
+  schedule: string;
+  url: string;
+}
+
+export type WebServiceEnvDetails =
+  | {
+      dockerCommand?: string;
+      dockerContext?: string;
+      dockerfilePath?: string;
+    }
+  | {
+      buildCommand?: string;
+      startCommand?: string;
+    };
+
+export interface OpenPort {
+  port: number;
+  protocol: "TCP" | "UDP";
+}
+
+export type WebServiceDetails = Omit<BaseServiceDetails, "schedule" | "lastSuccessfulRunAt">;
+export type PrivateServiceDetails = Omit<
+  BaseServiceDetails,
+  "healthCheckPath" | "schedule" | "lastSuccessfulRunAt"
+>;
+export type BackgroundWorkerServiceDetails = Omit<
+  BaseServiceDetails,
+  "healthCheckPath" | "openPorts" | "url" | "schedule" | "lastSuccessfulRunAt"
+>;
+export type CronJobServiceDetails = Omit<
+  BaseServiceDetails,
+  | "disk"
+  | "healthCheckPath"
+  | "numInstances"
+  | "openPorts"
+  | "parentServer"
+  | "pullRequestPreviewsEnabled"
+  | "url"
+>;
+
+export interface Commit {
+  id: string;
+  message: string;
+  createdAt: string;
+}
+
+export type JobStatus = "pending" | "running" | "succeeded" | "failed";
+
+export interface Job {
+  id: string;
+  serviceId: string;
+  startCommand: string;
+  planId: string;
+  status: JobStatus;
+  createdAt: string;
+  startedAt: string;
+  finishedAt: string;
+}
+
+export type DeployStatus =
+  | "created"
+  | "build_in_progress"
+  | "update_in_progress"
+  | "live"
+  | "deactivated"
+  | "build_failed"
+  | "update_failed"
+  | "canceled";
+
+export interface Deploy {
+  id: string;
+  commit: Commit;
+  status: DeployStatus;
+  finishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CustomDomain {
+  id: string;
+  name: string;
+  domainType: "apex" | "subdomain";
+  publicSuffix: string;
+  redirectForName: string;
+  verificationStatus: "verified" | "unverified";
+  createdAt: string;
+  server: ParentServer;
+}
+
+export type ServiceType =
+  | "static_site"
+  | "web_service"
+  | "private_service"
+  | "background_worker"
+  | "cron_job";
+export type ServiceEnvironment = "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
+export type ServiceRegion = "oregon" | "frankfurt";
+export type ServiceSuspendedStatus = "suspended" | "not_suspended";
+export type ServiceSuspender = "admin" | "billing" | "user" | "parent_service" | "unknown";
+export type ServicePlan =
+  | "starter"
+  | "starter_plus"
+  | "standard"
+  | "standard_plus"
+  | "pro"
+  | "pro_plus"
+  | "pro_max"
+  | "pro_ultra"
+  | "free"
+  | "custom";
+
+export interface ErrorResponse {
+  id: string;
+  message: string;
+}
+
+export interface GetOwnersParams {
   name?: string[];
   email?: string[];
   /**
@@ -1121,100 +573,14 @@ export type GetOwnersMetadataParam = {
    * Max number of items that can be returned
    */
   limit?: number;
-  [k: string]: unknown;
-};
-export type GetOwners_Response_200 = {
-  owner?: {
-    id: string;
-    name?: string;
-    email?: string;
-    /**
-     * `user` `team`
-     */
-    type?: "user" | "team";
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetOwners_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetOwners_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwners_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwners_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwners_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetOwnerMetadataParam = {
+export interface GetOwnerParams {
   /**
    * The ID of the user or team
    */
   ownerId: string;
-  [k: string]: unknown;
-};
-export interface GetOwner_Response_200 {
-  id: string;
-  name?: string;
-  email?: string;
-  /**
-   * `user` `team`
-   */
-  type?: "user" | "team";
-  [k: string]: unknown;
 }
-export interface GetOwner_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwner_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwner_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwner_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwner_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwner_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetOwner_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetServicesMetadataParam = {
+export interface GetServicesParams {
   /**
    * Filter for the names of services
    */
@@ -1222,19 +588,19 @@ export type GetServicesMetadataParam = {
   /**
    * Filter for types of services
    */
-  type?: ("static_site" | "web_service" | "private_service" | "background_worker" | "cron_job")[];
+  type?: ServiceType[];
   /**
    * Filter for environments of services
    */
-  env?: ("docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust")[];
+  env?: ServiceEnvironment[];
   /**
    * Filter for regions of services
    */
-  region?: ("oregon" | "frankfurt")[];
+  region?: ServiceRegion[];
   /**
    * Filter services based on whether they're suspended or not suspended
    */
-  suspended?: ("suspended" | "not_suspended")[];
+  suspended?: ServiceSuspendedStatus[];
   /**
    * Filter for services created before a certain time (specified as an ISO 8601 timestamp)
    */
@@ -1263,294 +629,70 @@ export type GetServicesMetadataParam = {
    * Max number of items that can be returned
    */
   limit?: number;
-  [k: string]: unknown;
-};
-export type GetServices_Response_200 = {
-  service?: {
-    id?: string;
-    /**
-     * `yes` `no`
-     */
-    autoDeploy?: "yes" | "no";
-    branch?: string;
-    createdAt?: string;
-    name?: string;
-    /**
-     * `default` `notify` `ignore`
-     */
-    notifyOnFail?: "default" | "notify" | "ignore";
-    ownerId?: string;
-    repo?: string;
-    slug?: string;
-    /**
-     * `suspended` `not_suspended`
-     */
-    suspended?: "suspended" | "not_suspended";
-    suspenders?: ("admin" | "billing" | "user" | "parent_service" | "unknown")[];
-    /**
-     * `static_site` `web_service` `private_service` `background_worker` `cron_job`
-     */
-    type?: "static_site" | "web_service" | "private_service" | "background_worker" | "cron_job";
-    updatedAt?: string;
-    serviceDetails?:
-      | {
-          buildCommand?: string;
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          publishPath?: string;
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          url?: string;
-          [k: string]: unknown;
-        }
-      | {
-          disk?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          healthCheckPath?: string;
-          numInstances?: number;
-          openPorts?: {
-            port?: number;
-            /**
-             * `TCP` `UDP`
-             */
-            protocol?: "TCP" | "UDP";
-            [k: string]: unknown;
-          }[];
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `free` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "free"
-            | "custom";
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          url?: string;
-          [k: string]: unknown;
-        }
-      | {
-          disk?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          numInstances?: number;
-          openPorts?: {
-            port?: number;
-            /**
-             * `TCP` `UDP`
-             */
-            protocol?: "TCP" | "UDP";
-            [k: string]: unknown;
-          }[];
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "custom";
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          url?: string;
-          [k: string]: unknown;
-        }
-      | {
-          disk?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          numInstances?: number;
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "custom";
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          [k: string]: unknown;
-        }
-      | {
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          lastSuccessfulRunAt?: string;
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "custom";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          schedule?: string;
-          [k: string]: unknown;
-        };
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetServices_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetServices_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
+
+export interface ServiceHeaderDefinition {
+  path: string;
+  name: string;
+  value: string;
 }
-export interface GetServices_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
+export interface ServiceRouteDefinition {
+  type: "redirect" | "rewrite";
+  source: string;
+  destination: string;
 }
-export interface GetServices_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
+
+export type EnvVarDefinition =
+  | { key: string; value: string }
+  | { key: string; generateValue: YesNoString };
+
+export interface StaticSiteServiceCreateDetails {
+  buildCommand?: string;
+  headers?: ServiceHeaderDefinition[];
+  publicPath?: string;
+  pullRequestPreviewsEnabled?: YesNoString;
+  routes?: ServiceRouteDefinition[];
 }
-export interface GetServices_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
+
+export type ServiceDiskDefinition = { name: string; mountPath: string; sizeGB: number };
+export type ServiceCreateEnvSpecificDetails =
+  | {
+      dockerCommand?: string;
+      dockerContext?: string;
+      dockerfilePath?: string;
+    }
+  | {
+      buildCommand: string;
+      startCommand: string;
+    };
+
+export interface WebServiceCreateDetails {
+  disk?: ServiceDiskDefinition;
+  env: ServiceEnvironment;
+  envSpecificDetails: ServiceCreateEnvSpecificDetails;
+  healthCheckPath?: string;
+  numInstances?: number;
+  plan?: ServicePlan;
+  pullRequestPreviewsEnabled?: YesNoString;
+  region?: ServiceRegion;
 }
+
+export type PrivateServiceCreateDetails = Omit<WebServiceCreateDetails, "healthCheckPath">;
+export type BackgroundWorkerCreateDetails = Omit<WebServiceCreateDetails, "healthCheckPath">;
+export type CronJobCreateDetails = Omit<
+  WebServiceCreateDetails,
+  "disk" | "healthCheckPath" | "numInstances"
+> & { schedule: string };
+
+export type ServiceCreateDetails =
+  | StaticSiteServiceCreateDetails
+  | WebServiceCreateDetails
+  | PrivateServiceCreateDetails
+  | BackgroundWorkerCreateDetails
+  | CronJobCreateDetails;
+
 export interface CreateServiceBodyParam {
-  type: "static_site" | "web_service" | "private_service" | "background_worker" | "cron_job";
+  type: ServiceType;
   name: string;
   ownerId: string;
   /**
@@ -1560,1259 +702,58 @@ export interface CreateServiceBodyParam {
   /**
    * Defaults to "yes"
    */
-  autoDeploy?: "yes" | "no";
+  autoDeploy?: YesNoString;
   /**
    * If left empty, this will fall back to the default branch of the repository
    */
   branch?: string;
-  envVars?: (
-    | {
-        key: string;
-        value: string;
-        [k: string]: unknown;
-      }
-    | {
-        key: string;
-        generateValue: "yes" | "no";
-        [k: string]: unknown;
-      }
-  )[];
+  envVars?: EnvVarDefinition[];
   secretFiles?: {
     name: string;
     contents: string;
-    [k: string]: unknown;
   }[];
-  serviceDetails?:
-    | {
-        buildCommand?: string;
-        headers?: {
-          path: string;
-          name: string;
-          value: string;
-          [k: string]: unknown;
-        }[];
-        /**
-         * Defaults to "public"
-         */
-        publishPath?: string;
-        /**
-         * Defaults to "no"
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        routes?: {
-          type: "redirect" | "rewrite";
-          source: string;
-          destination: string;
-          [k: string]: unknown;
-        }[];
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          name: string;
-          mountPath: string;
-          /**
-           * Defaults to 1
-           */
-          sizeGB?: number;
-          [k: string]: unknown;
-        };
-        env: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              /**
-               * Defaults to "./Dockerfile"
-               */
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand: string;
-              startCommand: string;
-              [k: string]: unknown;
-            };
-        healthCheckPath?: string;
-        /**
-         * Defaults to 1
-         */
-        numInstances?: number;
-        /**
-         * Defaults to "starter"
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra";
-        /**
-         * Defaults to "no"
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * Defaults to "oregon"
-         */
-        region?: "oregon" | "frankfurt";
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          name: string;
-          mountPath: string;
-          /**
-           * Defaults to 1
-           */
-          sizeGB?: number;
-          [k: string]: unknown;
-        };
-        env: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              /**
-               * Defaults to "./Dockerfile"
-               */
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand: string;
-              startCommand: string;
-              [k: string]: unknown;
-            };
-        /**
-         * Defaults to 1
-         */
-        numInstances?: number;
-        /**
-         * Defaults to "starter"
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra";
-        /**
-         * Defaults to "no"
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * Defaults to "oregon"
-         */
-        region?: "oregon" | "frankfurt";
-        [k: string]: unknown;
-      }
-    | {
-        env: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              /**
-               * Defaults to "./Dockerfile"
-               */
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand: string;
-              startCommand: string;
-              [k: string]: unknown;
-            };
-        /**
-         * Defaults to "starter"
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra";
-        /**
-         * Defaults to "oregon"
-         */
-        region?: "oregon" | "frankfurt";
-        schedule: string;
-        [k: string]: unknown;
-      };
-  [k: string]: unknown;
+  serviceDetails?: ServiceCreateDetails;
 }
-export interface CreateService_Response_201 {
-  service?: {
-    id?: string;
-    /**
-     * `yes` `no`
-     */
-    autoDeploy?: "yes" | "no";
-    branch?: string;
-    createdAt?: string;
-    name?: string;
-    /**
-     * `default` `notify` `ignore`
-     */
-    notifyOnFail?: "default" | "notify" | "ignore";
-    ownerId?: string;
-    repo?: string;
-    slug?: string;
-    /**
-     * `suspended` `not_suspended`
-     */
-    suspended?: "suspended" | "not_suspended";
-    suspenders?: ("admin" | "billing" | "user" | "parent_service" | "unknown")[];
-    /**
-     * `static_site` `web_service` `private_service` `background_worker` `cron_job`
-     */
-    type?: "static_site" | "web_service" | "private_service" | "background_worker" | "cron_job";
-    updatedAt?: string;
-    serviceDetails?:
-      | {
-          buildCommand?: string;
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          publishPath?: string;
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          url?: string;
-          [k: string]: unknown;
-        }
-      | {
-          disk?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          healthCheckPath?: string;
-          numInstances?: number;
-          openPorts?: {
-            port?: number;
-            /**
-             * `TCP` `UDP`
-             */
-            protocol?: "TCP" | "UDP";
-            [k: string]: unknown;
-          }[];
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `free` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "free"
-            | "custom";
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          url?: string;
-          [k: string]: unknown;
-        }
-      | {
-          disk?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          numInstances?: number;
-          openPorts?: {
-            port?: number;
-            /**
-             * `TCP` `UDP`
-             */
-            protocol?: "TCP" | "UDP";
-            [k: string]: unknown;
-          }[];
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "custom";
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          url?: string;
-          [k: string]: unknown;
-        }
-      | {
-          disk?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          numInstances?: number;
-          parentServer?: {
-            id?: string;
-            name?: string;
-            [k: string]: unknown;
-          };
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "custom";
-          /**
-           * `yes` `no`
-           */
-          pullRequestPreviewsEnabled?: "yes" | "no";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          [k: string]: unknown;
-        }
-      | {
-          /**
-           * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-           */
-          env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-          envSpecificDetails?:
-            | {
-                dockerCommand?: string;
-                dockerContext?: string;
-                dockerfilePath?: string;
-                [k: string]: unknown;
-              }
-            | {
-                buildCommand?: string;
-                startCommand?: string;
-                [k: string]: unknown;
-              };
-          lastSuccessfulRunAt?: string;
-          /**
-           * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-           */
-          plan?:
-            | "starter"
-            | "starter_plus"
-            | "standard"
-            | "standard_plus"
-            | "pro"
-            | "pro_plus"
-            | "pro_max"
-            | "pro_ultra"
-            | "custom";
-          /**
-           * `oregon` `frankfurt`
-           */
-          region?: "oregon" | "frankfurt";
-          schedule?: string;
-          [k: string]: unknown;
-        };
-    [k: string]: unknown;
-  };
-  deployId?: string;
-  [k: string]: unknown;
+export interface CreateServiceResponse {
+  service: Service;
+  deployId: string;
 }
-export interface CreateService_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_402 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_409 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetServiceMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export interface GetService_Response_200 {
-  id?: string;
-  /**
-   * `yes` `no`
-   */
-  autoDeploy?: "yes" | "no";
-  branch?: string;
-  createdAt?: string;
-  name?: string;
-  /**
-   * `default` `notify` `ignore`
-   */
-  notifyOnFail?: "default" | "notify" | "ignore";
-  ownerId?: string;
-  repo?: string;
-  slug?: string;
-  /**
-   * `suspended` `not_suspended`
-   */
-  suspended?: "suspended" | "not_suspended";
-  suspenders?: ("admin" | "billing" | "user" | "parent_service" | "unknown")[];
-  /**
-   * `static_site` `web_service` `private_service` `background_worker` `cron_job`
-   */
-  type?: "static_site" | "web_service" | "private_service" | "background_worker" | "cron_job";
-  updatedAt?: string;
-  serviceDetails?:
-    | {
-        buildCommand?: string;
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        publishPath?: string;
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        url?: string;
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        healthCheckPath?: string;
-        numInstances?: number;
-        openPorts?: {
-          port?: number;
-          /**
-           * `TCP` `UDP`
-           */
-          protocol?: "TCP" | "UDP";
-          [k: string]: unknown;
-        }[];
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `free` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "free"
-          | "custom";
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        url?: string;
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        numInstances?: number;
-        openPorts?: {
-          port?: number;
-          /**
-           * `TCP` `UDP`
-           */
-          protocol?: "TCP" | "UDP";
-          [k: string]: unknown;
-        }[];
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "custom";
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        url?: string;
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        numInstances?: number;
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "custom";
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        [k: string]: unknown;
-      }
-    | {
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        lastSuccessfulRunAt?: string;
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "custom";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        schedule?: string;
-        [k: string]: unknown;
-      };
-  [k: string]: unknown;
-}
-export interface GetService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
+
 export interface UpdateServiceBodyParam {
-  autoDeploy?: "yes" | "no";
+  autoDeploy?: YesNoString;
   branch?: string;
   name?: string;
   serviceDetails?:
     | {
         buildCommand?: string;
         publishPath?: string;
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        [k: string]: unknown;
+        pullRequestPreviewsEnabled?: YesNoString;
       }
     | {
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
+        envSpecificDetails?: Partial<ServiceCreateEnvSpecificDetails>;
         healthCheckPath?: string;
         numInstances?: number;
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra";
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        [k: string]: unknown;
+        plan?: ServicePlan;
+        pullRequestPreviewsEnabled?: YesNoString;
       }
     | {
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
+        envSpecificDetails?: Partial<ServiceCreateEnvSpecificDetails>;
         numInstances?: number;
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra";
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        [k: string]: unknown;
+        plan?: ServicePlan;
+        pullRequestPreviewsEnabled?: YesNoString;
       }
     | {
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra";
+        envSpecificDetails?: Partial<ServiceCreateEnvSpecificDetails>;
+        plan?: ServicePlan;
         schedule?: string;
-        [k: string]: unknown;
       };
-  [k: string]: unknown;
 }
-export type UpdateServiceMetadataParam = {
+
+export interface GetDeploysParams {
   /**
    * The ID of the service
    */
   serviceId: string;
-  [k: string]: unknown;
-};
-export interface UpdateService_Response_200 {
-  id?: string;
-  /**
-   * `yes` `no`
-   */
-  autoDeploy?: "yes" | "no";
-  branch?: string;
-  createdAt?: string;
-  name?: string;
-  /**
-   * `default` `notify` `ignore`
-   */
-  notifyOnFail?: "default" | "notify" | "ignore";
-  ownerId?: string;
-  repo?: string;
-  slug?: string;
-  /**
-   * `suspended` `not_suspended`
-   */
-  suspended?: "suspended" | "not_suspended";
-  suspenders?: ("admin" | "billing" | "user" | "parent_service" | "unknown")[];
-  /**
-   * `static_site` `web_service` `private_service` `background_worker` `cron_job`
-   */
-  type?: "static_site" | "web_service" | "private_service" | "background_worker" | "cron_job";
-  updatedAt?: string;
-  serviceDetails?:
-    | {
-        buildCommand?: string;
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        publishPath?: string;
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        url?: string;
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        healthCheckPath?: string;
-        numInstances?: number;
-        openPorts?: {
-          port?: number;
-          /**
-           * `TCP` `UDP`
-           */
-          protocol?: "TCP" | "UDP";
-          [k: string]: unknown;
-        }[];
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `free` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "free"
-          | "custom";
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        url?: string;
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        numInstances?: number;
-        openPorts?: {
-          port?: number;
-          /**
-           * `TCP` `UDP`
-           */
-          protocol?: "TCP" | "UDP";
-          [k: string]: unknown;
-        }[];
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "custom";
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        url?: string;
-        [k: string]: unknown;
-      }
-    | {
-        disk?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        numInstances?: number;
-        parentServer?: {
-          id?: string;
-          name?: string;
-          [k: string]: unknown;
-        };
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "custom";
-        /**
-         * `yes` `no`
-         */
-        pullRequestPreviewsEnabled?: "yes" | "no";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        [k: string]: unknown;
-      }
-    | {
-        /**
-         * `docker` `elixir` `go` `node` `python` `ruby` `rust`
-         */
-        env?: "docker" | "elixir" | "go" | "node" | "python" | "ruby" | "rust";
-        envSpecificDetails?:
-          | {
-              dockerCommand?: string;
-              dockerContext?: string;
-              dockerfilePath?: string;
-              [k: string]: unknown;
-            }
-          | {
-              buildCommand?: string;
-              startCommand?: string;
-              [k: string]: unknown;
-            };
-        lastSuccessfulRunAt?: string;
-        /**
-         * `starter` `starter_plus` `standard` `standard_plus` `pro` `pro_plus` `pro_max` `pro_ultra` `custom`
-         */
-        plan?:
-          | "starter"
-          | "starter_plus"
-          | "standard"
-          | "standard_plus"
-          | "pro"
-          | "pro_plus"
-          | "pro_max"
-          | "pro_ultra"
-          | "custom";
-        /**
-         * `oregon` `frankfurt`
-         */
-        region?: "oregon" | "frankfurt";
-        schedule?: string;
-        [k: string]: unknown;
-      };
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_402 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_409 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type DeleteServiceMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export interface DeleteService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetDeploysMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-} & {
   /**
    * Epoch/Unix timestamp of start of time range to return
    */
@@ -2829,244 +770,13 @@ export type GetDeploysMetadataParam = {
    * Max number of items that can be returned
    */
   limit?: number;
-  [k: string]: unknown;
-};
-export type GetDeploys_Response_200 = {
-  deploy?: {
-    id: string;
-    commit?: {
-      id?: string;
-      message?: string;
-      createdAt?: string;
-      [k: string]: unknown;
-    };
-    /**
-     * `created` `build_in_progress` `update_in_progress` `live` `deactivated` `build_failed` `update_failed` `canceled`
-     */
-    status?:
-      | "created"
-      | "build_in_progress"
-      | "update_in_progress"
-      | "live"
-      | "deactivated"
-      | "build_failed"
-      | "update_failed"
-      | "canceled";
-    finishedAt?: string;
-    createdAt?: string;
-    updatedAt?: string;
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetDeploys_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetDeploys_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploys_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploys_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploys_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploys_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploys_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploys_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeployBodyParam {
-  /**
-   * Defaults to "do_not_clear"
-   */
-  clearCache?: "clear" | "do_not_clear";
-  [k: string]: unknown;
-}
-export type CreateDeployMetadataParam = {
+
+export interface GetEnvVarsForServiceParams {
   /**
    * The ID of the service
    */
   serviceId: string;
-  [k: string]: unknown;
-};
-export interface CreateDeploy_Response_201 {
-  id: string;
-  commit?: {
-    id?: string;
-    message?: string;
-    createdAt?: string;
-    [k: string]: unknown;
-  };
-  /**
-   * `created` `build_in_progress` `update_in_progress` `live` `deactivated` `build_failed` `update_failed` `canceled`
-   */
-  status?:
-    | "created"
-    | "build_in_progress"
-    | "update_in_progress"
-    | "live"
-    | "deactivated"
-    | "build_failed"
-    | "update_failed"
-    | "canceled";
-  finishedAt?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_409 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateDeploy_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetDeployMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  /**
-   * The ID of the deploy
-   */
-  deployId: string;
-  [k: string]: unknown;
-};
-export interface GetDeploy_Response_200 {
-  id: string;
-  commit?: {
-    id?: string;
-    message?: string;
-    createdAt?: string;
-    [k: string]: unknown;
-  };
-  /**
-   * `created` `build_in_progress` `update_in_progress` `live` `deactivated` `build_failed` `update_failed` `canceled`
-   */
-  status?:
-    | "created"
-    | "build_in_progress"
-    | "update_in_progress"
-    | "live"
-    | "deactivated"
-    | "build_failed"
-    | "update_failed"
-    | "canceled";
-  finishedAt?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetDeploy_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetEnvVarsForServiceMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-} & {
   /**
    * Cursor to begin retrieving entries for this query
    */
@@ -3075,137 +785,13 @@ export type GetEnvVarsForServiceMetadataParam = {
    * Max number of items that can be returned
    */
   limit?: number;
-  [k: string]: unknown;
-};
-export type GetEnvVarsForService_Response_200 = {
-  envVar?: {
-    key: string;
-    value: string;
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetEnvVarsForService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetEnvVarsForService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetEnvVarsForService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetEnvVarsForService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetEnvVarsForService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetEnvVarsForService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetEnvVarsForService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetEnvVarsForService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type UpdateEnvVarsForServiceBodyParam = (
-  | {
-      key: string;
-      value: string;
-      [k: string]: unknown;
-    }
-  | {
-      key: string;
-      generateValue: "yes" | "no";
-      [k: string]: unknown;
-    }
-)[];
-export type UpdateEnvVarsForServiceMetadataParam = {
+
+export interface GetHeadersMetadataParam {
   /**
    * The ID of the service
    */
   serviceId: string;
-  [k: string]: unknown;
-};
-export type UpdateEnvVarsForService_Response_200 = {
-  envVar?: {
-    key: string;
-    value: string;
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface UpdateEnvVarsForService_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface UpdateEnvVarsForService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetHeadersMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-} & {
   /**
    * Filter for specific paths that headers apply to
    */
@@ -3226,65 +812,13 @@ export type GetHeadersMetadataParam = {
    * Max number of items that can be returned
    */
   limit?: number;
-  [k: string]: unknown;
-};
-export type GetHeaders_Response_200 = {
-  headers?: {
-    path: string;
-    name: string;
-    value: string;
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetHeaders_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetHeaders_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetHeaders_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetHeaders_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetHeaders_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetHeaders_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetHeaders_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetHeaders_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetRoutesMetadataParam = {
+
+export interface GetRoutesMetadataParam {
   /**
    * The ID of the service
    */
   serviceId: string;
-  [k: string]: unknown;
-} & {
   /**
    * Filter for the type of route rule
    */
@@ -3305,68 +839,12 @@ export type GetRoutesMetadataParam = {
    * Max number of items that can be returned
    */
   limit?: number;
-  [k: string]: unknown;
-};
-export type GetRoutes_Response_200 = {
-  routes?: {
-    /**
-     * `redirect` `rewrite`
-     */
-    type: "redirect" | "rewrite";
-    source: string;
-    destination: string;
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetRoutes_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetRoutes_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetRoutes_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetRoutes_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetRoutes_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetRoutes_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetRoutes_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetRoutes_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetCustomDomainsMetadataParam = {
+export interface GetCustomDomainsMetadataParam {
   /**
    * The ID of the service
    */
   serviceId: string;
-  [k: string]: unknown;
-} & {
   /**
    * Cursor to begin retrieving entries for this query
    */
@@ -3395,166 +873,9 @@ export type GetCustomDomainsMetadataParam = {
    * Filter for custom domains created after a certain time (specified as an ISO 8601 timestamp)
    */
   createdAfter?: string;
-  [k: string]: unknown;
-};
-export type GetCustomDomains_Response_200 = {
-  customDomain?: {
-    id?: string;
-    name?: string;
-    /**
-     * `apex` `subdomain`
-     */
-    domainType?: "apex" | "subdomain";
-    publicSuffix?: string;
-    redirectForName?: string;
-    /**
-     * `verified` `unverified`
-     */
-    verificationStatus?: "verified" | "unverified";
-    createdAt?: string;
-    server?: {
-      id?: string;
-      name?: string;
-      [k: string]: unknown;
-    };
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface GetCustomDomains_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
-export interface GetCustomDomains_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomains_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomainBodyParam {
-  name: string;
-  [k: string]: unknown;
-}
-export type CreateCustomDomainMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export type CreateCustomDomain_Response_201 = {
-  id?: string;
-  name?: string;
-  /**
-   * `apex` `subdomain`
-   */
-  domainType?: "apex" | "subdomain";
-  publicSuffix?: string;
-  redirectForName?: string;
-  /**
-   * `verified` `unverified`
-   */
-  verificationStatus?: "verified" | "unverified";
-  createdAt?: string;
-  server?: {
-    id?: string;
-    name?: string;
-    [k: string]: unknown;
-  };
-  [k: string]: unknown;
-}[];
-export interface CreateCustomDomain_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_402 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_409 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface CreateCustomDomain_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetCustomDomainMetadataParam = {
+
+export interface CustomDomainParams {
   /**
    * The ID of the service
    */
@@ -3563,353 +884,13 @@ export type GetCustomDomainMetadataParam = {
    * The ID or name of the custom domain
    */
   customDomainIdOrName: string;
-  [k: string]: unknown;
-};
-export interface GetCustomDomain_Response_200 {
-  id?: string;
-  name?: string;
-  /**
-   * `apex` `subdomain`
-   */
-  domainType?: "apex" | "subdomain";
-  publicSuffix?: string;
-  redirectForName?: string;
-  /**
-   * `verified` `unverified`
-   */
-  verificationStatus?: "verified" | "unverified";
-  createdAt?: string;
-  server?: {
-    id?: string;
-    name?: string;
-    [k: string]: unknown;
-  };
-  [k: string]: unknown;
 }
-export interface GetCustomDomain_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetCustomDomain_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type DeleteCustomDomainMetadataParam = {
+
+export interface ListJobMetadataParam {
   /**
    * The ID of the service
    */
   serviceId: string;
-  /**
-   * The ID or name of the custom domain
-   */
-  customDomainIdOrName: string;
-  [k: string]: unknown;
-};
-export interface DeleteCustomDomain_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface DeleteCustomDomain_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type RefreshCustomDomainMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  /**
-   * The ID or name of the custom domain
-   */
-  customDomainIdOrName: string;
-  [k: string]: unknown;
-};
-export interface RefreshCustomDomain_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface RefreshCustomDomain_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type SuspendServiceMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export interface SuspendService_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface SuspendService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type ResumeServiceMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export interface ResumeService_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ResumeService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleServiceBodyParam {
-  numInstances: number;
-  [k: string]: unknown;
-}
-export type ScaleServiceMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export interface ScaleService_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_403 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_406 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_410 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ScaleService_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type ListJobMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-} & {
   /**
    * Cursor to begin retrieving entries for this query
    */
@@ -3921,7 +902,7 @@ export type ListJobMetadataParam = {
   /**
    * Filter for the status of the job (`pending`, `running`, `succeeded`, or `failed`)
    */
-  status?: ("pending" | "running" | "succeeded" | "failed")[];
+  status?: JobStatus[];
   /**
    * Filter for jobs created before a certain time (specified as an ISO 8601 timestamp)
    */
@@ -3946,155 +927,4 @@ export type ListJobMetadataParam = {
    * Filter for jobs finished after a certain time (specified as an ISO 8601 timestamp)
    */
   finishedAfter?: string;
-  [k: string]: unknown;
-};
-export type ListJob_Response_200 = {
-  job?: {
-    id?: string;
-    serviceId?: string;
-    startCommand?: string;
-    planId?: string;
-    status?: string;
-    createdAt?: string;
-    startedAt?: string;
-    finishedAt?: string;
-    [k: string]: unknown;
-  };
-  cursor?: string;
-  [k: string]: unknown;
-}[];
-export interface ListJob_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ListJob_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ListJob_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ListJob_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ListJob_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface ListJob_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface PostJobBodyParam {
-  startCommand: string;
-  planId?: string;
-  [k: string]: unknown;
-}
-export type PostJobMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  [k: string]: unknown;
-};
-export interface PostJob_Response_200 {
-  id?: string;
-  serviceId?: string;
-  startCommand?: string;
-  planId?: string;
-  status?: string;
-  createdAt?: string;
-  startedAt?: string;
-  finishedAt?: string;
-  [k: string]: unknown;
-}
-export interface PostJob_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface PostJob_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface PostJob_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface PostJob_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface PostJob_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface PostJob_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export type GetJobMetadataParam = {
-  /**
-   * The ID of the service
-   */
-  serviceId: string;
-  /**
-   * The ID of the job
-   */
-  jobId: string;
-  [k: string]: unknown;
-};
-export interface GetJob_Response_200 {
-  id?: string;
-  serviceId?: string;
-  startCommand?: string;
-  planId?: string;
-  status?: string;
-  createdAt?: string;
-  startedAt?: string;
-  finishedAt?: string;
-  [k: string]: unknown;
-}
-export interface GetJob_Response_400 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetJob_Response_401 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetJob_Response_404 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetJob_Response_429 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetJob_Response_500 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
-}
-export interface GetJob_Response_503 {
-  id?: string;
-  message?: string;
-  [k: string]: unknown;
 }
