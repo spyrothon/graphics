@@ -1,7 +1,12 @@
 import api from "render-api";
-export * from "render-api";
 
-import Config from "../../Config";
+import { RenderConfig } from "./RenderConfig";
 
-api.auth(Config.render.apiToken);
+let config: RenderConfig | undefined;
+
+export function configureRenderClient(newConfig: RenderConfig) {
+  config = newConfig;
+  api.auth(config.apiToken);
+}
+
 export default api;

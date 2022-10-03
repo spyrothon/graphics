@@ -1,6 +1,16 @@
-import { EnvConfig } from "./config/env";
+import { Config } from "./ConfigTypes";
 
-const environment = process.env.NODE_ENV ?? "dev";
+let config: Config | undefined;
 
-const config = await import(`./config/env.${environment}.tsx`);
-export default config.default as EnvConfig;
+export function defineConfig(newConfig: Config) {
+  config = newConfig;
+}
+
+export function getConfig() {
+  return config;
+}
+
+export async function loadConfig() {
+  const environment = process.env.NODE_ENV ?? "dev";
+  await import(`./config/env.${environment}.tsx`);
+}

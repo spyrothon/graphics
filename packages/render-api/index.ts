@@ -4,7 +4,7 @@ import Oas from "oas";
 
 import definition from "./openapi.min.json";
 
-class SDK {
+export class RenderAPIClient {
   spec: Oas;
   core: APICore;
   authKeys: (number | string)[][] = [];
@@ -15,9 +15,9 @@ class SDK {
   }
 
   /**
-   * Optionally configure various options, such as response parsing, that the SDK allows.
+   * Optionally configure various options, such as response parsing, that the RenderAPIClient allows.
    *
-   * @param config Object of supported SDK options and toggles.
+   * @param config Object of supported RenderAPIClient options and toggles.
    * @param config.parseResponse If responses are parsed according to its `Content-Type` header.
    */
   config(config: ConfigOptions) {
@@ -52,7 +52,7 @@ class SDK {
 
   /**
    * If the API you're using offers alternate server URLs, and server variables, you can tell
-   * the SDK which one to use with this method. To use it you can supply either one of the
+   * the RenderAPIClient which one to use with this method. To use it you can supply either one of the
    * server URLs that are contained within the OpenAPI definition (along with any server
    * variables), or you can pass it a fully qualified URL to use (that may or may not exist
    * within the OpenAPI definition).
@@ -367,10 +367,7 @@ class SDK {
   }
 }
 
-const createSDK = (() => {
-  return new SDK();
-})();
-export default createSDK;
+export default new RenderAPIClient();
 
 export interface ConfigOptions {
   /**

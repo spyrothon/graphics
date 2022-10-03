@@ -1,12 +1,12 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-import Errors, { CommandError } from "../Errors";
-import RenderClient from "../integrations/render/RenderClient";
+import { getConfig } from "../Config";
 import { userIsInGroup } from "../Predicates";
 import { humanizedDateTime } from "../util/DateTimeUtil";
 import type { ChatCommand } from "./CommandTypes";
 
 const VersionsCommand: ChatCommand = {
+  name: "versions",
   predicate: (interaction) => userIsInGroup(interaction.user, "deployers"),
   get data() {
     return new SlashCommandBuilder()
@@ -16,54 +16,30 @@ const VersionsCommand: ChatCommand = {
   },
   async action(interaction) {
     interaction.deferReply({ ephemeral: true });
-    const services = await RenderClient.getServices().catch(() => {
-      throw new CommandError(Errors.RENDER_SERVICE_FETCH_FAILED);
-    });
-
-    let allSucceeded = true;
-
+    const services = getConfig().services;
     const embed = new EmbedBuilder()
       .setTitle("Deployed versions")
       .setDescription(`${services.length} known services are currently deployed.`);
 
-    for (const serviceObject of services) {
-      const service = serviceObject.service;
+    let allSucceeded = true;
+    for (const serviceName of Object.keys(services)) {
+      const service = services[serviceName];
       if (service == null) continue;
 
-      if (service.suspended === "suspended") {
-        embed.addFields({ name: service.name, value: "Service is suspended" });
+      const version = await service.version();
+      if (version == null) {
+        embed.addFields({ name: serviceName, value: "No active deployment" });
         continue;
       }
 
-      let deployFetchFailed = false;
-      const deploys = await RenderClient.getDeploys({
-        serviceId: service.id,
-      }).catch(() => {
-        deployFetchFailed = true;
-        return [];
-      });
-
-      if (deployFetchFailed) {
-        embed.addFields({ name: service.name, value: "!! Could not fetch deployments" });
-        allSucceeded = false;
-        continue;
-      }
-
-      const latest = deploys.find((deploy) => deploy.deploy.status === "live");
-
-      if (latest == null) {
-        embed.addFields({ name: service.name, value: "No active deployment" });
-        continue;
-      }
-
-      const commit = latest.deploy.commit;
-      const shortId = commit.id.substring(0, 8);
-      const message = commit.message.split("\n")[0];
-      const deployedAt = humanizedDateTime(service.updatedAt);
+      const shortId = version.commit?.substring(0, 8);
+      const message = version.name.split("\n")[0];
+      const deployedAt =
+        version.deployedAt != null ? humanizedDateTime(version.deployedAt) : undefined;
 
       embed.addFields({
-        name: `${service.name}`,
-        value: `_Deployed at: ${deployedAt}_\n[${shortId} - ${message}](${service.repo}/commit/${commit.id})`,
+        name: `${serviceName}`,
+        value: `_Deployed at: ${deployedAt}_\n${message} (${shortId})`,
       });
     }
 

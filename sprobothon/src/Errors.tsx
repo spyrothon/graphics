@@ -1,4 +1,4 @@
-import { UserGroup } from "./config/env";
+import { UserGroup } from "./ConfigTypes";
 
 export class CommandError extends Error {
   constructor(public message: string) {

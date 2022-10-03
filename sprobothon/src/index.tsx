@@ -1,16 +1,17 @@
 import { AutocompleteInteraction, ChatInputCommandInteraction, Client } from "discord.js";
 
-import { commands } from "./Commands";
-import config from "./Config";
+import { getConfig, loadConfig } from "./Config";
 import Errors from "./Errors";
 import Logger from "./Logger";
+
+await loadConfig();
 
 // Create a new client instance
 const client = new Client({ intents: [] });
 
 // When the client is ready, run this code (only once)
 client.once("ready", () => {
-  console.log("Ready!");
+  Logger.info("Ready!");
 });
 
 async function handleChatCommand(interaction: ChatInputCommandInteraction) {
@@ -18,7 +19,7 @@ async function handleChatCommand(interaction: ChatInputCommandInteraction) {
   Logger.info(
     `[${interaction.id}] ${interaction.user.tag} in #${interaction.channelId} triggered interaction ${commandName}.`,
   );
-  const command = commands.get(commandName);
+  const command = getConfig().commands.find((command) => command.name === commandName);
   if (command == null) {
     Logger.info(`[${interaction.id}] ${commandName} is not a registered command`);
     return;
@@ -59,7 +60,7 @@ async function handleAutocomplete(interaction: AutocompleteInteraction) {
   Logger.info(
     `[${interaction.id}] ${interaction.user.tag} in #${interaction.channelId} requested autocomplete for ${commandName}.`,
   );
-  const command = commands.get(commandName);
+  const command = getConfig().commands.find((command) => command.name === commandName);
   if (command == null) {
     Logger.info(`[${interaction.id}] ${commandName} is not a registered command`);
     return;
@@ -90,4 +91,4 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 // Login to Discord with your client's token
-client.login(config.botToken);
+client.login(getConfig().botToken);

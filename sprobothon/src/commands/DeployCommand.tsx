@@ -1,12 +1,14 @@
 import { SlashCommandBuilder } from "discord.js";
 
+import { getConfig } from "../Config";
 import Errors, { CommandError } from "../Errors";
-import RenderClient from "../integrations/render/RenderClient";
 import { userIsInGroup } from "../Predicates";
 import type { ChatCommand } from "./CommandTypes";
 
 const DeployCommand: ChatCommand = {
+  name: "deploy",
   predicate: (interaction) => userIsInGroup(interaction.user, "deployers"),
+
   get data() {
     const builder = new SlashCommandBuilder()
       .setName("deploy")
@@ -18,14 +20,15 @@ const DeployCommand: ChatCommand = {
 
     return builder;
   },
+
   async autocomplete(interaction) {
     const focusedValue = interaction.options.getFocused();
-    const services = await RenderClient.getServices();
+    const serviceNames = Object.keys(getConfig().services);
 
-    const choices = services.map((service) => service.service.name);
-    const filtered = choices.filter((choice) => choice.includes(focusedValue));
+    const filtered = serviceNames.filter((name) => name.includes(focusedValue));
     await interaction.respond(filtered.map((choice) => ({ name: choice, value: choice })));
   },
+
   async action(interaction) {
     const serviceName = interaction.options.getString("service");
     if (serviceName == null) {
@@ -36,25 +39,32 @@ const DeployCommand: ChatCommand = {
       return;
     }
 
-    interaction.deferReply({ ephemeral: true });
-    const services = await RenderClient.getServices();
-    const service = services
-      .map((service) => service.service)
-      .find((service) => service.name === serviceName);
+    const service = getConfig().services[serviceName];
     if (service == null) {
-      await interaction.editReply({
+      await interaction.reply({
         content: Errors.UNKOWN_SERVICE(serviceName),
+        ephemeral: true,
       });
       return;
     }
 
-    const deploy = await RenderClient.createDeploy({}, { serviceId: service.id }).catch(() => {
+    interaction.deferReply({ ephemeral: true });
+
+    const deploy = await service.deploy().catch(() => {
       throw new CommandError(Errors.RENDER_UNABLE_TO_DEPLOY(serviceName));
     });
 
-    await interaction.editReply({
-      content: `Started deploy of ${service.name}. Track its status here: <https://dashboard.render.com/static/${service.id}/deploys/${deploy.id}>`,
-    });
+    switch (deploy.status) {
+      case "success":
+        await interaction.editReply({
+          content: `Started deploy of ${serviceName}. Track its status here: <${deploy.statusUrl}>`,
+        });
+        return;
+      case "error":
+        await interaction.editReply({
+          content: `Deploy failed: ${deploy.reason}`,
+        });
+    }
   },
 };
 

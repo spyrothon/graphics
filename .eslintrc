@@ -68,7 +68,7 @@
       // Object literals can basically be anything depending on usage.
       {
         "selector": "objectLiteralProperty",
-        "format": ["camelCase", "UPPER_CASE", "PascalCase"]
+        "format": ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"]
       },
       {
         "selector": "objectLiteralMethod",
