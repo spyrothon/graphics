@@ -1,5 +1,5 @@
-import type { ServiceAdapter } from "./adapters/ServiceAdapter";
 import { ChatCommand } from "./commands/CommandTypes";
+import type { ServiceAdapter } from "./services/ServiceAdapter";
 
 export type UserId = string | {};
 

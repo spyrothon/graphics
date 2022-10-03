@@ -6,16 +6,24 @@ export interface VersionResponse {
 
 export interface StatusResponse {
   status: string;
-  startedAt?: Date;
+  createdAt?: Date;
   updatedAt?: Date;
 }
 
+export interface DeploySuccessResponse {
+  status: "success";
+  statusUrl?: string;
+  commit: {
+    id: string;
+    message: string;
+    createdAt: string;
+  };
+  deployId: string;
+  createdAt?: Date;
+}
+
 export type DeployResponse =
-  | {
-      status: "success";
-      statusUrl?: string;
-      startedAt?: Date;
-    }
+  | DeploySuccessResponse
   | {
       status: "error";
       reason: string;
@@ -31,4 +39,5 @@ export class ServiceAdapter {
   async deployStatus(_deployId: string): Promise<StatusResponse> {
     throw new Error(`No "deployStatus" method provided by ${this}`);
   }
+  async whenDeployFinished?(_deployId: string): Promise<StatusResponse>;
 }

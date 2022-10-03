@@ -2,10 +2,14 @@ import { ServiceType } from "render-api";
 
 import Errors from "../Errors";
 import RenderClient from "../integrations/render/RenderClient";
-import { ServiceAdapter, StatusResponse } from "./ServiceAdapter";
+import { DeployResponse, ServiceAdapter, StatusResponse } from "../services/ServiceAdapter";
+
+const RENDER_DEPLOY_POLL_INTERVAL = 5000;
+const RENDER_DEPLOY_FINISHED_STATUSES = ["live"];
+const RENDER_DEPLOY_FAILED_STATUSES = ["deactivated", "build_failed", "update_failed", "canceled"];
 
 function getServiceUrl(id: string, type: ServiceType) {
-  const base = "https://dashboard.render.com/";
+  const base = "https://dashboard.render.com";
   switch (type) {
     case "static_site":
       return `${base}/static/${id}`;
@@ -13,6 +17,12 @@ function getServiceUrl(id: string, type: ServiceType) {
     default:
       return base;
   }
+}
+
+async function waitForPollInterval(millis: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, millis);
+  });
 }
 
 export default class RenderAdapter extends ServiceAdapter {
@@ -36,13 +46,16 @@ export default class RenderAdapter extends ServiceAdapter {
     };
   }
 
-  async deploy() {
+  async deploy(): Promise<DeployResponse> {
     try {
       const response = await RenderClient.createDeploy({}, { serviceId: this.serviceId });
 
       return {
         status: "success" as const,
         statusUrl: `${getServiceUrl(this.serviceId, this.serviceType)}/deploys/${response.id}`,
+        commit: response.commit,
+        deployId: response.id,
+        createdAt: new Date(response.createdAt),
       };
     } catch (e) {
       return {
@@ -56,8 +69,20 @@ export default class RenderAdapter extends ServiceAdapter {
     const response = await RenderClient.getDeploy({ serviceId: this.serviceId, deployId });
     return {
       status: response.status,
-      startedAt: new Date(response.createdAt),
+      createdAt: new Date(response.createdAt),
       updatedAt: new Date(response.updatedAt),
     };
+  }
+
+  async whenDeployFinished(deployId: string): Promise<StatusResponse> {
+    await waitForPollInterval(RENDER_DEPLOY_POLL_INTERVAL);
+    const status = await this.deployStatus(deployId);
+    if (RENDER_DEPLOY_FINISHED_STATUSES.includes(status.status)) {
+      return status;
+    } else if (RENDER_DEPLOY_FAILED_STATUSES.includes(status.status)) {
+      return Promise.reject(status);
+    } else {
+      return await this.whenDeployFinished(deployId);
+    }
   }
 }

@@ -10,8 +10,11 @@ await loadConfig();
 const client = new Client({ intents: [] });
 
 // When the client is ready, run this code (only once)
-client.once("ready", () => {
+client.once("ready", async () => {
   Logger.info("Ready!");
+  // Preload data to be available for interactions
+  const guild = await client.guilds.fetch(getConfig().guildId);
+  await guild.channels.fetch();
 });
 
 async function handleChatCommand(interaction: ChatInputCommandInteraction) {
@@ -47,11 +50,15 @@ async function handleChatCommand(interaction: ChatInputCommandInteraction) {
       await interaction.reply({ content: `Successfully ran ${commandName}`, ephemeral: true });
     }
   } catch (error) {
-    Logger.error(`[${interaction.id}] failed to run ${commandName}`, error);
-    await interaction.reply({
-      content: Errors.EXECUTION_ERROR,
-      ephemeral: true,
-    });
+    const alreadyReplied = interaction.replied;
+    Logger.error(`[${interaction.id}] failed to run ${commandName}`, { error, alreadyReplied });
+
+    if (!alreadyReplied) {
+      await interaction.reply({
+        content: Errors.EXECUTION_ERROR,
+        ephemeral: true,
+      });
+    }
   }
 }
 
@@ -73,9 +80,8 @@ async function handleAutocomplete(interaction: AutocompleteInteraction) {
 
   try {
     await command.autocomplete(interaction);
-    Logger.info(`[${interaction.id}] successfully ran ${commandName}`);
   } catch (error) {
-    Logger.error(`[${interaction.id}] failed to run ${commandName}`, error);
+    Logger.error(`[${interaction.id}] failed to autocomplete ${commandName}`, error);
   }
 }
 

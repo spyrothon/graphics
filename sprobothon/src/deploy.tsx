@@ -1,8 +1,9 @@
 import { REST, Routes } from "discord.js";
 
-import { getConfig } from "./Config";
+import { getConfig, loadConfig } from "./Config";
 import Logger from "./Logger";
 
+await loadConfig();
 const config = getConfig();
 
 const rest = new REST({ version: "10" }).setToken(config.botToken);
