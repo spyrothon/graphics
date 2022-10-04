@@ -124,7 +124,6 @@ const DeployCommand: ChatCommand = {
           } started a deploy of "${serviceName}" (${new Date().toDateString()})`,
           reason: `Threading status update messages for this deploy of ${serviceName}`,
         });
-
         const embed = createDeployEmbed(serviceName, deploy);
         const statusEmbed = await thread.send({
           embeds: [embed],
@@ -144,6 +143,11 @@ const DeployCommand: ChatCommand = {
           .catch((status: StatusResponse) => {
             const updatedEmbed = setEmbedStatus(embed, false, status);
             statusEmbed.edit({ embeds: [updatedEmbed] });
+            return thread.send({
+              content: `!! ${userMention(
+                interaction.user.id,
+              )} your deploy of ${serviceName} has failed`,
+            });
           });
         return;
       }

@@ -1,19 +1,21 @@
-import { App } from "octokit";
+import { App, Octokit } from "octokit";
 
 import { GithubConfig } from "./GithubConfig";
 
 let config: GithubConfig | undefined;
 
 let app: App | undefined;
+let api: Octokit | undefined;
 
-export function initializeGithubClient(newConfig: GithubConfig) {
+export async function initializeGithubClient(newConfig: GithubConfig) {
   config = newConfig;
   app = new App({
     appId: config.appId,
     privateKey: config.privateKey,
     webhooks: { secret: config.webhookSecret },
   });
-  app.webhooks.on("workflow_job", () => null);
+
+  api = await app.getInstallationOctokit(config.installationId);
 }
 
-export default app;
+export { app as GithubApp, api as GithubAPI };

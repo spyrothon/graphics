@@ -15,4 +15,8 @@ export default {
   UNKOWN_SERVICE: (service: string) => `"${service}" is not a recognized service name`,
   NO_SERVICE_SPECIFIED: "No service specified",
   RENDER_UNABLE_TO_DEPLOY: (service: string) => `Couldn't create a new deploy for "${service}".`,
+  GITHUB_FAILED_TO_DISPATCH_WORKFLOW: (workflowId: string) =>
+    `Failed to dispatch workflow ${workflowId}`,
+  GITHUB_FAILED_TO_FETCH_WORKFLOW_RUNS: (workflowId: string) =>
+    `Failed to fetch latest runs for workflow ${workflowId}`,
 };

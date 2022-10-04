@@ -19,7 +19,7 @@ export interface DeploySuccessResponse {
     createdAt: string;
   };
   deployId: string;
-  createdAt?: Date;
+  createdAt: Date;
 }
 
 export type DeployResponse =
