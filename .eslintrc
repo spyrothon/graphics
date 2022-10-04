@@ -71,6 +71,11 @@
         "format": ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"]
       },
       {
+        "selector": "objectLiteralProperty",
+        "modifiers": ["requiresQuotes"],
+        "format": null
+      },
+      {
         "selector": "objectLiteralMethod",
         "format": ["camelCase", "UPPER_CASE", "PascalCase"]
       },

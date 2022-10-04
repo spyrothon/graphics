@@ -2,9 +2,12 @@ import { AutocompleteInteraction, ChatInputCommandInteraction, Client } from "di
 
 import { getConfig, loadConfig } from "./Config";
 import Errors from "./Errors";
+import HealthCheck from "./HealthCheck";
 import Logger from "./Logger";
 
 // This ends up being relative to the _current working directory_, not this file...
+const HEALTH_CHECK_PORT = parseInt(process.env.SPROBOTHON_HEALTH_CHECK_PORT ?? "8080");
+const HEALTH_CHECK_HOSTNAME = process.env.SPROBOTHON_HEALTH_CHECK_HOSTNAME ?? "localhost";
 const CONFIG_PATH =
   process.env.SPROBOTHON_CONFIG_PATH ?? `./config/env.${process.env.NODE_ENV ?? "dev"}.tsx`;
 await loadConfig(CONFIG_PATH);
@@ -101,3 +104,7 @@ client.on("interactionCreate", async (interaction) => {
 
 // Login to Discord with your client's token
 client.login(getConfig().botToken);
+
+// Render.com requires a health check endpoint to keep the service alive.
+HealthCheck.listen(HEALTH_CHECK_PORT, HEALTH_CHECK_HOSTNAME);
+console.log(`Health check available on port ${HEALTH_CHECK_HOSTNAME}:${HEALTH_CHECK_PORT}`);
