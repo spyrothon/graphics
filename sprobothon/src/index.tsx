@@ -4,7 +4,10 @@ import { getConfig, loadConfig } from "./Config";
 import Errors from "./Errors";
 import Logger from "./Logger";
 
-await loadConfig();
+// This ends up being relative to the _current working directory_, not this file...
+const CONFIG_PATH =
+  process.env.SPROBOTHON_CONFIG_PATH ?? `./config/env.${process.env.NODE_ENV ?? "dev"}.tsx`;
+await loadConfig(CONFIG_PATH);
 
 // Create a new client instance
 const client = new Client({ intents: [] });

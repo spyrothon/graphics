@@ -10,7 +10,6 @@ export function getConfig() {
   return config;
 }
 
-export async function loadConfig() {
-  const environment = process.env.NODE_ENV ?? "dev";
-  await import(`./config/env.${environment}.tsx`);
+export async function loadConfig(path: string) {
+  await import(path);
 }

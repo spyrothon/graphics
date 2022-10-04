@@ -1,6 +1,6 @@
-src/config/env.*.tsx
-!src/config/env.example.tsx
-!src/config/env.tsx
+config/env.*.tsx
+!config/env.example.tsx
+!config/env.tsx
 
 priv/
 
