@@ -19,9 +19,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.codeActionsOnSave.rules": ["simple-import-sort/imports"],
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  },
+  "eslint.codeActionsOnSave.mode": "problems",
   "files.insertFinalNewline": true,
   "elixirLS.projectDir": "./spyrothon_api"
 }

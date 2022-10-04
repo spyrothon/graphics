@@ -33,12 +33,3 @@ jobs:
         uses: ./.github/actions/frontend-checks
         with:
           package: ./spyrothon_graphics
-
-  deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/deploy-on-render.yaml
-    with:
-      service_name: graphics
-    secrets:
-      deploy_hook: ${{ secrets.GRAPHICS_DEPLOY_HOOK }}

@@ -15,7 +15,7 @@ indent_size = 4
 [*.json]
 insert_final_newline = ignore
 
-# Don't change minified files 
-[**.min.js]
+# Don't change minified files
+[**.min.js,**.min.json]
 indent_style = ignore
 insert_final_newline = ignore

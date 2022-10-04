@@ -1,0 +1,26 @@
+{
+  "name": "sprobo",
+  "private": true,
+  "version": "0.0.0",
+  "author": "Jon Egeland <jonegeland@gmail.com>",
+  "description": "A bot for interacting with Spyrothon services",
+  "type": "module",
+  "scripts": {
+    "dev": "vite-node ./src/index.tsx",
+    "update-commands": "vite-node ./src/deploy.tsx",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "api": "^4.5.2",
+    "discord.js": "^14.5.0",
+    "dotenv": "^16.0.3",
+    "octokit": "^2.0.7",
+    "render-api": "workspace:*",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite-node": "^0.23.4"
+  }
+}
