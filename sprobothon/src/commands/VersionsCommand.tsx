@@ -15,7 +15,7 @@ const VersionsCommand: ChatCommand = {
       .setDefaultMemberPermissions(0);
   },
   async action(interaction) {
-    interaction.deferReply({ ephemeral: true });
+    interaction.deferReply();
     const services = getConfig().services;
     const embed = new EmbedBuilder()
       .setTitle("Deployed versions")
