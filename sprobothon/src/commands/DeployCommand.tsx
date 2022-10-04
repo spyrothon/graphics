@@ -121,7 +121,7 @@ const DeployCommand: ChatCommand = {
         const thread = await replyMessage.startThread({
           name: `${
             interaction.user.username
-          } started a deploy of "${serviceName}" (${new Date().toDateString()})`,
+          } started a deploy of "${serviceName}" (${new Date().toString()})`,
           reason: `Threading status update messages for this deploy of ${serviceName}`,
         });
         const embed = createDeployEmbed(serviceName, deploy);

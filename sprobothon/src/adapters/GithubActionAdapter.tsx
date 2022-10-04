@@ -10,8 +10,8 @@ import {
 const GITHUB_ACTION_DEPLOY_CREATED_POLL_INTERVAL = 1200;
 const GITHUB_ACTION_DEPLOY_POLL_INTERVAL = 5000;
 const GITHUB_ACTION_MAX_CREATE_POLL_ATTEMPTS = 20;
-const GITHUB_ACTION_DEPLOY_FINISHED_STATUSES = ["success", "action_required"];
-const GITHUB_ACTION_DEPLOY_FAILED_STATUSES = [
+const GITHUB_ACTION_DEPLOY_FINISHED_CONCLUSIONS = ["success", "action_required"];
+const GITHUB_ACTION_DEPLOY_FAILED_CONCLUSIONS = [
   "neutral",
   "skipped",
   "cancelled",
@@ -71,14 +71,17 @@ export default class GithubActionAdapter extends ServiceAdapter {
         reason: Errors.GITHUB_FAILED_TO_DISPATCH_WORKFLOW(this.workflowId),
       };
     }
+    // Give some minimal time for GitHub to register that the workflow has run,
+    // but keep it short to try to keep some liveliness here.
+    await waitForPollInterval(800);
 
     try {
       let latest = undefined;
       let findAttempts = 0;
       while (latest == null) {
-        await waitForPollInterval(GITHUB_ACTION_DEPLOY_CREATED_POLL_INTERVAL);
         const runs = await GithubAPI.rest.actions.listWorkflowRuns({ ...params });
         latest = runs.data.workflow_runs.find((run) => run.name === triggerId);
+
         findAttempts += 1;
         if (findAttempts >= GITHUB_ACTION_MAX_CREATE_POLL_ATTEMPTS) {
           return {
@@ -86,7 +89,10 @@ export default class GithubActionAdapter extends ServiceAdapter {
             reason: Errors.GITHUB_WORKFLOW_RUN_FETCH_TIMED_OUT(this.workflowId, triggerId),
           };
         }
+
+        await waitForPollInterval(GITHUB_ACTION_DEPLOY_CREATED_POLL_INTERVAL);
       }
+
       return {
         status: "success",
         commit: {
@@ -122,9 +128,9 @@ export default class GithubActionAdapter extends ServiceAdapter {
   async whenDeployFinished(deployId: string): Promise<StatusResponse> {
     await waitForPollInterval(GITHUB_ACTION_DEPLOY_POLL_INTERVAL);
     const status = await this.deployStatus(deployId);
-    if (GITHUB_ACTION_DEPLOY_FINISHED_STATUSES.includes(status.status)) {
+    if (GITHUB_ACTION_DEPLOY_FINISHED_CONCLUSIONS.includes(status.status)) {
       return status;
-    } else if (GITHUB_ACTION_DEPLOY_FAILED_STATUSES.includes(status.status)) {
+    } else if (GITHUB_ACTION_DEPLOY_FAILED_CONCLUSIONS.includes(status.status)) {
       return Promise.reject(status);
     } else {
       return await this.whenDeployFinished(deployId);
