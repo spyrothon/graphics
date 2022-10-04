@@ -7,7 +7,9 @@ import {
   VersionResponse,
 } from "../services/ServiceAdapter";
 
+const GITHUB_ACTION_DEPLOY_CREATED_POLL_INTERVAL = 1200;
 const GITHUB_ACTION_DEPLOY_POLL_INTERVAL = 5000;
+const GITHUB_ACTION_MAX_CREATE_POLL_ATTEMPTS = 20;
 const GITHUB_ACTION_DEPLOY_FINISHED_STATUSES = ["success", "action_required"];
 const GITHUB_ACTION_DEPLOY_FAILED_STATUSES = [
   "neutral",
@@ -54,10 +56,14 @@ export default class GithubActionAdapter extends ServiceAdapter {
       repo: this.repo,
       workflow_id: this.workflowId,
     };
+    const triggerId = new Date().toString();
     try {
       await GithubAPI.rest.actions.createWorkflowDispatch({
         ...params,
         ref: this.branch,
+        inputs: {
+          trigger_id: triggerId,
+        },
       });
     } catch {
       return {
@@ -67,9 +73,20 @@ export default class GithubActionAdapter extends ServiceAdapter {
     }
 
     try {
-      await waitForPollInterval(5000);
-      const runs = await GithubAPI.rest.actions.listWorkflowRuns({ ...params });
-      const latest = runs.data.workflow_runs[0];
+      let latest = undefined;
+      let findAttempts = 0;
+      while (latest == null) {
+        await waitForPollInterval(GITHUB_ACTION_DEPLOY_CREATED_POLL_INTERVAL);
+        const runs = await GithubAPI.rest.actions.listWorkflowRuns({ ...params });
+        latest = runs.data.workflow_runs.find((run) => run.name === triggerId);
+        findAttempts += 1;
+        if (findAttempts >= GITHUB_ACTION_MAX_CREATE_POLL_ATTEMPTS) {
+          return {
+            status: "error",
+            reason: Errors.GITHUB_WORKFLOW_RUN_FETCH_TIMED_OUT(this.workflowId, triggerId),
+          };
+        }
+      }
       return {
         status: "success",
         commit: {

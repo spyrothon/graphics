@@ -1,7 +1,14 @@
 name: Spyrothon API
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      trigger_id:
+        type: string
+        required: true
+        description: unique identifier to find this run after being triggered
+
+run-name: ${{ inputs.trigger_id }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}

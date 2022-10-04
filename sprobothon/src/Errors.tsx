@@ -18,5 +18,7 @@ export default {
   GITHUB_FAILED_TO_DISPATCH_WORKFLOW: (workflowId: string) =>
     `Failed to dispatch workflow ${workflowId}`,
   GITHUB_FAILED_TO_FETCH_WORKFLOW_RUNS: (workflowId: string) =>
-    `Failed to fetch latest runs for workflow ${workflowId}`,
+    `Failed to fetch latest runs for workflow "${workflowId}"`,
+  GITHUB_WORKFLOW_RUN_FETCH_TIMED_OUT: (workflowId: string, triggerId: string) =>
+    `Timed out while trying to fetch the requested workflow run "${triggerId}" for workflow "${workflowId}"`,
 };

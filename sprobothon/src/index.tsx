@@ -15,14 +15,6 @@ await loadConfig(CONFIG_PATH);
 // Create a new client instance
 const client = new Client({ intents: [] });
 
-// When the client is ready, run this code (only once)
-client.once("ready", async () => {
-  Logger.info("Ready!");
-  // Preload data to be available for interactions
-  const guild = await client.guilds.fetch(getConfig().guildId);
-  await guild.channels.fetch();
-});
-
 async function handleChatCommand(interaction: ChatInputCommandInteraction) {
   const { commandName } = interaction;
   Logger.info(
@@ -100,6 +92,14 @@ client.on("interactionCreate", async (interaction) => {
     handleAutocomplete(interaction);
     return;
   }
+});
+
+// When the client is ready, run this code (only once)
+client.once("ready", async () => {
+  Logger.info("Ready!");
+  // Preload data to be available for interactions
+  const guild = await client.guilds.fetch(getConfig().guildId);
+  await guild.channels.fetch();
 });
 
 // Login to Discord with your client's token
