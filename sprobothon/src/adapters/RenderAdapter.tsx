@@ -13,6 +13,8 @@ function getServiceUrl(id: string, type: ServiceType) {
   switch (type) {
     case "static_site":
       return `${base}/static/${id}`;
+    case "web_service":
+      return `${base}/web/${id}`;
     // TODO: expand this later
     default:
       return base;

@@ -1,6 +1,11 @@
 import Errors from "../Errors";
 import { GithubAPI } from "../integrations/github/GithubAppClient";
-import { DeployResponse, ServiceAdapter, StatusResponse } from "../services/ServiceAdapter";
+import {
+  DeployResponse,
+  ServiceAdapter,
+  StatusResponse,
+  VersionResponse,
+} from "../services/ServiceAdapter";
 
 const GITHUB_ACTION_DEPLOY_POLL_INTERVAL = 5000;
 const GITHUB_ACTION_DEPLOY_FINISHED_STATUSES = ["success", "action_required"];
@@ -29,11 +34,17 @@ export default class GithubActionAdapter extends ServiceAdapter {
     super();
   }
 
-  async version() {
+  async version(): Promise<VersionResponse> {
+    const response = await GithubAPI.rest.actions.listWorkflowRuns({
+      owner: this.account,
+      repo: this.repo,
+      workflow_id: this.workflowId,
+    });
+    const latest = response.data.workflow_runs.find((run) => run.conclusion === "success");
     return {
-      name: "a version",
-      commit: "123afsf4214lkjljk",
-      deployedAt: new Date(),
+      name: latest.head_commit.message,
+      commit: latest.head_commit.id,
+      deployedAt: new Date(latest.updated_at),
     };
   }
 
