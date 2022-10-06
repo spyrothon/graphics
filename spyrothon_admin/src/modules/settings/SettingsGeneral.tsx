@@ -1,7 +1,8 @@
 import * as React from "react";
-import { APIClient, ScheduleResponse } from "@spyrothon/api";
+import { ScheduleResponse } from "@spyrothon/api";
 import { Header } from "@spyrothon/uikit";
 
+import API from "@admin/API";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
@@ -17,7 +18,7 @@ export default function SettingsGeneral() {
   const [schedules, setSchedules] = React.useState<ScheduleResponse[]>([]);
 
   React.useEffect(() => {
-    APIClient.fetchSchedules().then((data) => setSchedules(data));
+    API.schedules.fetchSchedules().then((data) => setSchedules(data));
   }, [currentSchedule]);
 
   return (

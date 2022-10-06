@@ -1,5 +1,4 @@
 import {
-  APIClient,
   InitialSchedule,
   OBSWebsocketConfig,
   Schedule,
@@ -8,6 +7,7 @@ import {
   TransitionSet,
 } from "@spyrothon/api";
 
+import API from "@admin/API";
 import { SafeDispatch } from "@admin/hooks/useDispatch";
 
 import { fetchInterviewsSuccess } from "../interviews/InterviewActions";
@@ -25,7 +25,7 @@ export function setCurrentSchedule(newSchedule: ScheduleResponse) {
   const { runs, interviews, ...schedule } = newSchedule;
 
   return async (dispatch: SafeDispatch) => {
-    await APIClient.updateInit({ scheduleId: schedule.id });
+    await API.init.updateInit({ scheduleId: schedule.id });
     dispatch(loadSchedule(schedule));
     dispatch(fetchInterviewsSuccess(interviews));
     dispatch(fetchRunsSuccess(runs));
@@ -35,23 +35,25 @@ export function setCurrentSchedule(newSchedule: ScheduleResponse) {
 
 export function createSchedule(schedule: InitialSchedule) {
   return async (dispatch: SafeDispatch) => {
-    const response = await APIClient.createSchedule(schedule);
+    const response = await API.schedules.createSchedule(schedule);
     dispatch(setCurrentSchedule(response));
   };
 }
 
 export function updateSchedule(schedule: Schedule) {
   return async (dispatch: SafeDispatch) => {
-    const updatedSchedule = await APIClient.updateSchedule(schedule.id, schedule);
+    const updatedSchedule = await API.schedules.updateSchedule(schedule.id, schedule);
     dispatch(loadSchedule(updatedSchedule));
   };
 }
 
 export function addRunToSchedule(scheduleId: string) {
   return async (dispatch: SafeDispatch) => {
-    const run = await APIClient.createRun({ gameName: "New Run" });
+    const run = await API.runs.createRun({ gameName: "New Run" });
     dispatch(fetchRunsSuccess([run]));
-    const updatedSchedule = await APIClient.addScheduleEntry(scheduleId, { runId: run.id });
+    const updatedSchedule = await API.schedules.addScheduleEntry(scheduleId, {
+      runId: run.id,
+    });
     const newEntry = updatedSchedule.scheduleEntries[updatedSchedule.scheduleEntries.length - 1];
     dispatch(loadSchedule(updatedSchedule));
     dispatch(selectScheduleEntry(newEntry.id));
@@ -60,9 +62,9 @@ export function addRunToSchedule(scheduleId: string) {
 
 export function addInterviewToSchedule(scheduleId: string) {
   return async (dispatch: SafeDispatch) => {
-    const interview = await APIClient.createInterview({ topic: "New Interview" });
+    const interview = await API.interviews.createInterview({ topic: "New Interview" });
     dispatch(fetchInterviewsSuccess([interview]));
-    const updatedSchedule = await APIClient.addScheduleEntry(scheduleId, {
+    const updatedSchedule = await API.schedules.addScheduleEntry(scheduleId, {
       interviewId: interview.id,
     });
     const newEntry = updatedSchedule.scheduleEntries[updatedSchedule.scheduleEntries.length - 1];
@@ -73,14 +75,14 @@ export function addInterviewToSchedule(scheduleId: string) {
 
 export function removeScheduleEntry(scheduleId: string, entryId: string) {
   return async (dispatch: SafeDispatch) => {
-    await APIClient.removeScheduleEntry(scheduleId, entryId);
+    await API.schedules.removeScheduleEntry(scheduleId, entryId);
     dispatch({ type: ScheduleActionType.SCHEDULES_ENTRY_DELETED, entryId });
   };
 }
 
 export function updateScheduleEntry(entry: ScheduleEntry) {
   return async (dispatch: SafeDispatch) => {
-    const updatedEntry = await APIClient.updateScheduleEntry(entry.scheduleId, entry);
+    const updatedEntry = await API.schedules.updateScheduleEntry(entry.scheduleId, entry);
     dispatch({ type: ScheduleActionType.SCHEDULES_ENTRY_UPDATED, entry: updatedEntry });
   };
 }
@@ -93,7 +95,7 @@ export function reorderScheduleEntries(schedule: Schedule, entryIds: string[]) {
       .map((entry, index) => ({ ...entry, position: index }));
 
     const newSchedule = { ...schedule, scheduleEntries: orderedEntries };
-    const updatedSchedule = await APIClient.updateSchedule(schedule.id, newSchedule);
+    const updatedSchedule = await API.schedules.updateSchedule(schedule.id, newSchedule);
     dispatch(loadSchedule(updatedSchedule));
   };
 }
@@ -101,7 +103,7 @@ export function reorderScheduleEntries(schedule: Schedule, entryIds: string[]) {
 export function fetchSchedule(scheduleId: string) {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: ScheduleActionType.SCHEDULES_FETCH_SCHEDULE_STARTED });
-    const scheduleResponse = await APIClient.fetchSchedule(scheduleId);
+    const scheduleResponse = await API.schedules.fetchSchedule(scheduleId);
     const { runs, interviews, ...schedule } = scheduleResponse;
 
     dispatch(loadSchedule(schedule));
@@ -112,7 +114,7 @@ export function fetchSchedule(scheduleId: string) {
 
 export function transitionToSecheduleEntry(scheduleId: string, entryId: string) {
   return async (dispatch: SafeDispatch) => {
-    const scheduleResponse = await APIClient.transitionToScheduleEntry(scheduleId, entryId);
+    const scheduleResponse = await API.schedules.transitionToScheduleEntry(scheduleId, entryId);
     const { runs, interviews, ...schedule } = scheduleResponse;
 
     dispatch(loadSchedule(schedule));
@@ -123,7 +125,7 @@ export function transitionToSecheduleEntry(scheduleId: string, entryId: string) 
 
 export function resetTransitionSet(transitionSet: TransitionSet) {
   return async (dispatch: SafeDispatch) => {
-    const scheduleResponse = await APIClient.resetTransitionSet(transitionSet.id);
+    const scheduleResponse = await API.transitions.resetTransitionSet(transitionSet.id);
     dispatch(loadSchedule(scheduleResponse));
   };
 }
@@ -134,14 +136,14 @@ export function loadSchedule(schedule: Schedule): ScheduleAction {
 
 export function fetchScheduleOBSConfig(scheduleId: string) {
   return async (dispatch: SafeDispatch) => {
-    const config = await APIClient.fetchScheduleOBSConfig(scheduleId);
+    const config = await API.schedules.fetchScheduleOBSConfig(scheduleId);
     dispatch(loadOBSConfig(config));
   };
 }
 
 export function updateScheduleOBSConfig(scheduleId: string, config: OBSWebsocketConfig) {
   return async (dispatch: SafeDispatch) => {
-    const savedConfig = await APIClient.updateScheduleOBSConfig(scheduleId, config);
+    const savedConfig = await API.schedules.updateScheduleOBSConfig(scheduleId, config);
     dispatch(loadOBSConfig(savedConfig));
   };
 }

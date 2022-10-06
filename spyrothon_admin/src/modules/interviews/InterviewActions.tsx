@@ -1,5 +1,6 @@
-import { APIClient, Interview } from "@spyrothon/api";
+import { Interview } from "@spyrothon/api";
 
+import API from "@admin/API";
 import { SafeDispatch } from "@admin/hooks/useDispatch";
 
 import { InterviewAction, InterviewActionType } from "./InterviewTypes";
@@ -14,7 +15,7 @@ export function updateInterview(interview: Interview): InterviewAction {
 export function fetchInterviews() {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: InterviewActionType.INTERVIEWS_FETCH_INTERVIEWS_STARTED });
-    const interviews = await APIClient.fetchInterviews();
+    const interviews = await API.interviews.fetchInterviews();
 
     dispatch(fetchInterviewsSuccess(interviews));
   };
@@ -41,7 +42,7 @@ export function persistInterview(interviewId: string, changes: Partial<Interview
         (entry) => entry?.displayName !== "",
       );
     }
-    const updatedInterview = await APIClient.updateInterview(interviewId, filteredChanges);
+    const updatedInterview = await API.interviews.updateInterview(interviewId, filteredChanges);
     dispatch({
       type: InterviewActionType.INTERVIEWS_UPDATE_INTERVIEW,
       interview: updatedInterview,

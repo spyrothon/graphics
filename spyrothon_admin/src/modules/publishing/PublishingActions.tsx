@@ -1,5 +1,6 @@
-import { APIClient, Article, InitialArticle, InitialNewsletter, Newsletter } from "@spyrothon/api";
+import { Article, InitialArticle, InitialNewsletter, Newsletter } from "@spyrothon/api";
 
+import API from "@admin/API";
 import { SafeDispatch } from "@admin/hooks/useDispatch";
 
 import { PublishingAction, PublishingActionType } from "./PublishingTypes";
@@ -14,7 +15,7 @@ export function updateNewsletter(newsletter: Newsletter): PublishingAction {
 export function fetchNewsletters() {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: PublishingActionType.PUBLISHING_FETCH_NEWSLETTERS_STARTED });
-    const newsletters = await APIClient.fetchNewsletters();
+    const newsletters = await API.publishing.fetchNewsletters();
 
     dispatch(fetchNewslettersSuccess(newsletters));
   };
@@ -23,7 +24,7 @@ export function fetchNewsletters() {
 export function fetchNewsletter(newsletterId: string) {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: PublishingActionType.PUBLISHING_FETCH_NEWSLETTERS_STARTED });
-    const newsletter = await APIClient.fetchNewsletter(newsletterId);
+    const newsletter = await API.publishing.fetchNewsletter(newsletterId);
 
     dispatch(fetchNewslettersSuccess([newsletter]));
   };
@@ -42,7 +43,7 @@ export function fetchNewslettersSuccess(newsletters: Newsletter[]): PublishingAc
 
 export function createNewsletter(newsletter: InitialNewsletter) {
   return async (dispatch: SafeDispatch) => {
-    const response = await APIClient.createNewsletter(newsletter);
+    const response = await API.publishing.createNewsletter(newsletter);
     dispatch(loadNewsletter(response));
   };
 }
@@ -50,7 +51,7 @@ export function createNewsletter(newsletter: InitialNewsletter) {
 export function persistNewsletter(newsletterId: string, changes: Partial<Newsletter>) {
   return async (dispatch: SafeDispatch) => {
     const filteredChanges = { ...changes };
-    const updatedNewsletter = await APIClient.updateNewsletter(newsletterId, filteredChanges);
+    const updatedNewsletter = await API.publishing.updateNewsletter(newsletterId, filteredChanges);
     dispatch({
       type: PublishingActionType.PUBLISHING_UPDATE_NEWSLETTER,
       newsletter: updatedNewsletter,
@@ -68,7 +69,7 @@ export function updateArticle(article: Article): PublishingAction {
 export function fetchArticles() {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: PublishingActionType.PUBLISHING_FETCH_ARTICLES_STARTED });
-    const articles = await APIClient.fetchArticles();
+    const articles = await API.publishing.fetchArticles();
 
     dispatch(fetchArticlesSuccess(articles));
   };
@@ -77,7 +78,7 @@ export function fetchArticles() {
 export function fetchArticle(articleId: string) {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: PublishingActionType.PUBLISHING_FETCH_ARTICLES_STARTED });
-    const article = await APIClient.fetchArticle(articleId);
+    const article = await API.publishing.fetchArticle(articleId);
 
     dispatch(fetchArticlesSuccess([article]));
   };
@@ -96,7 +97,7 @@ export function fetchArticlesSuccess(articles: Article[]): PublishingAction {
 
 export function createArticle(article: InitialArticle) {
   return async (dispatch: SafeDispatch) => {
-    const response = await APIClient.createArticle(article);
+    const response = await API.publishing.createArticle(article);
     dispatch(loadArticle(response));
   };
 }
@@ -104,7 +105,7 @@ export function createArticle(article: InitialArticle) {
 export function persistArticle(articleId: string, changes: Partial<Article>) {
   return async (dispatch: SafeDispatch) => {
     const filteredChanges = { ...changes };
-    const updatedArticle = await APIClient.updateArticle(articleId, filteredChanges);
+    const updatedArticle = await API.publishing.updateArticle(articleId, filteredChanges);
     dispatch({
       type: PublishingActionType.PUBLISHING_UPDATE_ARTICLE,
       article: updatedArticle,

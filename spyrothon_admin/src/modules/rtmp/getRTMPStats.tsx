@@ -1,4 +1,4 @@
-import { APIClient } from "@spyrothon/api";
+import API from "@admin/API";
 
 const DOM_PARSER = new DOMParser();
 
@@ -16,7 +16,7 @@ export interface RTMPStream {
 }
 
 export default async function getRTMPStats(scheduleId: string): Promise<RTMPStream[]> {
-  const response = await APIClient.fetchScheduleRTMPStat(scheduleId);
+  const response = await API.schedules.fetchScheduleRTMPStat(scheduleId);
   const parsed = DOM_PARSER.parseFromString(response, "application/xml");
 
   const liveStreams = Array.from(parsed.querySelectorAll("application")).filter(
