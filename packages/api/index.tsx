@@ -1,4 +1,4 @@
-export { default as APIClient } from "./src/APIClient";
+export { APIClient } from "./src/APIClient";
 export * from "./src/APITypes";
 export * from "./src/Config";
 export * from "./src/Endpoints";

@@ -1,17 +1,39 @@
-import * as auth from "./routes/auth";
-import * as init from "./routes/init";
-import * as interviews from "./routes/interviews";
-import * as publishing from "./routes/publishing";
-import * as runs from "./routes/runs";
-import * as schedules from "./routes/schedules";
-import * as transitions from "./routes/transitions";
+import { APIClientAuth } from "./routes/APIClientAuth";
+import { APIClientInit } from "./routes/APIClientInit";
+import { APIClientInterviews } from "./routes/APIClientInterviews";
+import { APIClientPublishing } from "./routes/APIClientPublishing";
+import { APIClientRuns } from "./routes/APIClientRuns";
+import { APIClientSchedules } from "./routes/APIClientSchedules";
+import { APIClientTransitions } from "./routes/APIClientTransitions";
+import { APIClientConfig } from "./APIClientTypes";
+import { HTTPUtil } from "./HTTPUtil";
 
-export default {
-  ...auth,
-  ...init,
-  ...interviews,
-  ...publishing,
-  ...runs,
-  ...schedules,
-  ...transitions,
-};
+export class APIClient {
+  http: HTTPUtil;
+  auth: APIClientAuth;
+  init: APIClientInit;
+  interviews: APIClientInterviews;
+  publishing: APIClientPublishing;
+  runs: APIClientRuns;
+  schedules: APIClientSchedules;
+  transitions: APIClientTransitions;
+
+  #endpoint: string;
+
+  constructor(public config: APIClientConfig) {
+    this.#endpoint = `${config.baseUrl}/${config.apiVersion}`;
+
+    this.http = new HTTPUtil(this.#endpoint, config.authToken);
+    this.auth = new APIClientAuth(this.http, config);
+    this.init = new APIClientInit(this.http, config);
+    this.interviews = new APIClientInterviews(this.http, config);
+    this.publishing = new APIClientPublishing(this.http, config);
+    this.runs = new APIClientRuns(this.http, config);
+    this.schedules = new APIClientSchedules(this.http, config);
+    this.transitions = new APIClientTransitions(this.http, config);
+  }
+
+  setAuthToken(authToken: string) {
+    this.config.authToken = authToken;
+  }
+}
