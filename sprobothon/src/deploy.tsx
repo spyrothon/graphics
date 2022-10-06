@@ -3,7 +3,10 @@ import { REST, Routes } from "discord.js";
 import { getConfig, loadConfig } from "./Config";
 import Logger from "./Logger";
 
-await loadConfig();
+const CONFIG_PATH =
+  process.env.SPROBOTHON_CONFIG_PATH ?? `./config/env.${process.env.NODE_ENV ?? "dev"}.tsx`;
+await loadConfig(CONFIG_PATH);
+
 const config = getConfig();
 
 const rest = new REST({ version: "10" }).setToken(config.botToken);

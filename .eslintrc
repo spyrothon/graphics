@@ -117,7 +117,15 @@
     "no-labels": ["error", { "allowLoop": true }],
     // TypeScript-replaced rules
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-expressions": [
       "error",

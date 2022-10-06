@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+set -e
+
+
+# Source the environment configuration before running any code
+if [ -z $ENV_FILE ]; then
+  . "../env/.env"
+else
+  . $ENV_FILE
+fi
+
+# Right now it's using the `dev` node script.
+pnpm dev

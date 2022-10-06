@@ -86,7 +86,9 @@ importers:
 
   sprobothon:
     specifiers:
+      '@spyrothon/api': workspace:^1.0.0
       api: ^4.5.2
+      cac: ^6.7.14
       discord.js: ^14.5.0
       dotenv: ^16.0.3
       octokit: ^2.0.7
@@ -95,7 +97,9 @@ importers:
       vite-node: ^0.23.4
       winston: ^3.8.2
     dependencies:
+      '@spyrothon/api': link:../packages/api
       api: 4.5.2_openapi-types@12.0.2
+      cac: 6.7.14
       discord.js: 14.5.0
       dotenv: 16.0.3
       octokit: 2.0.7
@@ -3412,6 +3416,11 @@ packages:
   /bytes/3.0.0:
     resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /cac/6.7.14:
+    resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
+    engines: {node: '>=8'}
     dev: false
 
   /cache-base/1.0.1:
