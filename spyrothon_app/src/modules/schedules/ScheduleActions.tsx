@@ -1,5 +1,6 @@
-import { APIClient, Schedule, ScheduleResponse } from "@spyrothon/api";
+import { Schedule } from "@spyrothon/api";
 
+import API from "@app/API";
 import { SafeDispatch } from "@app/hooks/useDispatch";
 
 import { fetchInterviewsSuccess } from "../interviews/InterviewActions";
@@ -13,21 +14,10 @@ export function selectScheduleEntry(entryId?: string): ScheduleAction {
   };
 }
 
-export function setCurrentSchedule(newSchedule: ScheduleResponse) {
-  const { runs, interviews, ...schedule } = newSchedule;
-
-  return async (dispatch: SafeDispatch) => {
-    await APIClient.updateInit({ scheduleId: schedule.id });
-    dispatch(loadSchedule(schedule));
-    dispatch(fetchInterviewsSuccess(interviews));
-    dispatch(fetchRunsSuccess(runs));
-  };
-}
-
 export function fetchSchedule(scheduleId: string) {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: ScheduleActionType.SCHEDULES_FETCH_SCHEDULE_STARTED });
-    const scheduleResponse = await APIClient.fetchSchedule(scheduleId);
+    const scheduleResponse = await API.schedules.fetchSchedule(scheduleId);
     const { runs, interviews, ...schedule } = scheduleResponse;
 
     dispatch(loadSchedule(schedule));

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { BrowserRouter, Route, Routes as RouterRoutes, useParams } from "react-router-dom";
-import { APIClient } from "@spyrothon/api";
 
 import useSafeDispatch from "@app/hooks/useDispatch";
 
@@ -10,6 +9,7 @@ import CurrentScheduleContext from "./modules/schedules/CurrentScheduleContext";
 import Schedule from "./modules/schedules/Schedule";
 import { fetchSchedule } from "./modules/schedules/ScheduleActions";
 import * as ScheduleStore from "./modules/schedules/ScheduleStore";
+import API from "./API";
 import { Routes } from "./Constants";
 import { useSafeSelector } from "./Store";
 
@@ -23,7 +23,7 @@ export default function App() {
 
   React.useEffect(() => {
     (async function () {
-      const { scheduleId } = await APIClient.fetchInit();
+      const { scheduleId } = await API.init.fetchInit();
       dispatch(fetchSchedule(scheduleId));
     })();
   }, [dispatch]);

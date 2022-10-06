@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Remark } from "react-remark";
-import { APIClient, Article as ArticleType, Newsletter as NewsletterType } from "@spyrothon/api";
+import { Article as ArticleType, Newsletter as NewsletterType } from "@spyrothon/api";
 import { Anchor, Header, Text } from "@spyrothon/uikit";
+
+import API from "@app/API";
 
 import FixedWidthLayout from "../layouts/FixedWidthLayout";
 
@@ -39,7 +41,7 @@ export default function Newsletter(props: NewsletterProps) {
 
   React.useEffect(() => {
     (async () => {
-      const newsletter = await APIClient.fetchNewsletter(newsletterId);
+      const newsletter = await API.publishing.fetchNewsletter(newsletterId);
       setNewsletter(newsletter);
     })();
   }, [newsletterId]);
