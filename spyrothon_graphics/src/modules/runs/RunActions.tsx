@@ -1,5 +1,6 @@
-import { APIClient, Run } from "@spyrothon/api";
+import { Run } from "@spyrothon/api";
 
+import API from "@graphics/API";
 import { SafeDispatch } from "@graphics/hooks/useDispatch";
 
 import { RunAction, RunActionType } from "./RunsTypes";
@@ -14,7 +15,7 @@ export function updateRun(run: Run): RunAction {
 export function fetchRuns() {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: RunActionType.RUNS_FETCH_RUNS_STARTED });
-    const runs = await APIClient.fetchRuns();
+    const runs = await API.runs.fetchRuns();
 
     dispatch(fetchRunsSuccess(runs));
   };
@@ -35,7 +36,7 @@ export function persistRun(run: Run) {
       runners: run.runners.filter((entry) => entry?.displayName !== ""),
       commentators: run.commentators.filter((entry) => entry?.displayName !== ""),
     };
-    const updatedRun = await APIClient.updateRun(run.id, filteredRun);
+    const updatedRun = await API.runs.updateRun(run.id, filteredRun);
     dispatch({
       type: RunActionType.RUNS_UPDATE_RUN,
       run: updatedRun,

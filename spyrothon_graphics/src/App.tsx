@@ -1,6 +1,5 @@
 import * as React from "react";
 import { BrowserRouter, Route, Routes as RouterRoutes } from "react-router-dom";
-import { APIClient } from "@spyrothon/api";
 
 import useSafeDispatch from "./hooks/useDispatch";
 import BingoStandard1v1 from "./layouts/bingo/BingoStandard1v1";
@@ -24,6 +23,7 @@ import Standard4 from "./layouts/standard/Standard4";
 import { fetchSchedule } from "./modules/schedules/ScheduleActions";
 import SyncSocketManager from "./modules/sync/SyncSocketManager";
 import SVGLibrary from "./uikit/svg/SVGLibrary";
+import API from "./API";
 import { Routes } from "./Constants";
 
 export default function App() {
@@ -38,7 +38,7 @@ export default function App() {
 
   React.useEffect(() => {
     (async function () {
-      const { scheduleId } = await APIClient.fetchInit();
+      const { scheduleId } = await API.init.fetchInit();
       dispatch(fetchSchedule(scheduleId));
     })();
   }, [dispatch]);
