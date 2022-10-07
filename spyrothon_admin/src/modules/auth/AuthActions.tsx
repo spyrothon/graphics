@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { HTTPUtils, User } from "@spyrothon/api";
+import { User } from "@spyrothon/api";
 
 import API from "@admin/API";
 import { SafeDispatch } from "@admin/hooks/useDispatch";
@@ -37,7 +37,7 @@ export function loadSession() {
     if (cookie == null) return;
 
     const { token } = JSON.parse(atob(cookie));
-    HTTPUtils.setAuth(token);
+    API.setAuthToken(token);
     const user = await API.auth.fetchMe();
 
     dispatch({
