@@ -1,11 +1,7 @@
-#!/usr/bin/env zsh
 set -e
 
-
 # Source the environment configuration before running any code
-if [ -z $ENV_FILE ]; then
-  . "../env/.env"
-else
+if [ ! -z $ENV_FILE ]; then
   . $ENV_FILE
 fi
 
