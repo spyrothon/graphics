@@ -80,7 +80,7 @@ jobs:
           username: ${{ secrets.DEPLOYMENT_USERNAME }}
           key: ${{ secrets.DEPLOYMENT_SSH_KEY }}
           source: ./${{ github.sha }}
-          target: artifacts/graphics_api/
+          target: /opt/graphics_api/artifacts/
           overwrite: true
 
       - name: Deploy new release

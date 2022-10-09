@@ -23,9 +23,9 @@ VERSION=$GITHUB_SHA
 CURRENT_DIR="/opt/$APP_NAME/current"
 
 # Location where artifacts bundles are prepared
-ARTIFACTS_DIR="~/artifacts/$APP_NAME"
+ARTIFACTS_DIR="/opt/$APP_NAME/artifacts"
 # Name of the tarball containing the release, relative to the artifact itself
-# e.g., '~/artifacts/graphics_api/<commitsha>/the.tar' -> './the.tar'
+# e.g., '/opt/graphics_api/artifacts/<commitsha>/the.tar' -> './the.tar'
 ARTIFACT_NAME="./$APP_NAME.tar.gz"
 
 # Path to the binary for invoking the service
@@ -44,6 +44,7 @@ LOG_FILE="./server-$(date -u +"%Y%m%d%H%M%S").log"
 # Extract the specified release
 echo "> Extracting $ARTIFACT_NAME from $VERSION"
 NEW_RELEASE_DIR="$ARTIFACTS_DIR/$VERSION"
+cd $ARTIFACTS_DIR
 cd $NEW_RELEASE_DIR
 tar xf $ARTIFACT_NAME
 
@@ -99,7 +100,7 @@ echo "> -- Creating links from $NEW_RELEASE_DIR to $CURRENT_DIR"
 cp -rl $NEW_RELEASE_DIR/* $CURRENT_DIR
 
 echo "> Running database migrations"
-has_migrations=$BINARY eval $MIGRATE_TASK
+has_migrations=$BINARY eval "$MIGRATE_TASK"
 
 # Start the new deployment in the background.
 echo "> Starting application version $VERSION"
