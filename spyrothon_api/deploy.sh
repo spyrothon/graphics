@@ -11,6 +11,8 @@ set -o nounset
 
 # Name of the application being deployed
 APP_NAME=graphics_api
+# Task to check and run database migrations
+MIGRATE_TASK="GraphicsAPI.Release.migrate()"
 
 # `GITHUB_SHA` is expected to be set by the script that invokes this script
 # (e.g., Github Actions). It defines the release that this script will unpack
@@ -95,6 +97,9 @@ echo "> -- Creating links from $NEW_RELEASE_DIR to $CURRENT_DIR"
 # of files", rather than resolving them to versioned directories (which would
 # endlessly spawn epmd daemons).
 cp -rl $NEW_RELEASE_DIR/* $CURRENT_DIR
+
+echo "> Running database migrations"
+has_migrations=$BINARY eval $MIGRATE_TASK
 
 # Start the new deployment in the background.
 echo "> Starting application version $VERSION"
