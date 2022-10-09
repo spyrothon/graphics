@@ -48,6 +48,10 @@ type PostOptions = CommonOptions & {
 export class HTTPUtil {
   constructor(public endpoint: string, private authToken?: string) {}
 
+  setAuthToken(token: string) {
+    this.authToken = token;
+  }
+
   async get<T>(url: string, queryParams?: object, opts: GetOptions = {}) {
     const { headers } = opts;
     const query = queryParams != null ? "?" + queryString.stringify(queryParams) : "";

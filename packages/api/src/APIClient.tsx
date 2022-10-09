@@ -35,5 +35,6 @@ export class APIClient {
 
   setAuthToken(authToken: string) {
     this.config.authToken = authToken;
+    this.http.setAuthToken(authToken);
   }
 }
