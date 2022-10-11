@@ -22,9 +22,9 @@ defmodule GraphicsAPIWeb.TransitionSetsController do
       GraphicsAPIWeb.SyncSocketHandler.update_schedule(schedule)
       json(conn, schedule)
     else
-      {:error, changeset} ->
+      _ ->
         conn
-        |> changeset_error(changeset)
+        |> put_status(500)
     end
   end
 end

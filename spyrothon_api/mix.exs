@@ -31,18 +31,18 @@ defmodule GraphicsAPI.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:jason, "~> 1.2"},
-      {:plug, "~> 1.6"},
-      {:plug_cowboy, "~> 2.0"},
-      {:cors_plug, "~> 2.0"},
-      {:ecto, "~> 3.7"},
-      {:ecto_sql, "~> 3.7"},
-      {:postgrex, "~> 0.15"},
+      {:jason, "~> 1.4.0"},
+      {:plug, "~> 1.13.6"},
+      {:plug_cowboy, "~> 2.5.2"},
+      {:cors_plug, "~> 3.0.3"},
+      {:ecto, "~> 3.9.1"},
+      {:ecto_sql, "~> 3.9.0"},
+      {:postgrex, "~> 0.16.5"},
       {:comeonin, "~> 5.3.2"},
       {:argon2_elixir, "~> 2.0"},
       {:exsync, "~> 0.2", only: :dev},
-      {:riverside, "~> 1.2.6"},
-      {:hackney, "~> 1.17"},
+      {:riverside, "~> 2.2.1"},
+      {:hackney, "~> 1.18.1"},
       {:tesla, "~> 1.4.3"}
     ]
   end

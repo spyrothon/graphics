@@ -20,7 +20,7 @@ defmodule GraphicsAPIWeb.SyncSocketHandler do
         session,
         state
       ) do
-    with {:ok, set} <- Runs.Transitions.start_transition(set_id, transition_id),
+    with {:ok, _set} <- Runs.Transitions.start_transition(set_id, transition_id),
          entry when entry != nil <- Runs.get_schedule_entry_for_transition_set(set_id),
          schedule when schedule != nil <- Runs.get_schedule(entry.schedule_id) do
       update_schedule(schedule)
@@ -41,7 +41,7 @@ defmodule GraphicsAPIWeb.SyncSocketHandler do
         session,
         state
       ) do
-    with {:ok, set} <- Runs.Transitions.finish_transition(set_id, transition_id),
+    with {:ok, _set} <- Runs.Transitions.finish_transition(set_id, transition_id),
          entry when entry != nil <- Runs.get_schedule_entry_for_transition_set(set_id),
          schedule when schedule != nil <- Runs.get_schedule(entry.schedule_id) do
       update_schedule(schedule)
@@ -62,7 +62,7 @@ defmodule GraphicsAPIWeb.SyncSocketHandler do
         session,
         state
       ) do
-    with {:ok, set} <- Runs.Transitions.reset_transition(set_id, transition_id),
+    with {:ok, _set} <- Runs.Transitions.reset_transition(set_id, transition_id),
          entry when entry != nil <- Runs.get_schedule_entry_for_transition_set(set_id),
          schedule when schedule != nil <- Runs.get_schedule(entry.schedule_id) do
       update_schedule(schedule)
