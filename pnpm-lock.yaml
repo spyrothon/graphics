@@ -124,7 +124,7 @@ importers:
       eslint: ^8.23.1
       js-cookie: ^3.0.1
       luxon: ^3.0.3
-      obs-websocket-js: npm:@faulty/obs-websocket-js@5.0.2
+      obs-websocket-js: 5.0.2
       re-reselect: ^4.0.1
       react: ^18.2.0
       react-dnd: ^16.0.1
@@ -147,7 +147,7 @@ importers:
       classnames: 2.3.2
       js-cookie: 3.0.1
       luxon: 3.0.3
-      obs-websocket-js: /@faulty/obs-websocket-js/5.0.2
+      obs-websocket-js: 5.0.2
       re-reselect: 4.0.1_reselect@4.1.6
       react: 18.2.0
       react-dnd: 16.0.1_w5j4k42lgipnm43s3brx6h3c34
@@ -1693,23 +1693,6 @@ packages:
 
   /@exodus/schemasafe/1.0.0-rc.7:
     resolution: {integrity: sha512-+1mBLsa+vvlV0lwEAP1hwgmOPkjMnoJ8hyCMfCCJga0sVDwDzrPJjnxZwdDaUmOh/vbFHQGBTk+FxsVjoI/CjQ==}
-    dev: false
-
-  /@faulty/obs-websocket-js/5.0.2:
-    resolution: {integrity: sha512-pZlFFZsN9Sa6ZmqAI33BBtk2eJ62Gy09hx5F8UPGEIRNWx5W/SJwBHOs8Kpm5DeKLF/l3ioxzj+xaSNDRqH7fw==}
-    engines: {node: '>12.0'}
-    dependencies:
-      '@msgpack/msgpack': 2.8.0
-      crypto-js: 4.1.1
-      debug: 4.3.4
-      eventemitter3: 4.0.7
-      isomorphic-ws: 4.0.1_ws@8.9.0
-      type-fest: 2.19.0
-      ws: 8.9.0
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
     dev: false
 
   /@hapi/hoek/9.3.0:
@@ -7063,6 +7046,23 @@ packages:
       define-properties: 1.1.4
       es-abstract: 1.20.2
     dev: true
+
+  /obs-websocket-js/5.0.2:
+    resolution: {integrity: sha512-4XxWd5abIFOk0HjIHk+X/NwSXuOTPGsNnn7845g0UQZV0T3AtNk+dfp21zSjJVzuN/5oZR3UKjzEqg8pxMndCA==}
+    engines: {node: '>12.0'}
+    dependencies:
+      '@msgpack/msgpack': 2.8.0
+      crypto-js: 4.1.1
+      debug: 4.3.4
+      eventemitter3: 4.0.7
+      isomorphic-ws: 4.0.1_ws@8.9.0
+      type-fest: 2.19.0
+      ws: 8.9.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
 
   /octokit/2.0.7:
     resolution: {integrity: sha512-Rf+pY3fCphmS4jjLqQ+D0xS1U+Ry/pAZHLJNvsQksuj4aopl7qFLlV4Id2KIlaUpKZrUCPzOkLiZOaoEb47RZQ==}

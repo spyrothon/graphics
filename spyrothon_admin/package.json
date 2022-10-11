@@ -17,7 +17,7 @@
     "classnames": "^2.3.1",
     "js-cookie": "^3.0.1",
     "luxon": "^3.0.3",
-    "obs-websocket-js": "npm:@faulty/obs-websocket-js@5.0.2",
+    "obs-websocket-js": "5.0.2",
     "re-reselect": "^4.0.1",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
