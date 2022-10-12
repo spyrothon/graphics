@@ -43,6 +43,7 @@ defmodule GraphicsAPI.MixProject do
       {:exsync, "~> 0.2", only: :dev},
       {:riverside, "~> 2.2.1"},
       {:hackney, "~> 1.18.1"},
+      {:tarams, "~> 1.7.0"},
       {:tesla, "~> 1.4.3"}
     ]
   end

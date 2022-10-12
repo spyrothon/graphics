@@ -34,17 +34,16 @@ defmodule GraphicsAPIWeb.AuthController do
   end
 
   post "/login" do
-    body_params = conn.body_params
-
-    with %{"name" => name, "password" => password} <- body_params,
+    with {:ok, %{name: name, password: password}} <-
+           Tarams.cast(conn.body_params, %{name: :string, password: :string}),
          user = %Users.User{} <- Users.get_user_by_name(name),
          {:ok, user} <- Users.verify_password(user, password),
          {:ok, token} <- Users.create_session(user) do
       json(conn, %{token: token})
     else
       nil -> not_found(conn)
-      ^body_params -> params_error(conn)
       {:error, "invalid password"} -> not_authorized(conn)
+      {:error, _bad_params} -> params_error(conn)
     end
   end
 

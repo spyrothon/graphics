@@ -17,7 +17,12 @@ defmodule Twitch.Authentication do
 
   def get_valid_token() do
     full_token = TokenManager.get_full_token()
+    _get_or_fetch_access_token(full_token)
+  end
 
+  defp _get_or_fetch_access_token(%{expires_at: nil}), do: nil
+
+  defp _get_or_fetch_access_token(full_token) do
     case DateTime.compare(DateTime.utc_now(), full_token.expires_at) do
       :lt -> full_token.access_token
       _ -> _get_refreshed_token(full_token.refresh_token).access_token
