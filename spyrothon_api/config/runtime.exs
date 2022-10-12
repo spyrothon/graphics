@@ -1,7 +1,7 @@
 import Config
 
 # These rely on the target server having these environment variables
-if config_env() == "prod" do
+if config_env() == :prod do
   config :graphics_api, GraphicsAPI.Repo, url: System.fetch_env!("API_DATABASE_URL")
 
   config :graphics_api, GraphicsAPIWeb.Endpoint,
