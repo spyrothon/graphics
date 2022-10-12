@@ -28,8 +28,8 @@ export default function LiveDashboard() {
     const hasCurrentEntry = currentEntry != null;
     if (hasCurrentEntry) return;
     // Can't do anything if there's no data
-    const hasEntries = schedule?.scheduleEntries != null;
-    if (schedule == null || !hasEntries) return;
+    if (schedule == null) return;
+    if (schedule.scheduleEntries.length == 0) return;
 
     dispatch(transitionToSecheduleEntry(schedule.id, schedule.scheduleEntries[0].id));
   }, [currentEntry, dispatch, schedule]);

@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Button } from "@spyrothon/uikit";
+import { Button, Text } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -27,7 +27,12 @@ export default function LiveSidebar(props: LiveSidebarProps) {
     schedule: ScheduleStore.getSchedule(state),
   }));
 
-  if (currentEntry == null) return null;
+  if (currentEntry == null)
+    return (
+      <div className={classNames(styles.container, className)}>
+        <Text>This schedule doesn't have any entries</Text>
+      </div>
+    );
 
   function handleToggleDebug() {
     if (schedule == null) return;
