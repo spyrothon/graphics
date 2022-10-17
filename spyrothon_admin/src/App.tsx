@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route, Routes as RouterRoutes } from "react-router-dom";
+import { Accent, AppContainer, Theme } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -44,35 +45,37 @@ export default function App() {
   if (schedule == null) return <div>Loading App</div>;
 
   return (
-    <CurrentScheduleContext.Provider value={{ scheduleId: schedule.id, schedule }}>
-      <RouterRoutes>
-        <Route path={Routes.LOGIN} element={<AuthLogin />} />
-        <Route path={Routes.LOGOUT} element={<AuthLogout />} />
-        <Route element={<AdminAuthenticated />}>
-          <Route path={Routes.SCHEDULE_EDITOR} element={<ScheduleEditor />} />
-          <Route path={Routes.LIVE_DASHBOARD} element={<LiveDashboard />} />
-          <Route path={Routes.SETTINGS} element={<SettingsDashboard />}>
-            {SETTINGS_ROUTES.map((item) => (
-              <Route
-                key={item.id}
-                path={item.path === Routes.SETTINGS ? "" : item.path}
-                element={item.element}
-              />
-            ))}
+    <AppContainer accent={Accent.PINK} theme={Theme.LIGHT}>
+      <CurrentScheduleContext.Provider value={{ scheduleId: schedule.id, schedule }}>
+        <RouterRoutes>
+          <Route path={Routes.LOGIN} element={<AuthLogin />} />
+          <Route path={Routes.LOGOUT} element={<AuthLogout />} />
+          <Route element={<AdminAuthenticated />}>
+            <Route path={Routes.SCHEDULE_EDITOR} element={<ScheduleEditor />} />
+            <Route path={Routes.LIVE_DASHBOARD} element={<LiveDashboard />} />
+            <Route path={Routes.SETTINGS} element={<SettingsDashboard />}>
+              {SETTINGS_ROUTES.map((item) => (
+                <Route
+                  key={item.id}
+                  path={item.path === Routes.SETTINGS ? "" : item.path}
+                  element={item.element}
+                />
+              ))}
+            </Route>
+            <Route path={Routes.PUBLISHING} element={<PublishingDashboard />}>
+              {PUBLISHING_ROUTES.map((item) => (
+                <Route
+                  key={item.id}
+                  path={item.path === Routes.PUBLISHING ? "" : item.path}
+                  element={item.element}
+                />
+              ))}
+            </Route>
           </Route>
-          <Route path={Routes.PUBLISHING} element={<PublishingDashboard />}>
-            {PUBLISHING_ROUTES.map((item) => (
-              <Route
-                key={item.id}
-                path={item.path === Routes.PUBLISHING ? "" : item.path}
-                element={item.element}
-              />
-            ))}
-          </Route>
-        </Route>
 
-        <Route path="*" element={<div>Not Found</div>} />
-      </RouterRoutes>
-    </CurrentScheduleContext.Provider>
+          <Route path="*" element={<div>Not Found</div>} />
+        </RouterRoutes>
+      </CurrentScheduleContext.Provider>
+    </AppContainer>
   );
 }
