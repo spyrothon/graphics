@@ -1,5 +1,6 @@
 .runners {
   width: 100%;
+  color: var(--text-normal);
 
   & th {
     text-align: left;

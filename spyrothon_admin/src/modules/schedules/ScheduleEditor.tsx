@@ -31,9 +31,9 @@ export default function ScheduleEditor() {
 
     switch (entryType) {
       case ScheduleEntryType.RUN:
-        return <RunEditor scheduleEntry={selectedScheduleEntry} className={styles.main} />;
+        return <RunEditor scheduleEntry={selectedScheduleEntry} />;
       case ScheduleEntryType.INTERVIEW:
-        return <InterviewEditor scheduleEntry={selectedScheduleEntry} className={styles.main} />;
+        return <InterviewEditor scheduleEntry={selectedScheduleEntry} />;
       default:
         return null;
     }

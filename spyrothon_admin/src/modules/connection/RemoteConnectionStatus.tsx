@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header, Stack } from "@spyrothon/sparx";
+import { Header, Stack, Text } from "@spyrothon/sparx";
 
 import { useOBSBusy, useOBSConnected } from "../obs/OBSStore";
 import SyncSocketManager from "../sync/SyncSocketManager";
@@ -23,14 +23,14 @@ export default function RemoteConnectionStatus() {
         Connections
       </Header>
       <Stack spacing="space-lg" direction="horizontal">
-        <div className={styles.item}>
+        <Text className={styles.item}>
           <StatusDot boolean={isConnected} />
           <span className={styles.itemName}>API Sync</span>
-        </div>
-        <div className={styles.item}>
+        </Text>
+        <Text className={styles.item}>
           <StatusDot boolean={obsConnected} busy={obsBusy} />
           <span className={styles.itemName}>OBS</span>
-        </div>
+        </Text>
       </Stack>
     </Stack>
   );

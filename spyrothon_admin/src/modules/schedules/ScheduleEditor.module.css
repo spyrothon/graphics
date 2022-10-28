@@ -6,7 +6,6 @@
 }
 
 .main {
-  height: 100%;
   min-width: 560px;
   overflow: scroll;
   padding: 16px;

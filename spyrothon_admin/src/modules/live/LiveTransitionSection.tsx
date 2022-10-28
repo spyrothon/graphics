@@ -38,22 +38,20 @@ export default function LiveTransitionSection(props: LiveTransitionSectionProps)
   function renderTransitionText(transition: Transition) {
     const Icon = getIconForTransitionState(transition.state);
     return (
-      <div className={styles.transition} key={transition.id}>
+      <Text className={styles.transition}>
         {Icon != null ? (
           <Icon className={styles.transitionIcon} size={16} strokeWidth="3" />
         ) : (
           <div className={styles.transitionIcon} />
         )}
-        <Text>
-          {transition.obsTransitionInName} to <strong>{transition.obsSceneName}</strong>
-          {transition.obsMediaSourceName != null ? (
-            <>
-              {" - Play "}
-              <strong>{transition.obsMediaSourceName}</strong>
-            </>
-          ) : null}
-        </Text>
-      </div>
+        {transition.obsTransitionInName} to <strong>{transition.obsSceneName}</strong>
+        {transition.obsMediaSourceName != null ? (
+          <>
+            {" - Play "}
+            <strong>{transition.obsMediaSourceName}</strong>
+          </>
+        ) : null}
+      </Text>
     );
   }
 
