@@ -5,13 +5,14 @@ import { InitialNewsletter, InitialPublication, Newsletter } from "@spyrothon/ap
 import {
   Anchor,
   Button,
-  DateTimeInput,
-  NumberInput,
-  SaveState,
+  Card,
+  FormControl,
   SelectInput,
+  Stack,
+  TextArea,
   TextInput,
-  useSaveable,
-} from "@spyrothon/uikit";
+} from "@spyrothon/sparx";
+import { SaveState, useSaveable } from "@spyrothon/uikit";
 
 import { AppRoutes } from "@admin/Constants";
 import getPublicAppURL from "@admin/hooks/getPublicAppURL";
@@ -22,6 +23,16 @@ import { createNewsletter, fetchArticles, persistNewsletter } from "./Publishing
 import * as PublishingStore from "./PublishingStore";
 
 import styles from "./NewsletterEditor.module.css";
+
+// This is hideous, but `datetime-local` doesn't accept timezones...
+function toDatetimeLocal(date?: Date) {
+  if (date == null) return "";
+
+  const tzOffset = date.getTimezoneOffset();
+  const localized = new Date(date);
+  localized.setMinutes(date.getMinutes() + tzOffset);
+  return localized.toISOString().slice(0, 16);
+}
 
 function validateNewsletter(newsletter: InitialNewsletter) {
   return (
@@ -44,33 +55,38 @@ function ArticleSelector(props: ArticleSelectorProps) {
   const { priority, articleId } = publication;
 
   const articles = useSafeSelector(PublishingStore.getArticles);
-  const articleIds = articles.map((article) => article.id);
+  const articleOptions = articles.map((article) => ({ name: article.title, value: article.id }));
+  const selectedArticle = articleOptions.find((option) => option.value === articleId) ?? {
+    name: "Select an Article",
+    value: undefined,
+  };
 
   return (
-    <div className={styles.publication}>
-      <div className={styles.inputRow}>
-        <SelectInput
-          label="Article"
-          value={articleId}
-          items={articleIds}
-          onChange={(articleId) => onChange({ ...publication, articleId: articleId })}
-          emptyLabel="Select an Article"
-          itemToString={(articleId) =>
-            articles.find((article) => article.id === articleId)?.title ?? articleId
-          }
-        />
-        <NumberInput
-          label="Priority"
-          value={priority || 1}
-          min={0}
-          onChange={(event) => onChange({ ...publication, priority: parseInt(event.target.value) })}
-        />
+    <Card>
+      <Stack direction="horizontal" justify="stretch">
+        <FormControl label="Article">
+          <SelectInput
+            selectedItem={selectedArticle}
+            items={articleOptions}
+            onSelect={(item) => onChange({ ...publication, articleId: item?.value })}
+          />
+        </FormControl>
+        <FormControl label="Priority">
+          <TextInput
+            type="number"
+            value={priority || 1}
+            min={0}
+            onChange={(event) =>
+              onChange({ ...publication, priority: parseInt(event.target.value) })
+            }
+          />
+        </FormControl>
 
         <div className={styles.remove} onClick={onRemove}>
           <X size={16} strokeWidth="3" />
         </div>
-      </div>
-    </div>
+      </Stack>
+    </Card>
   );
 }
 
@@ -125,8 +141,8 @@ export default function NewsletterEditor(props: NewsletterEditorProps) {
   });
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <div className={styles.editor}>
+    <Stack spacing="space-lg" className={classNames(styles.container, className)}>
+      <Stack direction="horizontal" align="center">
         <Button
           className={styles.saveButton}
           onClick={handleSaveNewsletter}
@@ -134,40 +150,43 @@ export default function NewsletterEditor(props: NewsletterEditorProps) {
           {getSaveText()}
         </Button>
         {edited.id != null ? (
-          <Anchor href={getPublicAppURL(AppRoutes.NEWSLETTER(edited.id))} target="_blank">
-            Preview
-          </Anchor>
+          <Anchor href={getPublicAppURL(AppRoutes.NEWSLETTER(edited.id))}>Preview</Anchor>
         ) : null}
+      </Stack>
+      <FormControl label="Title">
         <TextInput
-          label="Title"
           value={edited.title}
           onChange={(event) => setEdited({ ...edited, title: event.target.value })}
         />
-        <DateTimeInput
-          label="Publish Date"
-          value={edited.publishedAt}
-          onChange={(publishedAt) => setEdited({ ...edited, publishedAt })}
-        />
+      </FormControl>
+      <FormControl label="Publish Date">
         <TextInput
-          label="Introduction"
-          type="textarea"
+          type="datetime-local"
+          value={toDatetimeLocal(edited.publishedAt)}
+          onChange={(publishedAt) =>
+            setEdited({ ...edited, publishedAt: new Date(publishedAt.target.value) })
+          }
+        />
+      </FormControl>
+      <FormControl label="Introduction">
+        <TextArea
           rows={12}
           value={edited.introduction}
           onChange={(event) => setEdited({ ...edited, introduction: event.target.value })}
         />
-      </div>
+      </FormControl>
 
-      <div className={styles.articles}>
-        {(edited.publications ?? []).map((publication, index) => (
-          <ArticleSelector
-            key={publication.id ?? index}
-            publication={publication}
-            onChange={(changed) => updatePublication(changed, index)}
-            onRemove={() => removePublication(index)}
-          />
-        ))}
-        <Button onClick={addPublication}>Add an Article</Button>
-      </div>
-    </div>
+      {(edited.publications ?? []).map((publication, index) => (
+        <ArticleSelector
+          key={publication.id ?? index}
+          publication={publication}
+          onChange={(changed) => updatePublication(changed, index)}
+          onRemove={() => removePublication(index)}
+        />
+      ))}
+      <Button variant="primary" onClick={addPublication}>
+        Add an Article
+      </Button>
+    </Stack>
   );
 }

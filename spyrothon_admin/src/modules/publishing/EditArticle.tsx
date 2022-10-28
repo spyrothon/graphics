@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header } from "@spyrothon/uikit";
+import { Header, Stack } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";
@@ -25,10 +25,10 @@ export default function EditArticle(props: EditArticleProps) {
   if (newsletter == null) return null;
 
   return (
-    <div>
-      <Header size={Header.Sizes.H1}>Editing {newsletter.title}</Header>
+    <Stack spacing="space-lg">
+      <Header tag="h1">Editing {newsletter.title}</Header>
 
       <ArticleEditor articleId={articleId} />
-    </div>
+    </Stack>
   );
 }

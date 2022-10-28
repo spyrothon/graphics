@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, Routes as RouterRoutes } from "react-router-dom";
+import { Navigate, Route, Routes as RouterRoutes } from "react-router-dom";
 import { Accent, AppContainer, Theme } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -74,6 +74,7 @@ export default function App() {
           </Route>
 
           <Route path="*" element={<div>Not Found</div>} />
+          <Route path={Routes.BASE_PATH} element={<Navigate to={Routes.LIVE_DASHBOARD} />} />
         </RouterRoutes>
       </CurrentScheduleContext.Provider>
     </AppContainer>

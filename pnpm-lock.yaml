@@ -111,7 +111,7 @@ importers:
   spyrothon_admin:
     specifiers:
       '@spyrothon/api': workspace:*
-      '@spyrothon/sparx': ^0.1.1
+      '@spyrothon/sparx': ^0.1.2
       '@spyrothon/uikit': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
@@ -144,7 +144,7 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
-      '@spyrothon/sparx': 0.1.1
+      '@spyrothon/sparx': 0.1.2_biqbaboplfbrettd7655fr4n2y
       '@spyrothon/uikit': link:../packages/uikit
       classnames: 2.3.2
       js-cookie: 3.0.1
@@ -2557,11 +2557,6 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
-  /@remix-run/router/1.0.2:
-    resolution: {integrity: sha512-GRSOFhJzjGN+d4sKHTMSvNeUPoZiDHWmRnXfzaxrqe7dE/Nzlc8BiMSJdLDESZlndM7jIUrZ/F4yWqVYlI0rwQ==}
-    engines: {node: '>=14'}
-    dev: false
-
   /@sapphire/async-queue/1.5.0:
     resolution: {integrity: sha512-JkLdIsP8fPAdh9ZZjrbHWR/+mZj0wvKS5ICibcLrRI1j84UmLMshx5n9QmL8b95d4onJ2xxiyugTgSAX7AalmA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
@@ -2594,8 +2589,11 @@ packages:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
     dev: false
 
-  /@spyrothon/sparx/0.1.1:
-    resolution: {integrity: sha512-0mQBR+u4g4sb4JqRrnPb7CIXINtV8xlepMVH/Lwpy6O0+HGZvHHWchsf3WTjRi9A2VhuaF5RZApKuR9PhgvLCg==}
+  /@spyrothon/sparx/0.1.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-toRftGzsp7HKtaoPfW8qO2DaizVWb9SHDK9cCciHG1Jv5NJWWj2HR/Ot85TVDvsddderFfQ7RsdlsbATiGdGVA==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       '@iconscout/react-unicons': 1.1.6_react@18.2.0
       '@iconscout/react-unicons-solid': 0.0.3_react@18.2.0
@@ -2605,7 +2603,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-remark: 2.1.0_react@18.2.0
-      react-router-dom: 6.4.2_biqbaboplfbrettd7655fr4n2y
       uuid: 8.3.2
       zustand: 3.7.2_react@18.2.0
     transitivePeerDependencies:
@@ -7913,19 +7910,6 @@ packages:
       react-router: 6.4.0_react@18.2.0
     dev: false
 
-  /react-router-dom/6.4.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-yM1kjoTkpfjgczPrcyWrp+OuQMyB1WleICiiGfstnQYo/S8hPEEnVjr/RdmlH6yKK4Tnj1UGXFSa7uwAtmDoLQ==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.0.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-router: 6.4.2_react@18.2.0
-    dev: false
-
   /react-router/6.3.0_react@18.2.0:
     resolution: {integrity: sha512-7Wh1DzVQ+tlFjkeo+ujvjSqSJmkt1+8JO+T5xklPlgrh70y7ogx75ODRW0ThWhY7S+6yEDks8TYrtQe/aoboBQ==}
     peerDependencies:
@@ -7942,16 +7926,6 @@ packages:
       react: '>=16.8'
     dependencies:
       '@remix-run/router': 1.0.0
-      react: 18.2.0
-    dev: false
-
-  /react-router/6.4.2_react@18.2.0:
-    resolution: {integrity: sha512-Rb0BAX9KHhVzT1OKhMvCDMw776aTYM0DtkxqUBP8dNBom3mPXlfNs76JNGK8wKJ1IZEY1+WGj+cvZxHVk/GiKw==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.0.2
       react: 18.2.0
     dev: false
 
