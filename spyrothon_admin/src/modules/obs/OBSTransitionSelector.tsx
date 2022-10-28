@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SelectInput } from "@spyrothon/uikit";
+import { FormControl, SelectInput } from "@spyrothon/sparx";
 
 import { useOBSStore } from "./OBSStore";
 import type { OBSTransition } from "./OBSTypes";
@@ -8,9 +8,8 @@ type OBSTransitionSelectorProps = {
   label?: React.ReactNode;
   note?: React.ReactNode;
   selectedTransitionName?: string;
-  marginless?: boolean;
   className?: string;
-  onChange: (entry?: OBSTransition) => unknown;
+  onSelect: (entry?: OBSTransition) => unknown;
 };
 
 export default function OBSTransitionSelector(props: OBSTransitionSelectorProps) {
@@ -18,29 +17,30 @@ export default function OBSTransitionSelector(props: OBSTransitionSelectorProps)
     label = "OBS Transition",
     note = "Name of the transition to use in OBS.",
     selectedTransitionName,
-    marginless,
     className,
-    onChange,
+    onSelect,
   } = props;
   const transitions = useOBSStore((state) => state.data.transitionList);
+  const transitionOptions = transitions.map((transition) => ({
+    name: transition.transitionName,
+    value: transition,
+  }));
 
   const selected = React.useMemo(
-    () => transitions.find((entry) => entry.transitionName === selectedTransitionName),
-    [selectedTransitionName, transitions],
+    () => transitionOptions.find((entry) => entry.name === selectedTransitionName),
+    [selectedTransitionName, transitionOptions],
   );
 
   return (
-    <SelectInput
-      label={label}
-      note={note}
-      className={className}
-      items={transitions}
-      itemToString={(entry) => entry?.transitionName ?? "(unnamed)"}
-      value={selected}
-      marginless={marginless}
-      allowEmpty
-      emptyLabel="Select an OBS Transition"
-      onChange={onChange}
-    />
+    <FormControl label={label} note={note}>
+      <SelectInput
+        className={className}
+        items={transitionOptions}
+        renderItem={(entry) => entry?.name ?? "(unnamed)"}
+        selectedItem={selected}
+        renderPlaceholder={() => "Select an OBS Transition"}
+        onSelect={(entry) => onSelect(entry?.value)}
+      />
+    </FormControl>
   );
 }

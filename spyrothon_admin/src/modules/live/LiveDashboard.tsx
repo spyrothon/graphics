@@ -81,7 +81,6 @@ export default function LiveDashboard() {
 
   return (
     <Dashboard
-      fullPage
       renderSidebar={() => <LiveSidebar className={styles.sidebar} />}
       renderMain={renderMain}
     />

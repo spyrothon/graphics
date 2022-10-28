@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import type { Run } from "@spyrothon/api";
-import { Button, Header, TextInput } from "@spyrothon/uikit";
+import { Button, Card, FormControl, Header, Stack, TextArea } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -28,19 +28,24 @@ export default function LiveRunInfo(props: LiveRunInfoProps) {
   }
 
   return (
-    <div className={classNames(className)}>
-      <Header size={Header.Sizes.H4}>Layout Run Info</Header>
-      <TextInput
-        type="textarea"
-        label="Formatted Game Name"
-        note="Use newlines to adjust how the game name looks on stream."
-        value={gameNameFormatted}
-        rows={2}
-        onChange={(event) => setGameNameFormatted(event.target.value)}
-      />
-      <Button onClick={handleSave} disabled={!hasChanges}>
-        Save Game Info
-      </Button>
-    </div>
+    <Card className={classNames(className)}>
+      <Stack spacing="space-lg">
+        <Header tag="h4" variant="header-md/normal">
+          Layout Run Info
+        </Header>
+        <FormControl
+          label="Formatted Game Name"
+          note="Use newlines to adjust how the game name looks on stream.">
+          <TextArea
+            value={gameNameFormatted}
+            rows={2}
+            onChange={(event) => setGameNameFormatted(event.target.value)}
+          />
+        </FormControl>
+        <Button variant="primary" onClick={handleSave} disabled={!hasChanges}>
+          Save Game Info
+        </Button>
+      </Stack>
+    </Card>
   );
 }

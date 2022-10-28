@@ -6,18 +6,6 @@
   }
 }
 
-.globalTimer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  margin-bottom: 16px;
-
-  & > * {
-    flex: 1 1 auto;
-  }
-}
-
 .timer {
   font-family: var(--font-monospace);
 }

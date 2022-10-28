@@ -6,7 +6,6 @@ import DashboardHeader from "../dashboards/DashboardHeader";
 import styles from "./Dashboard.module.css";
 
 type DashboardProps = {
-  fullPage?: boolean;
   renderSidebar?: () => React.ReactNode;
   renderMain: () => React.ReactNode;
   children?: React.ReactNode;

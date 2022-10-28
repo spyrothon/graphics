@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "@spyrothon/uikit";
+import { Button } from "@spyrothon/sparx";
 
 import { useOBSBusy } from "./OBSStore";
 

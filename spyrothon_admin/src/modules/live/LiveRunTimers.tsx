@@ -2,7 +2,8 @@ import * as React from "react";
 import classNames from "classnames";
 import { Flag, Icon, Pause, Play, Repeat } from "react-feather";
 import type { Run, RunParticipant } from "@spyrothon/api";
-import { Button, formatDuration, Header, Text, useAnimationFrame } from "@spyrothon/uikit";
+import { Button, ButtonVariantColor, Card, Header, Stack, Text } from "@spyrothon/sparx";
+import { formatDuration, useAnimationFrame } from "@spyrothon/uikit";
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
 
@@ -60,7 +61,7 @@ interface TimerAction {
   Icon: Icon;
   action: (dispatch: SafeDispatch) => void;
   disabled?: boolean;
-  color?: typeof Button.Colors[keyof typeof Button.Colors];
+  color?: ButtonVariantColor;
   strokeWidth?: string;
   label?: string;
 }
@@ -105,7 +106,7 @@ function getPauseAction(run: Run): TimerAction | undefined {
 
   return {
     Icon: Pause,
-    color: Button.Colors.DEFAULT,
+    color: "default",
     strokeWidth: "2",
     action(dispatch) {
       dispatch(pauseRun(run.id));
@@ -117,7 +118,7 @@ function getResetAction(run: Run): TimerAction | undefined {
   if (run.startedAt == null) return undefined;
   return {
     Icon: Repeat,
-    color: Button.Colors.DEFAULT,
+    color: "default",
     action(dispatch) {
       dispatch(resetRun(run.id));
     },
@@ -131,6 +132,7 @@ function getParticipantAction(run: Run, runner: RunParticipant): TimerAction {
     return {
       Icon: Play,
       disabled: allDisabled,
+      color: "primary",
       action(dispatch) {
         dispatch(resumeRunParticipant(run.id, runner.id));
       },
@@ -140,6 +142,7 @@ function getParticipantAction(run: Run, runner: RunParticipant): TimerAction {
   return {
     Icon: Flag,
     disabled: allDisabled,
+    color: "primary",
     action(dispatch) {
       dispatch(finishRunParticipant(run.id, runner.id));
     },
@@ -154,16 +157,10 @@ function ActionButton(props: ActionButtonProps) {
   const dispatch = useSafeDispatch();
   if (props.action == null) return null;
 
-  const {
-    Icon,
-    action,
-    color = Button.Colors.PRIMARY,
-    disabled = false,
-    strokeWidth = "3",
-  } = props.action;
+  const { Icon, action, color = "primary", disabled = false, strokeWidth = "3" } = props.action;
 
   return (
-    <Button icon onClick={() => action(dispatch)} color={color} disabled={disabled}>
+    <Button onClick={() => action(dispatch)} color={color} disabled={disabled}>
       <Icon size={16} strokeWidth={strokeWidth} />
     </Button>
   );
@@ -191,7 +188,7 @@ export default function LiveRunTimers(props: LiveTimerProps) {
           {run.runners.map((runner) => (
             <tr key={runner.displayName} className={styles.runnerTimer}>
               <td>
-                <Text marginless>{runner.displayName}</Text>
+                <Text>{runner.displayName}</Text>
               </td>
               <td
                 className={classNames(styles.timer, {
@@ -209,23 +206,25 @@ export default function LiveRunTimers(props: LiveTimerProps) {
     );
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <Header size={Header.Sizes.H4}>Run Timer</Header>
-      <div className={styles.globalTimer}>
-        <div>
-          <Text className={styles.timer} size={Text.Sizes.SIZE_32} marginless>
-            <LiveTimer run={run} />
-          </Text>
-          <Text size={Text.Sizes.SIZE_14} marginless>
-            {getRunState(run)}
-          </Text>
-        </div>
-        <ActionButton action={getFinishAction(run)} />
-        <ActionButton action={getPlayAction(run)} />
-        <ActionButton action={getPauseAction(run)} />
-        <ActionButton action={getResetAction(run)} />
-      </div>
-      {runnersTable}
-    </div>
+    <Card className={className}>
+      <Stack spacing="space-lg">
+        <Header tag="h4" variant="header-md/normal">
+          Run Timer
+        </Header>
+        <Stack direction="horizontal" spacing="space-md" align="center" justify="stretch">
+          <div>
+            <Text variant="header-lg/normal" className={styles.timer}>
+              <LiveTimer run={run} />
+            </Text>
+            <Text variant="text-sm/normal">{getRunState(run)}</Text>
+          </div>
+          <ActionButton action={getFinishAction(run)} />
+          <ActionButton action={getPlayAction(run)} />
+          <ActionButton action={getPauseAction(run)} />
+          <ActionButton action={getResetAction(run)} />
+        </Stack>
+        {runnersTable}
+      </Stack>
+    </Card>
   );
 }

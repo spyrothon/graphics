@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import { Check, Circle, Loader } from "react-feather";
 import { Transition, TransitionSet, TransitionState } from "@spyrothon/api";
-import { Button, Text } from "@spyrothon/uikit";
+import { Button, Card, Stack, Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -44,7 +44,7 @@ export default function LiveTransitionSection(props: LiveTransitionSectionProps)
         ) : (
           <div className={styles.transitionIcon} />
         )}
-        <Text marginless>
+        <Text>
           {transition.obsTransitionInName} to <strong>{transition.obsSceneName}</strong>
           {transition.obsMediaSourceName != null ? (
             <>
@@ -60,7 +60,7 @@ export default function LiveTransitionSection(props: LiveTransitionSectionProps)
   if (transitionSet == null) {
     return (
       <div className={classNames(styles.container, className)}>
-        <Text className={styles.empty} color={Text.Colors.MUTED}>
+        <Text className={styles.empty} variant="text-md/secondary">
           No Transitions Specified
         </Text>
       </div>
@@ -74,27 +74,30 @@ export default function LiveTransitionSection(props: LiveTransitionSectionProps)
   );
 
   return (
-    <div className={classNames(styles.container, className, { [styles.completed]: completed })}>
-      <div className={styles.readout}>
-        <Text>{inProgress ? "Sequence (in progress):" : "Sequence:"}</Text>
-        {transitions.map((transition) => renderTransitionText(transition))}
-      </div>
-      <div className={styles.info}>
-        <Button
-          className={styles.transitionButton}
-          disabled={!obsConnected || inProgress || completed}
-          onClick={() => OBS.executeTransitionSet(transitionSet)}>
-          {label}
-        </Button>
-        {inProgress || completed ? (
+    <Card className={className}>
+      <Stack direction="horizontal" align="start" justify="space-between">
+        <div className={styles.readout}>
+          <Text>{inProgress ? "Sequence (in progress):" : "Sequence:"}</Text>
+          {transitions.map((transition) => renderTransitionText(transition))}
+        </div>
+        <Stack className={styles.info}>
           <Button
-            className={styles.resetButton}
-            onClick={() => dispatch(resetTransitionSet(transitionSet))}
-            size={Button.Sizes.SMALL}>
-            Reset
+            className={styles.transitionButton}
+            variant="primary"
+            disabled={!obsConnected || inProgress || completed}
+            onClick={() => OBS.executeTransitionSet(transitionSet)}>
+            {label}
           </Button>
-        ) : null}
-      </div>
-    </div>
+          {inProgress || completed ? (
+            <Button
+              className={styles.resetButton}
+              variant="default/outline"
+              onClick={() => dispatch(resetTransitionSet(transitionSet))}>
+              Reset
+            </Button>
+          ) : null}
+        </Stack>
+      </Stack>
+    </Card>
   );
 }

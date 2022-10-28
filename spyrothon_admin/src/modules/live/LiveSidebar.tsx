@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Button, Text } from "@spyrothon/uikit";
+import { Button, Spacer, Stack, Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -9,8 +9,6 @@ import { transitionToSecheduleEntry, updateSchedule } from "../schedules/Schedul
 import * as ScheduleStore from "../schedules/ScheduleStore";
 import LiveEntryDisplay from "./LiveEntryDisplay";
 import LiveOBSStatus from "./LiveOBSStatus";
-
-import styles from "./LiveSidebar.module.css";
 
 type LiveSidebarProps = {
   className?: string;
@@ -53,23 +51,22 @@ export default function LiveSidebar(props: LiveSidebarProps) {
   }
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <Stack className={className} align="stretch">
       <LiveEntryDisplay scheduleEntry={currentEntry} label="On Now" />
-      <div className={styles.entrySelection}>
-        <Button onClick={handleTransitionPrevious} disabled={prevEntry == null}>
+      <Stack direction="horizontal" justify="stretch">
+        <Button variant="primary" onClick={handleTransitionPrevious} disabled={prevEntry == null}>
           Go to Previous
         </Button>
-        <Button onClick={handleTransitionNext} disabled={nextEntry == null}>
+        <Button variant="primary" onClick={handleTransitionNext} disabled={nextEntry == null}>
           Go to Next
         </Button>
-      </div>
+      </Stack>
       {nextEntry != null ? <LiveEntryDisplay scheduleEntry={nextEntry} label="Up Next" /> : null}
       <LiveOBSStatus />
-      <div className={styles.bottom}>
-        <Button color={Button.Colors.DEFAULT} fullwidth onClick={handleToggleDebug}>
-          {!schedule?.debug ? "Enable Debug Mode" : "Disable Debug Mode"}
-        </Button>
-      </div>
-    </div>
+      <Spacer expand />
+      <Button onClick={handleToggleDebug}>
+        {!schedule?.debug ? "Enable Debug Mode" : "Disable Debug Mode"}
+      </Button>
+    </Stack>
   );
 }

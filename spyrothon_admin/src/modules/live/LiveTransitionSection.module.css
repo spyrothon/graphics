@@ -1,23 +1,9 @@
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: var(--background-secondary);
-}
-
 .info {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   flex: 0 0 auto;
   justify-self: end;
-}
-
-.transitionButton {
-  margin-bottom: 8px;
 }
 
 .readout {

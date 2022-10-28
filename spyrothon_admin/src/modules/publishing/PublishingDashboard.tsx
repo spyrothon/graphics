@@ -16,5 +16,5 @@ export default function NewslettersDashboard() {
     return <Outlet />;
   }
 
-  return <Dashboard fullPage renderSidebar={renderSidebar} renderMain={renderMain} />;
+  return <Dashboard renderSidebar={renderSidebar} renderMain={renderMain} />;
 }

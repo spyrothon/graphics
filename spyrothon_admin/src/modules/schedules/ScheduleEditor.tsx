@@ -55,5 +55,5 @@ export default function ScheduleEditor() {
     );
   }
 
-  return <Dashboard fullPage renderSidebar={renderSidebar} renderMain={renderMain} />;
+  return <Dashboard renderSidebar={renderSidebar} renderMain={renderMain} />;
 }

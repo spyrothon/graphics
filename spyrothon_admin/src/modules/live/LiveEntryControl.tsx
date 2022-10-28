@@ -1,9 +1,7 @@
 import * as React from "react";
 import { ScheduleEntry } from "@spyrothon/api";
+import { Button, Card, Header, Stack, Text } from "@spyrothon/sparx";
 import {
-  Button,
-  Header,
-  Text,
   // SelectInput,
   useSaveable,
 } from "@spyrothon/uikit";
@@ -63,20 +61,23 @@ function LiveEntryRunnerSlots(props: { runId: string }) {
   if (run == null) return null;
 
   return (
-    <div>
-      <Header size={Header.Sizes.H4}>Crop Data</Header>
+    <Stack spacing="space-lg">
+      <Header tag="h4" variant="header-md/normal">
+        Crop Data
+      </Header>
       {run.runners.map((runner) => (
         <div key={runner.id} className={styles.runnerCropData}>
           <Text>
             <strong>{runner.displayName}:</strong>
             <br />
             {runner.gameplayIngestUrl}
-            <br />
-            {JSON.stringify(runner.gameplayCropTransform, undefined, 1)}
+            <code>
+              <pre>{JSON.stringify(runner.gameplayCropTransform, undefined, 1)}</pre>
+            </code>
           </Text>
         </div>
       ))}
-    </div>
+    </Stack>
   );
 }
 
@@ -113,25 +114,27 @@ export default function LiveEntryControl(props: LiveEntryControlProps) {
   const { obsSceneName } = editedEntry;
 
   return (
-    <div className={className}>
-      <div className={styles.form}>
-        <div className={styles.flexContainer}>
-          <div>
-            <Header size={Header.Sizes.H4}>Current Entry</Header>
-            <OBSSceneSelector
-              selectedSceneName={obsSceneName}
-              onChange={(scene) =>
-                setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })
-              }
-            />
-            <div className={styles.actions}>
-              <Button onClick={handleSave}>{getSaveText()}</Button>
-              <Button onClick={handleSetPreview}>Set Preview Scene</Button>
-            </div>
-          </div>
-          {currentEntry.runId != null ? <LiveEntryRunnerSlots runId={currentEntry.runId} /> : null}
-        </div>
-      </div>
-    </div>
+    <Card className={className}>
+      <Stack direction="horizontal" justify="stretch" spacing="space-lg">
+        <Stack spacing="space-lg">
+          <Header tag="h4" variant="header-md/normal">
+            Current Entry
+          </Header>
+          <OBSSceneSelector
+            selectedSceneName={obsSceneName}
+            onSelect={(scene) => setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })}
+          />
+          <Stack direction="horizontal">
+            <Button variant="primary" onClick={handleSave}>
+              {getSaveText()}
+            </Button>
+            <Button variant="primary/outline" onClick={handleSetPreview}>
+              Set Preview Scene
+            </Button>
+          </Stack>
+        </Stack>
+        {currentEntry.runId != null ? <LiveEntryRunnerSlots runId={currentEntry.runId} /> : null}
+      </Stack>
+    </Card>
   );
 }
