@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Header, TextInput } from "@spyrothon/uikit";
+import { Button, Card, FormControl, Header, Spacer, Stack, TextInput } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -30,23 +30,30 @@ export default function AuthLogin() {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.box}>
-        <Header>Login</Header>
-        <TextInput
-          label="User Name"
-          value={userName}
-          onChange={(event) => setUserName(event.target.value)}
-          autoFocus
-        />
-        <TextInput
-          type="password"
-          label="Password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <Button onClick={handleSubmit}>Login</Button>
-      </div>
+    <div className={styles.positioner}>
+      <Card className={styles.box}>
+        <Stack spacing="space-lg">
+          <Header tag="h1">Login</Header>
+          <FormControl label="User Name">
+            <TextInput
+              value={userName}
+              onChange={(event) => setUserName(event.target.value)}
+              autoFocus
+            />
+          </FormControl>
+          <FormControl label="Password">
+            <TextInput
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </FormControl>
+          <Spacer />
+          <Button variant="primary" onClick={handleSubmit}>
+            Login
+          </Button>
+        </Stack>
+      </Card>
     </div>
   );
 }

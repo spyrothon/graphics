@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Anchor } from "@spyrothon/uikit";
+import { Anchor } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -16,5 +16,5 @@ export default function AuthLogout() {
     navigate(Routes.LOGIN);
   }, [dispatch, navigate]);
 
-  return <Anchor onClick={() => navigate(Routes.LOGIN)}>Go Home</Anchor>;
+  return <Anchor href={Routes.LOGIN}>Go Home</Anchor>;
 }
