@@ -41,7 +41,7 @@ export default function ScheduleEditor() {
 
   function renderMain() {
     return (
-      <Stack spacing="space-xl">
+      <Stack spacing="space-xl" className={styles.main}>
         {renderContentEditor()}
         {selectedScheduleEntry != null ? (
           <ScheduleEntryEditor scheduleEntry={selectedScheduleEntry} />
