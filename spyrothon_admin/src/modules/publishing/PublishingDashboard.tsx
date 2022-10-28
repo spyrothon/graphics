@@ -13,7 +13,11 @@ export default function NewslettersDashboard() {
   }
 
   function renderMain() {
-    return <Outlet />;
+    return (
+      <div className={styles.main}>
+        <Outlet />
+      </div>
+    );
   }
 
   return <Dashboard renderSidebar={renderSidebar} renderMain={renderMain} />;
