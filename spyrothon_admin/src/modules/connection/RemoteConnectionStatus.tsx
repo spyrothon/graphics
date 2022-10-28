@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Header, Stack } from "@spyrothon/sparx";
-import { StatusDot } from "@spyrothon/uikit";
 
 import { useOBSBusy, useOBSConnected } from "../obs/OBSStore";
 import SyncSocketManager from "../sync/SyncSocketManager";
+import { StatusDot } from "./StatusDot";
 
 import styles from "./RemoteConnectionStatus.module.css";
 

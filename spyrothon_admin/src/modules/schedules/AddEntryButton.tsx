@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Card, Stack, Text } from "@spyrothon/sparx";
+import { Button, Card, Stack } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
