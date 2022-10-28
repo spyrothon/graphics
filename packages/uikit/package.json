@@ -10,23 +10,6 @@
     ".": {
       "import": "./src/index.tsx",
       "require": "./src/index.tsx"
-    },
-    "./style.css": {
-      "import": "./fake-style.css",
-      "require": "./fake-style.css"
-    }
-  },
-  "publishConfig": {
-    "exports": {
-      ".": {
-        "import": "./dist/uikit.js",
-        "require": "./dist/uikit.umd.js",
-        "types": "./dist/index.d.ts"
-      },
-      "./style.css": {
-        "import": "./dist/style.css",
-        "require": "./dist/style.css"
-      }
     }
   },
   "scripts": {
