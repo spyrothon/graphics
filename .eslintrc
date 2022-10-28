@@ -162,9 +162,7 @@
           // CSS
           ["^.+(\\.module)?\\.css$"],
           // Assets
-          ["^.+\\.(png|gif|jpe?g|webm|mov|svg)$"],
-          // Side effects
-          ["^\\u0000"]
+          ["^.+\\.(png|gif|jpe?g|webm|mov|svg)$"]
         ]
       }
     ]

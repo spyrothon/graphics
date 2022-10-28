@@ -13,11 +13,7 @@ export default function SettingsDashboard() {
   }
 
   function renderMain() {
-    return (
-      <div className={styles.main}>
-        <Outlet />
-      </div>
-    );
+    return <Outlet />;
   }
 
   return <Dashboard fullPage renderSidebar={renderSidebar} renderMain={renderMain} />;

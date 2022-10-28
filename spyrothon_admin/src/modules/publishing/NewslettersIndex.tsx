@@ -46,11 +46,11 @@ export default function NewslettersIndex() {
   }, [dispatch]);
 
   return (
-    <div className={styles.container}>
+    <Stack spacing="space-lg" className={styles.container}>
       <Anchor href={Routes.PUBLISHING_NEWSLETTERS_NEW}>New Newsletter</Anchor>
       {newsletters.map((newsletter) => (
         <NewsletterPreviw newsletter={newsletter} key={newsletter.id} />
       ))}
-    </div>
+    </Stack>
   );
 }

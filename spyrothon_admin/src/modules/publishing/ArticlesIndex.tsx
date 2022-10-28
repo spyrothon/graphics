@@ -47,7 +47,7 @@ export default function ArticlesIndex() {
 
   return (
     <Stack spacing="space-lg">
-      {/* <Anchor href={Routes.PUBLISHING_ARTICLES_NEW}>New Article</Anchor> */}
+      <Anchor href={Routes.PUBLISHING_ARTICLES_NEW}>New Article</Anchor>
       {articles.map((article) => (
         <ArticlePreview article={article} key={article.id} />
       ))}

@@ -43,7 +43,7 @@ export default function ScheduleCard(props: ScheduleCardProps) {
           </Text>
         </div>
 
-        <div className={styles.images}>
+        <Stack align="end" justify="space-between">
           {schedule.logoUrl ? (
             <img className={styles.logo} src={schedule.logoUrl} />
           ) : (
@@ -52,7 +52,7 @@ export default function ScheduleCard(props: ScheduleCardProps) {
           <Button variant="primary" onClick={onSelect} disabled={isCurrent}>
             {isCurrent ? "Already Active" : "Use this Schedule"}
           </Button>
-        </div>
+        </Stack>
       </Stack>
     </Card>
   );
