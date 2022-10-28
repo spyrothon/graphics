@@ -1,11 +1,3 @@
-.body {
-  margin: 0;
-
-  & * {
-    box-sizing: border-box;
-  }
-}
-
 .background {
   position: fixed;
   display: block;
@@ -29,22 +21,6 @@
   padding: 32px 16px;
 }
 
-.dates {
-  color: var(--text-inverted);
-  text-align: center;
-  font-size: 24px;
-  font-weight: 700;
-  text-shadow: 0 1px 6px #000;
-}
-
-.timezone {
-  color: var(--text-inverted);
-  text-align: center;
-  font-size: 16px;
-  margin-top: 8px;
-  text-shadow: 0 1px 6px #000;
-}
-
 .schedule {
   margin: auto;
   padding: 0 0 96px 0;
@@ -58,10 +34,7 @@
   min-width: 40vw;
   padding: 8px 32px;
   margin-bottom: 8px;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-inverted);
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--background-mod-backdrop);
   text-shadow: 0 1px 6px #000;
   border-bottom: 2px solid var(--text-inverted);
 }
@@ -81,19 +54,17 @@
   padding: 8px;
   margin: 4px 0;
   border-radius: 4px;
-  color: var(--text-inverted);
   text-shadow: 0 1px 6px #000;
 }
 
 .interviewContainer {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .startTime {
   flex: 0 0 96px;
   text-align: right;
   margin-right: 16px;
-  font-size: 20px;
 }
 
 .details {
@@ -107,7 +78,6 @@
 }
 
 .game {
-  color: var(--text-inverted);
   font-weight: 700;
   font-family: var(--font-brand);
   margin-bottom: 2px;
@@ -117,21 +87,10 @@
   display: inline-block;
   font-weight: 400;
   font-family: var(--font-brand);
-  color: var(--text-inverted);
 }
 
 .participants {
   font-size: 16px;
-}
-
-.anchor {
-  text-decoration: none;
-  color: var(--primary-bg-200);
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
 }
 
 @media (min-width: 1400px) {

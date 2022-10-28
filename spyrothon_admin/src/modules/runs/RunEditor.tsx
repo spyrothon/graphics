@@ -175,7 +175,7 @@ export default function RunEditor(props: RunEditorProps) {
   }
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={className}>
       <Stack spacing="space-lg" direction="horizontal" align="start">
         <Card className={styles.runInfo}>
           <Stack spacing="space-lg">

@@ -4,36 +4,17 @@
   gap: 16px;
 }
 
-a {
-  color: var(--text-link);
-
-  &:hover {
-    color: var(--text-normal);
-    text-decoration-thickness: 1.5px;
-  }
-}
-
 .sidebar {
   flex: 1 0 220px;
   padding: 16px;
-  border-radius: 8px;
-  background-color: var(--background-tertiary);
 
-  ul {
+  & ul {
     padding: 0;
 
-    li {
+    & li {
       list-style: none;
       line-height: 1.4rem;
       margin-bottom: 8px;
-    }
-  }
-
-  a {
-    color: var(--text-link);
-
-    &:hover {
-      text-decoration-thickness: 1.5px;
     }
   }
 }
@@ -60,7 +41,7 @@ a {
   }
 
   & hr {
-    border: var(--border-secondary);
+    border: 1px solid var(--background-secondary);
     border-radius: 4px;
   }
 }

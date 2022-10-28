@@ -1,11 +1,10 @@
 import * as React from "react";
 import { DateTime } from "luxon";
 import { RunParticipant } from "@spyrothon/api";
-import { Anchor } from "@spyrothon/sparx";
+import { Anchor, Header, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration } from "@spyrothon/uikit";
 
 import { useSafeSelector } from "../../Store";
-import PublicHelmet from "../core/PublicHelmet";
 import { getInterview } from "../interviews/InterviewStore";
 import { getRun } from "../runs/RunStore";
 import { getEntriesWithStartTimes, getSchedule } from "../schedules/ScheduleStore";
@@ -43,15 +42,17 @@ function Run(props: RunEntryProps) {
 
   return (
     <div className={styles.runContainer}>
-      <div className={styles.startTime}>{startTime.toLocaleString(DateTime.TIME_SIMPLE)}</div>
+      <Text variant="text-md/normal" className={styles.startTime}>
+        {startTime.toLocaleString(DateTime.TIME_SIMPLE)}
+      </Text>
       <div className={styles.details}>
-        <div className={styles.game}>
+        <Text className={styles.game}>
           {run.gameNameFormatted}{" "}
           <span className={styles.category}>&middot; {run.categoryName}</span>
-        </div>
-        <div className={styles.participants}>
+        </Text>
+        <Text className={styles.participants}>
           {formatDuration(run.estimateSeconds)} &middot; {renderNameList(run.runners)}
-        </div>
+        </Text>
       </div>
     </div>
   );
@@ -69,10 +70,12 @@ function Interview(props: InterviewEntryProps) {
 
   return (
     <div className={styles.interviewContainer}>
-      <div className={styles.startTime}>{startTime.toLocaleString(DateTime.TIME_SIMPLE)}</div>
+      <Text variant="text-md/normal" className={styles.startTime}>
+        {startTime.toLocaleString(DateTime.TIME_SIMPLE)}
+      </Text>
       <div className={styles.details}>
-        <div className={styles.game}>{interview.topic}</div>
-        <div className={styles.participants}>{renderNameList(interview.interviewees)}</div>
+        <Text className={styles.game}>{interview.topic}</Text>
+        <Text className={styles.participants}>{renderNameList(interview.interviewees)}</Text>
       </div>
     </div>
   );
@@ -85,7 +88,11 @@ type DayMarkerProps = {
 function DayMarker(props: DayMarkerProps) {
   const { time } = props;
 
-  return <div className={styles.dayMarker}>{time.toLocaleString(DateTime.DATE_MED)}</div>;
+  return (
+    <Header tag="h2" variant="header-md/normal" className={styles.dayMarker}>
+      {time.toLocaleString(DateTime.DATE_MED)}
+    </Header>
+  );
 }
 
 export default function Schedule() {
@@ -146,19 +153,18 @@ export default function Schedule() {
   if (schedule == null) return null;
 
   return (
-    <div className={styles.page}>
-      <PublicHelmet className={styles.body} />
+    <div>
       <video className={styles.background} autoPlay muted loop poster={backgroundPoster}>
         <source src={backgroundVideo} type='video/webm;codecs="vp8, vorbis"' />
       </video>
       <div className={styles.schedule}>
-        <div className={styles.eventInfo}>
+        <Stack align="center" className={styles.eventInfo}>
           <img className={styles.logo} src={schedule.logoUrl} />
-          <div className={styles.dates}>{startTime?.toLocaleString(DateTime.DATE_FULL)}</div>
-          <div className={styles.timezone}>
+          <Text variant="header-md/normal">{startTime?.toLocaleString(DateTime.DATE_FULL)}</Text>
+          <Text className={styles.timezone}>
             All times are shown in <strong>{startTime?.offsetNameShort}</strong>.
-          </div>
-        </div>
+          </Text>
+        </Stack>
         {renderEntries()}
       </div>
     </div>

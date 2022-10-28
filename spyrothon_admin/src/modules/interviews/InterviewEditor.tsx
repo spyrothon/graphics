@@ -79,7 +79,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
         <Stack direction="horizontal" justify="stretch">
           <FormControl label={index === 0 ? "Display Name" : undefined}>
             <TextInput
-              className={styles.participantInput}
               value={editor.getParticipantField(type, index, "displayName")}
               onChange={(event) =>
                 editor.updateParticipantField(type, index, "displayName", event.target.value)
@@ -88,7 +87,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
           </FormControl>
           <FormControl label={index === 0 ? "Pronouns" : undefined}>
             <TextInput
-              className={styles.participantInput}
               value={editor.getParticipantField(type, index, "pronouns")}
               onChange={(event) =>
                 editor.updateParticipantField(type, index, "pronouns", event.target.value)
@@ -97,7 +95,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
           </FormControl>
           <FormControl label={index === 0 ? "Twitch" : undefined}>
             <TextInput
-              className={styles.participantInput}
               value={editor.getParticipantField(type, index, "twitchName")}
               onChange={(event) =>
                 editor.updateParticipantField(type, index, "twitchName", event.target.value)
@@ -122,7 +119,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
         <Stack direction="horizontal" justify="stretch">
           <FormControl label="Category">
             <TextInput
-              className={styles.participantInput}
               value={editor.getQuestionField(index, "category")}
               onChange={(event) =>
                 editor.updateQuestionField(index, "category", event.target.value)
@@ -131,14 +127,12 @@ export default function InterviewEditor(props: InterviewEditorProps) {
           </FormControl>
           <FormControl label="Hint">
             <TextInput
-              className={styles.participantInput}
               value={editor.getQuestionField(index, "hint")}
               onChange={(event) => editor.updateQuestionField(index, "hint", event.target.value)}
             />
           </FormControl>
           <FormControl label="Image">
             <TextInput
-              className={styles.participantInput}
               value={editor.getQuestionField(index, "image")}
               onChange={(event) => editor.updateQuestionField(index, "image", event.target.value)}
             />
@@ -148,7 +142,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
         <Stack direction="horizontal" justify="stretch">
           <FormControl label="Answer">
             <TextInput
-              className={styles.participantInput}
               value={editor.getQuestionField(index, "answer")}
               onChange={(event) => editor.updateQuestionField(index, "answer", event.target.value)}
             />
@@ -156,7 +149,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
           <FormControl label="Score">
             <TextInput
               type="number"
-              className={styles.participantInput}
               pattern="\d+"
               value={editor.getQuestionField(index, "score")}
               onChange={(event) =>
@@ -170,7 +162,7 @@ export default function InterviewEditor(props: InterviewEditorProps) {
   }
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={className}>
       <Stack spacing="space-lg" direction="horizontal" align="start">
         <Card className={styles.info}>
           <Stack spacing="space-lg">

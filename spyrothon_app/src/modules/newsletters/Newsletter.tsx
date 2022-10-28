@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Article as ArticleType, Newsletter as NewsletterType } from "@spyrothon/api";
-import { Anchor, Header, Markdown, Text } from "@spyrothon/sparx";
+import { Anchor, Card, Header, Markdown, Text } from "@spyrothon/sparx";
 
 import API from "@app/API";
 
@@ -64,38 +64,48 @@ export default function Newsletter(props: NewsletterProps) {
             <Article key={article.id} article={article} />
           ))}
         </main>
-        <aside className={styles.sidebar}>
-          <Header tag="h2" variant="text-sm/normal" className={styles.sidebarHeader}>
+        <Card className={styles.sidebar}>
+          <Header tag="h2" variant="header-md/normal">
             Articles
           </Header>
           <ul>
             {articles.map((article) => (
               <li key={article.id}>
-                <a href={`#${article.id}`}>{article.title}</a>
+                <Anchor href={`#${article.id}`}>{article.title}</Anchor>
               </li>
             ))}
           </ul>
 
-          <Header tag="h2" variant="text-sm/normal" className={styles.sidebarHeader}>
+          <Header tag="h2" variant="header-md/normal">
             Contact
           </Header>
-          <p>If you have ideas for things we should write about next, let us know!</p>
+          <Text variant="text-sm/normal">
+            If you have ideas for things we should write about next, let us know!
+          </Text>
           <ul>
             <li>
-              Twitter: <Anchor href="https://twitter.com/spyrothon">@spyrothon</Anchor>
+              <Text variant="text-sm/normal">
+                Twitter: <Anchor href="https://twitter.com/spyrothon">@spyrothon</Anchor>
+              </Text>
             </li>
             <li>
-              Twitch: <Anchor href="https://twitch.tv/spyrothon">Spyrothon</Anchor>
+              <Text variant="text-sm/normal">
+                Twitch: <Anchor href="https://twitch.tv/spyrothon">Spyrothon</Anchor>
+              </Text>
             </li>
             <li>
-              <Anchor href="https://discord.gg/fCvfnfk">Discord</Anchor>
+              <Text variant="text-sm/normal">
+                <Anchor href="https://discord.gg/fCvfnfk">Discord</Anchor>
+              </Text>
             </li>
             <li>
-              <Anchor href="https://youtube.com/channel/UCq-pkx-6-BB1Ns7ETmzY6-g">YouTube</Anchor>
+              <Text variant="text-sm/normal">
+                <Anchor href="https://youtube.com/channel/UCq-pkx-6-BB1Ns7ETmzY6-g">YouTube</Anchor>
+              </Text>
             </li>
           </ul>
 
-          <Header tag="h2" variant="header-sm/normal" className={styles.sidebarHeader}>
+          <Header tag="h2" variant="header-md/normal">
             Other Links
           </Header>
           <ul>
@@ -108,7 +118,7 @@ export default function Newsletter(props: NewsletterProps) {
               </Anchor>
             </li>
           </ul>
-        </aside>
+        </Card>
       </div>
     </FixedWidthLayout>
   );

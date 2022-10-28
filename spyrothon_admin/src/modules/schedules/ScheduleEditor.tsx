@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ScheduleEntryType } from "@spyrothon/api";
-import { Tab, Tabs } from "@spyrothon/uikit";
+import { Stack, Tabs } from "@spyrothon/sparx";
 
 import { useSafeSelector } from "../../Store";
 import Dashboard from "../dashboards/Dashboard";
@@ -42,16 +42,12 @@ export default function ScheduleEditor() {
 
   function renderMain() {
     return (
-      <Tabs className={styles.main} activeTab={activeTab} onTabChange={setActiveTab}>
-        <Tab id="content" label="Content">
-          {renderContentEditor()}
-        </Tab>
+      <Stack spacing="space-xl">
+        {renderContentEditor()}
         {selectedScheduleEntry != null ? (
-          <Tab id="meta" label="Meta">
-            <ScheduleEntryEditor scheduleEntry={selectedScheduleEntry} />
-          </Tab>
+          <ScheduleEntryEditor scheduleEntry={selectedScheduleEntry} />
         ) : undefined}
-      </Tabs>
+      </Stack>
     );
   }
 
