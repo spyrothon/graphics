@@ -1,14 +1,5 @@
-.container {
-  display: flex;
-  gap: 8px;
-  border-radius: 4px;
-  background-color: var(--background-tertiary);
-  padding: 16px;
-  margin: 8px 0;
-}
-
-.content {
-  flex: 1 1 auto;
+.flex {
+  flex-wrap: nowrap;
 }
 
 .drag {

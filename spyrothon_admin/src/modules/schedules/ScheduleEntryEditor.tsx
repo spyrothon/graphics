@@ -6,15 +6,14 @@ import {
   InitialTransitionSet,
   ScheduleEntry,
 } from "@spyrothon/api";
-import { Button, DurationInput, Header, SaveState, useSaveable } from "@spyrothon/uikit";
+import { Button, Card, DurationInput, Header, Stack } from "@spyrothon/sparx";
+import { SaveState, useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import OBSSceneSelector from "../obs/OBSSceneSelector";
 import { updateScheduleEntry } from "./ScheduleActions";
 import TransitionEditor from "./TransitionEditor";
-
-import styles from "./ScheduleEntryEditor.module.css";
 
 interface ScheduleEntryEditorProps {
   scheduleEntry: ScheduleEntry;
@@ -78,39 +77,45 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
   }
 
   return (
-    <div className={styles.container}>
-      <Button
-        className={styles.saveButton}
-        onClick={handleSave}
-        disabled={!hasChanges || saveState === SaveState.SAVING}>
-        {getSaveText()}
-      </Button>
-      <div className={styles.editor}>
-        <div>
-          <Header className={styles.header}>Timing</Header>
-          <DurationInput
-            label="Estimated Setup Time"
-            value={editedEntry.setupSeconds}
-            onChange={(value) => setEditedEntry({ ...editedEntry, setupSeconds: value })}
-          />
+    <div>
+      <Stack spacing="space-lg">
+        <Button
+          variant="primary"
+          onClick={handleSave}
+          disabled={!hasChanges || saveState === SaveState.SAVING}>
+          {getSaveText()}
+        </Button>
+        <Card>
+          <Stack direction="horizontal" spacing="space-lg" justify="stretch">
+            <Stack>
+              <Header tag="h2">Timing</Header>
+              <DurationInput
+                label="Estimated Setup Time"
+                value={editedEntry.setupSeconds}
+                onChange={(value) => setEditedEntry({ ...editedEntry, setupSeconds: value })}
+              />
+            </Stack>
 
-          <Header className={styles.header}>OBS Scene Setup</Header>
-          <OBSSceneSelector
-            selectedSceneName={editedEntry.obsSceneName}
-            note="Name of the scene to use for this run in OBS."
-            onChange={(scene) => setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })}
-          />
-        </div>
+            <Stack>
+              <Header tag="h2">OBS Scene Setup</Header>
+              <OBSSceneSelector
+                selectedSceneName={editedEntry.obsSceneName}
+                note="Name of the scene to use for this run in OBS."
+                onSelect={(scene) =>
+                  setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })
+                }
+              />
+            </Stack>
+          </Stack>
+        </Card>
 
-        <div className={styles.transitions}>
-          <Header className={styles.header}>
-            Enter Transition
-            <Button
-              className={styles.addTransitionButton}
-              onClick={() => addTransition("enterTransitionSet")}>
+        <Stack spacing="space-lg">
+          <Stack direction="horizontal" justify="space-between">
+            <Header tag="h2">Enter Transition</Header>
+            <Button variant="primary" onClick={() => addTransition("enterTransitionSet")}>
               Add Transition
             </Button>
-          </Header>
+          </Stack>
           {editedEntry.enterTransitionSet?.transitions.map((transition, index) => (
             <TransitionEditor
               key={transition.id}
@@ -121,14 +126,12 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
               onRemove={() => removeTransition("enterTransitionSet", index)}
             />
           ))}
-          <Header className={styles.header}>
-            Exit Transition
-            <Button
-              className={styles.addTransitionButton}
-              onClick={() => addTransition("exitTransitionSet")}>
+          <Stack direction="horizontal" justify="space-between">
+            <Header tag="h2">Exit Transition</Header>
+            <Button variant="primary" onClick={() => addTransition("exitTransitionSet")}>
               Add Transition
             </Button>
-          </Header>
+          </Stack>
           {editedEntry.exitTransitionSet?.transitions.map((transition, index) => (
             <TransitionEditor
               key={transition.id}
@@ -139,8 +142,8 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
               onRemove={() => removeTransition("exitTransitionSet", index)}
             />
           ))}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     </div>
   );
 }

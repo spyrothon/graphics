@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Text } from "@spyrothon/uikit";
+import { Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

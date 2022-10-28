@@ -2,16 +2,16 @@ import * as React from "react";
 import classNames from "classnames";
 import { Run, ScheduleEntry } from "@spyrothon/api";
 import {
-  Anchor,
   Button,
+  Card,
   DurationInput,
-  formatDuration,
+  FormControl,
   Header,
-  NumberInput,
-  SaveState,
+  Stack,
+  TextArea,
   TextInput,
-  useSaveable,
-} from "@spyrothon/uikit";
+} from "@spyrothon/sparx";
+import { formatDuration, SaveState, useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -83,154 +83,167 @@ export default function RunEditor(props: RunEditorProps) {
     return (
       <>
         {additional}{" "}
-        <Anchor onClick={() => originalValue != null && editor.updateField(field, originalValue)}>
+        <Button
+          variant="primary"
+          onClick={() => originalValue != null && editor.updateField(field, originalValue)}>
           Reset to {renderValue()}.
-        </Anchor>
+        </Button>
       </>
     );
   }
 
   function renderParticipantFields(type: "runners" | "commentators", index: number) {
     return (
-      <div className={styles.runner}>
-        <div className={styles.inputRow}>
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label="Display Name"
-            value={editor.getParticipantField(type, index, "displayName")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "displayName", event.target.value)
-            }
-          />
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label="Pronouns"
-            value={editor.getParticipantField(type, index, "pronouns")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "pronouns", event.target.value)
-            }
-          />
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label="Twitch"
-            value={editor.getParticipantField(type, index, "twitchName")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "twitchName", event.target.value)
-            }
-          />
-        </div>
-        <div className={styles.inputRow}>
-          <TextInput
-            marginless
-            className={classNames(styles.participantInput, styles.urlInput)}
-            label="Gameplay Ingest URL"
-            value={editor.getParticipantField(type, index, "gameplayIngestUrl")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "gameplayIngestUrl", event.target.value)
-            }
-          />
-          <NumberInput
-            marginless
-            className={classNames(styles.participantInput, styles.numberInput)}
-            label="Top"
-            value={editor.getParticipantField(type, index, "gameplayCropTransform")?.top}
-            onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "top")}
-          />
-          <NumberInput
-            marginless
-            className={classNames(styles.participantInput, styles.numberInput)}
-            label="Right"
-            value={editor.getParticipantField(type, index, "gameplayCropTransform")?.right}
-            onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "right")}
-          />
-          <NumberInput
-            marginless
-            className={classNames(styles.participantInput, styles.numberInput)}
-            label="Bottom"
-            value={editor.getParticipantField(type, index, "gameplayCropTransform")?.bottom}
-            onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "bottom")}
-          />
-          <NumberInput
-            marginless
-            className={classNames(styles.participantInput, styles.numberInput)}
-            label="Left"
-            value={editor.getParticipantField(type, index, "gameplayCropTransform")?.left}
-            onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "left")}
-          />
-        </div>
-      </div>
+      <Card>
+        <Stack spacing="space-lg">
+          <Stack direction="horizontal" justify="stretch">
+            <FormControl label="Display Name">
+              <TextInput
+                className={styles.participantInput}
+                value={editor.getParticipantField(type, index, "displayName")}
+                onChange={(event) =>
+                  editor.updateParticipantField(type, index, "displayName", event.target.value)
+                }
+              />
+            </FormControl>
+            <FormControl label="Pronouns">
+              <TextInput
+                className={styles.participantInput}
+                value={editor.getParticipantField(type, index, "pronouns")}
+                onChange={(event) =>
+                  editor.updateParticipantField(type, index, "pronouns", event.target.value)
+                }
+              />
+            </FormControl>
+            <FormControl label="Twitch">
+              <TextInput
+                className={styles.participantInput}
+                value={editor.getParticipantField(type, index, "twitchName")}
+                onChange={(event) =>
+                  editor.updateParticipantField(type, index, "twitchName", event.target.value)
+                }
+              />
+            </FormControl>
+            <FormControl label="Gameplay Ingest URL">
+              <TextInput
+                className={classNames(styles.participantInput, styles.urlInput)}
+                value={editor.getParticipantField(type, index, "gameplayIngestUrl")}
+                onChange={(event) =>
+                  editor.updateParticipantField(
+                    type,
+                    index,
+                    "gameplayIngestUrl",
+                    event.target.value,
+                  )
+                }
+              />
+            </FormControl>
+          </Stack>
+          <Stack direction="horizontal" justify="stretch" wrap={false}>
+            <FormControl label="Top">
+              <TextInput
+                type="number"
+                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.top}
+                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "top")}
+              />
+            </FormControl>
+            <FormControl label="Right">
+              <TextInput
+                type="number"
+                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.right}
+                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "right")}
+              />
+            </FormControl>
+            <FormControl label="Bottom">
+              <TextInput
+                type="number"
+                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.bottom}
+                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "bottom")}
+              />
+            </FormControl>
+            <FormControl label="Left">
+              <TextInput
+                type="number"
+                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.left}
+                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "left")}
+              />
+            </FormControl>
+          </Stack>
+        </Stack>
+      </Card>
     );
   }
 
   return (
     <div className={classNames(styles.container, className)}>
-      <div className={styles.editor}>
-        <div className={styles.runInfo}>
-          <Header className={styles.header}>
-            Run Information
-            <Button
-              className={styles.saveButton}
-              onClick={handleSaveRun}
-              disabled={saveState === SaveState.SAVING || !editor.hasChanges()}>
-              {getSaveText()}
-            </Button>
-          </Header>
-          <TextInput
-            label="Game Name"
-            value={editor.getField("gameName")}
-            note={getNote("gameName", "This must exactly match the game's name on Twitch.")}
-            onChange={(event) => editor.updateField("gameName", event.target.value)}
-          />
-          <TextInput
-            label="Category Name"
-            value={editor.getField("categoryName")}
-            note={getNote("categoryName")}
-            onChange={(event) => editor.updateField("categoryName", event.target.value)}
-          />
-          <div className={styles.inputRow}>
-            <DurationInput
-              label="Estimate"
-              value={editor.getField("estimateSeconds")}
-              note={getNote("estimateSeconds")}
-              onChange={(value) => editor.updateField("estimateSeconds", value)}
-            />
-            <TextInput
-              label="Platform"
-              value={editor.getField("platform")}
-              note={getNote("platform")}
-              onChange={(event) => editor.updateField("platform", event.target.value)}
-            />
-            <TextInput
-              label="Release Year"
-              value={editor.getField("releaseYear")}
-              note={getNote("releaseYear")}
-              pattern="\d\d\d\d"
-              onChange={(event) => editor.updateField("releaseYear", event.target.value)}
-            />
-          </div>
-          <TextInput
-            type="textarea"
-            label="Notes"
-            value={editor.getField("notes")}
-            note={getNote("notes")}
-            onChange={(event) => editor.updateField("notes", event.target.value)}
-          />
-          <Header className={styles.header}>Layout Information</Header>
-          <TextInput
-            type="textarea"
-            label="Formatted Game Name"
-            note="Use newlines to adjust how the game name looks on stream."
-            value={editor.getField("gameNameFormatted")}
-            rows={2}
-            onChange={(event) => editor.updateField("gameNameFormatted", event.target.value)}
-          />
-        </div>
+      <Stack spacing="space-lg" direction="horizontal" align="start">
+        <Card className={styles.runInfo}>
+          <Stack spacing="space-lg">
+            <Stack direction="horizontal" justify="space-between">
+              <Header tag="h2">Run Information</Header>
+              <Button
+                variant="primary"
+                onClick={handleSaveRun}
+                disabled={saveState === SaveState.SAVING || !editor.hasChanges()}>
+                {getSaveText()}
+              </Button>
+            </Stack>
+            <FormControl
+              label="Game Name"
+              note={getNote("gameName", "This must exactly match the game's name on Twitch.")}>
+              <TextInput
+                value={editor.getField("gameName")}
+                onChange={(event) => editor.updateField("gameName", event.target.value)}
+              />
+            </FormControl>
+            <FormControl label="Category Name" note={getNote("categoryName")}>
+              <TextInput
+                value={editor.getField("categoryName")}
+                onChange={(event) => editor.updateField("categoryName", event.target.value)}
+              />
+            </FormControl>
+            <Stack direction="horizontal" justify="stretch">
+              <FormControl label="Estimate" note={getNote("estimateSeconds")}>
+                <DurationInput
+                  value={editor.getField("estimateSeconds")}
+                  onChange={(value) => editor.updateField("estimateSeconds", value)}
+                />
+              </FormControl>
+              <FormControl label="Platform" note={getNote("platform")}>
+                <TextInput
+                  value={editor.getField("platform")}
+                  onChange={(event) => editor.updateField("platform", event.target.value)}
+                />
+              </FormControl>
+              <FormControl label="Release Year" note={getNote("releaseYear")}>
+                <TextInput
+                  value={editor.getField("releaseYear")}
+                  pattern="\d\d\d\d"
+                  onChange={(event) => editor.updateField("releaseYear", event.target.value)}
+                />
+              </FormControl>
+            </Stack>
+            <FormControl label="Notes" note={getNote("notes")}>
+              <TextArea
+                value={editor.getField("notes")}
+                onChange={(event) => editor.updateField("notes", event.target.value)}
+              />
+            </FormControl>
+            <Header tag="h2">Layout Information</Header>
+            <FormControl
+              label="Formatted Game Name"
+              note="Use newlines to adjust how the game name looks on stream.">
+              <TextArea
+                value={editor.getField("gameNameFormatted")}
+                rows={2}
+                onChange={(event) => editor.updateField("gameNameFormatted", event.target.value)}
+              />
+            </FormControl>
+          </Stack>
+        </Card>
 
-        <div className={styles.participants}>
-          <Header className={styles.header}>Runners</Header>
+        <Stack spacing="space-lg" className={styles.participants}>
+          <Header tag="h3">Runners</Header>
           {renderParticipantFields("runners", 0)}
           {renderParticipantFields("runners", 1)}
           {renderParticipantFields("runners", 2)}
@@ -240,13 +253,13 @@ export default function RunEditor(props: RunEditorProps) {
           {renderParticipantFields("runners", 6)}
           {renderParticipantFields("runners", 7)}
           {renderParticipantFields("runners", 8)}
-          <Header className={styles.header}>Commentators</Header>
+          <Header tag="h3">Commentators</Header>
           {renderParticipantFields("commentators", 0)}
           {renderParticipantFields("commentators", 1)}
           {renderParticipantFields("commentators", 2)}
           {renderParticipantFields("commentators", 3)}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     </div>
   );
 }

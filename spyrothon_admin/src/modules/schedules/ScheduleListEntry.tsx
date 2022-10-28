@@ -2,7 +2,8 @@ import * as React from "react";
 import classNames from "classnames";
 import { useDrag, useDrop } from "react-dnd";
 import { RunParticipant, ScheduleEntry } from "@spyrothon/api";
-import { formatDuration, Text } from "@spyrothon/uikit";
+import { Stack, Text } from "@spyrothon/sparx";
+import { formatDuration } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -29,22 +30,17 @@ function RunEntry(props: RunEntryProps) {
   if (run == null) return null;
 
   return (
-    <div className={styles.runContent}>
-      <Text marginless className={styles.runHeader} oneline>
-        <strong>{run.gameName}</strong>
+    <Stack spacing="space-xs" className={styles.runContent}>
+      <Text variant="header-sm/normal" lineClamp={1}>
+        {run.gameName}
       </Text>
-      <Text
-        size={Text.Sizes.SIZE_12}
-        color={Text.Colors.MUTED}
-        marginless
-        className={styles.category}
-        oneline>
+      <Text variant="text-xs/secondary" lineClamp={1}>
         {formatDuration(run.estimateSeconds)} &middot; {run.categoryName}
       </Text>
-      <Text size={Text.Sizes.SIZE_12} marginless oneline>
+      <Text variant="text-xs/normal" lineClamp={1}>
         {renderNameList(run.runners)}
       </Text>
-    </div>
+    </Stack>
   );
 }
 
@@ -58,22 +54,17 @@ function InterviewEntry(props: InterviewEntryProps) {
   if (interview == null) return null;
 
   return (
-    <div className={styles.runContent}>
-      <Text marginless className={styles.runHeader} oneline>
-        <strong>{interview.topic}</strong>
+    <Stack spacing="space-xs" className={styles.runContent}>
+      <Text variant="header-sm/normal" lineClamp={1}>
+        {interview.topic}
       </Text>
-      <Text
-        size={Text.Sizes.SIZE_12}
-        color={Text.Colors.MUTED}
-        marginless
-        className={styles.category}
-        oneline>
+      <Text variant="text-xs/secondary" className={styles.category} lineClamp={1}>
         {formatDuration(interview.estimateSeconds)}
       </Text>
-      <Text size={Text.Sizes.SIZE_12} marginless oneline>
+      <Text variant="text-xs/normal" lineClamp={1}>
         {renderNameList(interview.interviewees)}
       </Text>
-    </div>
+    </Stack>
   );
 }
 
@@ -133,7 +124,7 @@ export default function ScheduleListEntry(props: ScheduleListEntryProps) {
 
   const setup =
     setupSeconds != null && setupSeconds > 0 ? (
-      <Text className={styles.setup} size={Text.Sizes.SIZE_12} color={Text.Colors.MUTED} marginless>
+      <Text className={styles.setup} variant="text-xs/secondary">
         Setup: {formatDuration(setupSeconds)}
       </Text>
     ) : null;
@@ -150,7 +141,6 @@ export default function ScheduleListEntry(props: ScheduleListEntryProps) {
       className={classNames(styles.entry, {
         [styles.selected]: selected,
         [styles.interactive]: interactive,
-        [styles.dropOver]: isDropOver,
         [styles.dragging]: isDragging,
       })}
       onClick={handleSelect}>
@@ -158,8 +148,13 @@ export default function ScheduleListEntry(props: ScheduleListEntryProps) {
         <div className={styles.dropTarget} style={{ height: draggedHeight }}></div>
       ) : null}
       {setup}
-      <div className={styles.content}>
-        <Text className={styles.scheduleNumber} color={Text.Colors.MUTED} marginless>
+      <Stack
+        className={styles.content}
+        direction="horizontal"
+        align="start"
+        justify="stretch"
+        wrap={false}>
+        <Text className={styles.scheduleNumber} variant="text-md/secondary">
           {position + 1}
         </Text>
         {content}
@@ -168,7 +163,7 @@ export default function ScheduleListEntry(props: ScheduleListEntryProps) {
             &times;
           </div>
         ) : null}
-      </div>
+      </Stack>
     </div>
   );
 }

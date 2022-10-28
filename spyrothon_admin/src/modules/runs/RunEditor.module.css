@@ -37,29 +37,3 @@
 .participants {
   flex: 1 0 440px;
 }
-
-.header:not(:first-child) {
-  margin-top: 16px;
-}
-
-.runner {
-  margin: 16px 0;
-}
-
-.inputRow {
-  display: flex;
-  gap: 4px;
-}
-
-.participantInput {
-  margin: 4px 0;
-  flex: 1 1 0;
-}
-
-.numberInput {
-  flex: 1 2 auto;
-}
-
-.urlInput {
-  flex: 1 1 auto;
-}

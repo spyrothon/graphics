@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text } from "@spyrothon/uikit";
+import { Button, Card, Stack, Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -21,13 +21,15 @@ export default function AddEntryButtons() {
   }
 
   return (
-    <div className={styles.addButtons}>
-      <div className={styles.addButton} onClick={handleAddRun}>
-        <Text className={styles.addButtonText}>+ Add a Run</Text>
-      </div>
-      <div className={styles.addButton} onClick={handleAddInterview}>
-        <Text className={styles.addButtonText}>+ Add an Interview</Text>
-      </div>
-    </div>
+    <Card className={styles.addButtons}>
+      <Stack>
+        <Button variant="primary" onClick={handleAddRun}>
+          + Add a Run
+        </Button>
+        <Button variant="primary/outline" onClick={handleAddInterview}>
+          + Add an Interview
+        </Button>
+      </Stack>
+    </Card>
   );
 }

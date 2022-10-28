@@ -9,10 +9,6 @@
   margin: 8px 0;
 }
 
-.streamKey {
-  font-weight: 700;
-}
-
 .uptime {
   color: var(--text-muted);
 }
