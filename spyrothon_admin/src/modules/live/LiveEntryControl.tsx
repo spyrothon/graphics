@@ -1,10 +1,7 @@
 import * as React from "react";
 import { ScheduleEntry } from "@spyrothon/api";
 import { Button, Card, Header, Stack, Text } from "@spyrothon/sparx";
-import {
-  // SelectInput,
-  useSaveable,
-} from "@spyrothon/uikit";
+import { useSaveable } from "@spyrothon/uikit";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
