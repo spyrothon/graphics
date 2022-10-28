@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Remark } from "react-remark";
 import { Article as ArticleType, Newsletter as NewsletterType } from "@spyrothon/api";
-import { Anchor, Header, Text } from "@spyrothon/uikit";
+import { Anchor, Header, Markdown, Text } from "@spyrothon/sparx";
 
 import API from "@app/API";
 
@@ -18,15 +17,13 @@ function Article(props: ArticleProps) {
 
   return (
     <section className={styles.article}>
-      <Header marginless id={article.id} size={Header.Sizes.H2}>
+      <Header tag="h2" id={article.id}>
         {article.title}
       </Header>
       {article.authorName != null ? (
-        <Text marginless size={Text.Sizes.SIZE_16} color={Text.Colors.MUTED}>
-          by {article.authorName}
-        </Text>
+        <Text variant="text-md/secondary">by {article.authorName}</Text>
       ) : null}
-      <Remark>{article.content}</Remark>
+      <Markdown>{article.content}</Markdown>
     </section>
   );
 }
@@ -56,21 +53,19 @@ export default function Newsletter(props: NewsletterProps) {
     <FixedWidthLayout>
       <div className={styles.container}>
         <main className={styles.newsletterContent}>
-          <Header size={Header.Sizes.H1} marginless>
-            {newsletter.title}
-          </Header>
-          <Text size={Text.Sizes.SIZE_20} color={Text.Colors.MUTED}>
+          <Header tag="h1">{newsletter.title}</Header>
+          <Text variant="text-lg/secondary">
             Published {newsletter.publishedAt?.toLocaleDateString()}
           </Text>
 
-          <Remark>{newsletter.introduction}</Remark>
+          <Markdown>{newsletter.introduction}</Markdown>
 
           {articles.map((article) => (
             <Article key={article.id} article={article} />
           ))}
         </main>
         <aside className={styles.sidebar}>
-          <Header size={Header.Sizes.H4} className={styles.sidebarHeader}>
+          <Header tag="h2" variant="text-sm/normal" className={styles.sidebarHeader}>
             Articles
           </Header>
           <ul>
@@ -81,7 +76,7 @@ export default function Newsletter(props: NewsletterProps) {
             ))}
           </ul>
 
-          <Header size={Header.Sizes.H4} className={styles.sidebarHeader}>
+          <Header tag="h2" variant="text-sm/normal" className={styles.sidebarHeader}>
             Contact
           </Header>
           <p>If you have ideas for things we should write about next, let us know!</p>
@@ -100,7 +95,7 @@ export default function Newsletter(props: NewsletterProps) {
             </li>
           </ul>
 
-          <Header size={Header.Sizes.H4} className={styles.sidebarHeader}>
+          <Header tag="h2" variant="header-sm/normal" className={styles.sidebarHeader}>
             Other Links
           </Header>
           <ul>

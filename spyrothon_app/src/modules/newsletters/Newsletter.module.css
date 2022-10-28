@@ -46,7 +46,7 @@ a {
   flex: 1 0 100%;
   margin: 16px 0;
 
-  line-height: 1.8rem;
+  line-height: 1.8rem !important;
 }
 
 .article {
@@ -63,6 +63,10 @@ a {
     border: var(--border-secondary);
     border-radius: 4px;
   }
+}
+
+p {
+  margin-bottom: var(--space-lg);
 }
 
 @media only screen and (min-width: 720px) {

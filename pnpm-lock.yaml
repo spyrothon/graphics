@@ -180,6 +180,7 @@ importers:
   spyrothon_app:
     specifiers:
       '@spyrothon/api': workspace:*
+      '@spyrothon/sparx': link:../../sparx-design/packages/sparx
       '@spyrothon/uikit': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
@@ -212,6 +213,7 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
+      '@spyrothon/sparx': link:../../sparx-design/packages/sparx
       '@spyrothon/uikit': link:../packages/uikit
       classnames: 2.3.2
       js-cookie: 3.0.1

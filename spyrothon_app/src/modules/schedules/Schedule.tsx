@@ -1,7 +1,8 @@
 import * as React from "react";
 import { DateTime } from "luxon";
 import { RunParticipant } from "@spyrothon/api";
-import { Anchor, formatDuration } from "@spyrothon/uikit";
+import { Anchor } from "@spyrothon/sparx";
+import { formatDuration } from "@spyrothon/uikit";
 
 import { useSafeSelector } from "../../Store";
 import PublicHelmet from "../core/PublicHelmet";
