@@ -1,8 +1,7 @@
 import * as React from "react";
-import classNames from "classnames";
 import { Interview, Run } from "@spyrothon/api";
 import { Card, Header, Stack, Text } from "@spyrothon/sparx";
-import { formatDuration } from "@spyrothon/uikit";
+import { formatDuration } from "@spyrothon/utils";
 
 import { ScheduleEntryWithDependants } from "../schedules/ScheduleTypes";
 

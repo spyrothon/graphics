@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import { Article, InitialArticle } from "@spyrothon/api";
 import { Button, Card, FormControl, Stack, TextArea, TextInput } from "@spyrothon/sparx";
-import { SaveState, useSaveable } from "@spyrothon/uikit";
+import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";

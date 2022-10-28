@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { Header, Text } from "@spyrothon/sparx";
-import { formatDuration } from "@spyrothon/uikit";
+import { formatDuration } from "@spyrothon/utils";
 
 import getRTMPStats, { RTMPStream } from "./getRTMPStats";
 

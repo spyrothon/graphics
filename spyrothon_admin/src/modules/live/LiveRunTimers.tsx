@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Flag, Icon, Pause, Play, Repeat } from "react-feather";
 import type { Run, RunParticipant } from "@spyrothon/api";
 import { Button, ButtonVariantColor, Card, Header, Stack, Text } from "@spyrothon/sparx";
-import { formatDuration, useAnimationFrame } from "@spyrothon/uikit";
+import { formatDuration, useAnimationFrame } from "@spyrothon/utils";
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
 

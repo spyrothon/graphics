@@ -6,13 +6,13 @@ on:
     paths:
       - "spyrothon_admin/**"
       - "packages/api/**"
-      - "packages/uikit/**"
+      - "packages/utils/**"
       - "vendored/**"
   pull_request:
     paths:
       - "spyrothon_admin/**"
       - "packages/api/**"
-      - "packages/uikit/**"
+      - "packages/utils/**"
       - "vendored/**"
 
 concurrency:

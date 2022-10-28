@@ -55,33 +55,16 @@ importers:
       api: 5.0.0-beta.3_openapi-types@12.0.2
       oas: 18.4.4
 
-  packages/uikit:
+  packages/utils:
     specifiers:
       '@types/react': ^18.0.17
-      '@types/react-datepicker': ^4.4.2
       '@vitejs/plugin-react': ^2.1.0
-      classnames: ^2.3.1
-      eslint: ^8.23.1
-      react: 16.8 - 18
-      react-datepicker: ^4.8.0
-      react-dom: 16.8 - 18
-      react-feather: ^2.0.10
-      react-router-dom: 6.3.0
       typescript: ^4.6.4
       vite: ^3.1.0
-    dependencies:
-      classnames: 2.3.2
-      react: 18.2.0
-      react-datepicker: 4.8.0_biqbaboplfbrettd7655fr4n2y
-      react-dom: 18.2.0_react@18.2.0
-      react-feather: 2.0.10_react@18.2.0
-      react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@types/react': 18.0.20
-      '@types/react-datepicker': 4.4.2_biqbaboplfbrettd7655fr4n2y
       '@vitejs/plugin-react': 2.1.0_vite@3.1.2
-      eslint: 8.23.1
-      typescript: 4.8.3
+      typescript: 4.8.4
       vite: 3.1.2
 
   sprobothon:
@@ -112,7 +95,7 @@ importers:
     specifiers:
       '@spyrothon/api': workspace:*
       '@spyrothon/sparx': link:../../sparx-design/packages/sparx
-      '@spyrothon/uikit': workspace:*
+      '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
       '@types/react': ^18.0.17
@@ -145,7 +128,7 @@ importers:
     dependencies:
       '@spyrothon/api': link:../packages/api
       '@spyrothon/sparx': link:../../sparx-design/packages/sparx
-      '@spyrothon/uikit': link:../packages/uikit
+      '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       js-cookie: 3.0.1
       luxon: 3.0.3
@@ -181,7 +164,7 @@ importers:
     specifiers:
       '@spyrothon/api': workspace:*
       '@spyrothon/sparx': link:../../sparx-design/packages/sparx
-      '@spyrothon/uikit': workspace:*
+      '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
       '@types/react': ^18.0.17
@@ -213,7 +196,7 @@ importers:
     dependencies:
       '@spyrothon/api': link:../packages/api
       '@spyrothon/sparx': link:../../sparx-design/packages/sparx
-      '@spyrothon/uikit': link:../packages/uikit
+      '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       js-cookie: 3.0.1
       luxon: 3.0.3
@@ -2084,9 +2067,6 @@ packages:
       aggregate-error: 3.1.0
     dev: false
 
-  /@popperjs/core/2.11.6:
-    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
-
   /@react-dnd/asap/5.0.2:
     resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
     dev: false
@@ -2658,18 +2638,6 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-
-  /@types/react-datepicker/4.4.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-g8DhWvYmaIMLzVrIEVLXncylyImyBaoPsEUr3yR13JDaaHoebhDorqnVv4tLkNGa8SjBB8SAOQvxD5jaPNBX8A==}
-    dependencies:
-      '@popperjs/core': 2.11.6
-      '@types/react': 18.0.20
-      date-fns: 2.29.3
-      react-popper: 2.3.0_r6q5zrenym2zg7je7hgi674bti
-    transitivePeerDependencies:
-      - react
-      - react-dom
-    dev: true
 
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
@@ -3794,10 +3762,6 @@ packages:
       image-size: 1.0.0
       mimer: 2.0.2
     dev: false
-
-  /date-fns/2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
-    engines: {node: '>=0.11'}
 
   /dayjs/1.11.5:
     resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
@@ -7357,22 +7321,6 @@ packages:
       reselect: 4.1.6
     dev: false
 
-  /react-datepicker/4.8.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-u69zXGHMpxAa4LeYR83vucQoUCJQ6m/WBsSxmUMu/M8ahTSVMMyiyQzauHgZA2NUr9y0FUgOAix71hGYUb6tvg==}
-    peerDependencies:
-      react: ^16.9.0 || ^17 || ^18
-      react-dom: ^16.9.0 || ^17 || ^18
-    dependencies:
-      '@popperjs/core': 2.11.6
-      classnames: 2.3.2
-      date-fns: 2.29.3
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-onclickoutside: 6.12.2_biqbaboplfbrettd7655fr4n2y
-      react-popper: 2.3.0_r6q5zrenym2zg7je7hgi674bti
-    dev: false
-
   /react-devtools-core/4.24.0:
     resolution: {integrity: sha512-Rw7FzYOOzcfyUPaAm9P3g0tFdGqGq2LLiAI+wjYcp6CsF3DeeMrRS3HZAho4s273C29G/DJhx0e8BpRE/QZNGg==}
     dependencies:
@@ -7421,9 +7369,11 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
 
   /react-feather/2.0.10_react@18.2.0:
     resolution: {integrity: sha512-BLhukwJ+Z92Nmdcs+EMw6dy1Z/VLiJTzEQACDUEnWMClhYnFykJCGWQx+NmwP/qQHGX/5CzQ+TGi8ofg2+HzVQ==}
@@ -7535,29 +7485,6 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
-
-  /react-onclickoutside/6.12.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-NMXGa223OnsrGVp5dJHkuKxQ4czdLmXSp5jSV9OqiCky9LOpPATn3vLldc+q5fK3gKbEHvr7J1u0yhBh/xYkpA==}
-    peerDependencies:
-      react: ^15.5.x || ^16.x || ^17.x || ^18.x
-      react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /react-popper/2.3.0_r6q5zrenym2zg7je7hgi674bti:
-    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
-    peerDependencies:
-      '@popperjs/core': ^2.0.0
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-    dependencies:
-      '@popperjs/core': 2.11.6
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-fast-compare: 3.2.0
-      warning: 4.0.3
 
   /react-reconciler/0.20.4_react@18.2.0:
     resolution: {integrity: sha512-kxERc4H32zV2lXMg/iMiwQHOtyqf15qojvkcZ5Ja2CPkjVohHw9k70pdDBwrnQhLVetUJBSYyqU3yqrlVTOajA==}
@@ -8107,6 +8034,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -8811,7 +8739,6 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: false
 
   /ufo/0.8.5:
     resolution: {integrity: sha512-e4+UtA5IRO+ha6hYklwj6r7BjiGMxS0O+UaSg9HbaTefg4kMkzj4tXzEBajRR+wkxf+golgAWKzLbytCUDMJAA==}
@@ -9046,11 +8973,6 @@ packages:
     dependencies:
       makeerror: 1.0.12
     dev: false
-
-  /warning/4.0.3:
-    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
-    dependencies:
-      loose-envify: 1.4.0
 
   /wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}

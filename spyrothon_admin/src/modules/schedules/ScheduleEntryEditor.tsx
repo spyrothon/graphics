@@ -7,7 +7,7 @@ import {
   ScheduleEntry,
 } from "@spyrothon/api";
 import { Button, Card, DurationInput, Header, Stack } from "@spyrothon/sparx";
-import { SaveState, useSaveable } from "@spyrothon/uikit";
+import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

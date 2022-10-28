@@ -2,7 +2,7 @@ import * as React from "react";
 import { DateTime } from "luxon";
 import { RunParticipant } from "@spyrothon/api";
 import { Anchor, Header, Stack, Text } from "@spyrothon/sparx";
-import { formatDuration } from "@spyrothon/uikit";
+import { formatDuration } from "@spyrothon/utils";
 
 import { useSafeSelector } from "../../Store";
 import { getInterview } from "../interviews/InterviewStore";

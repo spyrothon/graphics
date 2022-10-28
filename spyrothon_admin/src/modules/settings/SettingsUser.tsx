@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button, Card, FormControl, Header, Section, Stack, TextInput } from "@spyrothon/sparx";
-import { useSaveable } from "@spyrothon/uikit";
+import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

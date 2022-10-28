@@ -1,5 +1,4 @@
 import * as React from "react";
-import classNames from "classnames";
 import { Button, Spacer, Stack, Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -27,7 +26,7 @@ export default function LiveSidebar(props: LiveSidebarProps) {
 
   if (currentEntry == null)
     return (
-      <div className={classNames(styles.container, className)}>
+      <div className={className}>
         <Text>This schedule doesn't have any entries</Text>
       </div>
     );

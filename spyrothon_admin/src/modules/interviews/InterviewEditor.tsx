@@ -1,5 +1,4 @@
 import * as React from "react";
-import classNames from "classnames";
 import { Interview, ScheduleEntry } from "@spyrothon/api";
 import {
   Button,
@@ -11,7 +10,7 @@ import {
   TextArea,
   TextInput,
 } from "@spyrothon/sparx";
-import { formatDuration, SaveState, useSaveable } from "@spyrothon/uikit";
+import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

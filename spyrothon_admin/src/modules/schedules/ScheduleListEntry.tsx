@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { useDrag, useDrop } from "react-dnd";
 import { RunParticipant, ScheduleEntry } from "@spyrothon/api";
 import { Stack, Text } from "@spyrothon/sparx";
-import { formatDuration } from "@spyrothon/uikit";
+import { formatDuration } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

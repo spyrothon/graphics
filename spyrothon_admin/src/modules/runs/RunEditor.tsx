@@ -11,7 +11,7 @@ import {
   TextArea,
   TextInput,
 } from "@spyrothon/sparx";
-import { formatDuration, SaveState, useSaveable } from "@spyrothon/uikit";
+import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 

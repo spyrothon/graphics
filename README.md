@@ -2,7 +2,7 @@
 
 This is the monorepo for all of the software that Spyrothon uses. The architecture is split between
 shared libraries and individual applications. Shared libraries live under `packages/` and include
-things like the API client and UIKit, while all individual applications are at the top level and are
+things like the API client and Utils, while all individual applications are at the top level and are
 named `spyrothon_*` accordingly.
 
 `spyrothon_admin` is the production management system that Spyrothon uses, including scheduling,

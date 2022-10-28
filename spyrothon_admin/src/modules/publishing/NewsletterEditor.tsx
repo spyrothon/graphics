@@ -12,7 +12,7 @@ import {
   TextArea,
   TextInput,
 } from "@spyrothon/sparx";
-import { SaveState, useSaveable } from "@spyrothon/uikit";
+import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import { AppRoutes } from "@admin/Constants";
 import getPublicAppURL from "@admin/hooks/getPublicAppURL";

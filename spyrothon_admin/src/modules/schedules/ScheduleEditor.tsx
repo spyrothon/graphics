@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ScheduleEntryType } from "@spyrothon/api";
-import { Stack, Tabs } from "@spyrothon/sparx";
+import { Stack } from "@spyrothon/sparx";
 
 import { useSafeSelector } from "../../Store";
 import Dashboard from "../dashboards/Dashboard";
@@ -14,7 +14,6 @@ import styles from "./ScheduleEditor.module.css";
 
 export default function ScheduleEditor() {
   const selectedScheduleEntry = useSafeSelector((state) => ScheduleStore.getSelectedEntry(state));
-  const [activeTab, setActiveTab] = React.useState("content");
 
   const entryType =
     selectedScheduleEntry?.runId != null
