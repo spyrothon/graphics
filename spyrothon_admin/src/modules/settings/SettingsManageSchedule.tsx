@@ -1,22 +1,21 @@
 import * as React from "react";
 import { Schedule } from "@spyrothon/api";
-import { Button, Card, FormControl, Header, Section, Stack, TextInput } from "@spyrothon/sparx";
+import {
+  Button,
+  Card,
+  DateTimeInput,
+  FormControl,
+  Header,
+  Section,
+  Stack,
+  TextInput,
+} from "@spyrothon/sparx";
 import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
 import { updateSchedule } from "../schedules/ScheduleActions";
-
-// This is hideous, but `datetime-local` doesn't accept timezones...
-function toDatetimeLocal(date?: Date) {
-  if (date == null) return "";
-
-  const tzOffset = date.getTimezoneOffset();
-  const localized = new Date(date);
-  localized.setMinutes(date.getMinutes() + tzOffset);
-  return localized.toISOString().slice(0, 16);
-}
 
 export default function SettingsGeneral() {
   const dispatch = useSafeDispatch();
@@ -59,28 +58,16 @@ export default function SettingsGeneral() {
 
             <Stack direction="horizontal" justify="stretch">
               <FormControl label="Start Time">
-                <TextInput
-                  type="datetime-local"
+                <DateTimeInput
                   required
-                  value={toDatetimeLocal(editedSchedule.startTime)}
-                  onChange={(startTime) =>
-                    setEditedSchedule({
-                      ...editedSchedule,
-                      startTime: new Date(startTime.target.value),
-                    })
-                  }
+                  value={editedSchedule.startTime}
+                  onChange={(startTime) => setEditedSchedule({ ...editedSchedule, startTime })}
                 />
               </FormControl>
               <FormControl label="End Time">
-                <TextInput
-                  type="datetime-local"
-                  value={toDatetimeLocal(editedSchedule.endTime)}
-                  onChange={(endTime) =>
-                    setEditedSchedule({
-                      ...editedSchedule,
-                      endTime: new Date(endTime.target.value),
-                    })
-                  }
+                <DateTimeInput
+                  value={editedSchedule.endTime}
+                  onChange={(endTime) => setEditedSchedule({ ...editedSchedule, endTime })}
                 />
               </FormControl>
             </Stack>
