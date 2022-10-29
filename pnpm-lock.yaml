@@ -94,7 +94,7 @@ importers:
   spyrothon_admin:
     specifiers:
       '@spyrothon/api': workspace:*
-      '@spyrothon/sparx': ^0.2.1
+      '@spyrothon/sparx': ^0.2.2
       '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
@@ -127,7 +127,7 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
-      '@spyrothon/sparx': 0.2.1_biqbaboplfbrettd7655fr4n2y
+      '@spyrothon/sparx': 0.2.2_biqbaboplfbrettd7655fr4n2y
       '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       js-cookie: 3.0.1
@@ -163,7 +163,7 @@ importers:
   spyrothon_app:
     specifiers:
       '@spyrothon/api': workspace:*
-      '@spyrothon/sparx': ^0.2.1
+      '@spyrothon/sparx': ^0.2.2
       '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
@@ -195,7 +195,7 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
-      '@spyrothon/sparx': 0.2.1_biqbaboplfbrettd7655fr4n2y
+      '@spyrothon/sparx': 0.2.2_biqbaboplfbrettd7655fr4n2y
       '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       js-cookie: 3.0.1
@@ -2569,8 +2569,8 @@ packages:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
     dev: false
 
-  /@spyrothon/sparx/0.2.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-nsAca7K1ZG3ylkJzEoniDcwEV1GwIor4K7Tecv3oWOrGmXUcKAUf6r9x8KotGeSlw78li7kWgxnhuT9/za6/4w==}
+  /@spyrothon/sparx/0.2.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6LvOu3aN8i1cbGXRZHv8TBLtX52QNncZ63OGW++2dA//LnlS0E1kXXFxQFhKsTOfVdPvoMxhSGrDAeZYJ3qang==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
