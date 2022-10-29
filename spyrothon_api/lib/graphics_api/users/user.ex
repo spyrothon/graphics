@@ -7,6 +7,7 @@ defmodule GraphicsAPI.Users.User do
     :name,
     :password_hash,
     :role,
+    :theme,
     :inserted_at,
     :updated_at
   ]
@@ -14,7 +15,8 @@ defmodule GraphicsAPI.Users.User do
   @cast_fields [
     :name,
     :password,
-    :role
+    :role,
+    :theme
   ]
 
   @required_fields [
@@ -30,6 +32,7 @@ defmodule GraphicsAPI.Users.User do
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
     field(:role, Ecto.Enum, values: GraphicsAPI.Users.Permissions.roles())
+    field(:theme, :string)
 
     timestamps()
   end

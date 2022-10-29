@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { User } from "@spyrothon/api";
+import { UserWithPassword } from "@spyrothon/api";
 
 import API from "@admin/API";
 import { SafeDispatch } from "@admin/hooks/useDispatch";
@@ -24,9 +24,9 @@ export function logout(): AuthAction {
   };
 }
 
-export function updateMe(user: User, password: string) {
+export function updateMe(user: UserWithPassword) {
   return async (dispatch: SafeDispatch) => {
-    const updatedMe = await API.auth.updateMe({ ...user, password });
+    const updatedMe = await API.auth.updateMe(user);
     dispatch({ type: AuthActionType.AUTH_UPDATE_ME, user: updatedMe });
   };
 }

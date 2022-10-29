@@ -1,14 +1,10 @@
 import { APIClientSubject } from "../APIClientTypes";
-import type { SessionToken, User } from "../APITypes";
+import type { SessionToken, User, UserWithPassword } from "../APITypes";
 import Endpoints from "../Endpoints";
 
 interface LoginResponse {
   user: User;
   token: SessionToken;
-}
-
-interface UserWithPassword extends User {
-  password: string;
 }
 
 export class APIClientAuth extends APIClientSubject {

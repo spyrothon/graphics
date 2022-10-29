@@ -10,7 +10,7 @@ import styles from "./DashboardHeader.module.css";
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   const location = useLocation();
-  const isActive = href === location.pathname;
+  const isActive = location.pathname.startsWith(href);
 
   return (
     <Anchor href={href} buttonVariant={isActive ? "primary/filled" : "link"}>

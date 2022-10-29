@@ -7,6 +7,7 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 import { loadSession } from "./modules/auth/AuthActions";
 import AuthLogin from "./modules/auth/AuthLogin";
 import AuthLogout from "./modules/auth/AuthLogout";
+import AuthStore from "./modules/auth/AuthStore";
 import LiveDashboard from "./modules/live/LiveDashboard";
 import OBSManager from "./modules/obs/OBSManager";
 import PublishingDashboard from "./modules/publishing/PublishingDashboard";
@@ -25,6 +26,7 @@ import { useSafeSelector } from "./Store";
 export default function App() {
   const schedule = useSafeSelector(ScheduleStore.getSchedule);
   const dispatch = useSafeDispatch();
+  const user = useSafeSelector(AuthStore.getUser);
 
   React.useEffect(() => {
     (async function () {
@@ -45,7 +47,7 @@ export default function App() {
   if (schedule == null) return <div>Loading App</div>;
 
   return (
-    <AppContainer accent={Accent.PINK} theme={Theme.LIGHT}>
+    <AppContainer accent={Accent.PINK} theme={(user?.theme as Theme) ?? Theme.LIGHT}>
       <CurrentScheduleContext.Provider value={{ scheduleId: schedule.id, schedule }}>
         <RouterRoutes>
           <Route path={Routes.LOGIN} element={<AuthLogin />} />

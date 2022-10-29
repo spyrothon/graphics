@@ -1,5 +1,16 @@
 import * as React from "react";
-import { Button, Card, FormControl, Header, Section, Stack, TextInput } from "@spyrothon/sparx";
+import { User } from "@spyrothon/api";
+import {
+  Button,
+  Card,
+  FormControl,
+  Header,
+  Section,
+  SelectInput,
+  Stack,
+  TextInput,
+  Theme,
+} from "@spyrothon/sparx";
 import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -17,12 +28,24 @@ export default function SettingsUser() {
   const [password, setPassword] = React.useState("");
 
   const [handleSave, getSaveText] = useSaveable(async () => {
-    dispatch(updateMe(editedUser, password));
+    dispatch(updateMe({ ...editedUser, password }));
   });
 
   React.useEffect(() => {
     setEditedUser(user);
   }, [user]);
+
+  function savePreference(changes: Partial<User>) {
+    const edited = { ...user, ...changes };
+    setEditedUser(edited);
+    dispatch(updateMe(edited));
+  }
+
+  const themeOptions = [
+    { name: "Dark", value: Theme.DARK },
+    { name: "Light", value: Theme.LIGHT },
+  ];
+  const selectedTheme = themeOptions.find((option) => option.value === user.theme);
 
   return (
     <Section>
@@ -43,11 +66,23 @@ export default function SettingsUser() {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </FormControl>
+            <Button variant="primary" onClick={handleSave} disabled={password.length === 0}>
+              {getSaveText()}
+            </Button>
           </Stack>
         </Card>
-        <Button variant="primary" onClick={handleSave} disabled={password.length === 0}>
-          {getSaveText()}
-        </Button>
+        <Header tag="h2">Preferences</Header>
+        <Card>
+          <Stack spacing="space-lg">
+            <FormControl label="App Theme">
+              <SelectInput
+                selectedItem={selectedTheme}
+                items={themeOptions}
+                onSelect={(item) => savePreference({ theme: item?.value })}
+              />
+            </FormControl>
+          </Stack>
+        </Card>
       </Stack>
     </Section>
   );

@@ -206,6 +206,10 @@ export interface User {
   id: string;
   name: string;
   role?: string;
+  theme?: string;
+}
+export interface UserWithPassword extends User {
+  password?: string;
 }
 
 export interface SessionToken {
