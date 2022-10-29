@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SelectInput } from "@spyrothon/uikit";
+import { FormControl, SelectInput } from "@spyrothon/sparx";
 
 import { useOBSStore } from "./OBSStore";
 import type { OBSScene } from "./OBSTypes";
@@ -8,9 +8,8 @@ type OBSSceneSelectorProps = {
   label?: React.ReactNode;
   note?: React.ReactNode;
   selectedSceneName?: string;
-  marginless?: boolean;
   className?: string;
-  onChange: (entry?: OBSScene) => unknown;
+  onSelect: (entry?: OBSScene) => unknown;
 };
 
 export default function OBSSceneSelector(props: OBSSceneSelectorProps) {
@@ -18,29 +17,27 @@ export default function OBSSceneSelector(props: OBSSceneSelectorProps) {
     label = "OBS Scene",
     note = "Name of the scene to use in OBS.",
     selectedSceneName,
-    marginless,
     className,
-    onChange,
+    onSelect,
   } = props;
   const scenes = useOBSStore((state) => state.data.sceneList);
+  const sceneOptions = scenes.map((scene) => ({ name: scene.sceneName, value: scene }));
 
   const selected = React.useMemo(
-    () => scenes.find((entry) => entry.sceneName === selectedSceneName),
-    [selectedSceneName, scenes],
+    () => sceneOptions.find((entry) => entry.name === selectedSceneName),
+    [selectedSceneName, sceneOptions],
   );
 
   return (
-    <SelectInput
-      label={label}
-      note={note}
-      className={className}
-      items={scenes}
-      itemToString={(entry) => entry?.sceneName ?? "(unnamed)"}
-      value={selected}
-      marginless={marginless}
-      allowEmpty
-      emptyLabel="Select an OBS Scene"
-      onChange={onChange}
-    />
+    <FormControl label={label} note={note}>
+      <SelectInput
+        className={className}
+        items={sceneOptions}
+        renderItem={(entry) => entry?.name ?? "(unnamed)"}
+        selectedItem={selected}
+        renderPlaceholder={() => "Select an OBS Scene"}
+        onSelect={(entry) => onSelect(entry?.value)}
+      />
+    </FormControl>
   );
 }

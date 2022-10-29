@@ -4,7 +4,7 @@ packages:
   - "spyrothon_app"
   - "spyrothon_graphics"
   - "packages/api"
-  - "packages/uikit"
+  - "packages/utils"
 
   # Vendored stuff
   - "packages/render-api"

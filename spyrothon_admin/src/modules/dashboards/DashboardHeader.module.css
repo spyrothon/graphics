@@ -1,21 +1,13 @@
 .container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 16px;
   background-color: var(--background-secondary);
 }
 
 .main {
   flex: 0 0 auto;
-  margin-right: 16px;
 }
 
 .pages {
   flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
 }
 
 .right {

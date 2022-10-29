@@ -1,12 +1,20 @@
 import * as React from "react";
-import { Button, Header, Text, TextInput, useSaveable } from "@spyrothon/uikit";
+import {
+  Button,
+  Card,
+  FormControl,
+  Header,
+  Section,
+  Stack,
+  Text,
+  TextInput,
+} from "@spyrothon/sparx";
+import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
 import { updateSchedule } from "../schedules/ScheduleActions";
-
-import styles from "./SettingsDashboard.module.css";
 
 export default function SettingsStreamTemplates() {
   const dispatch = useSafeDispatch();
@@ -36,37 +44,49 @@ export default function SettingsStreamTemplates() {
   });
 
   return (
-    <div className={styles.section}>
-      <Header size={Header.Sizes.H2}>Stream Titles</Header>
-      <Text>
-        Use these templates to automatically set the Stream Title on Twitch based on the current
-        schedule entry.
-        <br />
-        Interpolate values into the strings with <code>{"{{ value }}"}</code>.
-      </Text>
-      <TextInput
-        label="Run Title Template"
-        note="Available values are: gameName, categoryName, runners."
-        value={runTitleTemplate}
-        onChange={(event) => setRunTemplate(event.target.value)}
-      />
-      <TextInput
-        label="Interview Title Template"
-        note="Available values are: interviewees, interviewers."
-        value={interviewTitleTemplate}
-        onChange={(event) => setInterviewTemplate(event.target.value)}
-        autoFocus
-      />
-      <TextInput
-        label="Break Title Template"
-        note="No available interpolations currently."
-        value={breakTitleTemplate}
-        onChange={(event) => setBreakTemplate(event.target.value)}
-        autoFocus
-      />
-      <Button className={styles.setCurrentButton} onClick={handleSave}>
-        {getSaveText()}
-      </Button>
-    </div>
+    <Section>
+      <Stack spacing="space-lg">
+        <div>
+          <Header tag="h2">Stream Titles</Header>
+          <Text>
+            Use these templates to automatically set the Stream Title on Twitch based on the current
+            schedule entry.
+            <br />
+            Interpolate values into the strings with <code>{"{{ value }}"}</code>.
+          </Text>
+        </div>
+        <Card>
+          <Stack spacing="space-lg">
+            <FormControl
+              label="Run Title Template"
+              note="Available values are: gameName, categoryName, runners.">
+              <TextInput
+                value={runTitleTemplate}
+                onChange={(event) => setRunTemplate(event.target.value)}
+              />
+            </FormControl>
+            <FormControl
+              label="Interview Title Template"
+              note="Available values are: interviewees, interviewers.">
+              <TextInput
+                value={interviewTitleTemplate}
+                onChange={(event) => setInterviewTemplate(event.target.value)}
+                autoFocus
+              />
+            </FormControl>
+            <FormControl label="Break Title Template" note="No available interpolations currently.">
+              <TextInput
+                value={breakTitleTemplate}
+                onChange={(event) => setBreakTemplate(event.target.value)}
+                autoFocus
+              />
+            </FormControl>
+          </Stack>
+        </Card>
+        <Button variant="primary" onClick={handleSave}>
+          {getSaveText()}
+        </Button>
+      </Stack>
+    </Section>
   );
 }

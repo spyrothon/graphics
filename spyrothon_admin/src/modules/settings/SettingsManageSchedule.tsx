@@ -1,13 +1,21 @@
 import * as React from "react";
 import { Schedule } from "@spyrothon/api";
-import { Button, DateTimeInput, Header, TextInput, useSaveable } from "@spyrothon/uikit";
+import {
+  Button,
+  Card,
+  DateTimeInput,
+  FormControl,
+  Header,
+  Section,
+  Stack,
+  TextInput,
+} from "@spyrothon/sparx";
+import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
 import { updateSchedule } from "../schedules/ScheduleActions";
-
-import styles from "./SettingsManageSchedule.module.css";
 
 export default function SettingsGeneral() {
   const dispatch = useSafeDispatch();
@@ -24,106 +32,142 @@ export default function SettingsGeneral() {
   });
 
   return (
-    <div>
-      <Header size={Header.Sizes.H2}>Create a New Schedule</Header>
-      <TextInput
-        label="Event Name"
-        value={editedSchedule.name}
-        required
-        onChange={(event) => setEditedSchedule({ ...editedSchedule, name: event.target.value })}
-      />
-      <TextInput
-        label="Event Series"
-        value={editedSchedule.series}
-        required
-        onChange={(event) => setEditedSchedule({ ...editedSchedule, series: event.target.value })}
-      />
-      <div className={styles.dates}>
-        <DateTimeInput
-          className={styles.date}
-          label="Start Time"
-          required
-          value={editedSchedule.startTime}
-          onChange={(startTime) => setEditedSchedule({ ...editedSchedule, startTime })}
-        />
-        <DateTimeInput
-          className={styles.date}
-          label="End Time"
-          value={editedSchedule.endTime}
-          onChange={(endTime) => setEditedSchedule({ ...editedSchedule, endTime })}
-        />
-      </div>
-      <TextInput
-        label="Twitch URL"
-        value={editedSchedule.twitchUrl}
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, twitchUrl: event.target.value })
-        }
-      />
-      <TextInput
-        label="Logo URL"
-        value={editedSchedule.logoUrl}
-        onChange={(event) => setEditedSchedule({ ...editedSchedule, logoUrl: event.target.value })}
-      />
-      <TextInput
-        label="RTMP Host"
-        value={editedSchedule.rtmpHost}
-        onChange={(event) => setEditedSchedule({ ...editedSchedule, rtmpHost: event.target.value })}
-      />
+    <Section>
+      <Stack spacing="space-lg">
+        <Header tag="h2">Edit Schedule</Header>
+        <Card>
+          <Stack spacing="space-lg">
+            <FormControl label="Event Name">
+              <TextInput
+                value={editedSchedule.name}
+                required
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, name: event.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl label="Event Series">
+              <TextInput
+                value={editedSchedule.series}
+                required
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, series: event.target.value })
+                }
+              />
+            </FormControl>
 
-      <hr style={{ margin: "48px 0" }} />
-      <Header size={Header.Sizes.H3}>Break Screen Taglines</Header>
-      <TextInput
-        label="Break Left Title"
-        value={editedSchedule.breakLeftTitle}
-        placeholder="Stay fired up, Bob"
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, breakLeftTitle: event.target.value })
-        }
-      />
-      <TextInput
-        label="Break Left Subtitle"
-        value={editedSchedule.breakLeftSubtitle}
-        placeholder="We'll be right back"
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, breakLeftSubtitle: event.target.value })
-        }
-      />
+            <Stack direction="horizontal" justify="stretch">
+              <FormControl label="Start Time">
+                <DateTimeInput
+                  required
+                  value={editedSchedule.startTime}
+                  onChange={(startTime) => setEditedSchedule({ ...editedSchedule, startTime })}
+                />
+              </FormControl>
+              <FormControl label="End Time">
+                <DateTimeInput
+                  value={editedSchedule.endTime}
+                  onChange={(endTime) => setEditedSchedule({ ...editedSchedule, endTime })}
+                />
+              </FormControl>
+            </Stack>
 
-      <TextInput
-        label="Break Right Title"
-        value={editedSchedule.breakRightTitle}
-        placeholder="Stay fired up, Bob"
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, breakRightTitle: event.target.value })
-        }
-      />
-      <TextInput
-        label="Break Right Subtitle"
-        value={editedSchedule.breakRightSubtitle}
-        placeholder="We'll be right back"
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, breakRightSubtitle: event.target.value })
-        }
-      />
+            <FormControl label="Twitch URL">
+              <TextInput
+                value={editedSchedule.twitchUrl}
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, twitchUrl: event.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl label="Logo URL">
+              <TextInput
+                value={editedSchedule.logoUrl}
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, logoUrl: event.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl label="RTMP Host">
+              <TextInput
+                value={editedSchedule.rtmpHost}
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, rtmpHost: event.target.value })
+                }
+              />
+            </FormControl>
+          </Stack>
+        </Card>
+        <Button variant="primary" onClick={handleSave}>
+          {getSaveText()}
+        </Button>
 
-      <TextInput
-        label="Outro Title"
-        value={editedSchedule.outroTitle}
-        placeholder="See you again next time"
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, outroTitle: event.target.value })
-        }
-      />
-      <TextInput
-        label="Outro Subtitle"
-        value={editedSchedule.outroSubtitle}
-        onChange={(event) =>
-          setEditedSchedule({ ...editedSchedule, outroSubtitle: event.target.value })
-        }
-      />
+        <hr style={{ margin: "48px 0" }} />
+        <Header tag="h2">Break Screen Taglines</Header>
 
-      <Button onClick={handleSave}>{getSaveText()}</Button>
-    </div>
+        <Card>
+          <Stack spacing="space-lg">
+            <FormControl label="Break Left Title">
+              <TextInput
+                value={editedSchedule.breakLeftTitle}
+                placeholder="Stay fired up, Bob"
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, breakLeftTitle: event.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl label="Break Left Subtitle">
+              <TextInput
+                value={editedSchedule.breakLeftSubtitle}
+                placeholder="We'll be right back"
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, breakLeftSubtitle: event.target.value })
+                }
+              />
+            </FormControl>
+
+            <FormControl label="Break Right Title">
+              <TextInput
+                value={editedSchedule.breakRightTitle}
+                placeholder="Stay fired up, Bob"
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, breakRightTitle: event.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl label="Break Right Subtitle">
+              <TextInput
+                value={editedSchedule.breakRightSubtitle}
+                placeholder="We'll be right back"
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, breakRightSubtitle: event.target.value })
+                }
+              />
+            </FormControl>
+
+            <FormControl label="Outro Title">
+              <TextInput
+                value={editedSchedule.outroTitle}
+                placeholder="See you again next time"
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, outroTitle: event.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl label="Outro Subtitle">
+              <TextInput
+                value={editedSchedule.outroSubtitle}
+                onChange={(event) =>
+                  setEditedSchedule({ ...editedSchedule, outroSubtitle: event.target.value })
+                }
+              />
+            </FormControl>
+          </Stack>
+        </Card>
+        <Button variant="primary" onClick={handleSave}>
+          {getSaveText()}
+        </Button>
+      </Stack>
+    </Section>
   );
 }

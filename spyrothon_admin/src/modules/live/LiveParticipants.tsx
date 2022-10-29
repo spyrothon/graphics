@@ -1,7 +1,6 @@
 import * as React from "react";
-import classNames from "classnames";
 import type { Run } from "@spyrothon/api";
-import { Button, Checkbox, Header, Text } from "@spyrothon/uikit";
+import { Button, Card, Checkbox, Header, Stack, Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -84,57 +83,59 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
   }
 
   return (
-    <div className={classNames(className)}>
-      <Header size={Header.Sizes.H4}>Visibilities</Header>
-      <Text>Toggle which participants should be shown on the Layout</Text>
-      <div className={styles.columns}>
-        <div className={styles.checkboxes}>
-          {run.runners.map((runner) => (
-            <div key={runner.displayName} className={styles.row}>
-              <div className={styles.participantVisibility}>
+    <Card className={className}>
+      <Stack spacing="space-lg">
+        <Header tag="h4" variant="header-md/normal">
+          Visibilities
+        </Header>
+        <Text>Toggle which participants should be shown on the Layout</Text>
+        <Stack direction="horizontal" justify="stretch">
+          <Stack align="stretch">
+            {run.runners.map((runner) => (
+              <div key={runner.displayName} className={styles.row}>
                 <Checkbox
                   checked={runnerVisibilities[runner.displayName] ?? runner.visible}
                   onChange={(event) => setRunnerVisible(runner.displayName, event.target.checked)}
-                  label={runner.displayName}
+                  label={<Text variant="header-sm/normal">{runner.displayName}</Text>}
                 />
+                <div className={styles.participantWebcam}>
+                  <Checkbox
+                    checked={runnerWebcams[runner.displayName] ?? runner.hasWebcam}
+                    label="Has Webcam"
+                    onChange={(event) => setRunnerWebcam(runner.displayName, event.target.checked)}
+                  />
+                </div>
               </div>
-              <div className={styles.participantWebcam}>
-                <Checkbox
-                  checked={runnerWebcams[runner.displayName] ?? runner.hasWebcam}
-                  label="Has Webcam"
-                  onChange={(event) => setRunnerWebcam(runner.displayName, event.target.checked)}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </Stack>
 
-        <div className={styles.checkboxes}>
-          {run.commentators.map((commentator) => (
-            <div key={commentator.displayName} className={styles.row}>
-              <div className={styles.participantVisibility}>
+          <Stack align="stretch">
+            {run.commentators.map((commentator) => (
+              <div key={commentator.displayName} className={styles.row}>
                 <Checkbox
                   checked={commentatorVisibilities[commentator.displayName] ?? commentator.visible}
                   onChange={(event) =>
                     setCommentatorVisible(commentator.displayName, event.target.checked)
                   }
-                  label={commentator.displayName}
+                  label={<Text variant="header-sm/normal">{commentator.displayName}</Text>}
                 />
+                <div className={styles.participantWebcam}>
+                  <Checkbox
+                    checked={commentatorWebcams[commentator.displayName] ?? commentator.hasWebcam}
+                    label="Has Webcam"
+                    onChange={(event) =>
+                      setCommentatorWebcam(commentator.displayName, event.target.checked)
+                    }
+                  />
+                </div>
               </div>
-              <div className={styles.participantWebcam}>
-                <Checkbox
-                  checked={commentatorWebcams[commentator.displayName] ?? commentator.hasWebcam}
-                  label="Has Webcam"
-                  onChange={(event) =>
-                    setCommentatorWebcam(commentator.displayName, event.target.checked)
-                  }
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <Button onClick={handleSave}>Save Visibilities</Button>
-    </div>
+            ))}
+          </Stack>
+        </Stack>
+        <Button variant="primary" onClick={handleSave}>
+          Save Visibilities
+        </Button>
+      </Stack>
+    </Card>
   );
 }

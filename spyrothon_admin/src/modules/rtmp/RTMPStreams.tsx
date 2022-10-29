@@ -1,6 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
-import { formatDuration, Header, Text } from "@spyrothon/uikit";
+import { Header, Text } from "@spyrothon/sparx";
+import { formatDuration } from "@spyrothon/utils";
 
 import getRTMPStats, { RTMPStream } from "./getRTMPStats";
 
@@ -21,7 +22,7 @@ function RTMPStreamStat({ stream }: { stream: RTMPStream }) {
 
   return (
     <div className={styles.stream}>
-      <Text className={styles.streamKey} marginless>
+      <Text variant="header-sm/normal">
         {streamKey}
         {uptimeMillis != null ? (
           <span className={styles.uptime}>
@@ -30,7 +31,7 @@ function RTMPStreamStat({ stream }: { stream: RTMPStream }) {
           </span>
         ) : null}
       </Text>
-      <Text color={Text.Colors.MUTED} size={Text.Sizes.SIZE_14} marginless>
+      <Text variant="text-sm/secondary">
         <span className={styles.bitrate}>
           {videoBitrate != null ? `Video: ${(videoBitrate / 1000).toFixed(0)}kbps` : null}
         </span>
@@ -38,7 +39,7 @@ function RTMPStreamStat({ stream }: { stream: RTMPStream }) {
           {audioBitrate != null ? `Audio: ${(audioBitrate / 1000).toFixed(0)}kbps` : null}
         </span>
       </Text>
-      <Text color={Text.Colors.MUTED} size={Text.Sizes.SIZE_14} marginless>
+      <Text variant="text-sm/secondary">
         Resolution: {videoWidth}x{videoHeight} @ {frameRate}fps
       </Text>
     </div>
@@ -68,7 +69,9 @@ export default function RTMPStreams(props: RTMPStreamsProps) {
 
   return (
     <div className={classNames(styles.container, className)}>
-      <Header size={Header.Sizes.H4}>RTMP Stats</Header>
+      <Header variant="header-md/normal" tag="h4">
+        RTMP Stats
+      </Header>
       {streams.map((stream) => (
         <RTMPStreamStat key={stream.streamKey} stream={stream} />
       ))}

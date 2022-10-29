@@ -1,15 +1,21 @@
 import * as React from "react";
-import classNames from "classnames";
 import type { Interview, InterviewQuestion } from "@spyrothon/api";
-import { Button, Header, NumberInput, SelectInput, Text } from "@spyrothon/uikit";
+import {
+  Button,
+  Card,
+  FormControl,
+  Header,
+  SelectInput,
+  Stack,
+  Text,
+  TextInput,
+} from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import * as InterviewStore from "../../modules/interviews/InterviewStore";
 import { useSafeSelector } from "../../Store";
 import { persistInterview } from "../interviews/InterviewActions";
-
-import styles from "./LiveInterviewInfo.module.css";
 
 type LiveRunInfoProps = {
   interviewId: string;
@@ -40,6 +46,13 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
 
   if (interview == null) return null;
   const { questions, interviewees } = interview;
+  const questionOptions = questions.map((question) => ({
+    name: question.question,
+    value: question,
+  }));
+  const selectedQuestionOption = questionOptions.find(
+    (option) => option.value === selectedQuestion,
+  );
 
   function setQuestion(newQuestion?: InterviewQuestion) {
     if (newQuestion == null) {
@@ -96,65 +109,68 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
   }
 
   return (
-    <div className={classNames(className)}>
-      <Header size={Header.Sizes.H4}>Questions</Header>
-      <SelectInput
-        value={selectedQuestion}
-        items={questions}
-        itemToString={(q) => q?.question ?? ""}
-        onChange={(question) => setQuestion(question)}
-      />
-      <div className={styles.splits}>
-        <div className={styles.split}>
-          {selectedQuestion != null ? (
-            <>
-              <Text size={Text.Sizes.SIZE_20}>
-                <strong>Answer:</strong> {selectedQuestion?.answer}
-              </Text>
-              <Text size={Text.Sizes.SIZE_20}>
-                <strong>Points:</strong> {selectedQuestion?.score}
-              </Text>
-              <Button
-                onClick={() => toggle("showQuestion")}
-                color={
-                  selectedQuestion?.showQuestion ? Button.Colors.PRIMARY : Button.Colors.DEFAULT
-                }>
-                {selectedQuestion?.showQuestion ? "Hide Question" : "Show Question"}
-              </Button>
-              <Button
-                onClick={() => toggle("showHint")}
-                color={selectedQuestion?.showHint ? Button.Colors.PRIMARY : Button.Colors.DEFAULT}>
-                {selectedQuestion?.showHint ? "Hide Hint" : "Show Hint"}
-              </Button>
-              <Button
-                onClick={() => toggle("showAnswer")}
-                color={
-                  selectedQuestion?.showAnswer ? Button.Colors.PRIMARY : Button.Colors.DEFAULT
-                }>
-                {selectedQuestion?.showAnswer ? "Hide Answer" : "Show Answer"}
-              </Button>
-            </>
-          ) : null}
-        </div>
+    <Card className={className}>
+      <Stack spacing="space-lg">
+        <Header tag="h4" variant="header-md/normal">
+          Questions
+        </Header>
+        <SelectInput
+          selectedItem={selectedQuestionOption}
+          items={questionOptions}
+          renderItem={(question) => question?.name ?? ""}
+          onSelect={(question) => setQuestion(question?.value)}
+        />
+        <Stack direction="horizontal" spacing="space-lg">
+          <Stack>
+            {selectedQuestion != null ? (
+              <>
+                <Text variant="text-lg/normal">
+                  <strong>Answer:</strong> {selectedQuestion?.answer}
+                </Text>
+                <Text variant="text-lg/normal">
+                  <strong>Points:</strong> {selectedQuestion?.score}
+                </Text>
+                <Button
+                  onClick={() => toggle("showQuestion")}
+                  color={selectedQuestion?.showQuestion ? "primary" : "default"}>
+                  {selectedQuestion?.showQuestion ? "Hide Question" : "Show Question"}
+                </Button>
+                <Button
+                  onClick={() => toggle("showHint")}
+                  color={selectedQuestion?.showHint ? "primary" : "default"}>
+                  {selectedQuestion?.showHint ? "Hide Hint" : "Show Hint"}
+                </Button>
+                <Button
+                  onClick={() => toggle("showAnswer")}
+                  color={selectedQuestion?.showAnswer ? "primary" : "default"}>
+                  {selectedQuestion?.showAnswer ? "Hide Answer" : "Show Answer"}
+                </Button>
+              </>
+            ) : null}
+          </Stack>
 
-        <div className={styles.split}>
-          <Header>Scores</Header>
-          {interviewees.map((participant) => (
-            <NumberInput
-              key={participant.displayName}
-              label={participant.displayName}
-              value={scores[participant.displayName] ?? 0}
-              onChange={(score) =>
-                setScore(
-                  participant.displayName,
-                  score.target.value === "" ? undefined : parseInt(score.target.value),
-                )
-              }
-            />
-          ))}
-          <Button onClick={handleSaveScores}>Save Scores</Button>
-        </div>
-      </div>
-    </div>
+          <Stack>
+            <Header tag="h4">Scores</Header>
+            {interviewees.map((participant) => (
+              <FormControl key={participant.displayName} label={participant.displayName}>
+                <TextInput
+                  type="number"
+                  value={scores[participant.displayName] ?? 0}
+                  onChange={(score) =>
+                    setScore(
+                      participant.displayName,
+                      score.target.value === "" ? undefined : parseInt(score.target.value),
+                    )
+                  }
+                />
+              </FormControl>
+            ))}
+            <Button variant="primary" onClick={handleSaveScores}>
+              Save Scores
+            </Button>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Card>
   );
 }

@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Remark } from "react-remark";
 import { Article as ArticleType, Newsletter as NewsletterType } from "@spyrothon/api";
-import { Anchor, Header, Text } from "@spyrothon/uikit";
+import { Anchor, Card, Header, Markdown, Text } from "@spyrothon/sparx";
 
 import API from "@app/API";
 
@@ -18,15 +17,13 @@ function Article(props: ArticleProps) {
 
   return (
     <section className={styles.article}>
-      <Header marginless id={article.id} size={Header.Sizes.H2}>
+      <Header tag="h2" id={article.id}>
         {article.title}
       </Header>
       {article.authorName != null ? (
-        <Text marginless size={Text.Sizes.SIZE_16} color={Text.Colors.MUTED}>
-          by {article.authorName}
-        </Text>
+        <Text variant="text-md/secondary">by {article.authorName}</Text>
       ) : null}
-      <Remark>{article.content}</Remark>
+      <Markdown>{article.content}</Markdown>
     </section>
   );
 }
@@ -56,51 +53,59 @@ export default function Newsletter(props: NewsletterProps) {
     <FixedWidthLayout>
       <div className={styles.container}>
         <main className={styles.newsletterContent}>
-          <Header size={Header.Sizes.H1} marginless>
-            {newsletter.title}
-          </Header>
-          <Text size={Text.Sizes.SIZE_20} color={Text.Colors.MUTED}>
+          <Header tag="h1">{newsletter.title}</Header>
+          <Text variant="text-lg/secondary">
             Published {newsletter.publishedAt?.toLocaleDateString()}
           </Text>
 
-          <Remark>{newsletter.introduction}</Remark>
+          <Markdown>{newsletter.introduction}</Markdown>
 
           {articles.map((article) => (
             <Article key={article.id} article={article} />
           ))}
         </main>
-        <aside className={styles.sidebar}>
-          <Header size={Header.Sizes.H4} className={styles.sidebarHeader}>
+        <Card className={styles.sidebar}>
+          <Header tag="h2" variant="header-md/normal">
             Articles
           </Header>
           <ul>
             {articles.map((article) => (
               <li key={article.id}>
-                <a href={`#${article.id}`}>{article.title}</a>
+                <Anchor href={`#${article.id}`}>{article.title}</Anchor>
               </li>
             ))}
           </ul>
 
-          <Header size={Header.Sizes.H4} className={styles.sidebarHeader}>
+          <Header tag="h2" variant="header-md/normal">
             Contact
           </Header>
-          <p>If you have ideas for things we should write about next, let us know!</p>
+          <Text variant="text-sm/normal">
+            If you have ideas for things we should write about next, let us know!
+          </Text>
           <ul>
             <li>
-              Twitter: <Anchor href="https://twitter.com/spyrothon">@spyrothon</Anchor>
+              <Text variant="text-sm/normal">
+                Twitter: <Anchor href="https://twitter.com/spyrothon">@spyrothon</Anchor>
+              </Text>
             </li>
             <li>
-              Twitch: <Anchor href="https://twitch.tv/spyrothon">Spyrothon</Anchor>
+              <Text variant="text-sm/normal">
+                Twitch: <Anchor href="https://twitch.tv/spyrothon">Spyrothon</Anchor>
+              </Text>
             </li>
             <li>
-              <Anchor href="https://discord.gg/fCvfnfk">Discord</Anchor>
+              <Text variant="text-sm/normal">
+                <Anchor href="https://discord.gg/fCvfnfk">Discord</Anchor>
+              </Text>
             </li>
             <li>
-              <Anchor href="https://youtube.com/channel/UCq-pkx-6-BB1Ns7ETmzY6-g">YouTube</Anchor>
+              <Text variant="text-sm/normal">
+                <Anchor href="https://youtube.com/channel/UCq-pkx-6-BB1Ns7ETmzY6-g">YouTube</Anchor>
+              </Text>
             </li>
           </ul>
 
-          <Header size={Header.Sizes.H4} className={styles.sidebarHeader}>
+          <Header tag="h2" variant="header-md/normal">
             Other Links
           </Header>
           <ul>
@@ -113,7 +118,7 @@ export default function Newsletter(props: NewsletterProps) {
               </Anchor>
             </li>
           </ul>
-        </aside>
+        </Card>
       </div>
     </FixedWidthLayout>
   );

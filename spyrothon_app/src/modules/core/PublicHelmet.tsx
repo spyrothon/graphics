@@ -7,6 +7,7 @@ type PublicHelmetProps = {
 
 export default function PublicHelmet(props: PublicHelmetProps) {
   const { className } = props;
+
   return (
     <Helmet>
       <title>Spyrothon</title>

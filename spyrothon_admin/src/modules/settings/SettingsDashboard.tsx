@@ -20,5 +20,5 @@ export default function SettingsDashboard() {
     );
   }
 
-  return <Dashboard fullPage renderSidebar={renderSidebar} renderMain={renderMain} />;
+  return <Dashboard renderSidebar={renderSidebar} renderMain={renderMain} />;
 }

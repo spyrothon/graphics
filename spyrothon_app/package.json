@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@spyrothon/api": "workspace:*",
-    "@spyrothon/uikit": "workspace:*",
+    "@spyrothon/sparx": "^0.2.2",
+    "@spyrothon/utils": "workspace:*",
     "classnames": "^2.3.1",
     "js-cookie": "^3.0.1",
     "luxon": "^3.0.3",
@@ -25,7 +26,6 @@
     "react-feather": "^2.0.10",
     "react-helmet": "^6.1.0",
     "react-redux": "^8.0.2",
-    "react-remark": "^2.1.0",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",

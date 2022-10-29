@@ -55,33 +55,16 @@ importers:
       api: 5.0.0-beta.3_openapi-types@12.0.2
       oas: 18.4.4
 
-  packages/uikit:
+  packages/utils:
     specifiers:
       '@types/react': ^18.0.17
-      '@types/react-datepicker': ^4.4.2
       '@vitejs/plugin-react': ^2.1.0
-      classnames: ^2.3.1
-      eslint: ^8.23.1
-      react: 16.8 - 18
-      react-datepicker: ^4.8.0
-      react-dom: 16.8 - 18
-      react-feather: ^2.0.10
-      react-router-dom: 6.3.0
       typescript: ^4.6.4
       vite: ^3.1.0
-    dependencies:
-      classnames: 2.3.2
-      react: 18.2.0
-      react-datepicker: 4.8.0_biqbaboplfbrettd7655fr4n2y
-      react-dom: 18.2.0_react@18.2.0
-      react-feather: 2.0.10_react@18.2.0
-      react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@types/react': 18.0.20
-      '@types/react-datepicker': 4.4.2_biqbaboplfbrettd7655fr4n2y
       '@vitejs/plugin-react': 2.1.0_vite@3.1.2
-      eslint: 8.23.1
-      typescript: 4.8.3
+      typescript: 4.8.4
       vite: 3.1.2
 
   sprobothon:
@@ -111,7 +94,8 @@ importers:
   spyrothon_admin:
     specifiers:
       '@spyrothon/api': workspace:*
-      '@spyrothon/uikit': workspace:*
+      '@spyrothon/sparx': ^0.2.2
+      '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
       '@types/react': ^18.0.17
@@ -143,7 +127,8 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
-      '@spyrothon/uikit': link:../packages/uikit
+      '@spyrothon/sparx': 0.2.2_biqbaboplfbrettd7655fr4n2y
+      '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       js-cookie: 3.0.1
       luxon: 3.0.3
@@ -178,7 +163,8 @@ importers:
   spyrothon_app:
     specifiers:
       '@spyrothon/api': workspace:*
-      '@spyrothon/uikit': workspace:*
+      '@spyrothon/sparx': ^0.2.2
+      '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
       '@types/react': ^18.0.17
@@ -199,7 +185,6 @@ importers:
       react-feather: ^2.0.10
       react-helmet: ^6.1.0
       react-redux: ^8.0.2
-      react-remark: ^2.1.0
       react-router-dom: ^6.3.0
       redux: ^4.2.0
       redux-thunk: ^2.4.1
@@ -210,7 +195,8 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
-      '@spyrothon/uikit': link:../packages/uikit
+      '@spyrothon/sparx': 0.2.2_biqbaboplfbrettd7655fr4n2y
+      '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       js-cookie: 3.0.1
       luxon: 3.0.3
@@ -222,7 +208,6 @@ importers:
       react-feather: 2.0.10_react@18.2.0
       react-helmet: 6.1.0_react@18.2.0
       react-redux: 8.0.2_3scyx54fe4cnnff6navzqxutae
-      react-remark: 2.1.0_react@18.2.0
       react-router-dom: 6.4.0_biqbaboplfbrettd7655fr4n2y
       redux: 4.2.0
       redux-thunk: 2.4.1_redux@4.2.0
@@ -1734,6 +1719,22 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconscout/react-unicons-solid/0.0.3_react@18.2.0:
+    resolution: {integrity: sha512-oApQfBntjHLvUNbXL9jObCziPJLV0KTa1vqcYE+XD4dcB7e0/CHJgRzNOoBfPNUgZ09Af5ub4Z4cz+eYJNMydw==}
+    peerDependencies:
+      react: '>=15.0.0 <17.0.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@iconscout/react-unicons/1.1.6_react@18.2.0:
+    resolution: {integrity: sha512-BnyVvBew7Vm1lvL8+qyqjchUbkVHlDyNAlN+r5b+0P0KrkQ66BHPBuJEJ2faT89L8qRu+TohE7dHMV+bndje3Q==}
+    peerDependencies:
+      react: '>=15.0.0 <17.0.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@jest/create-cache-key-function/27.5.1:
     resolution: {integrity: sha512-dmH1yW+makpTSURTy8VzdUwFnfQh1G8R+DxO2Ho2FFmBbKFEVm+3jWdvFhE2VqB/LATCTokkP0dotjyQyw5/AQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -2088,9 +2089,6 @@ packages:
       '@octokit/webhooks-types': 6.3.6
       aggregate-error: 3.1.0
     dev: false
-
-  /@popperjs/core/2.11.6:
-    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
 
   /@react-dnd/asap/5.0.2:
     resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
@@ -2571,6 +2569,26 @@ packages:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
     dev: false
 
+  /@spyrothon/sparx/0.2.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6LvOu3aN8i1cbGXRZHv8TBLtX52QNncZ63OGW++2dA//LnlS0E1kXXFxQFhKsTOfVdPvoMxhSGrDAeZYJ3qang==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@iconscout/react-unicons': 1.1.6_react@18.2.0
+      '@iconscout/react-unicons-solid': 0.0.3_react@18.2.0
+      autonumeric: 4.6.0
+      classnames: 2.3.2
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-remark: 2.1.0_react@18.2.0
+      uuid: 8.3.2
+      zustand: 3.7.2_react@18.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@tokenizer/token/0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: false
@@ -2669,18 +2687,6 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-
-  /@types/react-datepicker/4.4.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-g8DhWvYmaIMLzVrIEVLXncylyImyBaoPsEUr3yR13JDaaHoebhDorqnVv4tLkNGa8SjBB8SAOQvxD5jaPNBX8A==}
-    dependencies:
-      '@popperjs/core': 2.11.6
-      '@types/react': 18.0.20
-      date-fns: 2.29.3
-      react-popper: 2.3.0_r6q5zrenym2zg7je7hgi674bti
-    transitivePeerDependencies:
-      - react
-      - react-dom
-    dev: true
 
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
@@ -3186,6 +3192,11 @@ packages:
     resolution: {integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==}
     engines: {node: '>= 4.5.0'}
     hasBin: true
+    dev: false
+
+  /autonumeric/4.6.0:
+    resolution: {integrity: sha512-bYnD2oD9UMZBTxSWcvXH1MTcp0w+CUBfXe4HI1QJLGzJu+O27Ny5gqzRcFuDsZB9jrZ5SJjqAG0PieJsaUdTcg==}
+    requiresBuild: true
     dev: false
 
   /babel-core/7.0.0-bridge.0_@babel+core@7.19.1:
@@ -3738,6 +3749,10 @@ packages:
       validate.io-integer-array: 1.0.0
     dev: false
 
+  /compute-scroll-into-view/1.0.17:
+    resolution: {integrity: sha512-j4dx+Fb0URmzbwwMUrhqWM2BEWHdFGx+qZ9qqASHRPqvTYdqvWnHg0H1hIbcyLnvgnoNAVMlwkepyqM3DaIFUg==}
+    dev: false
+
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
@@ -3829,10 +3844,6 @@ packages:
       image-size: 1.0.0
       mimer: 2.0.2
     dev: false
-
-  /date-fns/2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
-    engines: {node: '>=0.11'}
 
   /dayjs/1.11.5:
     resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
@@ -4002,6 +4013,19 @@ packages:
   /dotenv/16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
+    dev: false
+
+  /downshift/6.1.12_react@18.2.0:
+    resolution: {integrity: sha512-7XB/iaSJVS4T8wGFT3WRXmSF1UlBHAA40DshZtkrIscIN+VC+Lh363skLxFTvJwtNgHxAMDGEHT4xsyQFWL+UA==}
+    peerDependencies:
+      react: '>=16.12.0'
+    dependencies:
+      '@babel/runtime': 7.19.0
+      compute-scroll-into-view: 1.0.17
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-is: 17.0.2
+      tslib: 2.4.0
     dev: false
 
   /ecdsa-sig-formatter/1.0.11:
@@ -7506,22 +7530,6 @@ packages:
       reselect: 4.1.6
     dev: false
 
-  /react-datepicker/4.8.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-u69zXGHMpxAa4LeYR83vucQoUCJQ6m/WBsSxmUMu/M8ahTSVMMyiyQzauHgZA2NUr9y0FUgOAix71hGYUb6tvg==}
-    peerDependencies:
-      react: ^16.9.0 || ^17 || ^18
-      react-dom: ^16.9.0 || ^17 || ^18
-    dependencies:
-      '@popperjs/core': 2.11.6
-      classnames: 2.3.2
-      date-fns: 2.29.3
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-onclickoutside: 6.12.2_biqbaboplfbrettd7655fr4n2y
-      react-popper: 2.3.0_r6q5zrenym2zg7je7hgi674bti
-    dev: false
-
   /react-devtools-core/4.24.0:
     resolution: {integrity: sha512-Rw7FzYOOzcfyUPaAm9P3g0tFdGqGq2LLiAI+wjYcp6CsF3DeeMrRS3HZAho4s273C29G/DJhx0e8BpRE/QZNGg==}
     dependencies:
@@ -7570,9 +7578,11 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
 
   /react-feather/2.0.10_react@18.2.0:
     resolution: {integrity: sha512-BLhukwJ+Z92Nmdcs+EMw6dy1Z/VLiJTzEQACDUEnWMClhYnFykJCGWQx+NmwP/qQHGX/5CzQ+TGi8ofg2+HzVQ==}
@@ -7684,29 +7694,6 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
-
-  /react-onclickoutside/6.12.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-NMXGa223OnsrGVp5dJHkuKxQ4czdLmXSp5jSV9OqiCky9LOpPATn3vLldc+q5fK3gKbEHvr7J1u0yhBh/xYkpA==}
-    peerDependencies:
-      react: ^15.5.x || ^16.x || ^17.x || ^18.x
-      react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /react-popper/2.3.0_r6q5zrenym2zg7je7hgi674bti:
-    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
-    peerDependencies:
-      '@popperjs/core': ^2.0.0
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-    dependencies:
-      '@popperjs/core': 2.11.6
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-fast-compare: 3.2.0
-      warning: 4.0.3
 
   /react-reconciler/0.20.4_react@18.2.0:
     resolution: {integrity: sha512-kxERc4H32zV2lXMg/iMiwQHOtyqf15qojvkcZ5Ja2CPkjVohHw9k70pdDBwrnQhLVetUJBSYyqU3yqrlVTOajA==}
@@ -8292,6 +8279,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -9010,7 +8998,6 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: false
 
   /ufo/0.8.5:
     resolution: {integrity: sha512-e4+UtA5IRO+ha6hYklwj6r7BjiGMxS0O+UaSg9HbaTefg4kMkzj4tXzEBajRR+wkxf+golgAWKzLbytCUDMJAA==}
@@ -9211,6 +9198,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: false
 
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
+
   /uuid/9.0.0:
     resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
@@ -9326,11 +9318,6 @@ packages:
     dependencies:
       makeerror: 1.0.12
     dev: false
-
-  /warning/4.0.3:
-    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
-    dependencies:
-      loose-envify: 1.4.0
 
   /wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}

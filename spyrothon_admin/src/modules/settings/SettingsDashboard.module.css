@@ -7,11 +7,5 @@
 }
 
 .main {
-  height: 100%;
-  overflow: scroll;
   padding: 16px;
-}
-
-.section {
-  margin-bottom: 48px;
 }

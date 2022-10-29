@@ -1,7 +1,6 @@
 import * as React from "react";
-import classNames from "classnames";
 import { Schedule } from "@spyrothon/api";
-import { Anchor, Button, Text } from "@spyrothon/uikit";
+import { Anchor, Button, Card, Stack, Text } from "@spyrothon/sparx";
 
 import CurrentScheduleContext from "./CurrentScheduleContext";
 
@@ -23,40 +22,38 @@ export default function ScheduleCard(props: ScheduleCardProps) {
   const isCurrent = schedule.id === currentScheduleId;
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <div className={styles.info}>
-        <Text size={Text.Sizes.SIZE_24} marginless>
-          {schedule.name}
-        </Text>
-        {schedule.twitchUrl != null ? (
-          <Text marginless>
-            Streaming on <Anchor href={schedule.twitchUrl}>{schedule.twitchUrl}</Anchor>
-          </Text>
-        ) : null}
-        <Text>{schedule.series}</Text>
-        <Text>
-          <strong>Starts:</strong> {timeString(schedule.startTime)}
-          {schedule.endTime != null ? (
-            <>
-              <br />
-              <strong>Ends:</strong> {timeString(schedule.endTime)}
-            </>
+    <Card className={className}>
+      <Stack direction="horizontal" justify="space-between">
+        <div className={styles.info}>
+          <Text variant="header-md/normal">{schedule.name}</Text>
+          {schedule.twitchUrl != null ? (
+            <Text>
+              Streaming on <Anchor href={schedule.twitchUrl}>{schedule.twitchUrl}</Anchor>
+            </Text>
           ) : null}
-        </Text>
-      </div>
-
-      <div className={styles.images}>
-        {schedule.logoUrl ? (
-          <img className={styles.logo} src={schedule.logoUrl} />
-        ) : (
-          <Text size={Text.Sizes.SIZE_20} color={Text.Colors.MUTED}>
-            No Logo
+          <Text>{schedule.series}</Text>
+          <Text>
+            <strong>Starts:</strong> {timeString(schedule.startTime)}
+            {schedule.endTime != null ? (
+              <>
+                <br />
+                <strong>Ends:</strong> {timeString(schedule.endTime)}
+              </>
+            ) : null}
           </Text>
-        )}
-        <Button onClick={onSelect} disabled={isCurrent}>
-          {isCurrent ? "Already Active" : "Use this Schedule"}
-        </Button>
-      </div>
-    </div>
+        </div>
+
+        <Stack align="end" justify="space-between">
+          {schedule.logoUrl ? (
+            <img className={styles.logo} src={schedule.logoUrl} />
+          ) : (
+            <Text variant="text-lg/secondary">No Logo</Text>
+          )}
+          <Button variant="primary" onClick={onSelect} disabled={isCurrent}>
+            {isCurrent ? "Already Active" : "Use this Schedule"}
+          </Button>
+        </Stack>
+      </Stack>
+    </Card>
   );
 }

@@ -20,5 +20,5 @@ export default function NewslettersDashboard() {
     );
   }
 
-  return <Dashboard fullPage renderSidebar={renderSidebar} renderMain={renderMain} />;
+  return <Dashboard renderSidebar={renderSidebar} renderMain={renderMain} />;
 }

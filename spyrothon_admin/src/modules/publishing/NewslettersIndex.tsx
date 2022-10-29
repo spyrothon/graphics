@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Newsletter } from "@spyrothon/api";
-import { Anchor, Header, NavLink, Text } from "@spyrothon/uikit";
+import { Anchor, Card, Header, Stack, Text } from "@spyrothon/sparx";
 
 import { Routes } from "@admin/Constants";
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -19,19 +19,21 @@ function NewsletterPreviw(props: NewsletterPreviewProps) {
   const { newsletter } = props;
 
   return (
-    <div className={styles.preview}>
-      <Header>{newsletter.title}</Header>
-      <Text className={styles.previewTitle}>{newsletter.introduction}</Text>
-      <div className={styles.previewExtra}>
-        <Text marginless>{newsletter.articles.length} Articles</Text>
-        <Text marginless>{newsletter.publishedAt?.toLocaleString()}</Text>
-        <Anchor
-          href={Routes.PUBLISHING_NEWSLETTERS_EDIT(newsletter.id)}
-          className={styles.editButton}>
-          Edit
-        </Anchor>
-      </div>
-    </div>
+    <Card className={styles.preview}>
+      <Stack spacing="space-lg">
+        <Header tag="h2">{newsletter.title}</Header>
+        <Text className={styles.previewTitle}>{newsletter.introduction}</Text>
+        <Stack direction="horizontal" align="center" justify="end">
+          <Text>{newsletter.articles.length} Articles</Text>
+          <Text>{newsletter.publishedAt?.toLocaleString()}</Text>
+          <Anchor
+            href={Routes.PUBLISHING_NEWSLETTERS_EDIT(newsletter.id)}
+            className={styles.editButton}>
+            Edit
+          </Anchor>
+        </Stack>
+      </Stack>
+    </Card>
   );
 }
 
@@ -44,11 +46,11 @@ export default function NewslettersIndex() {
   }, [dispatch]);
 
   return (
-    <div className={styles.container}>
-      <NavLink route={Routes.PUBLISHING_NEWSLETTERS_NEW} label="New Newsletter" />
+    <Stack spacing="space-lg" className={styles.container}>
+      <Anchor href={Routes.PUBLISHING_NEWSLETTERS_NEW}>New Newsletter</Anchor>
       {newsletters.map((newsletter) => (
         <NewsletterPreviw newsletter={newsletter} key={newsletter.id} />
       ))}
-    </div>
+    </Stack>
   );
 }

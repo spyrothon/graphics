@@ -1,11 +1,23 @@
 import * as React from "react";
-import { Header, NavLink, Text } from "@spyrothon/uikit";
+import { useLocation } from "react-router-dom";
+import { Anchor, Card, Header, Stack, Text } from "@spyrothon/sparx";
 
 import { Routes } from "../../Constants";
 import RemoteConnectionStatus from "../connection/RemoteConnectionStatus";
 import CurrentScheduleContext from "../schedules/CurrentScheduleContext";
 
 import styles from "./DashboardHeader.module.css";
+
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const location = useLocation();
+  const isActive = href === location.pathname;
+
+  return (
+    <Anchor href={href} buttonVariant={isActive ? "primary/filled" : "link"}>
+      {children}
+    </Anchor>
+  );
+}
 
 type DashboardHeaderProps = {
   name: React.ReactNode;
@@ -16,24 +28,24 @@ export default function DashboardHeader(props: DashboardHeaderProps) {
   const { schedule } = React.useContext(CurrentScheduleContext);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <Header size={Header.Sizes.H3} marginless>
-          {name}
-        </Header>
-        <Text size={Text.Sizes.SIZE_14} marginless>
-          {schedule.name}
-        </Text>
-      </div>
-      <div className={styles.pages}>
-        <NavLink route={Routes.SCHEDULE_EDITOR} label="Schedule Editor" />
-        <NavLink route={Routes.LIVE_DASHBOARD} label="Live Dashboard" />
-        <NavLink route={Routes.SETTINGS} label="Settings" />
-        <NavLink route={Routes.PUBLISHING} label="Publishing" />
-      </div>
-      <div className={styles.right}>
-        <RemoteConnectionStatus />
-      </div>
-    </div>
+    <Card>
+      <Stack align="center" direction="horizontal" spacing="space-lg" className={styles.container}>
+        <div className={styles.main}>
+          <Header tag="h3" variant="header-md/normal">
+            {name}
+          </Header>
+          <Text variant="text-sm/normal">{schedule.name}</Text>
+        </div>
+        <Stack align="center" direction="horizontal" spacing="space-lg" className={styles.pages}>
+          <NavLink href={Routes.SCHEDULE_EDITOR}>Schedule Editor</NavLink>
+          <NavLink href={Routes.LIVE_DASHBOARD}>Live Dashboard</NavLink>
+          <NavLink href={Routes.SETTINGS}>Settings</NavLink>
+          <NavLink href={Routes.PUBLISHING}>Publishing</NavLink>
+        </Stack>
+        <div className={styles.right}>
+          <RemoteConnectionStatus />
+        </div>
+      </Stack>
+    </Card>
   );
 }

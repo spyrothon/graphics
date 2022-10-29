@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Article } from "@spyrothon/api";
-import { Anchor, Header, NavLink, Text } from "@spyrothon/uikit";
+import { Anchor, Card, Header, Stack, Text } from "@spyrothon/sparx";
 
 import { Routes } from "@admin/Constants";
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -19,19 +19,21 @@ function ArticlePreview(props: ArticlePreviewProps) {
   const { article } = props;
 
   return (
-    <div className={styles.preview}>
-      <Header>{article.title}</Header>
-      <Text className={styles.previewTitle}>{article.content}</Text>
-      <div className={styles.previewExtra}>
-        {article.publishedAt != null ? (
-          <Text marginless>Published {article.publishedAt.toDateString()}</Text>
-        ) : null}
-        <Text marginless>Updated {article.updatedAt.toDateString()}</Text>
-        <Anchor href={Routes.PUBLISHING_ARTICLES_EDIT(article.id)} className={styles.editButton}>
-          Edit
-        </Anchor>
-      </div>
-    </div>
+    <Card>
+      <Stack spacing="space-lg">
+        <Header tag="h2">{article.title}</Header>
+        <Text className={styles.previewTitle}>{article.content.substring(0, 512)}</Text>
+        <div className={styles.previewExtra}>
+          {article.publishedAt != null ? (
+            <Text>Published {article.publishedAt.toDateString()}</Text>
+          ) : null}
+          <Text>Updated {article.updatedAt.toDateString()}</Text>
+          <Anchor href={Routes.PUBLISHING_ARTICLES_EDIT(article.id)} className={styles.editButton}>
+            Edit
+          </Anchor>
+        </div>
+      </Stack>
+    </Card>
   );
 }
 
@@ -44,11 +46,11 @@ export default function ArticlesIndex() {
   }, [dispatch]);
 
   return (
-    <div className={styles.container}>
-      <NavLink route={Routes.PUBLISHING_ARTICLES_NEW} label="New Article" />
+    <Stack spacing="space-lg">
+      <Anchor href={Routes.PUBLISHING_ARTICLES_NEW}>New Article</Anchor>
       {articles.map((article) => (
         <ArticlePreview article={article} key={article.id} />
       ))}
-    </div>
+    </Stack>
   );
 }

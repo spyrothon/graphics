@@ -1,17 +1,16 @@
 import * as React from "react";
-import classNames from "classnames";
 import { Interview, ScheduleEntry } from "@spyrothon/api";
 import {
-  Anchor,
   Button,
+  Card,
   DurationInput,
-  formatDuration,
+  FormControl,
   Header,
-  NumberInput,
-  SaveState,
+  Stack,
+  TextArea,
   TextInput,
-  useSaveable,
-} from "@spyrothon/uikit";
+} from "@spyrothon/sparx";
+import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -65,154 +64,154 @@ export default function InterviewEditor(props: InterviewEditorProps) {
     };
 
     return (
-      <Anchor onClick={() => originalValue != null && editor.updateField(field, originalValue)}>
+      <Button
+        variant="primary"
+        onClick={() => originalValue != null && editor.updateField(field, originalValue)}>
         Reset to {renderValue()}.
-      </Anchor>
+      </Button>
     );
   }
 
   function renderParticipantFields(type: "interviewers" | "interviewees", index: number) {
     return (
-      <div className={styles.runner}>
-        <div className={styles.inputRow}>
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label={index === 0 ? "Display Name" : undefined}
-            value={editor.getParticipantField(type, index, "displayName")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "displayName", event.target.value)
-            }
-          />
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label={index === 0 ? "Pronouns" : undefined}
-            value={editor.getParticipantField(type, index, "pronouns")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "pronouns", event.target.value)
-            }
-          />
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label={index === 0 ? "Twitch" : undefined}
-            value={editor.getParticipantField(type, index, "twitchName")}
-            onChange={(event) =>
-              editor.updateParticipantField(type, index, "twitchName", event.target.value)
-            }
-          />
-        </div>
-      </div>
+      <Card>
+        <Stack direction="horizontal" justify="stretch">
+          <FormControl label={index === 0 ? "Display Name" : undefined}>
+            <TextInput
+              value={editor.getParticipantField(type, index, "displayName")}
+              onChange={(event) =>
+                editor.updateParticipantField(type, index, "displayName", event.target.value)
+              }
+            />
+          </FormControl>
+          <FormControl label={index === 0 ? "Pronouns" : undefined}>
+            <TextInput
+              value={editor.getParticipantField(type, index, "pronouns")}
+              onChange={(event) =>
+                editor.updateParticipantField(type, index, "pronouns", event.target.value)
+              }
+            />
+          </FormControl>
+          <FormControl label={index === 0 ? "Twitch" : undefined}>
+            <TextInput
+              value={editor.getParticipantField(type, index, "twitchName")}
+              onChange={(event) =>
+                editor.updateParticipantField(type, index, "twitchName", event.target.value)
+              }
+            />
+          </FormControl>
+        </Stack>
+      </Card>
     );
   }
 
   function renderQuestionFields(index: number) {
     return (
-      <div className={styles.question}>
-        <TextInput
-          className={styles.participantInput}
-          label="Question"
-          value={editor.getQuestionField(index, "question")}
-          onChange={(event) => editor.updateQuestionField(index, "question", event.target.value)}
-        />
-        <div className={styles.inputRow}>
+      <Card>
+        <FormControl label="Question">
           <TextInput
-            marginless
             className={styles.participantInput}
-            label="Category"
-            value={editor.getQuestionField(index, "category")}
-            onChange={(event) => editor.updateQuestionField(index, "category", event.target.value)}
+            value={editor.getQuestionField(index, "question")}
+            onChange={(event) => editor.updateQuestionField(index, "question", event.target.value)}
           />
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label="Hint"
-            value={editor.getQuestionField(index, "hint")}
-            onChange={(event) => editor.updateQuestionField(index, "hint", event.target.value)}
-          />
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label="Image"
-            value={editor.getQuestionField(index, "image")}
-            onChange={(event) => editor.updateQuestionField(index, "image", event.target.value)}
-          />
-        </div>
+        </FormControl>
+        <Stack direction="horizontal" justify="stretch">
+          <FormControl label="Category">
+            <TextInput
+              value={editor.getQuestionField(index, "category")}
+              onChange={(event) =>
+                editor.updateQuestionField(index, "category", event.target.value)
+              }
+            />
+          </FormControl>
+          <FormControl label="Hint">
+            <TextInput
+              value={editor.getQuestionField(index, "hint")}
+              onChange={(event) => editor.updateQuestionField(index, "hint", event.target.value)}
+            />
+          </FormControl>
+          <FormControl label="Image">
+            <TextInput
+              value={editor.getQuestionField(index, "image")}
+              onChange={(event) => editor.updateQuestionField(index, "image", event.target.value)}
+            />
+          </FormControl>
+        </Stack>
 
-        <div className={styles.inputRow}>
-          <TextInput
-            marginless
-            className={styles.participantInput}
-            label="Answer"
-            value={editor.getQuestionField(index, "answer")}
-            onChange={(event) => editor.updateQuestionField(index, "answer", event.target.value)}
-          />
-          <NumberInput
-            marginless
-            className={styles.participantInput}
-            label="Score"
-            pattern="\d+"
-            value={editor.getQuestionField(index, "score")}
-            onChange={(event) =>
-              editor.updateQuestionField(index, "score", parseInt(event.target.value))
-            }
-          />
-        </div>
-      </div>
+        <Stack direction="horizontal" justify="stretch">
+          <FormControl label="Answer">
+            <TextInput
+              value={editor.getQuestionField(index, "answer")}
+              onChange={(event) => editor.updateQuestionField(index, "answer", event.target.value)}
+            />
+          </FormControl>
+          <FormControl label="Score">
+            <TextInput
+              type="number"
+              pattern="\d+"
+              value={editor.getQuestionField(index, "score")}
+              onChange={(event) =>
+                editor.updateQuestionField(index, "score", parseInt(event.target.value))
+              }
+            />
+          </FormControl>
+        </Stack>
+      </Card>
     );
   }
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <div className={styles.editor}>
-        <div className={styles.info}>
-          <Header className={styles.header}>
-            Interview Information
-            <Button
-              className={styles.saveButton}
-              onClick={handleSave}
-              disabled={saveState === SaveState.SAVING || !editor.hasChanges()}>
-              {getSaveText()}
-            </Button>
-          </Header>
-          <TextInput
-            label="Topic"
-            value={editor.getField("topic")}
-            note={getNote("topic")}
-            onChange={(event) => editor.updateField("topic", event.target.value)}
-          />
-          <DurationInput
-            label="Estimated Time"
-            value={editor.getField("estimateSeconds")}
-            note={getNote("estimateSeconds")}
-            onChange={(value) => editor.updateField("estimateSeconds", value)}
-          />
-          <TextInput
-            type="textarea"
-            label="Notes"
-            value={editor.getField("notes")}
-            note={getNote("notes")}
-            onChange={(event) => editor.updateField("notes", event.target.value)}
-          />
-          <Header className={styles.header}>Questions</Header>
-          {renderQuestionFields(0)}
-          {renderQuestionFields(1)}
-          {renderQuestionFields(2)}
-          {renderQuestionFields(3)}
-          {renderQuestionFields(4)}
-          {renderQuestionFields(5)}
-        </div>
-        <div className={styles.participants}>
-          <Header className={styles.header}>Interviewer</Header>
+    <div className={className}>
+      <Stack spacing="space-lg" direction="horizontal" align="start">
+        <Card className={styles.info}>
+          <Stack spacing="space-lg">
+            <Stack direction="horizontal" justify="space-between">
+              <Header tag="h2">Interview Information</Header>
+              <Button
+                variant="primary"
+                className={styles.saveButton}
+                onClick={handleSave}
+                disabled={saveState === SaveState.SAVING || !editor.hasChanges()}>
+                {getSaveText()}
+              </Button>
+            </Stack>
+            <FormControl label="Topic" note={getNote("topic")}>
+              <TextInput
+                value={editor.getField("topic")}
+                onChange={(event) => editor.updateField("topic", event.target.value)}
+              />
+            </FormControl>
+            <FormControl label="Estimated Time" note={getNote("estimateSeconds")}>
+              <DurationInput
+                value={editor.getField("estimateSeconds")}
+                onChange={(value) => editor.updateField("estimateSeconds", value)}
+              />
+            </FormControl>
+            <FormControl label="Notes" note={getNote("notes")}>
+              <TextArea
+                value={editor.getField("notes")}
+                onChange={(event) => editor.updateField("notes", event.target.value)}
+              />
+            </FormControl>
+            <Header tag="h2">Questions</Header>
+            {renderQuestionFields(0)}
+            {renderQuestionFields(1)}
+            {renderQuestionFields(2)}
+            {renderQuestionFields(3)}
+            {renderQuestionFields(4)}
+            {renderQuestionFields(5)}
+          </Stack>
+        </Card>
+        <Stack spacing="space-lg" className={styles.participants}>
+          <Header tag="h2">Interviewer</Header>
           {renderParticipantFields("interviewers", 0)}
-          <Header className={styles.header}>Interviewees</Header>
+          <Header tag="h2">Interviewees</Header>
           {renderParticipantFields("interviewees", 0)}
           {renderParticipantFields("interviewees", 1)}
           {renderParticipantFields("interviewees", 2)}
           {renderParticipantFields("interviewees", 3)}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     </div>
   );
 }

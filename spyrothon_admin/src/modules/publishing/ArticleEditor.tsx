@@ -1,7 +1,8 @@
 import * as React from "react";
 import classNames from "classnames";
 import { Article, InitialArticle } from "@spyrothon/api";
-import { Button, Header, SaveState, TextInput, useSaveable } from "@spyrothon/uikit";
+import { Button, Card, FormControl, Stack, TextArea, TextInput } from "@spyrothon/sparx";
+import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";
@@ -39,34 +40,36 @@ export default function ArticleEditor(props: ArticleEditorProps) {
   });
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <div className={styles.editor}>
-        <Header className={styles.header}>
+    <Stack spacing="space-lg">
+      <Card className={classNames(styles.container, className)}>
+        <Stack spacing="space-lg" className={styles.editor}>
+          <FormControl label="Title">
+            <TextInput
+              value={edited.title}
+              onChange={(event) => setEdited({ ...edited, title: event.target.value })}
+            />
+          </FormControl>
+          <FormControl label="Author Name">
+            <TextInput
+              value={edited.authorName}
+              onChange={(event) => setEdited({ ...edited, authorName: event.target.value })}
+            />
+          </FormControl>
+          <FormControl label="Content">
+            <TextArea
+              rows={12}
+              value={edited.content}
+              onChange={(event) => setEdited({ ...edited, content: event.target.value })}
+            />
+          </FormControl>
           <Button
-            className={styles.saveButton}
+            variant="primary"
             onClick={handleSaveArticle}
             disabled={saveState === SaveState.SAVING || !hasChanges}>
             {getSaveText()}
           </Button>
-        </Header>
-        <TextInput
-          label="Title"
-          value={edited.title}
-          onChange={(event) => setEdited({ ...edited, title: event.target.value })}
-        />
-        <TextInput
-          label="Author Name"
-          value={edited.authorName}
-          onChange={(event) => setEdited({ ...edited, authorName: event.target.value })}
-        />
-        <TextInput
-          type="textarea"
-          label="Content"
-          rows={12}
-          value={edited.content}
-          onChange={(event) => setEdited({ ...edited, content: event.target.value })}
-        />
-      </div>
-    </div>
+        </Stack>
+      </Card>
+    </Stack>
   );
 }

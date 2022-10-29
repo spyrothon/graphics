@@ -1,0 +1,18 @@
+.dot {
+  display: inline-block;
+  border-radius: 100%;
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.good {
+  background-color: var(--status-success-background);
+}
+
+.bad {
+  background-color: var(--status-danger-background);
+}
+
+.busy {
+  background-color: var(--status-info-background);
+}

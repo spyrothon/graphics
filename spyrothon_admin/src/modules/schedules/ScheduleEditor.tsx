@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ScheduleEntryType } from "@spyrothon/api";
-import { Tab, Tabs } from "@spyrothon/uikit";
+import { Stack } from "@spyrothon/sparx";
 
 import { useSafeSelector } from "../../Store";
 import Dashboard from "../dashboards/Dashboard";
@@ -14,7 +14,6 @@ import styles from "./ScheduleEditor.module.css";
 
 export default function ScheduleEditor() {
   const selectedScheduleEntry = useSafeSelector((state) => ScheduleStore.getSelectedEntry(state));
-  const [activeTab, setActiveTab] = React.useState("content");
 
   const entryType =
     selectedScheduleEntry?.runId != null
@@ -32,9 +31,9 @@ export default function ScheduleEditor() {
 
     switch (entryType) {
       case ScheduleEntryType.RUN:
-        return <RunEditor scheduleEntry={selectedScheduleEntry} className={styles.main} />;
+        return <RunEditor scheduleEntry={selectedScheduleEntry} />;
       case ScheduleEntryType.INTERVIEW:
-        return <InterviewEditor scheduleEntry={selectedScheduleEntry} className={styles.main} />;
+        return <InterviewEditor scheduleEntry={selectedScheduleEntry} />;
       default:
         return null;
     }
@@ -42,18 +41,14 @@ export default function ScheduleEditor() {
 
   function renderMain() {
     return (
-      <Tabs className={styles.main} activeTab={activeTab} onTabChange={setActiveTab}>
-        <Tab id="content" label="Content">
-          {renderContentEditor()}
-        </Tab>
+      <Stack spacing="space-xl" className={styles.main}>
+        {renderContentEditor()}
         {selectedScheduleEntry != null ? (
-          <Tab id="meta" label="Meta">
-            <ScheduleEntryEditor scheduleEntry={selectedScheduleEntry} />
-          </Tab>
+          <ScheduleEntryEditor scheduleEntry={selectedScheduleEntry} />
         ) : undefined}
-      </Tabs>
+      </Stack>
     );
   }
 
-  return <Dashboard fullPage renderSidebar={renderSidebar} renderMain={renderMain} />;
+  return <Dashboard renderSidebar={renderSidebar} renderMain={renderMain} />;
 }

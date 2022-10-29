@@ -1,6 +1,5 @@
 import * as React from "react";
-import classNames from "classnames";
-import { Header, Text } from "@spyrothon/uikit";
+import { Card, Header, Stack, Text } from "@spyrothon/sparx";
 
 import OBS from "../obs/OBS";
 import { useOBSStore } from "../obs/OBSStore";
@@ -50,23 +49,27 @@ export default function LiveOBSStatus(props: { className?: string }) {
   );
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <Header size={Header.Sizes.H4}>OBS Monitor</Header>
-      <Text>{transitionInProgress ? "Transition in Progress" : "Static"}</Text>
-      <div className={styles.currentScenes}>
-        <Text>
-          <strong>Now Showing:</strong>
-          <br />
-          {currentProgramSceneName}
-        </Text>
-        <Text>
-          <strong>On Preview:</strong>
-          <br />
-          {currentPreviewSceneName}
-        </Text>
-      </div>
+    <Card className={className}>
+      <Stack spacing="space-lg">
+        <Header variant="header-md/normal" tag="h4">
+          OBS Monitor
+        </Header>
+        <Text>{transitionInProgress ? "Transition in Progress" : "Static"}</Text>
+        <Stack direction="horizontal">
+          <Text>
+            <strong>Now Showing:</strong>
+            <br />
+            {currentProgramSceneName}
+          </Text>
+          <Text>
+            <strong>On Preview:</strong>
+            <br />
+            {currentPreviewSceneName}
+          </Text>
+        </Stack>
 
-      <VolumeMeters />
-    </div>
+        <VolumeMeters />
+      </Stack>
+    </Card>
   );
 }

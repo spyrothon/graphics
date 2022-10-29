@@ -1,6 +1,3 @@
-.form {
-}
-
 .transitionActions {
   display: flex;
   gap: 8px;
@@ -9,12 +6,6 @@
   & > * {
     flex: 1 1 auto;
   }
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
 }
 
 .flexContainer {

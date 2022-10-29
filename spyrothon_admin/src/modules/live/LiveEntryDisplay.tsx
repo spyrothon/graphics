@@ -1,7 +1,7 @@
 import * as React from "react";
-import classNames from "classnames";
 import { Interview, Run } from "@spyrothon/api";
-import { formatDuration, Header, Text } from "@spyrothon/uikit";
+import { Card, Header, Stack, Text } from "@spyrothon/sparx";
+import { formatDuration } from "@spyrothon/utils";
 
 import { ScheduleEntryWithDependants } from "../schedules/ScheduleTypes";
 
@@ -12,35 +12,33 @@ function Notes({ content }: { content?: string }) {
 
   return (
     <div className={styles.notes}>
-      <Header color={Header.Colors.MUTED} size={Header.Sizes.H6} marginless>
+      <Header variant="header-xs/secondary" tag="h6">
         NOTES
       </Header>
-      <Text marginless>{content}</Text>
+      <Text>{content}</Text>
     </div>
   );
 }
 
 function EntryRunContent({ run }: { run: Run }) {
   return (
-    <div className={styles.content}>
-      <Text className={styles.title} marginless>
+    <Stack spacing="space-xs" className={styles.content}>
+      <Text variant="header-sm/normal">
         {run.gameName} - {run.categoryName}
       </Text>
-      <Text color={Text.Colors.MUTED} marginless>
-        Estimate: {formatDuration(run.estimateSeconds)}
-      </Text>
-      <Text marginless>{run.runners.map((runner) => runner.displayName).join(", ")}</Text>
+      <Text variant="text-md/secondary">Estimate: {formatDuration(run.estimateSeconds)}</Text>
+      <Text>{run.runners.map((runner) => runner.displayName).join(", ")}</Text>
       <Notes content={run.notes} />
-    </div>
+    </Stack>
   );
 }
 
 function EntryInterviewContent({ interview }: { interview: Interview }) {
   return (
-    <div className={styles.content}>
+    <Stack className={styles.content}>
       <Text>{interview.topic}</Text>
       <Notes content={interview.notes} />
-    </div>
+    </Stack>
   );
 }
 
@@ -65,9 +63,15 @@ export default function LiveEntryDisplay(props: LiveEntryDisplayProps) {
   }
 
   return (
-    <div className={classNames(styles.container, className)}>
-      {label != null ? <Header size={Header.Sizes.H4}>{label}</Header> : null}
-      {renderEntryContent()}
-    </div>
+    <Card className={className}>
+      <Stack spacing="space-lg">
+        {label != null ? (
+          <Header variant="header-md/normal" tag="h4">
+            {label}
+          </Header>
+        ) : null}
+        {renderEntryContent()}
+      </Stack>
+    </Card>
   );
 }

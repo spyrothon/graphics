@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Button, Header, TextInput, useSaveable } from "@spyrothon/uikit";
+import { Button, Card, FormControl, Header, Section, Stack, TextInput } from "@spyrothon/sparx";
+import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
@@ -24,22 +25,30 @@ export default function SettingsUser() {
   }, [user]);
 
   return (
-    <div>
-      <Header>User Settings</Header>
-      <TextInput
-        label="Name"
-        value={editedUser.name}
-        onChange={(event) => setEditedUser({ ...editedUser, name: event.target.value })}
-      />
-      <TextInput
-        type="password"
-        label="Password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      />
-      <Button onClick={handleSave} disabled={password.length === 0}>
-        {getSaveText()}
-      </Button>
-    </div>
+    <Section>
+      <Stack spacing="space-lg">
+        <Header tag="h2">User Settings</Header>
+        <Card>
+          <Stack spacing="space-lg">
+            <FormControl label="Name">
+              <TextInput
+                value={editedUser.name}
+                onChange={(event) => setEditedUser({ ...editedUser, name: event.target.value })}
+              />
+            </FormControl>
+            <FormControl label="Password">
+              <TextInput
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </FormControl>
+          </Stack>
+        </Card>
+        <Button variant="primary" onClick={handleSave} disabled={password.length === 0}>
+          {getSaveText()}
+        </Button>
+      </Stack>
+    </Section>
   );
 }

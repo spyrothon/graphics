@@ -8,24 +8,17 @@
 }
 
 .entry {
-  border-bottom: var(--border-secondary);
+  border-bottom: 1px solid var(--accent-primary);
 
   &.interactive:hover {
-    background-color: var(--background-hover);
+    background-color: var(--background-secondary);
     cursor: pointer;
   }
 
-  &.interactive:active {
-    background-color: var(--background-active);
-  }
-
   &.interactive.selected {
-    border-left: 8px solid var(--primary);
+    border-left: 8px solid var(--accent-primary);
     background-color: var(--background-secondary);
   }
-}
-
-.dropOver {
 }
 
 .dragging {
@@ -36,25 +29,24 @@
   background-color: var(--background-secondary);
 }
 
-.category {
-  flex: 1 1 auto;
-}
-
 .setup {
   text-transform: uppercase;
   line-height: 1;
   padding: 6px 32px;
-  background-color: var(--background-tertiary);
+  background-color: var(--background-secondary);
 }
 
 .content {
   padding: 8px;
-  display: flex;
-  align-items: flex-start;
 }
 
 .setup + .content {
   padding-top: 4px;
+}
+
+.runContent {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .scheduleNumber {
@@ -63,12 +55,8 @@
   text-align: right;
 }
 
-.runContent {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
 .removeAction {
+  flex: 0 0 auto;
   border-radius: 2px;
   padding: 0 4px;
   margin-left: 8px;
@@ -84,39 +72,5 @@
 .addButtons {
   position: sticky;
   bottom: 0;
-  display: flex;
   width: 100%;
-}
-
-.addButton {
-  flex: 1 1 50%;
-  padding: 16px 0;
-  border-top: var(--border-primary);
-  border-bottom: var(--border-secondary);
-  user-select: none;
-  background-color: var(--background-secondary);
-
-  &:hover {
-    background-color: var(--background-hover);
-    cursor: pointer;
-  }
-
-  &:active {
-    background-color: var(--background-active);
-  }
-
-  &.selected {
-    border-right: 8px solid var(--primary);
-    background-color: var(--background-hover);
-  }
-
-  &:not(:last-child) {
-    border-right: var(--border-primary);
-  }
-}
-
-.addButtonText {
-  color: var(--primary);
-  margin: 0;
-  text-align: center;
 }

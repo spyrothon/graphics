@@ -1,0 +1,30 @@
+{
+  "name": "@spyrothon/utils",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.tsx",
+      "require": "./index.tsx"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "tsc": "tsc",
+    "lint": "eslint . --ext .tsx",
+    "prettier": "prettier . --check --ignore-path ../../.prettierignore",
+    "types": "tsc --project tsconfig.json --declaration --noEmit false --emitDeclarationOnly --jsx react --module es6 --moduleResolution node --outDir dist/ --declarationMap",
+    "build": "vite build && pnpm types",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@vitejs/plugin-react": "^2.1.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0"
+  }
+}
