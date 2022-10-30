@@ -1,13 +1,5 @@
-# This script moves participant data from the embedded `participant` schema
-# shared between runs and interviews into a dedicated table that will allow
-# the data to be reused across runs and events.
-#
-# Unshared data like run timing and interview scores are _not_ part of this
-# table and will still use an embedded schema to track them, since they are
-# tied directly to the usage of the participant with that subject.
-defmodule Mix.Tasks.Graphics.Migrations.ParticipantsToTable do
-  @moduledoc "The hello mix task: `mix help hello`"
-  use Mix.Task
+defmodule GraphicsAPI.Repo.Migrations.MigrateParticipantsToTable do
+  use Ecto.Migration
 
   alias GraphicsAPI.Users
   alias GraphicsAPI.Runs.{Interview, Run, Participant}
@@ -38,20 +30,27 @@ defmodule Mix.Tasks.Graphics.Migrations.ParticipantsToTable do
   end
 
   def create_participants_for_interview(interview = %Interview{}) do
-    Runs.update_run(interview, %{
+    Runs.update_interview(interview, %{
       interviewers: map_participants_to_user_participants(interview.interviewers),
       interviewees: map_participants_to_user_participants(interview.interviewees)
     })
   end
 
-  @shortdoc "Extracts participant information from Runs and Interviews into the dedicated table"
-  def run(_) do
+  def up do
+    Application.ensure_all_started(:graphics_api)
+
     Runs.list_runs()
-    |> Stream.each(&Migration.create_participants_for_run/1)
+    |> Stream.each(&create_participants_for_run/1)
     |> Stream.run()
 
     Runs.list_interviews()
-    |> Stream.each(&Migration.create_participants_for_interview/1)
+    |> Stream.each(&create_participants_for_interview/1)
+    |> Stream.run()
+  end
+
+  def down do
+    Users.list_participants()
+    |> Stream.each(&Users.delete_participant/1)
     |> Stream.run()
   end
 end
