@@ -2,7 +2,7 @@ defmodule GraphicsAPI.Users do
   import Ecto.Query, warn: false
   alias GraphicsAPI.Repo
 
-  alias GraphicsAPI.Users.{Init, SessionToken, User}
+  alias GraphicsAPI.Users.{Init, SessionToken, User, Participant}
 
   @token_size 32
 
@@ -106,5 +106,34 @@ defmodule GraphicsAPI.Users do
     # Token expirations last ~1 month (60*60*24*30)
     DateTime.utc_now()
     |> DateTime.add(2_600_000, :second)
+  end
+
+  ###
+  # Participants
+  ###
+
+  def list_participants() do
+    Repo.all(Participant)
+  end
+
+  def get_participant(participant_id) do
+    Repo.get(Participant, participant_id)
+  end
+
+  def create_participant(params) do
+    %Participant{}
+    |> Participant.changeset(params)
+    |> Repo.insert()
+  end
+
+  def update_participant(participant = %Participant{}, params) do
+    participant
+    |> Participant.changeset(params)
+    |> Repo.update()
+  end
+
+  def delete_participant(participant = %Participant{}) do
+    participant
+    |> Repo.delete()
   end
 end
