@@ -2,6 +2,8 @@ defmodule GraphicsAPI.Runs.Participant do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias GraphicsAPI.Users
+
   @fields [
     :id,
     :display_name,
@@ -10,6 +12,9 @@ defmodule GraphicsAPI.Runs.Participant do
     :pronouns,
     :has_webcam,
     :visible,
+
+    # Offloading data
+    :participant_id,
 
     # Run Fields
     :finished_at,
@@ -38,6 +43,8 @@ defmodule GraphicsAPI.Runs.Participant do
 
     field(:has_webcam, :boolean, default: false)
     field(:visible, :boolean, default: true)
+
+    belongs_to(:participant, Users.Participant)
 
     # Run Fields
     field(:actual_seconds, :integer)
