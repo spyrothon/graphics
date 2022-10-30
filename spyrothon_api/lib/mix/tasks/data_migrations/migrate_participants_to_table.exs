@@ -5,13 +5,15 @@
 # Unshared data like run timing and interview scores are _not_ part of this
 # table and will still use an embedded schema to track them, since they are
 # tied directly to the usage of the participant with that subject.
+defmodule Mix.Tasks.Graphics.Migrations.ParticipantsToTable do
+  @moduledoc "The hello mix task: `mix help hello`"
+  use Mix.Task
 
-alias GraphicsAPI.Users
-alias GraphicsAPI.Runs.{Interview, Run, Participant}
+  alias GraphicsAPI.Users
+  alias GraphicsAPI.Runs.{Interview, Run, Participant}
 
-alias GraphicsAPI.Runs
+  alias GraphicsAPI.Runs
 
-defmodule Migration do
   def create_user_participant(run_participant) do
     Map.from_struct(run_participant)
     |> Map.put(:pronouns_visible, true)
@@ -41,12 +43,15 @@ defmodule Migration do
       interviewees: map_participants_to_user_participants(interview.interviewees)
     })
   end
+
+  @shortdoc "Extracts participant information from Runs and Interviews into the dedicated table"
+  def run(_) do
+    Runs.list_runs()
+    |> Stream.each(&Migration.create_participants_for_run/1)
+    |> Stream.run()
+
+    Runs.list_interviews()
+    |> Stream.each(&Migration.create_participants_for_interview/1)
+    |> Stream.run()
+  end
 end
-
-Runs.list_runs()
-|> Stream.each(&Migration.create_participants_for_run/1)
-|> Stream.run()
-
-Runs.list_interviews()
-|> Stream.each(&Migration.create_participants_for_interview/1)
-|> Stream.run()
