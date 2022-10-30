@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Button, Card, FormControl, FormSwitch, Header, Stack, TextInput } from "@spyrothon/sparx";
+import {
+  Button,
+  Card,
+  FormControl,
+  FormSwitch,
+  Header,
+  Stack,
+  Text,
+  TextInput,
+} from "@spyrothon/sparx";
 import { useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -35,9 +44,12 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
     <Card level={1} className={styles.container}>
       <Stack spacing="space-lg">
         <Stack direction="horizontal" justify="space-between" align="center">
-          <Header tag="h1" variant="header-md/normal">
-            {runner.participant.displayName}
-          </Header>
+          <Stack spacing="space-none">
+            <Header tag="h1" variant="header-md/normal">
+              {runner.participant.displayName}
+            </Header>
+            <Text variant="text-sm/secondary">Runner</Text>
+          </Stack>
           <Button variant="primary/outline" onClick={() => null}>
             Edit Participant
           </Button>

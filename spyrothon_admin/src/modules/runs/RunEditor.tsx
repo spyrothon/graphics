@@ -22,6 +22,7 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
 import CreateParticipantModal from "../participants/CreateParticipantModal";
+import CommentatorPopout from "./CommentatorPopout";
 import { persistRun } from "./RunActions";
 import RunnerPopout from "./RunnerPopout";
 import * as RunStore from "./RunStore";
@@ -40,6 +41,13 @@ function handleAddRunner() {
 
 function openRunnerPopout(runId: string, runnerId: string, target: HTMLElement) {
   openPopout((props) => <RunnerPopout {...props} runId={runId} runnerId={runnerId} />, target);
+}
+
+function openCommentatorPopout(runId: string, commentatorId: string, target: HTMLElement) {
+  openPopout(
+    (props) => <CommentatorPopout {...props} runId={runId} commentatorId={commentatorId} />,
+    target,
+  );
 }
 
 export default function RunEditor(props: RunEditorProps) {
@@ -125,7 +133,7 @@ export default function RunEditor(props: RunEditorProps) {
     return (
       <Clickable
         key={commentator.id}
-        onClick={(event) => openRunnerPopout(run.id, commentator.id, event.currentTarget)}>
+        onClick={(event) => openCommentatorPopout(run.id, commentator.id, event.currentTarget)}>
         <Card>
           <Stack spacing="space-xs">
             <Text variant="header-sm/normal">
