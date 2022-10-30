@@ -46,8 +46,8 @@ defmodule GraphicsAPI.Runs.Runner do
     field(:webcam_crop_transform, :map)
   end
 
-  def changeset(participant, params \\ %{}) do
-    participant
+  def changeset(runner, params \\ %{}) do
+    runner
     |> cast(params, @fields)
     |> validate_required([:participant_id])
   end

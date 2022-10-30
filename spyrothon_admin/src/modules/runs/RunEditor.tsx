@@ -8,7 +8,6 @@ import {
   DurationInput,
   FormControl,
   Header,
-  openModal,
   openPopout,
   Spacer,
   Stack,
@@ -21,9 +20,9 @@ import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
-import CreateParticipantModal from "../participants/CreateParticipantModal";
+import SelectParticipantPopout from "../participants/SelectParticipantPopout";
 import CommentatorPopout from "./CommentatorPopout";
-import { persistRun } from "./RunActions";
+import { addRunner, persistRun } from "./RunActions";
 import RunnerPopout from "./RunnerPopout";
 import * as RunStore from "./RunStore";
 import useRunEditorState from "./useRunEditorState";
@@ -34,10 +33,6 @@ type RunEditorProps = {
   scheduleEntry: ScheduleEntry;
   className?: string;
 };
-
-function handleAddRunner() {
-  openModal((props) => <CreateParticipantModal {...props} />);
-}
 
 function openRunnerPopout(runId: string, runnerId: string, target: HTMLElement) {
   openPopout((props) => <RunnerPopout {...props} runId={runId} runnerId={runnerId} />, target);
@@ -158,6 +153,25 @@ export default function RunEditor(props: RunEditorProps) {
     );
   }
 
+  function handleAddRunner(target: HTMLElement) {
+    const existingParticipantIds = run.runners.map((runner) => runner.participant.id);
+
+    function handleSelect(participantId: string) {
+      return dispatch(addRunner(run.id, { participantId }));
+    }
+
+    openPopout(
+      (props) => (
+        <SelectParticipantPopout
+          {...props}
+          existingParticipantIds={existingParticipantIds}
+          onSelect={handleSelect}
+        />
+      ),
+      target,
+    );
+  }
+
   return (
     <div className={className}>
       <Stack spacing="space-lg" direction="horizontal" align="start">
@@ -229,7 +243,9 @@ export default function RunEditor(props: RunEditorProps) {
         <Stack spacing="space-md" className={styles.participants}>
           <Header tag="h3">Runners</Header>
           {run.runners.map(renderRunner)}
-          <Button variant="primary/outline" onClick={handleAddRunner}>
+          <Button
+            variant="primary/outline"
+            onClick={(event) => handleAddRunner(event.currentTarget)}>
             Add a Runner
           </Button>
           <Spacer size="space-lg" />

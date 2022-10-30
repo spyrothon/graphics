@@ -176,6 +176,7 @@ export interface CropTransform {
 }
 
 export interface Participant {
+  id: string;
   displayName: string;
   twitchName?: string;
   twitterName?: string;
@@ -190,6 +191,7 @@ export interface Runner {
   id: string;
   visible: boolean;
   participant: Participant;
+  participantId: string;
   displayName?: string;
   finishedAt?: Date;
   actualSeconds?: number;
@@ -202,6 +204,7 @@ export interface Commentator {
   id: string;
   visible: boolean;
   participant: Participant;
+  participantId: string;
   displayName?: string;
 }
 
@@ -209,6 +212,7 @@ export interface InterviewParticipant {
   id: string;
   visible: boolean;
   participant: Participant;
+  participantId: string;
   displayName?: string;
   score: number;
   videoIngestUrl?: string;

@@ -3,3 +3,5 @@ export { useSaveable, SaveState } from "./src/hooks/useSaveable";
 
 export { dateToString, isoStringToDate } from "./src/utils/DateTimeUtils";
 export { formatDuration, parseDuration } from "./src/utils/DurationUtils";
+
+export { fuzzysearch } from "./src/utils/fuzzysearch";

@@ -38,8 +38,10 @@ defmodule GraphicsAPI.Runs do
   end
 
   def add_runner(run = %Run{}, runner_params) do
+    runner_maps = run.runners |> Enum.map(&Map.from_struct/1)
+
     run
-    |> Run.changeset(%{runners: run.runners ++ [runner_params]})
+    |> Run.changeset(%{runners: runner_maps ++ [runner_params]})
     |> Repo.update()
   end
 
@@ -52,11 +54,11 @@ defmodule GraphicsAPI.Runs do
             runner
             |> Runner.changeset(runner_params)
             |> Ecto.Changeset.apply_changes()
+            |> IO.inspect()
 
           _ ->
             runner
         end
-        |> IO.inspect()
         |> Map.from_struct()
       end)
 
@@ -71,7 +73,8 @@ defmodule GraphicsAPI.Runs do
       |> Enum.reject(&(&1.id == runner_id))
 
     run
-    |> Run.changeset(%{runners: updated_runners})
+    |> Run.changeset()
+    |> Ecto.Changeset.put_embed(:runners, updated_runners)
     |> Repo.update()
   end
 

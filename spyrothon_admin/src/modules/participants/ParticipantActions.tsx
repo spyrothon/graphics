@@ -5,6 +5,15 @@ import { SafeDispatch } from "@admin/hooks/useDispatch";
 
 import { ParticipantAction, ParticipantActionType } from "./ParticipantTypes";
 
+export function fetchParticipants() {
+  return async (dispatch: SafeDispatch) => {
+    dispatch({ type: ParticipantActionType.PARTICIPANTS_FETCH_PARTICIPANTS_STARTED });
+    const participants = await API.participants.fetchParticipants();
+
+    dispatch(fetchParticipantsSuccess(participants));
+  };
+}
+
 export function createParticipant(participant: InitialParticipant) {
   return async (dispatch: SafeDispatch) => {
     const updatedParticipant = await API.participants.createParticipant(participant);
@@ -19,15 +28,6 @@ export function updateParticipant(participant: Participant): ParticipantAction {
   return {
     type: ParticipantActionType.PARTICIPANTS_UPDATE_PARTICIPANT,
     participant,
-  };
-}
-
-export function fetchInterviews() {
-  return async (dispatch: SafeDispatch) => {
-    dispatch({ type: ParticipantActionType.PARTICIPANTS_FETCH_PARTICIPANTS_STARTED });
-    const participants = await API.participants.fetchParticipants();
-
-    dispatch(fetchParticipantsSuccess(participants));
   };
 }
 

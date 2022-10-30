@@ -104,6 +104,8 @@ defmodule GraphicsAPIWeb.RunsController do
 
     modify_run(conn, run_id, fn run ->
       Runs.add_runner(run, conn.body_params)
+      run = Runs.get_run(run_id)
+      {:ok, run}
     end)
   end
 

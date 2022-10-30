@@ -2,9 +2,11 @@ import * as React from "react";
 import {
   Button,
   Card,
+  ConfirmModal,
   FormControl,
   FormSwitch,
   Header,
+  openModal,
   Stack,
   Text,
   TextInput,
@@ -14,7 +16,7 @@ import { useSaveable } from "@spyrothon/utils";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";
 
-import { persistRunner } from "./RunActions";
+import { persistRunner, removeRunner } from "./RunActions";
 import * as RunStore from "./RunStore";
 
 import styles from "./RunnerPopout.module.css";
@@ -39,6 +41,24 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
   const [save, getSaveText] = useSaveable(async () => {
     dispatch(persistRunner(runId, runnerId, { displayName }));
   });
+
+  function handleRemove() {
+    function remove() {
+      dispatch(removeRunner(runId, runnerId));
+    }
+
+    openModal((props) => (
+      <ConfirmModal
+        {...props}
+        title="Remove Runner"
+        body={`Removing ${
+          runner.displayName ?? runner.participant.displayName
+        } will remove all information about them and cannot be undone.`}
+        onConfirm={remove}
+        onCancel={props.onClose}
+      />
+    ));
+  }
 
   return (
     <Card level={1} className={styles.container}>
@@ -107,6 +127,9 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
         </Stack>
         <Button variant="primary" onClick={save}>
           {getSaveText()}
+        </Button>
+        <Button variant="link" onClick={handleRemove}>
+          Remove Runner
         </Button>
       </Stack>
     </Card>

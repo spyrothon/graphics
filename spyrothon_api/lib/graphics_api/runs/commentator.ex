@@ -21,8 +21,8 @@ defmodule GraphicsAPI.Runs.Commentator do
     belongs_to(:participant, Users.Participant)
   end
 
-  def changeset(participant, params \\ %{}) do
-    participant
+  def changeset(commentator, params \\ %{}) do
+    commentator
     |> cast(params, @fields)
     |> validate_required([:participant_id])
   end

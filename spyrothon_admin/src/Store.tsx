@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 
 import authReducer from "./modules/auth/AuthReducer";
 import interviewsReducer from "./modules/interviews/InterviewsReducer";
+import participantsReducer from "./modules/participants/ParticipantsReducer";
 import publishingReducer from "./modules/publishing/PublishingReducer";
 import runsReducer from "./modules/runs/RunsReducer";
 import schedulesReducer from "./modules/schedules/SchedulesReducer";
@@ -11,6 +12,7 @@ import schedulesReducer from "./modules/schedules/SchedulesReducer";
 export const combinedReducer = combineReducers({
   auth: authReducer,
   interviews: interviewsReducer,
+  participants: participantsReducer,
   publishing: publishingReducer,
   runs: runsReducer,
   schedules: schedulesReducer,
