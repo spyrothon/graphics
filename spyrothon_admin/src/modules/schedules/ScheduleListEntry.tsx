@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { useDrag, useDrop } from "react-dnd";
-import { RunParticipant, ScheduleEntry } from "@spyrothon/api";
+import { Runner, ScheduleEntry } from "@spyrothon/api";
 import { Stack, Text } from "@spyrothon/sparx";
 import { formatDuration } from "@spyrothon/utils";
 
@@ -14,10 +14,12 @@ import { removeScheduleEntry, selectScheduleEntry } from "./ScheduleActions";
 
 import styles from "./ScheduleList.module.css";
 
-function renderNameList(participants: RunParticipant[]) {
+function renderNameList(participants: Runner[]) {
   if (participants.length === 0) return null;
 
-  return participants.map((participant) => participant.displayName).join(", ");
+  return participants
+    .map((participant) => participant.displayName ?? participant.participant.displayName)
+    .join(", ");
 }
 
 type RunEntryProps = {

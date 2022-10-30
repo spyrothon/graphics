@@ -10,13 +10,13 @@ export enum SaveState {
 export function useSaveable(
   saveFunction: () => Promise<unknown>,
   stateDuration = 2500,
-): [() => void, () => React.ReactNode, SaveState] {
+): [() => Promise<void>, () => React.ReactNode, SaveState] {
   const [state, setState] = React.useState<SaveState>(SaveState.PENDING);
 
   const handleSave = React.useCallback(() => {
     setState(SaveState.SAVING);
 
-    saveFunction()
+    return saveFunction()
       .then(() => setState(SaveState.SAVED))
       .catch((error) => (console.log(error), setState(SaveState.FAILED)))
       .finally(() => setTimeout(() => setState(SaveState.PENDING), stateDuration));

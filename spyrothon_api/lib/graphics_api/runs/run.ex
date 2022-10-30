@@ -51,8 +51,8 @@ defmodule GraphicsAPI.Runs.Run do
     field(:paused_at, :utc_datetime)
     field(:pause_seconds, :integer)
 
-    embeds_many(:runners, GraphicsAPI.Runs.Participant, on_replace: :delete)
-    embeds_many(:commentators, GraphicsAPI.Runs.Participant, on_replace: :delete)
+    embeds_many(:runners, GraphicsAPI.Runs.Runner, on_replace: :delete)
+    embeds_many(:commentators, GraphicsAPI.Runs.Commentator, on_replace: :delete)
 
     timestamps()
   end
@@ -66,7 +66,7 @@ defmodule GraphicsAPI.Runs.Run do
   def timing_changeset(run, params \\ %{}) do
     run
     |> cast(params, @timing_fields)
-    |> cast_embed(:runners, with: &GraphicsAPI.Runs.Participant.timing_changeset/2)
+    |> cast_embed(:runners, with: &GraphicsAPI.Runs.Runner.timing_changeset/2)
   end
 
   defp cast_participants(changeset) do

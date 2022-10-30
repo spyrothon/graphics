@@ -186,7 +186,7 @@ export default function LiveRunTimers(props: LiveTimerProps) {
         </thead>
         <tbody>
           {run.runners.map((runner) => (
-            <tr key={runner.displayName} className={styles.runnerTimer}>
+            <tr key={runner.id} className={styles.runnerTimer}>
               <td>
                 <Text>{runner.displayName}</Text>
               </td>

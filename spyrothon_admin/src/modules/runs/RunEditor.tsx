@@ -1,13 +1,18 @@
 import * as React from "react";
-import classNames from "classnames";
-import { Run, ScheduleEntry } from "@spyrothon/api";
+import { Twitch, Twitter } from "react-feather";
+import { Commentator, Run, Runner, ScheduleEntry } from "@spyrothon/api";
 import {
   Button,
   Card,
+  Clickable,
   DurationInput,
   FormControl,
   Header,
+  openModal,
+  openPopout,
+  Spacer,
   Stack,
+  Text,
   TextArea,
   TextInput,
 } from "@spyrothon/sparx";
@@ -16,9 +21,11 @@ import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
+import CreateParticipantModal from "../participants/CreateParticipantModal";
 import { persistRun } from "./RunActions";
+import RunnerPopout from "./RunnerPopout";
 import * as RunStore from "./RunStore";
-import useRunEditorState, { RunEditorStateValue } from "./useRunEditorState";
+import useRunEditorState from "./useRunEditorState";
 
 import styles from "./RunEditor.module.css";
 
@@ -27,23 +34,12 @@ type RunEditorProps = {
   className?: string;
 };
 
-function onTransformChange(
-  editor: RunEditorStateValue,
-  type: "runners" | "commentators",
-  index: number,
-  transform: "gameplayCropTransform" | "webcamCropTransform",
-  position: "top" | "right" | "bottom" | "left",
-) {
-  return (event: React.ChangeEvent<HTMLInputElement>) => {
-    editor.updateParticipantField(type, index, transform, {
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-      ...editor.getParticipantField(type, index, transform),
-      [position]: parseInt(event.target.value),
-    });
-  };
+function handleAddRunner() {
+  openModal((props) => <CreateParticipantModal {...props} />);
+}
+
+function openRunnerPopout(runId: string, runnerId: string, target: HTMLElement) {
+  openPopout((props) => <RunnerPopout {...props} runId={runId} runnerId={runnerId} />, target);
 }
 
 export default function RunEditor(props: RunEditorProps) {
@@ -92,85 +88,65 @@ export default function RunEditor(props: RunEditorProps) {
     );
   }
 
-  function renderParticipantFields(type: "runners" | "commentators", index: number) {
+  function renderRunner(runner: Runner) {
+    const participant = runner.participant;
+
     return (
-      <Card>
-        <Stack spacing="space-lg">
-          <Stack direction="horizontal" justify="stretch">
-            <FormControl label="Display Name">
-              <TextInput
-                className={styles.participantInput}
-                value={editor.getParticipantField(type, index, "displayName")}
-                onChange={(event) =>
-                  editor.updateParticipantField(type, index, "displayName", event.target.value)
-                }
-              />
-            </FormControl>
-            <FormControl label="Pronouns">
-              <TextInput
-                className={styles.participantInput}
-                value={editor.getParticipantField(type, index, "pronouns")}
-                onChange={(event) =>
-                  editor.updateParticipantField(type, index, "pronouns", event.target.value)
-                }
-              />
-            </FormControl>
-            <FormControl label="Twitch">
-              <TextInput
-                className={styles.participantInput}
-                value={editor.getParticipantField(type, index, "twitchName")}
-                onChange={(event) =>
-                  editor.updateParticipantField(type, index, "twitchName", event.target.value)
-                }
-              />
-            </FormControl>
-            <FormControl label="Gameplay Ingest URL">
-              <TextInput
-                className={classNames(styles.participantInput, styles.urlInput)}
-                value={editor.getParticipantField(type, index, "gameplayIngestUrl")}
-                onChange={(event) =>
-                  editor.updateParticipantField(
-                    type,
-                    index,
-                    "gameplayIngestUrl",
-                    event.target.value,
-                  )
-                }
-              />
-            </FormControl>
+      <Clickable
+        key={runner.id}
+        onClick={(event) => openRunnerPopout(run.id, runner.id, event.currentTarget)}>
+        <Card>
+          <Stack spacing="space-xs">
+            <Text variant="header-sm/normal">
+              {runner.displayName ?? participant.displayName}{" "}
+              {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
+            </Text>
+            <Stack direction="horizontal" align="center">
+              {participant.twitchName != null ? (
+                <Text>
+                  <Twitch size={16} /> {participant.twitchName}
+                </Text>
+              ) : null}
+              {participant.twitterName != null ? (
+                <Text>
+                  <Twitter size={16} /> {participant.twitterName}
+                </Text>
+              ) : null}
+            </Stack>
           </Stack>
-          <Stack direction="horizontal" justify="stretch" wrap={false}>
-            <FormControl label="Top">
-              <TextInput
-                type="number"
-                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.top}
-                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "top")}
-              />
-            </FormControl>
-            <FormControl label="Right">
-              <TextInput
-                type="number"
-                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.right}
-                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "right")}
-              />
-            </FormControl>
-            <FormControl label="Bottom">
-              <TextInput
-                type="number"
-                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.bottom}
-                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "bottom")}
-              />
-            </FormControl>
-            <FormControl label="Left">
-              <TextInput
-                type="number"
-                value={editor.getParticipantField(type, index, "gameplayCropTransform")?.left}
-                onChange={onTransformChange(editor, type, index, "gameplayCropTransform", "left")}
-              />
-            </FormControl>
+        </Card>
+      </Clickable>
+    );
+  }
+
+  function renderCommentator(commentator: Commentator) {
+    const participant = commentator.participant;
+
+    return (
+      <Clickable
+        key={commentator.id}
+        onClick={(event) => openRunnerPopout(run.id, commentator.id, event.currentTarget)}>
+        <Card>
+          <Stack spacing="space-xs">
+            <Text variant="header-sm/normal">
+              {commentator.displayName ?? participant.displayName}{" "}
+              {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
+            </Text>
+            <Stack direction="horizontal" align="center">
+              {participant.twitchName != null ? (
+                <Text>
+                  <Twitch size={16} /> {participant.twitchName}
+                </Text>
+              ) : null}
+              {participant.twitterName != null ? (
+                <Text>
+                  <Twitter size={16} /> {participant.twitterName}
+                </Text>
+              ) : null}
+            </Stack>
           </Stack>
-        </Stack>
-      </Card>
+        </Card>
+      </Clickable>
     );
   }
 
@@ -192,13 +168,13 @@ export default function RunEditor(props: RunEditorProps) {
               label="Game Name"
               note={getNote("gameName", "This must exactly match the game's name on Twitch.")}>
               <TextInput
-                value={editor.getField("gameName")}
+                value={editor.getField("gameName") ?? ""}
                 onChange={(event) => editor.updateField("gameName", event.target.value)}
               />
             </FormControl>
             <FormControl label="Category Name" note={getNote("categoryName")}>
               <TextInput
-                value={editor.getField("categoryName")}
+                value={editor.getField("categoryName") ?? ""}
                 onChange={(event) => editor.updateField("categoryName", event.target.value)}
               />
             </FormControl>
@@ -211,13 +187,13 @@ export default function RunEditor(props: RunEditorProps) {
               </FormControl>
               <FormControl label="Platform" note={getNote("platform")}>
                 <TextInput
-                  value={editor.getField("platform")}
+                  value={editor.getField("platform") ?? ""}
                   onChange={(event) => editor.updateField("platform", event.target.value)}
                 />
               </FormControl>
               <FormControl label="Release Year" note={getNote("releaseYear")}>
                 <TextInput
-                  value={editor.getField("releaseYear")}
+                  value={editor.getField("releaseYear") ?? ""}
                   pattern="\d\d\d\d"
                   onChange={(event) => editor.updateField("releaseYear", event.target.value)}
                 />
@@ -225,7 +201,7 @@ export default function RunEditor(props: RunEditorProps) {
             </Stack>
             <FormControl label="Notes" note={getNote("notes")}>
               <TextArea
-                value={editor.getField("notes")}
+                value={editor.getField("notes") ?? ""}
                 onChange={(event) => editor.updateField("notes", event.target.value)}
               />
             </FormControl>
@@ -234,7 +210,7 @@ export default function RunEditor(props: RunEditorProps) {
               label="Formatted Game Name"
               note="Use newlines to adjust how the game name looks on stream.">
               <TextArea
-                value={editor.getField("gameNameFormatted")}
+                value={editor.getField("gameNameFormatted") ?? ""}
                 rows={2}
                 onChange={(event) => editor.updateField("gameNameFormatted", event.target.value)}
               />
@@ -242,22 +218,15 @@ export default function RunEditor(props: RunEditorProps) {
           </Stack>
         </Card>
 
-        <Stack spacing="space-lg" className={styles.participants}>
+        <Stack spacing="space-md" className={styles.participants}>
           <Header tag="h3">Runners</Header>
-          {renderParticipantFields("runners", 0)}
-          {renderParticipantFields("runners", 1)}
-          {renderParticipantFields("runners", 2)}
-          {renderParticipantFields("runners", 3)}
-          {renderParticipantFields("runners", 4)}
-          {renderParticipantFields("runners", 5)}
-          {renderParticipantFields("runners", 6)}
-          {renderParticipantFields("runners", 7)}
-          {renderParticipantFields("runners", 8)}
+          {run.runners.map(renderRunner)}
+          <Button variant="primary/outline" onClick={handleAddRunner}>
+            Add a Runner
+          </Button>
+          <Spacer size="space-lg" />
           <Header tag="h3">Commentators</Header>
-          {renderParticipantFields("commentators", 0)}
-          {renderParticipantFields("commentators", 1)}
-          {renderParticipantFields("commentators", 2)}
-          {renderParticipantFields("commentators", 3)}
+          {run.commentators.map(renderCommentator)}
         </Stack>
       </Stack>
     </div>

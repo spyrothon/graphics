@@ -152,7 +152,7 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
           <Stack>
             <Header tag="h4">Scores</Header>
             {interviewees.map((participant) => (
-              <FormControl key={participant.displayName} label={participant.displayName}>
+              <FormControl key={participant.id} label={participant.displayName}>
                 <TextInput
                   type="number"
                   value={scores[participant.displayName] ?? 0}

@@ -2,18 +2,22 @@ defmodule GraphicsAPI.Runs do
   import Ecto.Query, warn: false
   alias GraphicsAPI.Repo
 
-  alias GraphicsAPI.Runs.{Interview, Schedule, ScheduleEntry, Run}
+  alias GraphicsAPI.Runs.{Interview, Schedule, ScheduleEntry, Run, Runner}
 
   ###
   # Runs
   ###
 
   def list_runs() do
-    Repo.all(Run)
+    Run
+    |> Repo.all()
+    |> Repo.preload(runners: :participant, commentators: :participant)
   end
 
   def get_run(run_id) do
-    Repo.get(Run, run_id)
+    Run
+    |> Repo.get(run_id)
+    |> Repo.preload(runners: :participant, commentators: :participant)
   end
 
   def create_run(params) do
@@ -33,16 +37,58 @@ defmodule GraphicsAPI.Runs do
     |> Repo.delete()
   end
 
+  def add_runner(run = %Run{}, runner_params) do
+    run
+    |> Run.changeset(%{runners: run.runners ++ [runner_params]})
+    |> Repo.update()
+  end
+
+  def update_runner(run = %Run{}, runner_id, runner_params) do
+    updated_runners =
+      run.runners
+      |> Enum.map(fn runner ->
+        case runner do
+          %{id: ^runner_id} ->
+            runner
+            |> Runner.changeset(runner_params)
+            |> Ecto.Changeset.apply_changes()
+
+          _ ->
+            runner
+        end
+        |> IO.inspect()
+        |> Map.from_struct()
+      end)
+
+    run
+    |> Run.changeset(%{runners: updated_runners})
+    |> Repo.update()
+  end
+
+  def remove_runner(run = %Run{}, runner_id) do
+    updated_runners =
+      run.runners
+      |> Enum.reject(&(&1.id == runner_id))
+
+    run
+    |> Run.changeset(%{runners: updated_runners})
+    |> Repo.update()
+  end
+
   ###
   # Interviews
   ###
 
   def list_interviews() do
-    Repo.all(Interview)
+    Interview
+    |> Repo.all()
+    |> Repo.preload(interviewers: :participant, interviewees: :participant)
   end
 
   def get_interview(interview_id) do
-    Repo.get(Interview, interview_id)
+    Interview
+    |> Repo.get(interview_id)
+    |> Repo.preload(interviewers: :participant, interviewees: :participant)
   end
 
   def create_interview(params) do
@@ -68,8 +114,8 @@ defmodule GraphicsAPI.Runs do
 
   @schedules_query from(s in Schedule,
                      preload: [
-                       :runs,
-                       :interviews,
+                       runs: [runners: :participant, commentators: :participant],
+                       interviews: [interviewers: :participant, interviewees: :participant],
                        schedule_entries:
                          ^from(e in ScheduleEntry,
                            order_by: [asc: e.position],

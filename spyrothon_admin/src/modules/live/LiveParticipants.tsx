@@ -20,7 +20,7 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
   const [runnerVisibilities, setRunnerVisibilities] = React.useState(() => {
     const runnerVisibilities: { [name: string]: boolean } = {};
     for (const runner of run.runners) {
-      runnerVisibilities[runner.displayName] = runner.visible;
+      runnerVisibilities[runner.id] = runner.visible;
     }
     return runnerVisibilities;
   });
@@ -28,7 +28,7 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
   const [runnerWebcams, setRunnerWebcams] = React.useState(() => {
     const runnerWebcams: { [name: string]: boolean } = {};
     for (const runner of run.runners) {
-      runnerWebcams[runner.displayName] = runner.hasWebcam;
+      runnerWebcams[runner.id] = runner.hasWebcam;
     }
     return runnerWebcams;
   });
@@ -36,7 +36,7 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
   const [commentatorVisibilities, setCommentatorVisibilities] = React.useState(() => {
     const commentatorVisibilities: { [name: string]: boolean } = {};
     for (const commentator of run.commentators) {
-      commentatorVisibilities[commentator.displayName] = commentator.visible;
+      commentatorVisibilities[commentator.id] = commentator.visible;
     }
     return commentatorVisibilities;
   });
@@ -44,25 +44,25 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
   const [commentatorWebcams, setCommentatorWebcams] = React.useState(() => {
     const commentatorWebcams: { [name: string]: boolean } = {};
     for (const commentator of run.commentators) {
-      commentatorWebcams[commentator.displayName] = commentator.hasWebcam;
+      commentatorWebcams[commentator.id] = commentator.hasWebcam;
     }
     return commentatorWebcams;
   });
 
-  function setRunnerVisible(displayName: string, visible: boolean) {
-    setRunnerVisibilities((state) => ({ ...state, [displayName]: visible }));
+  function setRunnerVisible(runnerId: string, visible: boolean) {
+    setRunnerVisibilities((state) => ({ ...state, [runnerId]: visible }));
   }
 
-  function setCommentatorVisible(displayName: string, visible: boolean) {
-    setCommentatorVisibilities((state) => ({ ...state, [displayName]: visible }));
+  function setCommentatorVisible(commentatorId: string, visible: boolean) {
+    setCommentatorVisibilities((state) => ({ ...state, [commentatorId]: visible }));
   }
 
-  function setRunnerWebcam(displayName: string, hasWebcam: boolean) {
-    setRunnerWebcams((state) => ({ ...state, [displayName]: hasWebcam }));
+  function setRunnerWebcam(runnerId: string, hasWebcam: boolean) {
+    setRunnerWebcams((state) => ({ ...state, [runnerId]: hasWebcam }));
   }
 
-  function setCommentatorWebcam(displayName: string, hasWebcam: boolean) {
-    setCommentatorWebcams((state) => ({ ...state, [displayName]: hasWebcam }));
+  function setCommentatorWebcam(commentatorId: string, hasWebcam: boolean) {
+    setCommentatorWebcams((state) => ({ ...state, [commentatorId]: hasWebcam }));
   }
 
   function handleSave() {
@@ -70,13 +70,13 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
       persistRun(run.id, {
         runners: run.runners.map((runner) => ({
           ...runner,
-          visible: runnerVisibilities[runner.displayName] ?? runner.visible,
-          hasWebcam: runnerWebcams[runner.displayName] ?? runner.hasWebcam,
+          visible: runnerVisibilities[runner.id] ?? runner.visible,
+          hasWebcam: runnerWebcams[runner.id] ?? runner.hasWebcam,
         })),
         commentators: run.commentators.map((commentator) => ({
           ...commentator,
-          visible: commentatorVisibilities[commentator.displayName] ?? commentator.visible,
-          hasWebcam: commentatorWebcams[commentator.displayName] ?? commentator.hasWebcam,
+          visible: commentatorVisibilities[commentator.id] ?? commentator.visible,
+          hasWebcam: commentatorWebcams[commentator.id] ?? commentator.hasWebcam,
         })),
       }),
     );
@@ -92,17 +92,17 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
         <Stack direction="horizontal" justify="stretch">
           <Stack align="stretch">
             {run.runners.map((runner) => (
-              <div key={runner.displayName} className={styles.row}>
+              <div key={runner.id} className={styles.row}>
                 <Checkbox
-                  checked={runnerVisibilities[runner.displayName] ?? runner.visible}
-                  onChange={(event) => setRunnerVisible(runner.displayName, event.target.checked)}
+                  checked={runnerVisibilities[runner.id] ?? runner.visible}
+                  onChange={(event) => setRunnerVisible(runner.id, event.target.checked)}
                   label={<Text variant="header-sm/normal">{runner.displayName}</Text>}
                 />
                 <div className={styles.participantWebcam}>
                   <Checkbox
-                    checked={runnerWebcams[runner.displayName] ?? runner.hasWebcam}
+                    checked={runnerWebcams[runner.id] ?? runner.hasWebcam}
                     label="Has Webcam"
-                    onChange={(event) => setRunnerWebcam(runner.displayName, event.target.checked)}
+                    onChange={(event) => setRunnerWebcam(runner.id, event.target.checked)}
                   />
                 </div>
               </div>
@@ -111,21 +111,17 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
 
           <Stack align="stretch">
             {run.commentators.map((commentator) => (
-              <div key={commentator.displayName} className={styles.row}>
+              <div key={commentator.id} className={styles.row}>
                 <Checkbox
-                  checked={commentatorVisibilities[commentator.displayName] ?? commentator.visible}
-                  onChange={(event) =>
-                    setCommentatorVisible(commentator.displayName, event.target.checked)
-                  }
+                  checked={commentatorVisibilities[commentator.id] ?? commentator.visible}
+                  onChange={(event) => setCommentatorVisible(commentator.id, event.target.checked)}
                   label={<Text variant="header-sm/normal">{commentator.displayName}</Text>}
                 />
                 <div className={styles.participantWebcam}>
                   <Checkbox
-                    checked={commentatorWebcams[commentator.displayName] ?? commentator.hasWebcam}
+                    checked={commentatorWebcams[commentator.id] ?? commentator.hasWebcam}
                     label="Has Webcam"
-                    onChange={(event) =>
-                      setCommentatorWebcam(commentator.displayName, event.target.checked)
-                    }
+                    onChange={(event) => setCommentatorWebcam(commentator.id, event.target.checked)}
                   />
                 </div>
               </div>

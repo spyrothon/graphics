@@ -1,4 +1,4 @@
-defmodule GraphicsAPI.Runs.Participant do
+defmodule GraphicsAPI.Runs.Runner do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -6,12 +6,8 @@ defmodule GraphicsAPI.Runs.Participant do
 
   @fields [
     :id,
-    :display_name,
-    :twitch_name,
-    :twitter_name,
-    :pronouns,
-    :has_webcam,
     :visible,
+    :display_name,
 
     # Offloading data
     :participant_id,
@@ -19,9 +15,6 @@ defmodule GraphicsAPI.Runs.Participant do
     # Run Fields
     :finished_at,
     :actual_seconds,
-
-    # Interview Fields
-    :score,
 
     # Video ingest
     :gameplay_ingest_url,
@@ -36,22 +29,15 @@ defmodule GraphicsAPI.Runs.Participant do
   ]
 
   embedded_schema do
-    field(:display_name, :string)
-    field(:twitch_name, :string)
-    field(:twitter_name, :string)
-    field(:pronouns, :string)
-
-    field(:has_webcam, :boolean, default: false)
     field(:visible, :boolean, default: true)
+    # An override of the participant's display name for a specific run
+    field(:display_name, :string)
 
     belongs_to(:participant, Users.Participant)
 
     # Run Fields
     field(:actual_seconds, :integer)
     field(:finished_at, :utc_datetime)
-
-    # Interview Fields
-    field(:score, :integer, default: 0)
 
     # Video Ingest
     field(:gameplay_ingest_url, :string)
@@ -63,7 +49,7 @@ defmodule GraphicsAPI.Runs.Participant do
   def changeset(participant, params \\ %{}) do
     participant
     |> cast(params, @fields)
-    |> validate_required([:display_name])
+    |> validate_required([:participant_id])
   end
 
   def timing_changeset(participant, params \\ %{}) do
@@ -71,14 +57,14 @@ defmodule GraphicsAPI.Runs.Participant do
     |> cast(params, @timing_fields)
   end
 
-  def fields, do: @fields
+  def fields, do: @fields ++ [:participant]
 end
 
-defimpl Jason.Encoder, for: [GraphicsAPI.Runs.Participant] do
+defimpl Jason.Encoder, for: [GraphicsAPI.Runs.Runner] do
   def encode(%{__struct__: _} = struct, options) do
     struct
     |> Map.from_struct()
-    |> Map.take(GraphicsAPI.Runs.Participant.fields())
+    |> Map.take(GraphicsAPI.Runs.Runner.fields())
     |> Jason.Encode.map(options)
   end
 end

@@ -4,6 +4,9 @@ const Endpoints = {
   AUTH_LOGIN: "/auth/login",
   AUTH_LOGOUT: "/auth/logout",
   AUTH_ME: "/auth/me",
+  // Participants
+  PARTICIPANTS: "/participants",
+  PARTICIPANT: (id: string) => `/participants/${id}`,
   // Interviews
   INTERVIEWS: "/interviews",
   INTERVIEW: (id: string) => `/interviews/${id}`,
@@ -15,10 +18,10 @@ const Endpoints = {
   RUN_PAUSE: (id: string) => `/runs/${id}/pause`,
   RUN_RESUME: (id: string) => `/runs/${id}/resume`,
   RUN_RESET: (id: string) => `/runs/${id}/reset`,
-  RUN_PARTICIPANT_FINISH: (id: string, participantId: string) =>
-    `/runs/${id}/finish-participant/${participantId}`,
-  RUN_PARTICIPANT_RESUME: (id: string, participantId: string) =>
-    `/runs/${id}/resume-participant/${participantId}`,
+  RUN_RUNNERS: (id: string) => `/runs/${id}/runners`,
+  RUN_RUNNER: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}`,
+  RUN_RUNNER_FINISH: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}/finish`,
+  RUN_RUNNER_RESUME: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}/resume`,
   // Schedules
   SCHEDULES: "/schedules",
   SCHEDULE: (id: string) => `/schedules/${id}`,

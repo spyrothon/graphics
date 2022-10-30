@@ -18,7 +18,7 @@ export default function QuizCornerScores(props: QuizCornerScoresProps) {
   return (
     <div className={classNames(styles.container, className)}>
       {participants.map((participant) => (
-        <div key={participant.displayName} className={styles.participant}>
+        <div key={participant.id} className={styles.participant}>
           <div className={styles.participantScore}>{participant.score ?? 0}</div>
           <div className={styles.participantName}>{participant.displayName}</div>
         </div>

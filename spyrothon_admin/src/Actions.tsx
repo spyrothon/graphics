@@ -1,5 +1,6 @@
 import { AuthAction, AuthActionType } from "./modules/auth/AuthTypes";
 import { InterviewAction, InterviewActionType } from "./modules/interviews/InterviewTypes";
+import { ParticipantAction, ParticipantActionType } from "./modules/participants/ParticipantTypes";
 import { PublishingAction, PublishingActionType } from "./modules/publishing/PublishingTypes";
 import { RunAction, RunActionType } from "./modules/runs/RunsTypes";
 import { ScheduleAction, ScheduleActionType } from "./modules/schedules/ScheduleTypes";
@@ -7,6 +8,7 @@ import { ScheduleAction, ScheduleActionType } from "./modules/schedules/Schedule
 export const ActionTypes = {
   ...AuthActionType,
   ...InterviewActionType,
+  ...ParticipantActionType,
   ...PublishingActionType,
   ...RunActionType,
   ...ScheduleActionType,
@@ -16,6 +18,7 @@ export type Action =
   | { type: "@@INIT" }
   | AuthAction
   | InterviewAction
+  | ParticipantAction
   | PublishingAction
   | RunAction
   | ScheduleAction;

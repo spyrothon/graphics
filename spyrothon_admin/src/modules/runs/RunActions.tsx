@@ -1,4 +1,4 @@
-import { Run } from "@spyrothon/api";
+import { Run, Runner } from "@spyrothon/api";
 
 import API from "@admin/API";
 import { SafeDispatch } from "@admin/hooks/useDispatch";
@@ -31,16 +31,7 @@ export function fetchRunsSuccess(runs: Run[]): RunAction {
 
 export function persistRun(runId: string, changes: Partial<Run>) {
   return async (dispatch: SafeDispatch) => {
-    const filteredChanges = { ...changes };
-    if (changes.runners != null) {
-      filteredChanges.runners = changes.runners.filter((entry) => entry?.displayName !== "");
-    }
-    if (changes.commentators != null) {
-      filteredChanges.commentators = changes.commentators.filter(
-        (entry) => entry?.displayName !== "",
-      );
-    }
-    const updatedRun = await API.runs.updateRun(runId, filteredChanges);
+    const updatedRun = await API.runs.updateRun(runId, changes);
     dispatch({
       type: RunActionType.RUNS_UPDATE_RUN,
       run: updatedRun,
@@ -48,7 +39,39 @@ export function persistRun(runId: string, changes: Partial<Run>) {
   };
 }
 
-function _runTimingAction(runId: string, action: (runId: string) => Promise<Run>) {
+export function addRunner(runId: string, runner: Partial<Runner>) {
+  return async (dispatch: SafeDispatch) => {
+    const updatedRun = await API.runs.addRunner(runId, runner);
+    dispatch({
+      type: RunActionType.RUNS_UPDATE_RUN,
+      run: updatedRun,
+    });
+  };
+}
+
+export function removeRunner(runId: string, runnerId: string) {
+  return async (dispatch: SafeDispatch) => {
+    await API.runs.removeRunner(runId, runnerId);
+    const updatedRun = await API.runs.fetchRun(runId);
+
+    dispatch({
+      type: RunActionType.RUNS_UPDATE_RUN,
+      run: updatedRun,
+    });
+  };
+}
+
+export function persistRunner(runId: string, runnerId: string, changes: Partial<Runner>) {
+  return async (dispatch: SafeDispatch) => {
+    const updatedRun = await API.runs.updateRunner(runId, runnerId, changes);
+    dispatch({
+      type: RunActionType.RUNS_UPDATE_RUN,
+      run: updatedRun,
+    });
+  };
+}
+
+function _timingAction(runId: string, action: (runId: string) => Promise<Run>) {
   return async (dispatch: SafeDispatch) => {
     const run = await action(runId);
 
@@ -59,15 +82,15 @@ function _runTimingAction(runId: string, action: (runId: string) => Promise<Run>
   };
 }
 
-export const startRun = (runId: string) => _runTimingAction(runId, API.runs.startRun);
-export const finishRun = (runId: string) => _runTimingAction(runId, API.runs.finishRun);
-export const pauseRun = (runId: string) => _runTimingAction(runId, API.runs.pauseRun);
-export const resumeRun = (runId: string) => _runTimingAction(runId, API.runs.resumeRun);
-export const resetRun = (runId: string) => _runTimingAction(runId, API.runs.resetRun);
+export const startRun = (runId: string) => _timingAction(runId, () => API.runs.startRun(runId));
+export const finishRun = (runId: string) => _timingAction(runId, () => API.runs.finishRun(runId));
+export const pauseRun = (runId: string) => _timingAction(runId, () => API.runs.pauseRun(runId));
+export const resumeRun = (runId: string) => _timingAction(runId, () => API.runs.resumeRun(runId));
+export const resetRun = (runId: string) => _timingAction(runId, () => API.runs.resetRun(runId));
 
 export function finishRunParticipant(runId: string, participantId: string) {
   return async (dispatch: SafeDispatch) => {
-    const run = await API.runs.finishParticipant(runId, participantId);
+    const run = await API.runs.finishRunner(runId, participantId);
 
     dispatch({
       type: RunActionType.RUNS_UPDATE_RUN,
@@ -78,7 +101,7 @@ export function finishRunParticipant(runId: string, participantId: string) {
 
 export function resumeRunParticipant(runId: string, participantId: string) {
   return async (dispatch: SafeDispatch) => {
-    const run = await API.runs.resumeParticipant(runId, participantId);
+    const run = await API.runs.resumeRunner(runId, participantId);
 
     dispatch({
       type: RunActionType.RUNS_UPDATE_RUN,

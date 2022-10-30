@@ -129,13 +129,13 @@ defmodule GraphicsAPI.Runs.Timing do
     |> Repo.update()
   end
 
-  def finish_participant(run = %Run{}, participant_id, finish_time \\ DateTime.utc_now()) do
+  def finish_runner(run = %Run{}, runner_id, finish_time \\ DateTime.utc_now()) do
     actual_seconds = DateTime.diff(finish_time, run.started_at) - (run.pause_seconds || 0)
 
     updated_runners =
       run.runners
-      |> _update_participant(
-        participant_id,
+      |> _update_runner(
+        runner_id,
         fn runner -> %{runner | finished_at: finish_time, actual_seconds: actual_seconds} end
       )
 
@@ -160,11 +160,11 @@ defmodule GraphicsAPI.Runs.Timing do
     |> Repo.update()
   end
 
-  def resume_participant(run = %Run{}, participant_id) do
+  def resume_runner(run = %Run{}, runner_id) do
     updated_runners =
       run.runners
-      |> _update_participant(
-        participant_id,
+      |> _update_runner(
+        runner_id,
         fn runner -> %{runner | finished_at: nil, actual_seconds: nil} end
       )
 
@@ -178,8 +178,8 @@ defmodule GraphicsAPI.Runs.Timing do
     |> Repo.update()
   end
 
-  defp _update_participant(participants, target_id, func) do
-    participants
+  defp _update_runner(runners, target_id, func) do
+    runners
     |> Enum.map(fn runner ->
       case runner do
         %{id: ^target_id} -> func.(runner)

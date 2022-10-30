@@ -86,26 +86,65 @@ defmodule GraphicsAPIWeb.RunsController do
     modify_run(conn, run_id, &Runs.Timing.reset_run/1)
   end
 
-  patch "/:id/finish-participant/:participant_id" do
+  get "/:id/runners" do
+    run_id = Map.get(conn.path_params, "id")
+
+    case run_id do
+      nil ->
+        not_found(conn)
+
+      run_id ->
+        run = Runs.get_run(run_id)
+        json(conn, run.runners)
+    end
+  end
+
+  post "/:id/runners" do
+    run_id = Map.get(conn.path_params, "id")
+
+    modify_run(conn, run_id, fn run ->
+      Runs.add_runner(run, conn.body_params)
+    end)
+  end
+
+  put "/:id/runners/:runner_id" do
+    run_id = Map.get(conn.path_params, "id")
+    runner_id = Map.get(conn.path_params, "runner_id")
+
+    modify_run(conn, run_id, fn run ->
+      Runs.update_runner(run, runner_id, conn.body_params)
+    end)
+  end
+
+  delete "/:id/runners/:runner_id" do
+    run_id = Map.get(conn.path_params, "id")
+    runner_id = Map.get(conn.path_params, "runner_id")
+
+    modify_run(conn, run_id, fn run ->
+      Runs.remove_runner(run, runner_id)
+    end)
+  end
+
+  patch "/:id/runners/:runner_id/finish" do
     run_id = conn.path_params["id"]
 
     modify_run(
       conn,
       run_id,
       fn run ->
-        Runs.Timing.finish_participant(run, conn.path_params["participant_id"])
+        Runs.Timing.finish_runner(run, conn.path_params["runner_id"])
       end
     )
   end
 
-  patch "/:id/resume-participant/:participant_id" do
+  patch "/:id/runners/:runner_id/resume" do
     run_id = conn.path_params["id"]
 
     modify_run(
       conn,
       run_id,
       fn run ->
-        Runs.Timing.resume_participant(run, conn.path_params["participant_id"])
+        Runs.Timing.resume_runner(run, conn.path_params["runner_id"])
       end
     )
   end

@@ -15,8 +15,8 @@ defmodule GraphicsAPI.Runs.Interview do
     field(:notes, :string)
     field(:estimate_seconds, :integer)
 
-    embeds_many(:interviewees, GraphicsAPI.Runs.Participant, on_replace: :delete)
-    embeds_many(:interviewers, GraphicsAPI.Runs.Participant, on_replace: :delete)
+    embeds_many(:interviewees, GraphicsAPI.Runs.InterviewParticipant, on_replace: :delete)
+    embeds_many(:interviewers, GraphicsAPI.Runs.InterviewParticipant, on_replace: :delete)
 
     embeds_many(:questions, GraphicsAPI.Runs.InterviewQuestion, on_replace: :delete)
     field(:current_question, :string)
