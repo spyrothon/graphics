@@ -11,8 +11,6 @@ import {
 } from "@spyrothon/sparx";
 import { SaveState, useSaveable } from "@spyrothon/utils";
 
-import useSafeDispatch from "@admin/hooks/useDispatch";
-
 import { createParticipant } from "./ParticipantActions";
 
 import styles from "./CreateParticipantModal.module.css";
@@ -22,7 +20,6 @@ interface CreateParticipantModalProps {
 }
 
 export default function CreateParticipantModal(props: CreateParticipantModalProps) {
-  const dispatch = useSafeDispatch();
   const { onClose } = props;
 
   const [displayName, setDisplayName] = React.useState("");
@@ -33,16 +30,14 @@ export default function CreateParticipantModal(props: CreateParticipantModalProp
   const [hasWebcam, setHasWebcam] = React.useState(false);
 
   const [save, getSaveText, saveState] = useSaveable(async () => {
-    dispatch(
-      createParticipant({
-        displayName,
-        twitchName,
-        twitterName,
-        pronouns,
-        pronounsVisible,
-        hasWebcam,
-      }),
-    );
+    createParticipant({
+      displayName,
+      twitchName,
+      twitterName,
+      pronouns,
+      pronounsVisible,
+      hasWebcam,
+    });
   });
 
   async function handleSave() {

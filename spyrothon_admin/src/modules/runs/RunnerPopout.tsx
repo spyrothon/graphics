@@ -40,7 +40,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
   const participant = useParticipant(runner.participantId);
 
   const [displayName, setDisplayName] = React.useState(runner.displayName);
-  const [showWebcam, setShowWebcam] = React.useState(false);
+  const [webcamVisible, setWebcamVisible] = React.useState(runner.webcamVisible);
   const [gameplayIngestUrl, setGameplayIngestUrl] = React.useState(runner.gameplayIngestUrl);
   const [gameplayCropTransform, setGameplayCropTransform] = React.useState(
     runner.gameplayCropTransform ?? { top: 0, right: 0, bottom: 0, left: 0 },
@@ -58,6 +58,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
         gameplayCropTransform,
         webcamIngestUrl,
         webcamCropTransform,
+        webcamVisible,
       }),
     );
   });
@@ -114,14 +115,14 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
           </FormControl>
           <FormSwitch
             label="Show Webcam"
-            checked={showWebcam}
+            checked={webcamVisible}
             disabled={!participant.hasWebcam}
             note={
               participant.hasWebcam
                 ? undefined
                 : `${participant.displayName} doesn't have a webcam input configured`
             }
-            onChange={(event) => setShowWebcam(event.target.checked)}
+            onChange={(event) => setWebcamVisible(event.target.checked)}
           />
         </Stack>
         <hr className={styles.separator} />

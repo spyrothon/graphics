@@ -7,6 +7,7 @@ defmodule GraphicsAPI.Runs.Commentator do
   @fields [
     :id,
     :visible,
+    :webcam_visible,
     :display_name,
 
     # Offloading data
@@ -15,6 +16,7 @@ defmodule GraphicsAPI.Runs.Commentator do
 
   embedded_schema do
     field(:visible, :boolean, default: true)
+    field(:webcam_visible, :boolean, default: false)
     # An override of the participant's display name for a specific run
     field(:display_name, :string)
 

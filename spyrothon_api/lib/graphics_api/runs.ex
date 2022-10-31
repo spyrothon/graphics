@@ -62,7 +62,6 @@ defmodule GraphicsAPI.Runs do
             runner
             |> Runner.changeset(runner_params)
             |> Ecto.Changeset.apply_changes()
-            |> IO.inspect()
 
           _ ->
             runner
@@ -103,7 +102,6 @@ defmodule GraphicsAPI.Runs do
             commentator
             |> Commentator.changeset(commentator_params)
             |> Ecto.Changeset.apply_changes()
-            |> IO.inspect()
 
           _ ->
             commentator
@@ -177,7 +175,6 @@ defmodule GraphicsAPI.Runs do
             interviewer
             |> InterviewParticipant.changeset(interviewer_params)
             |> Ecto.Changeset.apply_changes()
-            |> IO.inspect()
 
           _ ->
             interviewer
@@ -218,7 +215,6 @@ defmodule GraphicsAPI.Runs do
             interviewee
             |> InterviewParticipant.changeset(interviewee_params)
             |> Ecto.Changeset.apply_changes()
-            |> IO.inspect()
 
           _ ->
             interviewee

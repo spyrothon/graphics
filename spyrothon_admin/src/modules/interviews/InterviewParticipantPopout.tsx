@@ -47,13 +47,13 @@ export default function InterviewParticipantPopout(props: InterviewParticipantPo
   const participant = useParticipant(interviewParticipant.participantId);
 
   const [displayName, setDisplayName] = React.useState(interviewParticipant.displayName);
-  const [showWebcam, setShowWebcam] = React.useState(false);
+  const [webcamVisible, setWebcamVisible] = React.useState(interviewParticipant.webcamVisible);
 
   const persistFunction = type === "interviewers" ? persistInterviewer : persistInterviewee;
   const removeFunction = type === "interviewers" ? removeInterviewer : removeInterviewee;
 
   const [save, getSaveText] = useSaveable(async () => {
-    dispatch(persistFunction(interviewId, interviewParticipantId, { displayName }));
+    dispatch(persistFunction(interviewId, interviewParticipantId, { displayName, webcamVisible }));
   });
 
   function handleRemove() {
@@ -108,14 +108,14 @@ export default function InterviewParticipantPopout(props: InterviewParticipantPo
           </FormControl>
           <FormSwitch
             label="Show Webcam"
-            checked={showWebcam}
+            checked={webcamVisible}
             disabled={!participant.hasWebcam}
             note={
               participant.hasWebcam
                 ? undefined
                 : `${participant.displayName} doesn't have a webcam input configured`
             }
-            onChange={(event) => setShowWebcam(event.target.checked)}
+            onChange={(event) => setWebcamVisible(event.target.checked)}
           />
         </Stack>
         <Button variant="primary" onClick={save}>

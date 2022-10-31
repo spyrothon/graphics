@@ -7,6 +7,7 @@ defmodule GraphicsAPI.Runs.InterviewParticipant do
   @fields [
     :id,
     :visible,
+    :webcam_visible,
     :display_name,
     :score,
 
@@ -18,6 +19,7 @@ defmodule GraphicsAPI.Runs.InterviewParticipant do
 
   embedded_schema do
     field(:visible, :boolean, default: true)
+    field(:webcam_visible, :boolean, default: false)
     # An override of the participant's display name for a specific interview
     field(:display_name, :string)
 
