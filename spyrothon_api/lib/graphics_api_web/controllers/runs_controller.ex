@@ -151,6 +151,47 @@ defmodule GraphicsAPIWeb.RunsController do
     )
   end
 
+  get "/:id/runners" do
+    run_id = Map.get(conn.path_params, "id")
+
+    case run_id do
+      nil ->
+        not_found(conn)
+
+      run_id ->
+        run = Runs.get_run(run_id)
+        json(conn, run.runners)
+    end
+  end
+
+  post "/:id/commentators" do
+    run_id = Map.get(conn.path_params, "id")
+
+    modify_run(conn, run_id, fn run ->
+      Runs.add_commentator(run, conn.body_params)
+      run = Runs.get_run(run_id)
+      {:ok, run}
+    end)
+  end
+
+  put "/:id/commentators/:commentator_id" do
+    run_id = Map.get(conn.path_params, "id")
+    commentator_id = Map.get(conn.path_params, "commentator_id")
+
+    modify_run(conn, run_id, fn run ->
+      Runs.update_commentator(run, commentator_id, conn.body_params)
+    end)
+  end
+
+  delete "/:id/commentators/:commentator_id" do
+    run_id = Map.get(conn.path_params, "id")
+    commentator_id = Map.get(conn.path_params, "commentator_id")
+
+    modify_run(conn, run_id, fn run ->
+      Runs.remove_commentator(run, commentator_id)
+    end)
+  end
+
   def _respond_with_run(conn, run) do
     GraphicsAPIWeb.SyncSocketHandler.update_run(run)
     json(conn, run)

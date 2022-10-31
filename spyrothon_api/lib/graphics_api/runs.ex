@@ -2,7 +2,7 @@ defmodule GraphicsAPI.Runs do
   import Ecto.Query, warn: false
   alias GraphicsAPI.Repo
 
-  alias GraphicsAPI.Runs.{Interview, Schedule, ScheduleEntry, Run, Runner}
+  alias GraphicsAPI.Runs.{Commentator, Interview, Schedule, ScheduleEntry, Run, Runner}
 
   ###
   # Runs
@@ -75,6 +75,47 @@ defmodule GraphicsAPI.Runs do
     run
     |> Run.changeset()
     |> Ecto.Changeset.put_embed(:runners, updated_runners)
+    |> Repo.update()
+  end
+
+  def add_commentator(run = %Run{}, commentator_params) do
+    commentator_maps = run.commentators |> Enum.map(&Map.from_struct/1)
+
+    run
+    |> Run.changeset(%{commentators: commentator_maps ++ [commentator_params]})
+    |> Repo.update()
+  end
+
+  def update_commentator(run = %Run{}, commentator_id, commentator_params) do
+    updated_commentators =
+      run.commentators
+      |> Enum.map(fn commentator ->
+        case commentator do
+          %{id: ^commentator_id} ->
+            commentator
+            |> Commentator.changeset(commentator_params)
+            |> Ecto.Changeset.apply_changes()
+            |> IO.inspect()
+
+          _ ->
+            commentator
+        end
+        |> Map.from_struct()
+      end)
+
+    run
+    |> Run.changeset(%{commentators: updated_commentators})
+    |> Repo.update()
+  end
+
+  def remove_commentator(run = %Run{}, commentator_id) do
+    updated_commentators =
+      run.commentators
+      |> Enum.reject(&(&1.id == commentator_id))
+
+    run
+    |> Run.changeset()
+    |> Ecto.Changeset.put_embed(:commentators, updated_commentators)
     |> Repo.update()
   end
 

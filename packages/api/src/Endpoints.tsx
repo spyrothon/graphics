@@ -23,6 +23,9 @@ const Endpoints = {
   RUN_RUNNER: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}`,
   RUN_RUNNER_FINISH: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}/finish`,
   RUN_RUNNER_RESUME: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}/resume`,
+  RUN_COMMENTATORS: (id: string) => `/runs/${id}/commentators`,
+  RUN_COMMENTATOR: (id: string, commentatorId: string) =>
+    `/runs/${id}/commentators/${commentatorId}`,
   // Schedules
   SCHEDULES: "/schedules",
   SCHEDULE: (id: string) => `/schedules/${id}`,

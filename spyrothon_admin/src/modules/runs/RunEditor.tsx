@@ -23,7 +23,7 @@ import { useSafeSelector } from "../../Store";
 import { useParticipant } from "../participants/ParticipantStore";
 import SelectParticipantPopout from "../participants/SelectParticipantPopout";
 import CommentatorPopout from "./CommentatorPopout";
-import { addRunner, persistRun } from "./RunActions";
+import { addCommentator, addRunner, persistRun } from "./RunActions";
 import RunnerPopout from "./RunnerPopout";
 import * as RunStore from "./RunStore";
 import useRunEditorState from "./useRunEditorState";
@@ -45,6 +45,7 @@ function openCommentatorPopout(runId: string, commentatorId: string, target: HTM
     target,
   );
 }
+
 function RunnerInfo(props: { runId: string; runner: Runner }) {
   const { runId, runner } = props;
 
@@ -58,6 +59,39 @@ function RunnerInfo(props: { runId: string; runner: Runner }) {
         <Stack spacing="space-xs">
           <Text variant="header-sm/normal">
             {runner.displayName ?? participant.displayName}{" "}
+            {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
+          </Text>
+          <Stack direction="horizontal" align="center">
+            {participant.twitchName != null ? (
+              <Text>
+                <Twitch size={16} /> {participant.twitchName}
+              </Text>
+            ) : null}
+            {participant.twitterName != null ? (
+              <Text>
+                <Twitter size={16} /> {participant.twitterName}
+              </Text>
+            ) : null}
+          </Stack>
+        </Stack>
+      </Card>
+    </Clickable>
+  );
+}
+
+function CommentatorInfo(props: { runId: string; commentator: Commentator }) {
+  const { runId, commentator } = props;
+
+  const participant = useParticipant(commentator.participantId);
+
+  return (
+    <Clickable
+      key={commentator.id}
+      onClick={(event) => openCommentatorPopout(runId, commentator.id, event.currentTarget)}>
+      <Card>
+        <Stack spacing="space-xs">
+          <Text variant="header-sm/normal">
+            {commentator.displayName ?? participant.displayName}{" "}
             {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
           </Text>
           <Stack direction="horizontal" align="center">
@@ -124,42 +158,32 @@ export default function RunEditor(props: RunEditorProps) {
     );
   }
 
-  function renderCommentator(commentator: Commentator) {
-    const participant = commentator.participant;
-
-    return (
-      <Clickable
-        key={commentator.id}
-        onClick={(event) => openCommentatorPopout(run.id, commentator.id, event.currentTarget)}>
-        <Card>
-          <Stack spacing="space-xs">
-            <Text variant="header-sm/normal">
-              {commentator.displayName ?? participant.displayName}{" "}
-              {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
-            </Text>
-            <Stack direction="horizontal" align="center">
-              {participant.twitchName != null ? (
-                <Text>
-                  <Twitch size={16} /> {participant.twitchName}
-                </Text>
-              ) : null}
-              {participant.twitterName != null ? (
-                <Text>
-                  <Twitter size={16} /> {participant.twitterName}
-                </Text>
-              ) : null}
-            </Stack>
-          </Stack>
-        </Card>
-      </Clickable>
-    );
-  }
-
   function handleAddRunner(target: HTMLElement) {
     const existingParticipantIds = run.runners.map((runner) => runner.participant.id);
 
     function handleSelect(participantId: string) {
       return dispatch(addRunner(run.id, { participantId }));
+    }
+
+    openPopout(
+      (props) => (
+        <SelectParticipantPopout
+          {...props}
+          existingParticipantIds={existingParticipantIds}
+          onSelect={handleSelect}
+        />
+      ),
+      target,
+    );
+  }
+
+  function handleAddCommentator(target: HTMLElement) {
+    const existingParticipantIds = run.commentators.map(
+      (commentator) => commentator.participant.id,
+    );
+
+    function handleSelect(participantId: string) {
+      return dispatch(addCommentator(run.id, { participantId }));
     }
 
     openPopout(
@@ -254,7 +278,14 @@ export default function RunEditor(props: RunEditorProps) {
           </Button>
           <Spacer size="space-lg" />
           <Header tag="h3">Commentators</Header>
-          {run.commentators.map(renderCommentator)}
+          {run.commentators.map((commentator) => (
+            <CommentatorInfo key={commentator.id} runId={run.id} commentator={commentator} />
+          ))}
+          <Button
+            variant="primary/outline"
+            onClick={(event) => handleAddCommentator(event.currentTarget)}>
+            Add a Commentator
+          </Button>
         </Stack>
       </Stack>
     </div>

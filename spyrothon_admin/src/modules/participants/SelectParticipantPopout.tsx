@@ -56,7 +56,7 @@ export default function SelectParticipantPopout(props: SelectParticipantPopoutPr
         <FormControl
           label="Add a Participant"
           note="Search by display name, twitch, or twitter username">
-          <TextInput value={query} onChange={(event) => setQuery(event.target.value)} />
+          <TextInput value={query} onChange={(event) => setQuery(event.target.value)} autoFocus />
         </FormControl>
 
         {filteredParticipants.map((participant) => (

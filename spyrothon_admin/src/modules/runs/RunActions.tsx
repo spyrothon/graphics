@@ -70,9 +70,41 @@ export function removeRunner(runId: string, runnerId: string) {
   };
 }
 
+export function addCommentator(runId: string, runner: Partial<Runner>) {
+  return async (dispatch: SafeDispatch) => {
+    const updatedRun = await API.runs.addCommentator(runId, runner);
+    dispatch({
+      type: RunActionType.RUNS_UPDATE_RUN,
+      run: updatedRun,
+    });
+  };
+}
+
+export function removeCommentator(runId: string, commentatorId: string) {
+  return async (dispatch: SafeDispatch) => {
+    await API.runs.removeCommentator(runId, commentatorId);
+    const updatedRun = await API.runs.fetchRun(runId);
+
+    dispatch({
+      type: RunActionType.RUNS_UPDATE_RUN,
+      run: updatedRun,
+    });
+  };
+}
+
 export function persistRunner(runId: string, runnerId: string, changes: Partial<Runner>) {
   return async (dispatch: SafeDispatch) => {
     const updatedRun = await API.runs.updateRunner(runId, runnerId, changes);
+    dispatch({
+      type: RunActionType.RUNS_UPDATE_RUN,
+      run: updatedRun,
+    });
+  };
+}
+
+export function persistCommentator(runId: string, runnerId: string, changes: Partial<Runner>) {
+  return async (dispatch: SafeDispatch) => {
+    const updatedRun = await API.runs.updateCommentator(runId, runnerId, changes);
     dispatch({
       type: RunActionType.RUNS_UPDATE_RUN,
       run: updatedRun,
