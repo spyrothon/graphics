@@ -1,13 +1,13 @@
 import * as React from "react";
 import classNames from "classnames";
-import { RunParticipant } from "@spyrothon/api";
+import { Commentator, InterviewParticipant, Runner } from "@spyrothon/api";
 
 import Nameplate from "./Nameplate";
 
 import styles from "./NameplateGroup.module.css";
 
 type NameplateGroupProps = {
-  participants: RunParticipant[];
+  participants: Array<Runner | Commentator | InterviewParticipant>;
   title?: React.ReactNode;
   className?: string;
 };
