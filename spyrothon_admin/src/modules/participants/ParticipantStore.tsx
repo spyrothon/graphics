@@ -13,7 +13,7 @@ export default useParticipantsStore;
 
 export function loadParticipants(participants: Participant[]) {
   useParticipantsStore.setState((state) => {
-    const updatedParticipants = state.participants;
+    const updatedParticipants = { ...state.participants };
     for (const participant of participants) {
       updatedParticipants[participant.id] = participant;
     }

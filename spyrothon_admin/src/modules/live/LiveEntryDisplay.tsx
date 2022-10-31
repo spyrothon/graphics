@@ -3,6 +3,7 @@ import { Interview, Run } from "@spyrothon/api";
 import { Card, Header, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration } from "@spyrothon/utils";
 
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import { ScheduleEntryWithDependants } from "../schedules/ScheduleTypes";
 
 import styles from "./LiveEntryDisplay.module.css";
@@ -27,7 +28,7 @@ function EntryRunContent({ run }: { run: Run }) {
         {run.gameName} - {run.categoryName}
       </Text>
       <Text variant="text-md/secondary">Estimate: {formatDuration(run.estimateSeconds)}</Text>
-      <Text>{run.runners.map((runner) => runner.displayName).join(", ")}</Text>
+      <Text>{run.runners.map((runner) => getDisplayNameForParticipant(runner)).join(", ")}</Text>
       <Notes content={run.notes} />
     </Stack>
   );

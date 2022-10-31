@@ -17,6 +17,7 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";
 
 import EditParticipantModal from "../participants/EditParticipantModal";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import { useParticipant } from "../participants/ParticipantStore";
 import { persistCommentator, removeCommentator } from "./RunActions";
 import * as RunStore from "./RunStore";
@@ -49,7 +50,7 @@ export default function CommentatorPopout(props: CommentatorPopoutProps) {
       dispatch(removeCommentator(runId, commentatorId));
     }
 
-    const name = commentator.displayName ?? participant.displayName;
+    const name = getDisplayNameForParticipant(commentator);
 
     openModal((props) => (
       <ConfirmModal

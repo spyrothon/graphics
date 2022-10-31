@@ -196,7 +196,6 @@ export type InitialParticipant = Partial<Participant> & { displayName: string };
 export interface Runner {
   id: string;
   visible: boolean;
-  participant: Participant;
   participantId: string;
   displayName?: string;
   finishedAt?: Date;
@@ -209,7 +208,6 @@ export interface Runner {
 export interface Commentator {
   id: string;
   visible: boolean;
-  participant: Participant;
   participantId: string;
   displayName?: string;
 }
@@ -217,10 +215,9 @@ export interface Commentator {
 export interface InterviewParticipant {
   id: string;
   visible: boolean;
-  participant: Participant;
   participantId: string;
   displayName?: string;
-  score: number;
+  score?: number;
   videoIngestUrl?: string;
   videoCropTransform?: CropTransform;
 }

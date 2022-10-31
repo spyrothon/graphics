@@ -35,7 +35,7 @@ defmodule GraphicsAPI.Runs.InterviewParticipant do
     |> validate_required([:participant_id])
   end
 
-  def fields, do: @fields ++ [:participant]
+  def fields, do: @fields
 end
 
 defimpl Jason.Encoder, for: [GraphicsAPI.Runs.InterviewParticipant] do

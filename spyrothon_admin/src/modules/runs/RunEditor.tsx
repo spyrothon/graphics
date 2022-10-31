@@ -20,6 +20,7 @@ import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import { useParticipant } from "../participants/ParticipantStore";
 import SelectParticipantPopout from "../participants/SelectParticipantPopout";
 import CommentatorPopout from "./CommentatorPopout";
@@ -58,7 +59,7 @@ function RunnerInfo(props: { runId: string; runner: Runner }) {
       <Card>
         <Stack spacing="space-xs">
           <Text variant="header-sm/normal">
-            {runner.displayName ?? participant.displayName}{" "}
+            {getDisplayNameForParticipant(runner)}{" "}
             {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
           </Text>
           <Stack direction="horizontal" align="center">
@@ -91,7 +92,7 @@ function CommentatorInfo(props: { runId: string; commentator: Commentator }) {
       <Card>
         <Stack spacing="space-xs">
           <Text variant="header-sm/normal">
-            {commentator.displayName ?? participant.displayName}{" "}
+            {getDisplayNameForParticipant(commentator)}{" "}
             {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
           </Text>
           <Stack direction="horizontal" align="center">
@@ -159,7 +160,7 @@ export default function RunEditor(props: RunEditorProps) {
   }
 
   function handleAddRunner(target: HTMLElement) {
-    const existingParticipantIds = run.runners.map((runner) => runner.participant.id);
+    const existingParticipantIds = run.runners.map((runner) => runner.participantId);
 
     function handleSelect(participantId: string) {
       return dispatch(addRunner(run.id, { participantId }));
@@ -178,9 +179,7 @@ export default function RunEditor(props: RunEditorProps) {
   }
 
   function handleAddCommentator(target: HTMLElement) {
-    const existingParticipantIds = run.commentators.map(
-      (commentator) => commentator.participant.id,
-    );
+    const existingParticipantIds = run.commentators.map((commentator) => commentator.participantId);
 
     function handleSelect(participantId: string) {
       return dispatch(addCommentator(run.id, { participantId }));

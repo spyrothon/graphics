@@ -1,12 +1,12 @@
 import * as React from "react";
 import type { Run } from "@spyrothon/api";
-import { Button, Card, Checkbox, Header, Stack, Text } from "@spyrothon/sparx";
+import { Button, Card, Checkbox, FormSwitch, Header, Stack, Text } from "@spyrothon/sparx";
+import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import { persistRun } from "../runs/RunActions";
-
-import styles from "./LiveParticipants.module.css";
 
 type LiveParticipantsProps = {
   run: Run;
@@ -65,7 +65,7 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
     setCommentatorWebcams((state) => ({ ...state, [commentatorId]: hasWebcam }));
   }
 
-  function handleSave() {
+  const [handleSave, getSaveText, saveState] = useSaveable(async () => {
     dispatch(
       persistRun(run.id, {
         runners: run.runners.map((runner) => ({
@@ -80,7 +80,7 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
         })),
       }),
     );
-  }
+  });
 
   return (
     <Card className={className}>
@@ -89,47 +89,49 @@ export default function LiveParticipants(props: LiveParticipantsProps) {
           Visibilities
         </Header>
         <Text>Toggle which participants should be shown on the Layout</Text>
-        <Stack direction="horizontal" justify="stretch">
+        <Stack spacing="space-xl" direction="horizontal" justify="stretch">
           <Stack align="stretch">
             {run.runners.map((runner) => (
-              <div key={runner.id} className={styles.row}>
-                <Checkbox
+              <div key={runner.id}>
+                <FormSwitch
                   checked={runnerVisibilities[runner.id] ?? runner.visible}
                   onChange={(event) => setRunnerVisible(runner.id, event.target.checked)}
-                  label={<Text variant="header-sm/normal">{runner.displayName}</Text>}
+                  label={
+                    <Text variant="header-sm/normal">{getDisplayNameForParticipant(runner)}</Text>
+                  }
                 />
-                <div className={styles.participantWebcam}>
-                  <Checkbox
-                    checked={runnerWebcams[runner.id] ?? runner.hasWebcam}
-                    label="Has Webcam"
-                    onChange={(event) => setRunnerWebcam(runner.id, event.target.checked)}
-                  />
-                </div>
+                <Checkbox
+                  checked={runnerWebcams[runner.id] ?? runner.hasWebcam}
+                  label="Show Webcam"
+                  onChange={(event) => setRunnerWebcam(runner.id, event.target.checked)}
+                />
               </div>
             ))}
           </Stack>
 
           <Stack align="stretch">
             {run.commentators.map((commentator) => (
-              <div key={commentator.id} className={styles.row}>
-                <Checkbox
+              <div key={commentator.id}>
+                <FormSwitch
                   checked={commentatorVisibilities[commentator.id] ?? commentator.visible}
                   onChange={(event) => setCommentatorVisible(commentator.id, event.target.checked)}
-                  label={<Text variant="header-sm/normal">{commentator.displayName}</Text>}
+                  label={
+                    <Text variant="header-sm/normal">
+                      {getDisplayNameForParticipant(commentator)}
+                    </Text>
+                  }
                 />
-                <div className={styles.participantWebcam}>
-                  <Checkbox
-                    checked={commentatorWebcams[commentator.id] ?? commentator.hasWebcam}
-                    label="Has Webcam"
-                    onChange={(event) => setCommentatorWebcam(commentator.id, event.target.checked)}
-                  />
-                </div>
+                <Checkbox
+                  checked={commentatorWebcams[commentator.id] ?? commentator.hasWebcam}
+                  label="Show Webcam"
+                  onChange={(event) => setCommentatorWebcam(commentator.id, event.target.checked)}
+                />
               </div>
             ))}
           </Stack>
         </Stack>
-        <Button variant="primary" onClick={handleSave}>
-          Save Visibilities
+        <Button variant="primary" onClick={handleSave} disabled={saveState === SaveState.SAVING}>
+          {saveState === SaveState.PENDING ? "Save Visibilities" : getSaveText()}
         </Button>
       </Stack>
     </Card>

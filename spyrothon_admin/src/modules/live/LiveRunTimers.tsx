@@ -1,12 +1,13 @@
 import * as React from "react";
 import classNames from "classnames";
 import { Flag, Icon, Pause, Play, Repeat } from "react-feather";
-import type { Run, RunParticipant } from "@spyrothon/api";
+import type { Run, Runner } from "@spyrothon/api";
 import { Button, ButtonVariantColor, Card, Header, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration, useAnimationFrame } from "@spyrothon/utils";
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
 
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import getRunState from "../runs/getRunState";
 import {
   finishRun,
@@ -125,7 +126,7 @@ function getResetAction(run: Run): TimerAction | undefined {
   };
 }
 
-function getParticipantAction(run: Run, runner: RunParticipant): TimerAction {
+function getParticipantAction(run: Run, runner: Runner): TimerAction {
   const allDisabled = run.startedAt == null || run.pausedAt != null;
 
   if (runner.finishedAt != null) {
@@ -188,7 +189,7 @@ export default function LiveRunTimers(props: LiveTimerProps) {
           {run.runners.map((runner) => (
             <tr key={runner.id} className={styles.runnerTimer}>
               <td>
-                <Text>{runner.displayName}</Text>
+                <Text>{getDisplayNameForParticipant(runner)}</Text>
               </td>
               <td
                 className={classNames(styles.timer, {

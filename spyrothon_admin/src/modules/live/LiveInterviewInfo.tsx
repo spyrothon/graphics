@@ -16,6 +16,7 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 import * as InterviewStore from "../../modules/interviews/InterviewStore";
 import { useSafeSelector } from "../../Store";
 import { persistInterview } from "../interviews/InterviewActions";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 
 type LiveRunInfoProps = {
   interviewId: string;
@@ -33,7 +34,7 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
   const [scores, setScores] = React.useState(() => {
     const scores: { [name: string]: number | undefined } = {};
     for (const interviewee of interview?.interviewees ?? []) {
-      scores[interviewee.displayName] = interviewee.score;
+      scores[interviewee.id] = interviewee.score;
     }
     return scores;
   });
@@ -79,8 +80,8 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
     }
   }
 
-  function setScore(displayName: string, score?: number) {
-    setScores((state) => ({ ...state, [displayName]: score }));
+  function setScore(participantId: string, score?: number) {
+    setScores((state) => ({ ...state, [participantId]: score }));
   }
 
   function handleSaveScores() {
@@ -88,7 +89,7 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
       persistInterview(interviewId, {
         interviewees: interviewees.map((interviewee) => ({
           ...interviewee,
-          score: scores[interviewee.displayName],
+          score: scores[interviewee.id],
         })),
       }),
     );
@@ -151,14 +152,14 @@ export default function LiveInterviewInfo(props: LiveRunInfoProps) {
 
           <Stack>
             <Header tag="h4">Scores</Header>
-            {interviewees.map((participant) => (
-              <FormControl key={participant.id} label={participant.displayName}>
+            {interviewees.map((interviewee) => (
+              <FormControl key={interviewee.id} label={getDisplayNameForParticipant(interviewee)}>
                 <TextInput
                   type="number"
-                  value={scores[participant.displayName] ?? 0}
+                  value={scores[interviewee.id] ?? 0}
                   onChange={(score) =>
                     setScore(
-                      participant.displayName,
+                      interviewee.id,
                       score.target.value === "" ? undefined : parseInt(score.target.value),
                     )
                   }

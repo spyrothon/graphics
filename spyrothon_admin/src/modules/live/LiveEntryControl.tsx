@@ -9,6 +9,7 @@ import * as ScheduleStore from "../../modules/schedules/ScheduleStore";
 import { useSafeSelector } from "../../Store";
 import OBS from "../obs/OBS";
 import OBSSceneSelector from "../obs/OBSSceneSelector";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import * as RunStore from "../runs/RunStore";
 // import { useOBSStore } from "../obs/OBSStore";
 import { updateScheduleEntry } from "../schedules/ScheduleActions";
@@ -65,7 +66,7 @@ function LiveEntryRunnerSlots(props: { runId: string }) {
       {run.runners.map((runner) => (
         <div key={runner.id} className={styles.runnerCropData}>
           <Text>
-            <strong>{runner.displayName}:</strong>
+            <strong>{getDisplayNameForParticipant(runner)}:</strong>
             <br />
             {runner.gameplayIngestUrl}
           </Text>

@@ -151,7 +151,7 @@ defmodule GraphicsAPIWeb.RunsController do
     )
   end
 
-  get "/:id/runners" do
+  get "/:id/commentators" do
     run_id = Map.get(conn.path_params, "id")
 
     case run_id do
@@ -160,7 +160,7 @@ defmodule GraphicsAPIWeb.RunsController do
 
       run_id ->
         run = Runs.get_run(run_id)
-        json(conn, run.runners)
+        json(conn, run.commentators)
     end
   end
 

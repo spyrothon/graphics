@@ -131,7 +131,7 @@ importers:
       '@spyrothon/sparx': 0.2.2_biqbaboplfbrettd7655fr4n2y
       '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
-      jotai: 1.9.0_3toe27fv7etiytxb5kxc7fxaw4
+      jotai: 1.9.0_react@18.2.0
       js-cookie: 3.0.1
       luxon: 3.0.3
       obs-websocket-js: 5.0.2
@@ -5696,7 +5696,7 @@ packages:
       '@sideway/pinpoint': 2.0.0
     dev: false
 
-  /jotai/1.9.0_3toe27fv7etiytxb5kxc7fxaw4:
+  /jotai/1.9.0_react@18.2.0:
     resolution: {integrity: sha512-XYpSlxbxujUCTA8PNkzfj3+zF6XVyzo6XMZIEic3gXQCpTDPfmqhUj2FR8kwUACK5weosFrSBhesrjwfILUCoQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -5727,7 +5727,6 @@ packages:
       xstate:
         optional: true
     dependencies:
-      '@babel/core': 7.19.1
       react: 18.2.0
     dev: false
 

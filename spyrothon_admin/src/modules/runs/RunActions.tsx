@@ -102,9 +102,9 @@ export function persistRunner(runId: string, runnerId: string, changes: Partial<
   };
 }
 
-export function persistCommentator(runId: string, runnerId: string, changes: Partial<Runner>) {
+export function persistCommentator(runId: string, commentatorId: string, changes: Partial<Runner>) {
   return async (dispatch: SafeDispatch) => {
-    const updatedRun = await API.runs.updateCommentator(runId, runnerId, changes);
+    const updatedRun = await API.runs.updateCommentator(runId, commentatorId, changes);
     dispatch({
       type: RunActionType.RUNS_UPDATE_RUN,
       run: updatedRun,

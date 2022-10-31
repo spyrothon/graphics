@@ -57,7 +57,7 @@ defmodule GraphicsAPI.Runs.Runner do
     |> cast(params, @timing_fields)
   end
 
-  def fields, do: @fields ++ [:participant]
+  def fields, do: @fields
 end
 
 defimpl Jason.Encoder, for: [GraphicsAPI.Runs.Runner] do

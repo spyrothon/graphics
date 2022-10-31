@@ -11,6 +11,12 @@ const Endpoints = {
   // Interviews
   INTERVIEWS: "/interviews",
   INTERVIEW: (id: string) => `/interviews/${id}`,
+  INTERVIEW_INTERVIEWERS: (id: string) => `/interviews/${id}/interviewers`,
+  INTERVIEW_INTERVIEWER: (id: string, interviewerId: string) =>
+    `/interviews/${id}/interviewers/${interviewerId}`,
+  INTERVIEW_INTERVIEWEES: (id: string) => `/interviews/${id}/interviewees`,
+  INTERVIEW_INTERVIEWEE: (id: string, intervieweeId: string) =>
+    `/interviews/${id}/interviewees/${intervieweeId}`,
   // Runs
   RUNS: "/runs",
   RUN: (id: string) => `/runs/${id}`,

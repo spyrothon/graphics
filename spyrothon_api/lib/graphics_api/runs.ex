@@ -2,7 +2,15 @@ defmodule GraphicsAPI.Runs do
   import Ecto.Query, warn: false
   alias GraphicsAPI.Repo
 
-  alias GraphicsAPI.Runs.{Commentator, Interview, Schedule, ScheduleEntry, Run, Runner}
+  alias GraphicsAPI.Runs.{
+    Commentator,
+    Interview,
+    InterviewParticipant,
+    Schedule,
+    ScheduleEntry,
+    Run,
+    Runner
+  }
 
   ###
   # Runs
@@ -150,6 +158,88 @@ defmodule GraphicsAPI.Runs do
   def delete_interview(interview = %Interview{}) do
     interview
     |> Repo.delete()
+  end
+
+  def add_interviewer(interview = %Interview{}, interviewer_params) do
+    interviewer_maps = interview.interviewers |> Enum.map(&Map.from_struct/1)
+
+    interview
+    |> Interview.changeset(%{interviewers: interviewer_maps ++ [interviewer_params]})
+    |> Repo.update()
+  end
+
+  def update_interviewer(interview = %Interview{}, interviewer_id, interviewer_params) do
+    updated_interviewers =
+      interview.interviewers
+      |> Enum.map(fn interviewer ->
+        case interviewer do
+          %{id: ^interviewer_id} ->
+            interviewer
+            |> InterviewParticipant.changeset(interviewer_params)
+            |> Ecto.Changeset.apply_changes()
+            |> IO.inspect()
+
+          _ ->
+            interviewer
+        end
+        |> Map.from_struct()
+      end)
+
+    interview
+    |> Interview.changeset(%{interviewers: updated_interviewers})
+    |> Repo.update()
+  end
+
+  def remove_interviewer(interview = %Interview{}, interviewer_id) do
+    updated_interviewers =
+      interview.interviewers
+      |> Enum.reject(&(&1.id == interviewer_id))
+
+    interview
+    |> Interview.changeset()
+    |> Ecto.Changeset.put_embed(:interviewers, updated_interviewers)
+    |> Repo.update()
+  end
+
+  def add_interviewee(interview = %Interview{}, interviewee_params) do
+    interviewee_maps = interview.interviewees |> Enum.map(&Map.from_struct/1)
+
+    interview
+    |> Interview.changeset(%{interviewees: interviewee_maps ++ [interviewee_params]})
+    |> Repo.update()
+  end
+
+  def update_interviewee(interview = %Interview{}, interviewee_id, interviewee_params) do
+    updated_interviewees =
+      interview.interviewees
+      |> Enum.map(fn interviewee ->
+        case interviewee do
+          %{id: ^interviewee_id} ->
+            interviewee
+            |> InterviewParticipant.changeset(interviewee_params)
+            |> Ecto.Changeset.apply_changes()
+            |> IO.inspect()
+
+          _ ->
+            interviewee
+        end
+        |> Map.from_struct()
+      end)
+
+    interview
+    |> Interview.changeset(%{interviewees: updated_interviewees})
+    |> Repo.update()
+  end
+
+  def remove_interviewee(interview = %Interview{}, interviewee_id) do
+    updated_interviewees =
+      interview.interviewees
+      |> Enum.reject(&(&1.id == interviewee_id))
+
+    interview
+    |> Interview.changeset()
+    |> Ecto.Changeset.put_embed(:interviewees, updated_interviewees)
+    |> Repo.update()
   end
 
   ###
@@ -309,8 +399,8 @@ defmodule GraphicsAPI.Runs do
     runner_names = run.runners |> Enum.map_join(", ", & &1.display_name)
 
     (template || "")
-    |> String.replace("{{gameName}}", run.game_name)
-    |> String.replace("{{categoryName}}", run.category_name)
+    |> String.replace("{{gameName}}", run.game_name || "")
+    |> String.replace("{{categoryName}}", run.category_name || "")
     |> String.replace("{{runners}}", runner_names)
   end
 

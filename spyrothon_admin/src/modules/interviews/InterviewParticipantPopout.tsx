@@ -19,55 +19,49 @@ import { useSafeSelector } from "@admin/Store";
 import EditParticipantModal from "../participants/EditParticipantModal";
 import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import { useParticipant } from "../participants/ParticipantStore";
-import CropDataInput from "./CropDataInput";
-import { persistRunner, removeRunner } from "./RunActions";
-import * as RunStore from "./RunStore";
+import {
+  persistInterviewee,
+  persistInterviewer,
+  removeInterviewee,
+  removeInterviewer,
+} from "./InterviewActions";
+import * as InterviewStore from "./InterviewStore";
 
-import styles from "./RunnerPopout.module.css";
+import styles from "./InterviewParticipantPopout.module.css";
 
-export interface RunnerPopoutProps {
-  runId: string;
-  runnerId: string;
+export interface InterviewParticipantPopoutProps {
+  interviewId: string;
+  interviewParticipantId: string;
+  type: "interviewers" | "interviewees";
   onClose: () => void;
 }
 
-export default function RunnerPopout(props: RunnerPopoutProps) {
+export default function InterviewParticipantPopout(props: InterviewParticipantPopoutProps) {
   const dispatch = useSafeDispatch();
-  const { runId, runnerId, onClose } = props;
+  const { interviewId, interviewParticipantId, type, onClose } = props;
 
-  const run = useSafeSelector((state) => RunStore.getRun(state, { runId }));
-  const runner = run.runners.find((runner) => runner.id === runnerId)!;
-  const participant = useParticipant(runner.participantId);
+  const interview = useSafeSelector((state) => InterviewStore.getInterview(state, { interviewId }));
+  const interviewParticipant = interview[type].find(
+    (commentator) => commentator.id === interviewParticipantId,
+  )!;
+  const participant = useParticipant(interviewParticipant.participantId);
 
-  const [displayName, setDisplayName] = React.useState(runner.displayName);
+  const [displayName, setDisplayName] = React.useState(interviewParticipant.displayName);
   const [showWebcam, setShowWebcam] = React.useState(false);
-  const [gameplayIngestUrl, setGameplayIngestUrl] = React.useState(runner.gameplayIngestUrl);
-  const [gameplayCropTransform, setGameplayCropTransform] = React.useState(
-    runner.gameplayCropTransform ?? { top: 0, right: 0, bottom: 0, left: 0 },
-  );
-  const [webcamIngestUrl, setWebcamIngestUrl] = React.useState(runner.webcamIngestUrl);
-  const [webcamCropTransform, setWebcamCropTransform] = React.useState(
-    runner.webcamCropTransform ?? { top: 0, right: 0, bottom: 0, left: 0 },
-  );
+
+  const persistFunction = type === "interviewers" ? persistInterviewer : persistInterviewee;
+  const removeFunction = type === "interviewers" ? removeInterviewer : removeInterviewee;
 
   const [save, getSaveText] = useSaveable(async () => {
-    dispatch(
-      persistRunner(runId, runnerId, {
-        displayName,
-        gameplayIngestUrl,
-        gameplayCropTransform,
-        webcamIngestUrl,
-        webcamCropTransform,
-      }),
-    );
+    dispatch(persistFunction(interviewId, interviewParticipantId, { displayName }));
   });
 
   function handleRemove() {
     function remove() {
-      dispatch(removeRunner(runId, runnerId));
+      dispatch(removeFunction(interviewId, interviewParticipantId));
     }
 
-    const name = getDisplayNameForParticipant(runner);
+    const name = getDisplayNameForParticipant(interviewParticipant);
 
     openModal((props) => (
       <ConfirmModal
@@ -99,7 +93,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
             <Header tag="h1" variant="header-md/normal">
               {participant.displayName}
             </Header>
-            <Text variant="text-sm/secondary">Runner</Text>
+            <Text variant="text-sm/secondary">Commentator</Text>
           </Stack>
           <Button variant="primary/outline" onClick={handleEditParticipant}>
             Edit Participant
@@ -124,38 +118,11 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
             onChange={(event) => setShowWebcam(event.target.checked)}
           />
         </Stack>
-        <hr className={styles.separator} />
-        <Stack spacing="space-md">
-          <FormControl label="Gameplay Ingest URL">
-            <TextInput
-              value={gameplayIngestUrl}
-              onChange={(event) => setGameplayIngestUrl(event.target.value)}
-            />
-          </FormControl>
-          <CropDataInput
-            label="Gameplay Crop"
-            transform={gameplayCropTransform}
-            onChange={setGameplayCropTransform}
-          />
-        </Stack>
-        <Stack spacing="space-md">
-          <FormControl label="Webcam Ingest URL">
-            <TextInput
-              value={webcamIngestUrl}
-              onChange={(event) => setWebcamIngestUrl(event.target.value)}
-            />
-          </FormControl>
-          <CropDataInput
-            label="Webcam Crop"
-            transform={webcamCropTransform}
-            onChange={setWebcamCropTransform}
-          />
-        </Stack>
         <Button variant="primary" onClick={save}>
           {getSaveText()}
         </Button>
         <Button variant="link" onClick={handleRemove}>
-          Remove Runner
+          Remove Participant
         </Button>
       </Stack>
     </Card>
