@@ -8,13 +8,21 @@ import { loadSession } from "./modules/auth/AuthActions";
 import AuthLogin from "./modules/auth/AuthLogin";
 import AuthLogout from "./modules/auth/AuthLogout";
 import AuthStore from "./modules/auth/AuthStore";
+import { fetchInterviewsSuccess } from "./modules/interviews/InterviewActions";
 import LiveDashboard from "./modules/live/LiveDashboard";
 import OBSManager from "./modules/obs/OBSManager";
 import { fetchParticipants } from "./modules/participants/ParticipantActions";
+import { loadParticipants } from "./modules/participants/ParticipantStore";
 import PublishingDashboard from "./modules/publishing/PublishingDashboard";
 import PUBLISHING_ROUTES from "./modules/publishing/PublishingRoutes";
+import { fetchRunsSuccess } from "./modules/runs/RunActions";
 import CurrentScheduleContext from "./modules/schedules/CurrentScheduleContext";
-import { fetchSchedule, fetchScheduleOBSConfig } from "./modules/schedules/ScheduleActions";
+import {
+  fetchSchedule,
+  fetchScheduleOBSConfig,
+  loadOBSConfig,
+  loadSchedule,
+} from "./modules/schedules/ScheduleActions";
 import ScheduleEditor from "./modules/schedules/ScheduleEditor";
 import * as ScheduleStore from "./modules/schedules/ScheduleStore";
 import SettingsDashboard from "./modules/settings/SettingsDashboard";
@@ -32,10 +40,12 @@ export default function App() {
   React.useEffect(() => {
     (async function () {
       dispatch(loadSession());
-      const { scheduleId } = await API.init.fetchInit();
-      dispatch(fetchSchedule(scheduleId));
-      dispatch(fetchScheduleOBSConfig(scheduleId));
-      fetchParticipants();
+      const { schedule, obsConfig, participants } = await API.init.fetchAdminInit();
+      loadParticipants(participants);
+      dispatch(loadSchedule(schedule));
+      dispatch(fetchRunsSuccess(schedule.runs));
+      dispatch(fetchInterviewsSuccess(schedule.interviews));
+      dispatch(loadOBSConfig(obsConfig));
     })();
   }, [dispatch]);
 

@@ -11,8 +11,6 @@ import {
 } from "@spyrothon/sparx";
 import { fuzzysearch } from "@spyrothon/utils";
 
-import useSafeDispatch from "@admin/hooks/useDispatch";
-
 import CreateParticipantModal from "../participants/CreateParticipantModal";
 import { fetchParticipants } from "./ParticipantActions";
 import useParticipantsStore from "./ParticipantStore";
@@ -26,7 +24,6 @@ interface SelectParticipantPopoutProps {
 }
 
 export default function SelectParticipantPopout(props: SelectParticipantPopoutProps) {
-  const dispatch = useSafeDispatch();
   const { existingParticipantIds, onClose, onSelect } = props;
 
   const [query, setQuery] = React.useState("");
@@ -42,8 +39,8 @@ export default function SelectParticipantPopout(props: SelectParticipantPopoutPr
   });
 
   React.useEffect(() => {
-    dispatch(fetchParticipants());
-  }, [dispatch]);
+    fetchParticipants();
+  }, []);
 
   function handleCreateNewParticipant() {
     openModal((props) => <CreateParticipantModal {...props} />);

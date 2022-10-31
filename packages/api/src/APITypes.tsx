@@ -3,6 +3,12 @@ export interface InitPayload {
   currentUser?: User;
 }
 
+export interface AdminInitPayload extends InitPayload {
+  schedule: ScheduleResponse;
+  obsConfig: OBSWebsocketConfig;
+  participants: Participant[];
+}
+
 export interface Interview {
   id: string;
   topic: string;

@@ -1,5 +1,6 @@
 const Endpoints = {
   INIT: "/init",
+  INIT_ADMIN: "/init/admin",
   // Auth
   AUTH_LOGIN: "/auth/login",
   AUTH_LOGOUT: "/auth/logout",
