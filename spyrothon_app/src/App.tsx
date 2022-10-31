@@ -41,7 +41,7 @@ export default function App() {
   React.useEffect(() => {
     (async function () {
       const { scheduleId } = await API.init.fetchInit();
-      fetchParticipants();
+      await fetchParticipants();
       dispatch(fetchSchedule(scheduleId));
     })();
   }, [dispatch]);

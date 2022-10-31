@@ -35,11 +35,9 @@ export default function BingoStandard1v1() {
 
       <div className={styles.centerStack}>
         <div className={styles.participantsTimer}>
-          {left != null ? <Nameplate className={styles.nameplateLeft} participant={left} /> : null}
+          {left != null ? <Nameplate className={styles.nameplateLeft} entity={left} /> : null}
           {currentRun != null ? <RunTimer run={currentRun} className={styles.timer} /> : null}
-          {right != null ? (
-            <Nameplate className={styles.nameplateRight} participant={right} />
-          ) : null}
+          {right != null ? <Nameplate className={styles.nameplateRight} entity={right} /> : null}
         </div>
       </div>
 

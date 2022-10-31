@@ -1,21 +1,15 @@
 import * as React from "react";
 import classNames from "classnames";
 import { DateTime } from "luxon";
-import { RunParticipant } from "@spyrothon/api";
 
 import InterviewStore from "@graphics/modules/interviews/InterviewStore";
+import renderParticipantNames from "@graphics/modules/participants/renderParticipantNames";
 import RunStore from "@graphics/modules/runs/RunStore";
 import ScheduleStore from "@graphics/modules/schedules/ScheduleStore";
 import DurationUtils from "@graphics/modules/time/DurationUtils";
 import { useSafeSelector } from "@graphics/Store";
 
 import styles from "./BreakUpNext.module.css";
-
-function renderNameList(participants: RunParticipant[]) {
-  if (participants.length === 0) return null;
-
-  return participants.map((participant) => participant.displayName).join(", ");
-}
 
 type BreakRunProps = {
   runId: string;
@@ -33,7 +27,9 @@ function BreakRun(props: BreakRunProps) {
     <div className={styles.runContainer}>
       <div className={styles.runLeft}>
         <div className={styles.runGame}>{run.gameName}</div>
-        <div className={styles.runParticipants}>{renderNameList(run.runners)}</div>
+        <div className={styles.runParticipants}>
+          {renderParticipantNames(run.runners).join(", ")}
+        </div>
       </div>
       <div className={styles.runRight}>
         <div className={styles.runCategory}>{run.categoryName}</div>

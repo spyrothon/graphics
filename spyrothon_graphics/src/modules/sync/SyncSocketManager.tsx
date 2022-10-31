@@ -5,6 +5,7 @@ import { store } from "@graphics/Store";
 import { loadInterview } from "../interviews/InterviewActions";
 import { loadRun } from "../runs/RunActions";
 import { loadSchedule } from "../schedules/ScheduleActions";
+import { loadParticipants } from "../participants/ParticipantStore";
 
 class SyncSocketManager {
   private socket?: SyncSocket;
@@ -29,6 +30,9 @@ class SyncSocketManager {
         return;
       case "load_interview":
         store.dispatch(loadInterview(message.interview));
+        return;
+      case "load_participant":
+        loadParticipants([message.participant]);
         return;
     }
   };

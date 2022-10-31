@@ -37,26 +37,26 @@ export default function Standard4() {
         {topLeft != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateTopLeft)}
-            participant={topLeft}
+            entity={topLeft}
           />
         ) : null}
         {currentRun != null ? <RunTimer run={currentRun} className={styles.timer} /> : null}
         {topRight != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateTopRight)}
-            participant={topRight}
+            entity={topRight}
           />
         ) : null}
         {bottomLeft != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateBottomLeft)}
-            participant={bottomLeft}
+            entity={bottomLeft}
           />
         ) : null}
         {bottomRight != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateBottomRight)}
-            participant={bottomRight}
+            entity={bottomRight}
           />
         ) : null}
         {commentators.length > 0 ? (

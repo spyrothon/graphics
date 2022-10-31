@@ -20,7 +20,7 @@ export default function NameplateGroup(props: NameplateGroupProps) {
       {title != null ? <div className={styles.title}>{title}</div> : null}
       <div className={styles.participants}>
         {participants.map((participant, index) => (
-          <Nameplate key={index} className={styles.nameplate} participant={participant} />
+          <Nameplate key={index} className={styles.nameplate} entity={participant} />
         ))}
       </div>
     </div>

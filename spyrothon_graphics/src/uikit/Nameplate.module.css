@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: radial-gradient(circle, var(--primary-bg-200) 0%, var(--primary-bg-300) 100%);
   padding: 6px 16px;
   box-shadow: 0 0 4px #000;
@@ -14,9 +17,8 @@
 }
 
 .pronouns {
-  display: inline-block;
   height: 18px;
-  line-height: 12px;
+  /* line-height: 12px; */
   font-size: 12px;
   padding: 3px 6px;
   margin-left: 4px;

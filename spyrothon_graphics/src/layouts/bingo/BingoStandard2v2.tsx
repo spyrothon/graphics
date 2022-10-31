@@ -37,27 +37,27 @@ export default function BingoStandard2v2() {
         {topLeft != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateTopLeft)}
-            participant={topLeft}
+            entity={topLeft}
           />
         ) : null}
         {currentRun != null ? <RunTimer run={currentRun} className={styles.timer} /> : null}
         {topRight != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateTopRight)}
-            participant={topRight}
+            entity={topRight}
           />
         ) : null}
         {bottomLeft != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateBottomLeft)}
-            participant={bottomLeft}
+            entity={bottomLeft}
           />
         ) : null}
         <BingoBoard className={styles.bingoBoard} />
         {bottomRight != null ? (
           <Nameplate
             className={classNames(styles.nameplate, styles.nameplateBottomRight)}
-            participant={bottomRight}
+            entity={bottomRight}
           />
         ) : null}
       </div>
