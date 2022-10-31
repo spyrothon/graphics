@@ -9,6 +9,7 @@ defmodule GraphicsAPI.Users.Participant do
     :twitch_name,
     :twitter_name,
     :pronouns,
+    :pronouns_visible,
     :has_webcam
   ]
 

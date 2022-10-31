@@ -6,7 +6,7 @@
   flex: 0 0 24px;
   align-self: center;
   visibility: hidden;
-  border-radius: 2px;
+  border-radius: var(--radius-normal);
 
   @nest .container:hover & {
     visibility: visible;

@@ -42,7 +42,7 @@
 
   & hr {
     border: 1px solid var(--background-secondary);
-    border-radius: 4px;
+    border-radius: var(--radius-normal);
   }
 }
 
