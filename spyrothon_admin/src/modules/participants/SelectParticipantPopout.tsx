@@ -30,13 +30,16 @@ export default function SelectParticipantPopout(props: SelectParticipantPopoutPr
 
   const participants = useParticipantsStore((state) => state.participants);
 
-  const filteredParticipants = Object.values(participants).filter((participant) => {
-    if (existingParticipantIds.includes(participant.id)) return false;
-    if (fuzzysearch(query, participant.displayName)) return true;
-    if (participant.twitchName != null && fuzzysearch(query, participant.twitchName)) return true;
-    if (participant.twitterName != null && fuzzysearch(query, participant.twitterName)) return true;
-    return false;
-  });
+  const filteredParticipants = Object.values(participants)
+    .filter((participant) => {
+      if (existingParticipantIds.includes(participant.id)) return false;
+      if (fuzzysearch(query, participant.displayName)) return true;
+      if (participant.twitchName != null && fuzzysearch(query, participant.twitchName)) return true;
+      if (participant.twitterName != null && fuzzysearch(query, participant.twitterName))
+        return true;
+      return false;
+    })
+    .slice(0, 8);
 
   React.useEffect(() => {
     fetchParticipants();
