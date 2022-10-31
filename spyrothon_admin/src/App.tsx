@@ -11,18 +11,12 @@ import AuthStore from "./modules/auth/AuthStore";
 import { fetchInterviewsSuccess } from "./modules/interviews/InterviewActions";
 import LiveDashboard from "./modules/live/LiveDashboard";
 import OBSManager from "./modules/obs/OBSManager";
-import { fetchParticipants } from "./modules/participants/ParticipantActions";
 import { loadParticipants } from "./modules/participants/ParticipantStore";
 import PublishingDashboard from "./modules/publishing/PublishingDashboard";
 import PUBLISHING_ROUTES from "./modules/publishing/PublishingRoutes";
 import { fetchRunsSuccess } from "./modules/runs/RunActions";
 import CurrentScheduleContext from "./modules/schedules/CurrentScheduleContext";
-import {
-  fetchSchedule,
-  fetchScheduleOBSConfig,
-  loadOBSConfig,
-  loadSchedule,
-} from "./modules/schedules/ScheduleActions";
+import { loadOBSConfig, loadSchedule } from "./modules/schedules/ScheduleActions";
 import ScheduleEditor from "./modules/schedules/ScheduleEditor";
 import * as ScheduleStore from "./modules/schedules/ScheduleStore";
 import SettingsDashboard from "./modules/settings/SettingsDashboard";

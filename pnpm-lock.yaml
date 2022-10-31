@@ -94,7 +94,7 @@ importers:
   spyrothon_admin:
     specifiers:
       '@spyrothon/api': workspace:*
-      '@spyrothon/sparx': ^0.2.2
+      '@spyrothon/sparx': 0.2.3
       '@spyrothon/utils': workspace:*
       '@types/js-cookie': ^3.0.2
       '@types/luxon': ^3.0.1
@@ -128,7 +128,7 @@ importers:
       zustand: ^4.1.1
     dependencies:
       '@spyrothon/api': link:../packages/api
-      '@spyrothon/sparx': 0.2.2_biqbaboplfbrettd7655fr4n2y
+      '@spyrothon/sparx': 0.2.3_biqbaboplfbrettd7655fr4n2y
       '@spyrothon/utils': link:../packages/utils
       classnames: 2.3.2
       jotai: 1.9.0_react@18.2.0
@@ -2573,6 +2573,26 @@ packages:
 
   /@spyrothon/sparx/0.2.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-6LvOu3aN8i1cbGXRZHv8TBLtX52QNncZ63OGW++2dA//LnlS0E1kXXFxQFhKsTOfVdPvoMxhSGrDAeZYJ3qang==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@iconscout/react-unicons': 1.1.6_react@18.2.0
+      '@iconscout/react-unicons-solid': 0.0.3_react@18.2.0
+      autonumeric: 4.6.0
+      classnames: 2.3.2
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-remark: 2.1.0_react@18.2.0
+      uuid: 8.3.2
+      zustand: 3.7.2_react@18.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@spyrothon/sparx/0.2.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-NCG/p0PzD1UwdpGxksEkAUuavyw+0q2FaD5YW+3Ge7Mkl+ZE+T/DY62snfz43bnHBE/YL70ViUgn/ABAdnJIVQ==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0

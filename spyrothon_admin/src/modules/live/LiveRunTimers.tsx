@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import { Flag, Icon, Pause, Play, Repeat } from "react-feather";
 import type { Run, Runner } from "@spyrothon/api";
-import { Button, ButtonVariantColor, Card, Header, Stack, Text } from "@spyrothon/sparx";
+import { Button, ButtonVariant, Card, Header, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration, useAnimationFrame } from "@spyrothon/utils";
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
@@ -62,7 +62,7 @@ interface TimerAction {
   Icon: Icon;
   action: (dispatch: SafeDispatch) => void;
   disabled?: boolean;
-  color?: ButtonVariantColor;
+  variant?: ButtonVariant;
   strokeWidth?: string;
   label?: string;
 }
@@ -71,6 +71,7 @@ function getPlayAction(run: Run): TimerAction | undefined {
   if ((run.runners.length <= 1 && run.finished) || run.pausedAt != null) {
     return {
       Icon: Play,
+      variant: "primary",
       action(dispatch) {
         dispatch(resumeRun(run.id));
       },
@@ -81,6 +82,7 @@ function getPlayAction(run: Run): TimerAction | undefined {
 
   return {
     Icon: Play,
+    variant: "primary",
     action(dispatch) {
       dispatch(startRun(run.id));
     },
@@ -107,7 +109,7 @@ function getPauseAction(run: Run): TimerAction | undefined {
 
   return {
     Icon: Pause,
-    color: "default",
+    variant: "primary",
     strokeWidth: "2",
     action(dispatch) {
       dispatch(pauseRun(run.id));
@@ -119,7 +121,7 @@ function getResetAction(run: Run): TimerAction | undefined {
   if (run.startedAt == null) return undefined;
   return {
     Icon: Repeat,
-    color: "default",
+    variant: "default",
     action(dispatch) {
       dispatch(resetRun(run.id));
     },
@@ -133,7 +135,7 @@ function getParticipantAction(run: Run, runner: Runner): TimerAction {
     return {
       Icon: Play,
       disabled: allDisabled,
-      color: "primary",
+      variant: "primary/outline",
       action(dispatch) {
         dispatch(resumeRunParticipant(run.id, runner.id));
       },
@@ -143,7 +145,7 @@ function getParticipantAction(run: Run, runner: Runner): TimerAction {
   return {
     Icon: Flag,
     disabled: allDisabled,
-    color: "primary",
+    variant: "primary",
     action(dispatch) {
       dispatch(finishRunParticipant(run.id, runner.id));
     },
@@ -158,12 +160,14 @@ function ActionButton(props: ActionButtonProps) {
   const dispatch = useSafeDispatch();
   if (props.action == null) return null;
 
-  const { Icon, action, color = "primary", disabled = false, strokeWidth = "3" } = props.action;
+  const { Icon, action, variant = "primary", disabled = false, strokeWidth = "3" } = props.action;
 
   return (
-    <Button onClick={() => action(dispatch)} color={color} disabled={disabled}>
-      <Icon size={16} strokeWidth={strokeWidth} />
-    </Button>
+    <Button
+      onClick={() => action(dispatch)}
+      variant={variant}
+      disabled={disabled}
+      icon={(props) => <Icon {...props} strokeWidth={strokeWidth} />}></Button>
   );
 }
 

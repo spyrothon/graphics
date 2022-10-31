@@ -7,8 +7,8 @@ import { BrowserRouter, Link } from "react-router-dom";
 import { setAnchorRenderer, ThemeProvider } from "@spyrothon/sparx";
 
 // These style imports come first so that the app's styles take precedence.
-import "@spyrothon/sparx/style.css";
-import "@spyrothon/sparx/default.css";
+import "@spyrothon/sparx/dist/style.css";
+import "@spyrothon/sparx/dist/default.css";
 
 // This blank code is needed to keep `simple-import-sort` from complaining that
 // the following imports should be moved to above the CSS.

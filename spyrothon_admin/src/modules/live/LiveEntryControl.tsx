@@ -67,12 +67,11 @@ function LiveEntryRunnerSlots(props: { runId: string }) {
           <div key={runner.id}>
             <Text>
               <strong>{getDisplayNameForParticipant(runner)}:</strong>
-              <br />
-              {runner.gameplayIngestUrl}
             </Text>
             {runner.gameplayCropTransform != null ? (
               <CropDataDisplay transform={runner.gameplayCropTransform} />
             ) : null}
+            <Text>{runner.gameplayIngestUrl}</Text>
           </div>
         ))}
       </Stack>

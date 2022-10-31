@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@spyrothon/api": "workspace:*",
-    "@spyrothon/sparx": "^0.2.2",
+    "@spyrothon/sparx": "0.2.3",
     "@spyrothon/utils": "workspace:*",
     "classnames": "^2.3.1",
     "jotai": "^1.9.0",
