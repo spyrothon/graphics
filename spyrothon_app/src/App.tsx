@@ -8,6 +8,7 @@ import useSafeDispatch from "@app/hooks/useDispatch";
 import PublicHelmet from "./modules/core/PublicHelmet";
 import Newsletter from "./modules/newsletters/Newsletter";
 import Newsletters from "./modules/newsletters/Newsletters";
+import { fetchParticipants } from "./modules/participants/ParticipantActions";
 import CurrentScheduleContext from "./modules/schedules/CurrentScheduleContext";
 import Schedule from "./modules/schedules/Schedule";
 import { fetchSchedule } from "./modules/schedules/ScheduleActions";
@@ -40,6 +41,7 @@ export default function App() {
   React.useEffect(() => {
     (async function () {
       const { scheduleId } = await API.init.fetchInit();
+      fetchParticipants();
       dispatch(fetchSchedule(scheduleId));
     })();
   }, [dispatch]);

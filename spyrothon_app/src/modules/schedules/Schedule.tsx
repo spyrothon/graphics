@@ -1,11 +1,13 @@
 import * as React from "react";
 import { DateTime } from "luxon";
-import { RunParticipant } from "@spyrothon/api";
+import { Commentator, InterviewParticipant, Runner } from "@spyrothon/api";
 import { Anchor, Header, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration } from "@spyrothon/utils";
 
 import { useSafeSelector } from "../../Store";
 import { getInterview } from "../interviews/InterviewStore";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
+import { useParticipant } from "../participants/ParticipantStore";
 import { getRun } from "../runs/RunStore";
 import { getEntriesWithStartTimes, getSchedule } from "../schedules/ScheduleStore";
 import { ScheduleEntryWithTimes } from "../schedules/ScheduleTypes";
@@ -15,16 +17,23 @@ import styles from "./Schedule.module.css";
 import backgroundPoster from "../../res/schedule_background.png";
 import backgroundVideo from "../../res/schedule_background.webm";
 
-function renderNameList(participants: RunParticipant[]) {
+function ParticipantName(props: { entity: Runner | Commentator | InterviewParticipant }) {
+  const { entity } = props;
+  const participant = useParticipant(entity.participantId);
+
+  return participant.twitchName != null ? (
+    <Anchor className={styles.anchor} href={`https://twitch.tv/${participant.twitchName}`}>
+      {getDisplayNameForParticipant(entity)}
+    </Anchor>
+  ) : (
+    <>{getDisplayNameForParticipant(entity)}</>
+  );
+}
+
+function renderNameList(participants: Runner[]) {
   return participants.map((runner, index) => (
     <React.Fragment key={index}>
-      {runner.twitchName != null ? (
-        <Anchor className={styles.anchor} href={`https://twitch.tv/${runner.twitchName}`}>
-          {runner.displayName}
-        </Anchor>
-      ) : (
-        runner.displayName
-      )}
+      <ParticipantName entity={runner} />
       {index < participants.length - 1 ? ", " : null}
     </React.Fragment>
   ));
