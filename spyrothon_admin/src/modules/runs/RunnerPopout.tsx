@@ -17,6 +17,7 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";
 
 import EditParticipantModal from "../participants/EditParticipantModal";
+import { useParticipant } from "../participants/ParticipantStore";
 import CropDataInput from "./CropDataInput";
 import { persistRunner, removeRunner } from "./RunActions";
 import * as RunStore from "./RunStore";
@@ -35,6 +36,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
 
   const run = useSafeSelector((state) => RunStore.getRun(state, { runId }));
   const runner = run.runners.find((runner) => runner.id === runnerId)!;
+  const participant = useParticipant(runner.participantId);
 
   const [displayName, setDisplayName] = React.useState(runner.displayName);
   const [showWebcam, setShowWebcam] = React.useState(false);
@@ -64,7 +66,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
       dispatch(removeRunner(runId, runnerId));
     }
 
-    const name = runner.displayName ?? runner.participant.displayName;
+    const name = runner.displayName ?? participant.displayName;
 
     openModal((props) => (
       <ConfirmModal
@@ -83,9 +85,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
         onClose();
       }
 
-      return (
-        <EditParticipantModal {...props} onClose={handleClose} participant={runner.participant} />
-      );
+      return <EditParticipantModal {...props} onClose={handleClose} participant={participant} />;
     });
     onClose();
   }
@@ -96,7 +96,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
         <Stack direction="horizontal" justify="space-between" align="center">
           <Stack spacing="space-none">
             <Header tag="h1" variant="header-md/normal">
-              {runner.participant.displayName}
+              {participant.displayName}
             </Header>
             <Text variant="text-sm/secondary">Runner</Text>
           </Stack>
@@ -114,11 +114,11 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
           <FormSwitch
             label="Show Webcam"
             checked={showWebcam}
-            disabled={!runner.participant.hasWebcam}
+            disabled={!participant.hasWebcam}
             note={
-              runner.participant.hasWebcam
+              participant.hasWebcam
                 ? undefined
-                : `${runner.participant.displayName} doesn't have a webcam input configured`
+                : `${participant.displayName} doesn't have a webcam input configured`
             }
             onChange={(event) => setShowWebcam(event.target.checked)}
           />

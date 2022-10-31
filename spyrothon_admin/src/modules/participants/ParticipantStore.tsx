@@ -1,22 +1,27 @@
-import createCachedSelector from "re-reselect";
-import { createSelector } from "reselect";
+import create from "zustand";
+import { Participant } from "@spyrothon/api";
 
-import { getProp, StoreState } from "../../Store";
+interface ParticipantsStoreState {
+  participants: Record<string, Participant>;
+}
 
-const getParticipantsState = (globalState: StoreState) => globalState.participants;
+const useParticipantsStore = create<ParticipantsStoreState>(() => ({
+  participants: {},
+}));
 
-export const isFetchingParticipants = createSelector(
-  [getParticipantsState],
-  (state) => state.fetching,
-);
-export const getParticipants = createSelector([getParticipantsState], (state) =>
-  Object.values(state.participants),
-);
-export const getParticipantsById = createSelector(
-  [getParticipantsState],
-  (state) => state.participants,
-);
-export const getParticipant = createCachedSelector(
-  [getParticipantsState, getProp<string>("participantId")],
-  (state, participantId) => state.participants[participantId],
-)(getProp("participantId"));
+export default useParticipantsStore;
+
+export function loadParticipants(participants: Participant[]) {
+  useParticipantsStore.setState((state) => {
+    const updatedParticipants = state.participants;
+    for (const participant of participants) {
+      updatedParticipants[participant.id] = participant;
+    }
+
+    return { participants: updatedParticipants };
+  });
+}
+
+export function useParticipant(participantId: string) {
+  return useParticipantsStore((state) => state.participants[participantId]);
+}

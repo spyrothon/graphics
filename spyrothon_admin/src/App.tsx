@@ -10,6 +10,7 @@ import AuthLogout from "./modules/auth/AuthLogout";
 import AuthStore from "./modules/auth/AuthStore";
 import LiveDashboard from "./modules/live/LiveDashboard";
 import OBSManager from "./modules/obs/OBSManager";
+import { fetchParticipants } from "./modules/participants/ParticipantActions";
 import PublishingDashboard from "./modules/publishing/PublishingDashboard";
 import PUBLISHING_ROUTES from "./modules/publishing/PublishingRoutes";
 import CurrentScheduleContext from "./modules/schedules/CurrentScheduleContext";
@@ -34,6 +35,7 @@ export default function App() {
       const { scheduleId } = await API.init.fetchInit();
       dispatch(fetchSchedule(scheduleId));
       dispatch(fetchScheduleOBSConfig(scheduleId));
+      fetchParticipants();
     })();
   }, [dispatch]);
 

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Loader } from "react-feather";
 import {
   Button,
   Card,
@@ -13,11 +12,10 @@ import {
 import { fuzzysearch } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
-import { useSafeSelector } from "@admin/Store";
 
 import CreateParticipantModal from "../participants/CreateParticipantModal";
 import { fetchParticipants } from "./ParticipantActions";
-import * as ParticipantStore from "./ParticipantStore";
+import useParticipantsStore from "./ParticipantStore";
 
 import styles from "./SelectParticipantPopout.module.css";
 
@@ -33,16 +31,15 @@ export default function SelectParticipantPopout(props: SelectParticipantPopoutPr
 
   const [query, setQuery] = React.useState("");
 
-  const participants = useSafeSelector(ParticipantStore.getParticipants);
+  const participants = useParticipantsStore((state) => state.participants);
 
-  const filteredParticipants = participants.filter((participant) => {
+  const filteredParticipants = Object.values(participants).filter((participant) => {
     if (existingParticipantIds.includes(participant.id)) return false;
     if (fuzzysearch(query, participant.displayName)) return true;
     if (participant.twitchName != null && fuzzysearch(query, participant.twitchName)) return true;
     if (participant.twitterName != null && fuzzysearch(query, participant.twitterName)) return true;
     return false;
   });
-  const isFetching = useSafeSelector(ParticipantStore.isFetchingParticipants);
 
   React.useEffect(() => {
     dispatch(fetchParticipants());
@@ -64,8 +61,6 @@ export default function SelectParticipantPopout(props: SelectParticipantPopoutPr
           note="Search by display name, twitch, or twitter username">
           <TextInput value={query} onChange={(event) => setQuery(event.target.value)} />
         </FormControl>
-
-        {isFetching && <Loader />}
 
         {filteredParticipants.map((participant) => (
           <Clickable

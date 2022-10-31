@@ -20,6 +20,7 @@ import { formatDuration, SaveState, useSaveable } from "@spyrothon/utils";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
+import { useParticipant } from "../participants/ParticipantStore";
 import SelectParticipantPopout from "../participants/SelectParticipantPopout";
 import CommentatorPopout from "./CommentatorPopout";
 import { addRunner, persistRun } from "./RunActions";
@@ -42,6 +43,38 @@ function openCommentatorPopout(runId: string, commentatorId: string, target: HTM
   openPopout(
     (props) => <CommentatorPopout {...props} runId={runId} commentatorId={commentatorId} />,
     target,
+  );
+}
+function RunnerInfo(props: { runId: string; runner: Runner }) {
+  const { runId, runner } = props;
+
+  const participant = useParticipant(runner.participantId);
+
+  return (
+    <Clickable
+      key={runner.id}
+      onClick={(event) => openRunnerPopout(runId, runner.id, event.currentTarget)}>
+      <Card>
+        <Stack spacing="space-xs">
+          <Text variant="header-sm/normal">
+            {runner.displayName ?? participant.displayName}{" "}
+            {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
+          </Text>
+          <Stack direction="horizontal" align="center">
+            {participant.twitchName != null ? (
+              <Text>
+                <Twitch size={16} /> {participant.twitchName}
+              </Text>
+            ) : null}
+            {participant.twitterName != null ? (
+              <Text>
+                <Twitter size={16} /> {participant.twitterName}
+              </Text>
+            ) : null}
+          </Stack>
+        </Stack>
+      </Card>
+    </Clickable>
   );
 }
 
@@ -88,37 +121,6 @@ export default function RunEditor(props: RunEditorProps) {
           Reset to {renderValue()}.
         </Button>
       </>
-    );
-  }
-
-  function renderRunner(runner: Runner) {
-    const participant = runner.participant;
-
-    return (
-      <Clickable
-        key={runner.id}
-        onClick={(event) => openRunnerPopout(run.id, runner.id, event.currentTarget)}>
-        <Card>
-          <Stack spacing="space-xs">
-            <Text variant="header-sm/normal">
-              {runner.displayName ?? participant.displayName}{" "}
-              {participant.pronouns != null ? <small>({participant.pronouns})</small> : null}
-            </Text>
-            <Stack direction="horizontal" align="center">
-              {participant.twitchName != null ? (
-                <Text>
-                  <Twitch size={16} /> {participant.twitchName}
-                </Text>
-              ) : null}
-              {participant.twitterName != null ? (
-                <Text>
-                  <Twitter size={16} /> {participant.twitterName}
-                </Text>
-              ) : null}
-            </Stack>
-          </Stack>
-        </Card>
-      </Clickable>
     );
   }
 
@@ -242,7 +244,9 @@ export default function RunEditor(props: RunEditorProps) {
 
         <Stack spacing="space-md" className={styles.participants}>
           <Header tag="h3">Runners</Header>
-          {run.runners.map(renderRunner)}
+          {run.runners.map((runner) => (
+            <RunnerInfo key={runner.id} runId={run.id} runner={runner} />
+          ))}
           <Button
             variant="primary/outline"
             onClick={(event) => handleAddRunner(event.currentTarget)}>

@@ -20,6 +20,7 @@ defmodule GraphicsAPIWeb.ParticipantsController do
     participant_params = conn.body_params
 
     with {:ok, participant} <- Users.create_participant(participant_params) do
+      GraphicsAPIWeb.SyncSocketHandler.update_participant(participant)
       json(conn, participant)
     else
       {:error, changeset} ->
@@ -34,6 +35,7 @@ defmodule GraphicsAPIWeb.ParticipantsController do
 
     with participant = %Users.Participant{} <- Users.get_participant(participant_id),
          {:ok, participant} <- Users.update_participant(participant, participant_params) do
+      GraphicsAPIWeb.SyncSocketHandler.update_participant(participant)
       json(conn, participant)
     else
       participant when is_nil(participant) ->
