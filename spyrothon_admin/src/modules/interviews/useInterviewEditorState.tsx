@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Interview, InterviewQuestion, RunParticipant } from "@spyrothon/api";
+import { Interview, InterviewQuestion } from "@spyrothon/api";
 
 type InterviewEditorState = {
   base?: Interview;
@@ -35,17 +35,6 @@ export type InterviewEditorStateValue = {
   setBase: (Interview?: Interview) => unknown;
   updateField: <F extends keyof Interview>(field: F, value: Interview[F]) => unknown;
   getField: <F extends keyof Interview>(field: F) => Interview[F] | undefined;
-  updateParticipantField: <F extends keyof RunParticipant>(
-    type: "interviewers" | "interviewees",
-    index: number,
-    field: F,
-    value: RunParticipant[F],
-  ) => unknown;
-  getParticipantField: <F extends keyof RunParticipant>(
-    type: "interviewers" | "interviewees",
-    index: number,
-    field: F,
-  ) => RunParticipant[F] | undefined;
   updateQuestionField: <F extends keyof InterviewQuestion>(
     index: number,
     field: F,
@@ -70,34 +59,6 @@ export default function useInterviewEditorState(): InterviewEditorStateValue {
   }
   function getField<F extends keyof Interview>(field: F): Interview[F] | undefined {
     return (state.edits[field] as Interview[F]) ?? state.base?.[field];
-  }
-  function updateParticipantField<F extends keyof RunParticipant>(
-    type: "interviewers" | "interviewees",
-    index: number,
-    field: F,
-    value: RunParticipant[F],
-  ) {
-    const list = Array.from(getField(type) ?? []);
-
-    if (list[index] == null) {
-      list[index] = {
-        displayName: "",
-        twitchName: "",
-        twitterName: "",
-        hasWebcam: false,
-        visible: true,
-      } as RunParticipant;
-    }
-    list[index][field] = value;
-    dispatch({ type: "updateField", field: type, value: list });
-  }
-  function getParticipantField<F extends keyof RunParticipant>(
-    type: "interviewers" | "interviewees",
-    index: number,
-    field: F,
-  ): RunParticipant[F] | undefined {
-    const runner = getField(type)?.[index];
-    return runner?.[field];
   }
   function updateQuestionField<F extends keyof InterviewQuestion>(
     index: number,
@@ -134,8 +95,6 @@ export default function useInterviewEditorState(): InterviewEditorStateValue {
     setBase,
     updateField,
     getField,
-    updateParticipantField,
-    getParticipantField,
     updateQuestionField,
     getQuestionField,
     getEditedInterview,

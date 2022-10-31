@@ -58,6 +58,7 @@
 .removeAction {
   flex: 0 0 auto;
   border-radius: var(--radius-normal);
+  color: var(--text-normal);
   padding: 0 4px;
   margin-left: 8px;
   line-height: 1;

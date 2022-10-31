@@ -3,9 +3,9 @@ import { SyncSocket, SyncSocketMessage } from "@spyrothon/api";
 import { store } from "@graphics/Store";
 
 import { loadInterview } from "../interviews/InterviewActions";
+import { loadParticipants } from "../participants/ParticipantStore";
 import { loadRun } from "../runs/RunActions";
 import { loadSchedule } from "../schedules/ScheduleActions";
-import { loadParticipants } from "../participants/ParticipantStore";
 
 class SyncSocketManager {
   private socket?: SyncSocket;
