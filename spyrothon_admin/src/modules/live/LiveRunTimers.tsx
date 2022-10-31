@@ -216,17 +216,19 @@ export default function LiveRunTimers(props: LiveTimerProps) {
         <Header tag="h4" variant="header-md/normal">
           Run Timer
         </Header>
-        <Stack direction="horizontal" spacing="space-md" align="center" justify="stretch">
+        <Stack direction="horizontal" spacing="space-md" align="center" justify="space-between">
           <div>
             <Text variant="header-lg/normal" className={styles.timer}>
               <LiveTimer run={run} />
             </Text>
             <Text variant="text-sm/normal">{getRunState(run)}</Text>
           </div>
-          <ActionButton action={getFinishAction(run)} />
-          <ActionButton action={getPlayAction(run)} />
-          <ActionButton action={getPauseAction(run)} />
-          <ActionButton action={getResetAction(run)} />
+          <Stack direction="horizontal">
+            <ActionButton action={getFinishAction(run)} />
+            <ActionButton action={getPlayAction(run)} />
+            <ActionButton action={getPauseAction(run)} />
+            <ActionButton action={getResetAction(run)} />
+          </Stack>
         </Stack>
         {runnersTable}
       </Stack>
