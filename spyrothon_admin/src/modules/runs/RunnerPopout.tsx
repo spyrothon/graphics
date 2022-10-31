@@ -16,6 +16,8 @@ import { useSaveable } from "@spyrothon/utils";
 import useSafeDispatch from "@admin/hooks/useDispatch";
 import { useSafeSelector } from "@admin/Store";
 
+import EditParticipantModal from "../participants/EditParticipantModal";
+import CropDataInput from "./CropDataInput";
 import { persistRunner, removeRunner } from "./RunActions";
 import * as RunStore from "./RunStore";
 
@@ -24,22 +26,37 @@ import styles from "./RunnerPopout.module.css";
 export interface RunnerPopoutProps {
   runId: string;
   runnerId: string;
+  onClose: () => void;
 }
 
 export default function RunnerPopout(props: RunnerPopoutProps) {
   const dispatch = useSafeDispatch();
-  const { runId, runnerId } = props;
+  const { runId, runnerId, onClose } = props;
 
   const run = useSafeSelector((state) => RunStore.getRun(state, { runId }));
   const runner = run.runners.find((runner) => runner.id === runnerId)!;
 
   const [displayName, setDisplayName] = React.useState(runner.displayName);
   const [showWebcam, setShowWebcam] = React.useState(false);
-  const [gameplayIngestURL, setGameplayIngestURL] = React.useState(runner.gameplayIngestUrl);
-  const [webcamIngestURL, setWebcamIngestURL] = React.useState(runner.webcamIngestUrl);
+  const [gameplayIngestUrl, setGameplayIngestUrl] = React.useState(runner.gameplayIngestUrl);
+  const [gameplayCropTransform, setGameplayCropTransform] = React.useState(
+    runner.gameplayCropTransform ?? { top: 0, right: 0, bottom: 0, left: 0 },
+  );
+  const [webcamIngestUrl, setWebcamIngestUrl] = React.useState(runner.webcamIngestUrl);
+  const [webcamCropTransform, setWebcamCropTransform] = React.useState(
+    runner.webcamCropTransform ?? { top: 0, right: 0, bottom: 0, left: 0 },
+  );
 
   const [save, getSaveText] = useSaveable(async () => {
-    dispatch(persistRunner(runId, runnerId, { displayName }));
+    dispatch(
+      persistRunner(runId, runnerId, {
+        displayName,
+        gameplayIngestUrl,
+        gameplayCropTransform,
+        webcamIngestUrl,
+        webcamCropTransform,
+      }),
+    );
   });
 
   function handleRemove() {
@@ -47,17 +64,30 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
       dispatch(removeRunner(runId, runnerId));
     }
 
+    const name = runner.displayName ?? runner.participant.displayName;
+
     openModal((props) => (
       <ConfirmModal
         {...props}
-        title="Remove Runner"
-        body={`Removing ${
-          runner.displayName ?? runner.participant.displayName
-        } will remove all information about them and cannot be undone.`}
+        title={`Remove ${name}`}
+        body={`Removing ${name} will remove all information about them and cannot be undone.`}
         onConfirm={remove}
         onCancel={props.onClose}
       />
     ));
+  }
+
+  function handleEditParticipant() {
+    openModal(({ onClose, ...props }) => {
+      function handleClose() {
+        onClose();
+      }
+
+      return (
+        <EditParticipantModal {...props} onClose={handleClose} participant={runner.participant} />
+      );
+    });
+    onClose();
   }
 
   return (
@@ -70,7 +100,7 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
             </Header>
             <Text variant="text-sm/secondary">Runner</Text>
           </Stack>
-          <Button variant="primary/outline" onClick={() => null}>
+          <Button variant="primary/outline" onClick={handleEditParticipant}>
             Edit Participant
           </Button>
         </Stack>
@@ -93,37 +123,32 @@ export default function RunnerPopout(props: RunnerPopoutProps) {
             onChange={(event) => setShowWebcam(event.target.checked)}
           />
         </Stack>
+        <hr className={styles.separator} />
         <Stack spacing="space-md">
           <FormControl label="Gameplay Ingest URL">
             <TextInput
-              value={gameplayIngestURL}
-              onChange={(event) => setGameplayIngestURL(event.target.value)}
+              value={gameplayIngestUrl}
+              onChange={(event) => setGameplayIngestUrl(event.target.value)}
             />
           </FormControl>
-          <FormControl label="Gameplay Crop Data" note="Enter as Top, Right, Bottom, Left">
-            <Stack direction="horizontal" spacing="space-sm" wrap={false}>
-              <TextInput type="number" value={0} />
-              <TextInput type="number" value={0} />
-              <TextInput type="number" value={0} />
-              <TextInput type="number" value={0} />
-            </Stack>
-          </FormControl>
+          <CropDataInput
+            label="Gameplay Crop"
+            transform={gameplayCropTransform}
+            onChange={setGameplayCropTransform}
+          />
         </Stack>
         <Stack spacing="space-md">
           <FormControl label="Webcam Ingest URL">
             <TextInput
-              value={webcamIngestURL}
-              onChange={(event) => setWebcamIngestURL(event.target.value)}
+              value={webcamIngestUrl}
+              onChange={(event) => setWebcamIngestUrl(event.target.value)}
             />
           </FormControl>
-          <FormControl label="Webcam Crop Data" note="Enter as Top, Right, Bottom, Left">
-            <Stack direction="horizontal" spacing="space-sm" wrap={false}>
-              <TextInput type="number" value={0} />
-              <TextInput type="number" value={0} />
-              <TextInput type="number" value={0} />
-              <TextInput type="number" value={0} />
-            </Stack>
-          </FormControl>
+          <CropDataInput
+            label="Webcam Crop"
+            transform={webcamCropTransform}
+            onChange={setWebcamCropTransform}
+          />
         </Stack>
         <Button variant="primary" onClick={save}>
           {getSaveText()}

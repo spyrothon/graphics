@@ -21,6 +21,15 @@ export function fetchRuns() {
   };
 }
 
+export function fetchRun(runId: string) {
+  return async (dispatch: SafeDispatch) => {
+    dispatch({ type: RunActionType.RUNS_FETCH_RUNS_STARTED });
+    const run = await API.runs.fetchRun(runId);
+
+    dispatch(fetchRunsSuccess([run]));
+  };
+}
+
 export function loadRun(run: Run): RunAction {
   return { type: RunActionType.RUNS_FETCH_RUNS_SUCCESS, runs: [run] };
 }
