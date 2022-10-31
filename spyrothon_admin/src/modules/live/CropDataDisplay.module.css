@@ -1,0 +1,38 @@
+.grid {
+  display: grid;
+  grid-template-areas:
+    "x top y"
+    "left middle right"
+    "z bottom zz";
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-normal);
+}
+
+.top {
+  grid-area: top;
+  text-align: center;
+}
+
+.right {
+  grid-area: right;
+  text-align: left;
+}
+
+.bottom {
+  grid-area: bottom;
+  text-align: center;
+}
+
+.left {
+  grid-area: left;
+  text-align: right;
+}
+
+.middle {
+  grid-area: middle;
+  background-color: var(--background-mod-subtle);
+  border-radius: var(--radius-normal);
+}

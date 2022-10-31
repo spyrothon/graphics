@@ -1,4 +1,4 @@
-defmodule GraphicsAPI.Runs.Participant do
+defmodule GraphicsAPI.Runs.Runner do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -6,12 +6,9 @@ defmodule GraphicsAPI.Runs.Participant do
 
   @fields [
     :id,
-    :display_name,
-    :twitch_name,
-    :twitter_name,
-    :pronouns,
-    :has_webcam,
     :visible,
+    :webcam_visible,
+    :display_name,
 
     # Offloading data
     :participant_id,
@@ -19,9 +16,6 @@ defmodule GraphicsAPI.Runs.Participant do
     # Run Fields
     :finished_at,
     :actual_seconds,
-
-    # Interview Fields
-    :score,
 
     # Video ingest
     :gameplay_ingest_url,
@@ -36,22 +30,16 @@ defmodule GraphicsAPI.Runs.Participant do
   ]
 
   embedded_schema do
-    field(:display_name, :string)
-    field(:twitch_name, :string)
-    field(:twitter_name, :string)
-    field(:pronouns, :string)
-
-    field(:has_webcam, :boolean, default: false)
     field(:visible, :boolean, default: true)
+    field(:webcam_visible, :boolean, default: false)
+    # An override of the participant's display name for a specific run
+    field(:display_name, :string)
 
     belongs_to(:participant, Users.Participant)
 
     # Run Fields
     field(:actual_seconds, :integer)
     field(:finished_at, :utc_datetime)
-
-    # Interview Fields
-    field(:score, :integer, default: 0)
 
     # Video Ingest
     field(:gameplay_ingest_url, :string)
@@ -60,10 +48,10 @@ defmodule GraphicsAPI.Runs.Participant do
     field(:webcam_crop_transform, :map)
   end
 
-  def changeset(participant, params \\ %{}) do
-    participant
+  def changeset(runner, params \\ %{}) do
+    runner
     |> cast(params, @fields)
-    |> validate_required([:display_name])
+    |> validate_required([:participant_id])
   end
 
   def timing_changeset(participant, params \\ %{}) do
@@ -74,11 +62,11 @@ defmodule GraphicsAPI.Runs.Participant do
   def fields, do: @fields
 end
 
-defimpl Jason.Encoder, for: [GraphicsAPI.Runs.Participant] do
+defimpl Jason.Encoder, for: [GraphicsAPI.Runs.Runner] do
   def encode(%{__struct__: _} = struct, options) do
     struct
     |> Map.from_struct()
-    |> Map.take(GraphicsAPI.Runs.Participant.fields())
+    |> Map.take(GraphicsAPI.Runs.Runner.fields())
     |> Jason.Encode.map(options)
   end
 end

@@ -3,13 +3,19 @@ export interface InitPayload {
   currentUser?: User;
 }
 
+export interface AdminInitPayload extends InitPayload {
+  schedule: ScheduleResponse;
+  obsConfig: OBSWebsocketConfig;
+  participants: Participant[];
+}
+
 export interface Interview {
   id: string;
   topic: string;
   notes: string;
   estimateSeconds: number;
-  interviewees: RunParticipant[];
-  interviewers: RunParticipant[];
+  interviewees: InterviewParticipant[];
+  interviewers: InterviewParticipant[];
   questions: InterviewQuestion[];
   currentQuestion?: string;
 }
@@ -17,8 +23,8 @@ export interface Interview {
 export interface InitialInterview {
   topic?: string;
   notes?: string;
-  interviewees?: RunParticipant[];
-  interviewers?: RunParticipant[];
+  interviewees?: InterviewParticipant[];
+  interviewers?: InterviewParticipant[];
 }
 
 export interface InterviewQuestion {
@@ -151,8 +157,8 @@ export interface Run {
   finished: boolean;
   actualSeconds?: number;
   pauseSeconds?: number;
-  runners: RunParticipant[];
-  commentators: RunParticipant[];
+  runners: Runner[];
+  commentators: Commentator[];
 }
 
 export interface InitialRun {
@@ -164,8 +170,8 @@ export interface InitialRun {
   notes?: string;
   actualTime?: number;
   finished?: boolean;
-  runners?: RunParticipant[];
-  commentators?: RunParticipant[];
+  runners?: Runner[];
+  commentators?: Commentator[];
 }
 
 export interface CropTransform {
@@ -175,23 +181,48 @@ export interface CropTransform {
   left: number;
 }
 
-export interface RunParticipant {
+export interface Participant {
   id: string;
   displayName: string;
   twitchName?: string;
   twitterName?: string;
   pronouns?: string;
+  pronounsVisible?: boolean;
   hasWebcam: boolean;
+}
+
+export type InitialParticipant = Partial<Participant> & { displayName: string };
+
+export interface Runner {
+  id: string;
   visible: boolean;
-  // Run fields
+  webcamVisible: boolean;
+  participantId: string;
+  displayName?: string;
   finishedAt?: Date;
   actualSeconds?: number;
-  // Interview fields
-  score?: number;
   gameplayIngestUrl?: string;
   gameplayCropTransform?: CropTransform;
   webcamIngestUrl?: string;
   webcamCropTransform?: CropTransform;
+}
+export interface Commentator {
+  id: string;
+  visible: boolean;
+  webcamVisible: boolean;
+  participantId: string;
+  displayName?: string;
+}
+
+export interface InterviewParticipant {
+  id: string;
+  visible: boolean;
+  webcamVisible: boolean;
+  participantId: string;
+  displayName?: string;
+  score?: number;
+  videoIngestUrl?: string;
+  videoCropTransform?: CropTransform;
 }
 
 export interface OBSWebsocketConfig {

@@ -13,9 +13,10 @@
   },
   "dependencies": {
     "@spyrothon/api": "workspace:*",
-    "@spyrothon/sparx": "^0.2.2",
+    "@spyrothon/sparx": "0.2.3",
     "@spyrothon/utils": "workspace:*",
     "classnames": "^2.3.1",
+    "jotai": "^1.9.0",
     "js-cookie": "^3.0.1",
     "luxon": "^3.0.3",
     "obs-websocket-js": "5.0.2",

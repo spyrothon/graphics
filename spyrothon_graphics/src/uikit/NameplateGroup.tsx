@@ -1,13 +1,13 @@
 import * as React from "react";
 import classNames from "classnames";
-import { RunParticipant } from "@spyrothon/api";
+import { Commentator, InterviewParticipant, Runner } from "@spyrothon/api";
 
 import Nameplate from "./Nameplate";
 
 import styles from "./NameplateGroup.module.css";
 
 type NameplateGroupProps = {
-  participants: RunParticipant[];
+  participants: Array<Runner | Commentator | InterviewParticipant>;
   title?: React.ReactNode;
   className?: string;
 };
@@ -20,7 +20,7 @@ export default function NameplateGroup(props: NameplateGroupProps) {
       {title != null ? <div className={styles.title}>{title}</div> : null}
       <div className={styles.participants}>
         {participants.map((participant, index) => (
-          <Nameplate key={index} className={styles.nameplate} participant={participant} />
+          <Nameplate key={index} className={styles.nameplate} entity={participant} />
         ))}
       </div>
     </div>

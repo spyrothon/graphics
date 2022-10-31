@@ -9,11 +9,11 @@ import * as ScheduleStore from "../../modules/schedules/ScheduleStore";
 import { useSafeSelector } from "../../Store";
 import OBS from "../obs/OBS";
 import OBSSceneSelector from "../obs/OBSSceneSelector";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import * as RunStore from "../runs/RunStore";
 // import { useOBSStore } from "../obs/OBSStore";
 import { updateScheduleEntry } from "../schedules/ScheduleActions";
-
-import styles from "./LiveEntryControl.module.css";
+import CropDataDisplay from "./CropDataDisplay";
 
 // const RUNNER_OBS_INPUT_NAMES = ["Ping Runner 1", "Ping Runner 2", "Ping Runner 3", "Ping Runner 4"];
 
@@ -62,18 +62,19 @@ function LiveEntryRunnerSlots(props: { runId: string }) {
       <Header tag="h4" variant="header-md/normal">
         Crop Data
       </Header>
-      {run.runners.map((runner) => (
-        <div key={runner.id} className={styles.runnerCropData}>
-          <Text>
-            <strong>{runner.displayName}:</strong>
-            <br />
-            {runner.gameplayIngestUrl}
-            <code>
-              <pre>{JSON.stringify(runner.gameplayCropTransform, undefined, 1)}</pre>
-            </code>
-          </Text>
-        </div>
-      ))}
+      <Stack direction="horizontal" spacing="space-lg" justify="stretch">
+        {run.runners.map((runner) => (
+          <div key={runner.id}>
+            <Text>
+              <strong>{getDisplayNameForParticipant(runner)}:</strong>
+            </Text>
+            {runner.gameplayCropTransform != null ? (
+              <CropDataDisplay transform={runner.gameplayCropTransform} />
+            ) : null}
+            <Text>{runner.gameplayIngestUrl}</Text>
+          </div>
+        ))}
+      </Stack>
     </Stack>
   );
 }

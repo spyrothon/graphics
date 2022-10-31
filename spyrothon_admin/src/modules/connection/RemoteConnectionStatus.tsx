@@ -23,14 +23,14 @@ export default function RemoteConnectionStatus() {
         Connections
       </Header>
       <Stack spacing="space-lg" direction="horizontal">
-        <Text className={styles.item}>
+        <div className={styles.item}>
           <StatusDot boolean={isConnected} />
-          <span className={styles.itemName}>API Sync</span>
-        </Text>
-        <Text className={styles.item}>
+          <Text className={styles.itemName}>API Sync</Text>
+        </div>
+        <div className={styles.item}>
           <StatusDot boolean={obsConnected} busy={obsBusy} />
-          <span className={styles.itemName}>OBS</span>
-        </Text>
+          <Text className={styles.itemName}>OBS</Text>
+        </div>
       </Stack>
     </Stack>
   );

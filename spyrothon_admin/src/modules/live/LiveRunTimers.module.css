@@ -12,5 +12,9 @@
 }
 
 .inProgress {
-  color: var(--text-muted);
+  color: var(--text-secondary);
+}
+
+.timer:not(.inProgress) {
+  font-weight: var(--font-weight-bold);
 }

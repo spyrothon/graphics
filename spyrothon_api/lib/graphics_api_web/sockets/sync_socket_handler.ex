@@ -96,6 +96,10 @@ defmodule GraphicsAPIWeb.SyncSocketHandler do
     _sync(%{type: "load_interview", interview: interview})
   end
 
+  def update_participant(participant) do
+    _sync(%{type: "load_participant", participant: participant})
+  end
+
   defp _sync(data) do
     deliver_channel("sync_updates", data)
   end

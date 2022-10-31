@@ -5,13 +5,6 @@ import { SafeDispatch } from "@graphics/hooks/useDispatch";
 
 import { RunAction, RunActionType } from "./RunsTypes";
 
-export function updateRun(run: Run): RunAction {
-  return {
-    type: RunActionType.RUNS_UPDATE_RUN,
-    run,
-  };
-}
-
 export function fetchRuns() {
   return async (dispatch: SafeDispatch) => {
     dispatch({ type: RunActionType.RUNS_FETCH_RUNS_STARTED });
@@ -27,19 +20,4 @@ export function loadRun(run: Run): RunAction {
 
 export function fetchRunsSuccess(runs: Run[]): RunAction {
   return { type: RunActionType.RUNS_FETCH_RUNS_SUCCESS, runs };
-}
-
-export function persistRun(run: Run) {
-  return async (dispatch: SafeDispatch) => {
-    const filteredRun = {
-      ...run,
-      runners: run.runners.filter((entry) => entry?.displayName !== ""),
-      commentators: run.commentators.filter((entry) => entry?.displayName !== ""),
-    };
-    const updatedRun = await API.runs.updateRun(run.id, filteredRun);
-    dispatch({
-      type: RunActionType.RUNS_UPDATE_RUN,
-      run: updatedRun,
-    });
-  };
 }

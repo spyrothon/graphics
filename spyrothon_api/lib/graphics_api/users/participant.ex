@@ -3,11 +3,13 @@ defmodule GraphicsAPI.Users.Participant do
   import Ecto.Changeset
 
   @fields [
+    :id,
     :user_id,
     :display_name,
     :twitch_name,
     :twitter_name,
     :pronouns,
+    :pronouns_visible,
     :has_webcam
   ]
 

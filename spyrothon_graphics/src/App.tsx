@@ -20,6 +20,7 @@ import Standard1 from "./layouts/standard/Standard1";
 import Standard2 from "./layouts/standard/Standard2";
 import Standard3 from "./layouts/standard/Standard3";
 import Standard4 from "./layouts/standard/Standard4";
+import { fetchParticipants } from "./modules/participants/ParticipantActions";
 import { fetchSchedule } from "./modules/schedules/ScheduleActions";
 import SyncSocketManager from "./modules/sync/SyncSocketManager";
 import SVGLibrary from "./uikit/svg/SVGLibrary";
@@ -39,6 +40,7 @@ export default function App() {
   React.useEffect(() => {
     (async function () {
       const { scheduleId } = await API.init.fetchInit();
+      await fetchParticipants();
       dispatch(fetchSchedule(scheduleId));
     })();
   }, [dispatch]);

@@ -1,12 +1,13 @@
 import * as React from "react";
 import classNames from "classnames";
 import { Flag, Icon, Pause, Play, Repeat } from "react-feather";
-import type { Run, RunParticipant } from "@spyrothon/api";
-import { Button, ButtonVariantColor, Card, Header, Stack, Text } from "@spyrothon/sparx";
+import type { Run, Runner } from "@spyrothon/api";
+import { Button, ButtonVariant, Card, Header, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration, useAnimationFrame } from "@spyrothon/utils";
 
 import useSafeDispatch, { SafeDispatch } from "@admin/hooks/useDispatch";
 
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import getRunState from "../runs/getRunState";
 import {
   finishRun,
@@ -61,7 +62,7 @@ interface TimerAction {
   Icon: Icon;
   action: (dispatch: SafeDispatch) => void;
   disabled?: boolean;
-  color?: ButtonVariantColor;
+  variant?: ButtonVariant;
   strokeWidth?: string;
   label?: string;
 }
@@ -70,6 +71,7 @@ function getPlayAction(run: Run): TimerAction | undefined {
   if ((run.runners.length <= 1 && run.finished) || run.pausedAt != null) {
     return {
       Icon: Play,
+      variant: "primary",
       action(dispatch) {
         dispatch(resumeRun(run.id));
       },
@@ -80,6 +82,7 @@ function getPlayAction(run: Run): TimerAction | undefined {
 
   return {
     Icon: Play,
+    variant: "primary",
     action(dispatch) {
       dispatch(startRun(run.id));
     },
@@ -106,7 +109,7 @@ function getPauseAction(run: Run): TimerAction | undefined {
 
   return {
     Icon: Pause,
-    color: "default",
+    variant: "primary",
     strokeWidth: "2",
     action(dispatch) {
       dispatch(pauseRun(run.id));
@@ -118,21 +121,21 @@ function getResetAction(run: Run): TimerAction | undefined {
   if (run.startedAt == null) return undefined;
   return {
     Icon: Repeat,
-    color: "default",
+    variant: "default",
     action(dispatch) {
       dispatch(resetRun(run.id));
     },
   };
 }
 
-function getParticipantAction(run: Run, runner: RunParticipant): TimerAction {
+function getParticipantAction(run: Run, runner: Runner): TimerAction {
   const allDisabled = run.startedAt == null || run.pausedAt != null;
 
   if (runner.finishedAt != null) {
     return {
       Icon: Play,
       disabled: allDisabled,
-      color: "primary",
+      variant: "primary/outline",
       action(dispatch) {
         dispatch(resumeRunParticipant(run.id, runner.id));
       },
@@ -142,7 +145,7 @@ function getParticipantAction(run: Run, runner: RunParticipant): TimerAction {
   return {
     Icon: Flag,
     disabled: allDisabled,
-    color: "primary",
+    variant: "primary",
     action(dispatch) {
       dispatch(finishRunParticipant(run.id, runner.id));
     },
@@ -157,12 +160,14 @@ function ActionButton(props: ActionButtonProps) {
   const dispatch = useSafeDispatch();
   if (props.action == null) return null;
 
-  const { Icon, action, color = "primary", disabled = false, strokeWidth = "3" } = props.action;
+  const { Icon, action, variant = "primary", disabled = false, strokeWidth = "3" } = props.action;
 
   return (
-    <Button onClick={() => action(dispatch)} color={color} disabled={disabled}>
-      <Icon size={16} strokeWidth={strokeWidth} />
-    </Button>
+    <Button
+      onClick={() => action(dispatch)}
+      variant={variant}
+      disabled={disabled}
+      icon={(props) => <Icon {...props} strokeWidth={strokeWidth} />}></Button>
   );
 }
 
@@ -186,9 +191,9 @@ export default function LiveRunTimers(props: LiveTimerProps) {
         </thead>
         <tbody>
           {run.runners.map((runner) => (
-            <tr key={runner.displayName} className={styles.runnerTimer}>
+            <tr key={runner.id} className={styles.runnerTimer}>
               <td>
-                <Text>{runner.displayName}</Text>
+                <Text>{getDisplayNameForParticipant(runner)}</Text>
               </td>
               <td
                 className={classNames(styles.timer, {
@@ -211,17 +216,19 @@ export default function LiveRunTimers(props: LiveTimerProps) {
         <Header tag="h4" variant="header-md/normal">
           Run Timer
         </Header>
-        <Stack direction="horizontal" spacing="space-md" align="center" justify="stretch">
+        <Stack direction="horizontal" spacing="space-md" align="center" justify="space-between">
           <div>
             <Text variant="header-lg/normal" className={styles.timer}>
               <LiveTimer run={run} />
             </Text>
             <Text variant="text-sm/normal">{getRunState(run)}</Text>
           </div>
-          <ActionButton action={getFinishAction(run)} />
-          <ActionButton action={getPlayAction(run)} />
-          <ActionButton action={getPauseAction(run)} />
-          <ActionButton action={getResetAction(run)} />
+          <Stack direction="horizontal">
+            <ActionButton action={getFinishAction(run)} />
+            <ActionButton action={getPlayAction(run)} />
+            <ActionButton action={getPauseAction(run)} />
+            <ActionButton action={getResetAction(run)} />
+          </Stack>
         </Stack>
         {runnersTable}
       </Stack>

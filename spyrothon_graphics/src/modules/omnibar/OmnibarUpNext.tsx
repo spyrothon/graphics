@@ -1,20 +1,14 @@
 import * as React from "react";
 import classNames from "classnames";
-import { RunParticipant } from "@spyrothon/api";
 
 import { useSafeSelector } from "@graphics/Store";
 
 import InterviewStore from "../interviews/InterviewStore";
+import renderParticipantNames from "../participants/renderParticipantNames";
 import RunStore from "../runs/RunStore";
 import ScheduleStore from "../schedules/ScheduleStore";
 
 import styles from "./OmnibarUpNext.module.css";
-
-function renderNameList(participants: RunParticipant[]) {
-  if (participants.length === 0) return null;
-
-  return participants.map((participant) => participant.displayName).join(", ");
-}
 
 type OmnibarRunProps = {
   runId?: string;
@@ -31,7 +25,9 @@ function OmnibarRun(props: OmnibarRunProps) {
       <div className={styles.entryName}>
         {run.gameName} &middot; <span className={styles.entryCategory}>{run.categoryName}</span>
       </div>
-      <div className={styles.entryParticipants}>by {renderNameList(run.runners)}</div>
+      <div className={styles.entryParticipants}>
+        by {renderParticipantNames(run.runners).join(", ")}
+      </div>
     </div>
   );
 }
@@ -49,7 +45,9 @@ function OmnibarInterview(props: OmnibarInterviewProps) {
   return (
     <div className={styles.entry}>
       <div className={styles.entryName}>{interview.topic}</div>
-      <div className={styles.entryParticipants}>with {renderNameList(interview.interviewees)}</div>
+      <div className={styles.entryParticipants}>
+        with {renderParticipantNames(interview.interviewees).join(", ")}
+      </div>
     </div>
   );
 }

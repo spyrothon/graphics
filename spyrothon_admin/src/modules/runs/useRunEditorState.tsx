@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Run, RunParticipant } from "@spyrothon/api";
+import type { Run } from "@spyrothon/api";
 
 type RunEditorState = {
   baseRun?: Run;
@@ -35,17 +35,6 @@ export type RunEditorStateValue = {
   setBaseRun: (run?: Run) => unknown;
   updateField: <F extends keyof Run>(field: F, value: Run[F]) => unknown;
   getField: <F extends keyof Run>(field: F) => Run[F] | undefined;
-  updateParticipantField: <F extends keyof RunParticipant>(
-    type: "runners" | "commentators",
-    index: number,
-    field: F,
-    value: RunParticipant[F],
-  ) => unknown;
-  getParticipantField: <F extends keyof RunParticipant>(
-    type: "runners" | "commentators",
-    index: number,
-    field: F,
-  ) => RunParticipant[F] | undefined;
   getEditedRun: () => Run;
   hasChanges: () => boolean;
 };
@@ -62,32 +51,6 @@ export default function useRunEditorState(): RunEditorStateValue {
   function getField<F extends keyof Run>(field: F): Run[F] | undefined {
     return (state.runEdits[field] as Run[F]) ?? state.baseRun?.[field];
   }
-  function updateParticipantField<F extends keyof RunParticipant>(
-    type: "runners" | "commentators",
-    index: number,
-    field: F,
-    value: RunParticipant[F],
-  ) {
-    const list = Array.from(getField(type) ?? []);
-
-    if (list[index] == null) {
-      list[index] = {
-        displayName: "",
-        twitchName: "",
-        twitterName: "",
-      } as RunParticipant;
-    }
-    list[index][field] = value;
-    dispatch({ type: "updateField", field: type, value: list });
-  }
-  function getParticipantField<F extends keyof RunParticipant>(
-    type: "runners" | "commentators",
-    index: number,
-    field: F,
-  ): RunParticipant[F] | undefined {
-    const runner = getField(type)?.[index];
-    return runner?.[field];
-  }
   function getEditedRun(): Run {
     return { ...state.baseRun, ...state.runEdits } as Run;
   }
@@ -101,8 +64,6 @@ export default function useRunEditorState(): RunEditorStateValue {
     setBaseRun,
     updateField,
     getField,
-    updateParticipantField,
-    getParticipantField,
     getEditedRun,
     hasChanges,
   };

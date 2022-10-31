@@ -9,3 +9,7 @@
   font-weight: 700;
   text-shadow: 0 0 4px #000;
 }
+
+.text {
+  line-height: 1;
+}

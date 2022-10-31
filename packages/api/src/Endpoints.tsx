@@ -1,12 +1,22 @@
 const Endpoints = {
   INIT: "/init",
+  INIT_ADMIN: "/init/admin",
   // Auth
   AUTH_LOGIN: "/auth/login",
   AUTH_LOGOUT: "/auth/logout",
   AUTH_ME: "/auth/me",
+  // Participants
+  PARTICIPANTS: "/participants",
+  PARTICIPANT: (id: string) => `/participants/${id}`,
   // Interviews
   INTERVIEWS: "/interviews",
   INTERVIEW: (id: string) => `/interviews/${id}`,
+  INTERVIEW_INTERVIEWERS: (id: string) => `/interviews/${id}/interviewers`,
+  INTERVIEW_INTERVIEWER: (id: string, interviewerId: string) =>
+    `/interviews/${id}/interviewers/${interviewerId}`,
+  INTERVIEW_INTERVIEWEES: (id: string) => `/interviews/${id}/interviewees`,
+  INTERVIEW_INTERVIEWEE: (id: string, intervieweeId: string) =>
+    `/interviews/${id}/interviewees/${intervieweeId}`,
   // Runs
   RUNS: "/runs",
   RUN: (id: string) => `/runs/${id}`,
@@ -15,10 +25,13 @@ const Endpoints = {
   RUN_PAUSE: (id: string) => `/runs/${id}/pause`,
   RUN_RESUME: (id: string) => `/runs/${id}/resume`,
   RUN_RESET: (id: string) => `/runs/${id}/reset`,
-  RUN_PARTICIPANT_FINISH: (id: string, participantId: string) =>
-    `/runs/${id}/finish-participant/${participantId}`,
-  RUN_PARTICIPANT_RESUME: (id: string, participantId: string) =>
-    `/runs/${id}/resume-participant/${participantId}`,
+  RUN_RUNNERS: (id: string) => `/runs/${id}/runners`,
+  RUN_RUNNER: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}`,
+  RUN_RUNNER_FINISH: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}/finish`,
+  RUN_RUNNER_RESUME: (id: string, runnerId: string) => `/runs/${id}/runners/${runnerId}/resume`,
+  RUN_COMMENTATORS: (id: string) => `/runs/${id}/commentators`,
+  RUN_COMMENTATOR: (id: string, commentatorId: string) =>
+    `/runs/${id}/commentators/${commentatorId}`,
   // Schedules
   SCHEDULES: "/schedules",
   SCHEDULE: (id: string) => `/schedules/${id}`,

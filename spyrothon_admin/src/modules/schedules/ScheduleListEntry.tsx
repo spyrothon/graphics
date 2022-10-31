@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { useDrag, useDrop } from "react-dnd";
-import { RunParticipant, ScheduleEntry } from "@spyrothon/api";
+import { Commentator, InterviewParticipant, Runner, ScheduleEntry } from "@spyrothon/api";
 import { Stack, Text } from "@spyrothon/sparx";
 import { formatDuration } from "@spyrothon/utils";
 
@@ -9,15 +9,16 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 
 import { useSafeSelector } from "../../Store";
 import * as InterviewStore from "../interviews/InterviewStore";
+import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import * as RunStore from "../runs/RunStore";
 import { removeScheduleEntry, selectScheduleEntry } from "./ScheduleActions";
 
 import styles from "./ScheduleList.module.css";
 
-function renderNameList(participants: RunParticipant[]) {
+function renderNameList(participants: Array<Runner | Commentator | InterviewParticipant>) {
   if (participants.length === 0) return null;
 
-  return participants.map((participant) => participant.displayName).join(", ");
+  return participants.map((participant) => getDisplayNameForParticipant(participant)).join(", ");
 }
 
 type RunEntryProps = {
