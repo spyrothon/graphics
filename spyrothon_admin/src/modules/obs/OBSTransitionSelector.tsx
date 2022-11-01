@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormControl, SelectInput } from "@spyrothon/sparx";
+import { FormControl, SelectInput, Text } from "@spyrothon/sparx";
 
 import { useOBSStore } from "./OBSStore";
 import type { OBSTransition } from "./OBSTypes";
@@ -38,7 +38,7 @@ export default function OBSTransitionSelector(props: OBSTransitionSelectorProps)
         items={transitionOptions}
         renderItem={(entry) => entry?.name ?? "(unnamed)"}
         selectedItem={selected}
-        renderPlaceholder={() => "Select an OBS Transition"}
+        renderPlaceholder={() => <Text>Select an OBS Transition</Text>}
         onSelect={(entry) => onSelect(entry?.value)}
       />
     </FormControl>

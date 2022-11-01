@@ -278,9 +278,6 @@ export default function InterviewEditor(props: InterviewEditorProps) {
             {renderQuestionFields(0)}
             {renderQuestionFields(1)}
             {renderQuestionFields(2)}
-            {renderQuestionFields(3)}
-            {renderQuestionFields(4)}
-            {renderQuestionFields(5)}
           </Stack>
         </Card>
         <Stack spacing="space-lg" className={styles.participants}>

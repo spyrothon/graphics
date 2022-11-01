@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormControl, SelectInput } from "@spyrothon/sparx";
+import { FormControl, SelectInput, Text } from "@spyrothon/sparx";
 
 import { useOBSStore } from "./OBSStore";
 import type { OBSScene } from "./OBSTypes";
@@ -35,7 +35,7 @@ export default function OBSSceneSelector(props: OBSSceneSelectorProps) {
         items={sceneOptions}
         renderItem={(entry) => entry?.name ?? "(unnamed)"}
         selectedItem={selected}
-        renderPlaceholder={() => "Select an OBS Scene"}
+        renderPlaceholder={() => <Text>Select an OBS Scene</Text>}
         onSelect={(entry) => onSelect(entry?.value)}
       />
     </FormControl>

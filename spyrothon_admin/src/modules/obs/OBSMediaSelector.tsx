@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormControl, SelectInput } from "@spyrothon/sparx";
+import { FormControl, SelectInput, Text } from "@spyrothon/sparx";
 
 import { useOBSStore } from "./OBSStore";
 import type { OBSInput } from "./OBSTypes";
@@ -35,7 +35,7 @@ export default function OBSMediaSelector(props: OBSMediaSelectorProps) {
         items={sourceOptions}
         renderItem={(entry) => entry?.name ?? "(unnamed)"}
         selectedItem={selected}
-        renderPlaceholder={() => "Select an OBS Media Source"}
+        renderPlaceholder={() => <Text>Select an OBS Media Source</Text>}
         onSelect={(entry) => onSelect(entry?.value)}
       />
     </FormControl>

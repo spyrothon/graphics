@@ -6,7 +6,7 @@ import {
   InitialTransitionSet,
   ScheduleEntry,
 } from "@spyrothon/api";
-import { Button, Card, DurationInput, Header, Stack } from "@spyrothon/sparx";
+import { Button, Card, DurationInput, FormControl, Header, Stack } from "@spyrothon/sparx";
 import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -89,11 +89,12 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
           <Stack direction="horizontal" spacing="space-lg" justify="stretch">
             <Stack>
               <Header tag="h2">Timing</Header>
-              <DurationInput
-                label="Estimated Setup Time"
-                value={editedEntry.setupSeconds}
-                onChange={(value) => setEditedEntry({ ...editedEntry, setupSeconds: value })}
-              />
+              <FormControl label="Estimated Setup Time">
+                <DurationInput
+                  value={editedEntry.setupSeconds}
+                  onChange={(value) => setEditedEntry({ ...editedEntry, setupSeconds: value })}
+                />
+              </FormControl>
             </Stack>
 
             <Stack>
