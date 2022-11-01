@@ -85,26 +85,25 @@ type DragItem = {
 
 export default function ScheduleListEntry(props: ScheduleListEntryProps) {
   const { scheduleEntry, selected, interactive = true, onReorder } = props;
-  const { id: entryId, runId, interviewId, position, setupSeconds } = scheduleEntry;
+  const { runId, interviewId, position, setupSeconds } = scheduleEntry;
   const dispatch = useSafeDispatch();
 
   const entryRef = React.useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, drag] = useDrag({
     type: "schedule-entry",
-    item: { entry: scheduleEntry, height: 60 },
+    item: { entry: scheduleEntry },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
-  const [{ isDropOver, draggedHeight }, drop] = useDrop({
+  const [{ isDropOver }, drop] = useDrop({
     accept: "schedule-entry",
     canDrop: (item) => item.entry !== scheduleEntry,
     drop: (item: DragItem) =>
       item.entry.position === position ? null : onReorder(item.entry.id, position),
     collect: (monitor) => ({
       isDropOver: monitor.isOver() && monitor.canDrop(),
-      draggedHeight: monitor.getItem()?.entry.id === entryId ? 0 : monitor.getItem()?.height,
     }),
   });
   if (interactive) drag(drop(entryRef));
@@ -145,9 +144,7 @@ export default function ScheduleListEntry(props: ScheduleListEntryProps) {
         [styles.dragging]: isDragging,
       })}
       onClick={handleSelect}>
-      {isDropOver ? (
-        <div className={styles.dropTarget} style={{ height: draggedHeight }}></div>
-      ) : null}
+      {isDropOver ? <div className={styles.dropTargetBar}></div> : null}
       {setup}
       <Stack
         className={styles.content}

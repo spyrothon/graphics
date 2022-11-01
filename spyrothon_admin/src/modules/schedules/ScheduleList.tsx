@@ -1,5 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
+import { useDrop } from "react-dnd";
 import { Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -11,6 +12,32 @@ import ScheduleListEntry from "./ScheduleListEntry";
 import * as ScheduleStore from "./ScheduleStore";
 
 import styles from "./ScheduleList.module.css";
+
+interface BottomDropTargetProps {
+  index: number;
+  onReorder: (entryId: string, newIndex: number) => unknown;
+}
+
+function BottomDropTarget(props: BottomDropTargetProps) {
+  const { index, onReorder } = props;
+
+  const [{ isDropOver }, drop] = useDrop({
+    accept: "schedule-entry",
+    // @ts-expect-error item isn't typed
+    drop: (item) => onReorder(item.entry.id, index),
+    collect: (monitor) => ({
+      isDropOver: monitor.isOver() && monitor.canDrop(),
+    }),
+  });
+
+  return (
+    <div className={styles.bottomDropTargetPositioner}>
+      <div ref={drop} className={styles.bottomDropTarget}>
+        {isDropOver ? <div className={styles.dropTargetBar}></div> : null}
+      </div>
+    </div>
+  );
+}
 
 type RunListProps = {
   className?: string;
@@ -42,10 +69,14 @@ export default function ScheduleList(props: RunListProps) {
   function handleReorder(movedEntryId: string, newIndex: number) {
     if (schedule == null) return;
 
-    const updatedEntryIds = scheduleEntries
-      .map((entry) => entry.id)
-      .filter((entryId) => entryId !== movedEntryId);
+    const entryIds = scheduleEntries.map((entry) => entry.id);
+    const sourceIndex = entryIds.indexOf(movedEntryId);
+    // Moving a run further down the list means it will be taken out of the
+    // list first, shifting things up by one, and then inserted. So the index
+    // needs to be offset.
+    if (sourceIndex < newIndex) newIndex -= 1;
 
+    const updatedEntryIds = entryIds.filter((entryId) => entryId !== movedEntryId);
     updatedEntryIds.splice(newIndex, 0, movedEntryId);
 
     dispatch(reorderScheduleEntries(schedule, updatedEntryIds));
@@ -65,6 +96,7 @@ export default function ScheduleList(props: RunListProps) {
           />
         ))
       )}
+      <BottomDropTarget index={scheduleEntries.length + 1} onReorder={handleReorder} />
       <AddEntryButton />
     </div>
   );

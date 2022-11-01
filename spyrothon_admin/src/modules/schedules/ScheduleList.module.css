@@ -8,6 +8,7 @@
 }
 
 .entry {
+  position: relative;
   border-bottom: 1px solid var(--accent-primary);
 
   &.interactive:hover {
@@ -25,8 +26,29 @@
   opacity: 0;
 }
 
-.dropTarget {
-  background-color: var(--background-secondary);
+.dropTargetBar {
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  background-color: var(--accent-primary);
+}
+
+.bottomDropTargetPositioner {
+  position: relative;
+  width: 100%;
+  height: 0;
+}
+
+.bottomDropTarget {
+  position: absolute;
+  z-index: 1;
+  top: -20px;
+  height: 40px;
+  width: 100%;
+
+  & .dropTargetBar {
+    top: 20px;
+  }
 }
 
 .setup {
