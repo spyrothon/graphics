@@ -49,7 +49,7 @@ export default function EditParticipantModal(props: EditParticipantModalProps) {
   }
 
   return (
-    <Card level={1} className={styles.container}>
+    <Card floating className={styles.container}>
       <Stack spacing="space-lg">
         <Header tag="h1">Edit {participant.displayName}</Header>
         <Stack spacing="space-lg">

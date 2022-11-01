@@ -46,7 +46,7 @@ export default function CreateParticipantModal(props: CreateParticipantModalProp
   }
 
   return (
-    <Card level={1} className={styles.container}>
+    <Card floating className={styles.container}>
       <Stack spacing="space-lg">
         <Header tag="h1">Create a new Participant</Header>
         <Stack spacing="space-lg">

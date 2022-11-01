@@ -17,6 +17,7 @@ export const Routes = {
   SETTINGS_TWITCH: "/settings/twitch",
   SETTINGS_CREATE_SCHEDULE: "/settings/create-schedule",
   SETTINGS_MANAGE_SCHEDULE: "/settings/manage-schedule",
+  SETTINGS_PARTICIPANTS: "/settings/participants",
   SETTINGS_USER: "/settings/user",
 
   // Publishing

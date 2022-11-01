@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Airplay, Edit, PlusCircle, Settings, Twitch, User } from "react-feather";
+import { Airplay, Edit, PlusCircle, Settings, Twitch, User, Users } from "react-feather";
 
 import { Routes } from "../../Constants";
 import { DashboardSidebarRoute } from "../dashboards/DashboardSidebar";
@@ -7,6 +7,7 @@ import SettingsCreateSchedule from "./SettingsCreateSchedule";
 import SettingsGeneral from "./SettingsGeneral";
 import SettingsManageSchedule from "./SettingsManageSchedule";
 import SettingsOBSHost from "./SettingsOBSHost";
+import SettingsParticipants from "./SettingsParticipants";
 import SettingsStreamTemplates from "./SettingsStreamTemplates";
 import SettingsUser from "./SettingsUser";
 
@@ -31,6 +32,13 @@ const SETTINGS_ROUTES: DashboardSidebarRoute[] = [
     label: "Create a Schedule",
     path: Routes.SETTINGS_CREATE_SCHEDULE,
     element: <SettingsCreateSchedule />,
+  },
+  {
+    id: "participants",
+    icon: Users,
+    label: "Participants",
+    path: Routes.SETTINGS_PARTICIPANTS,
+    element: <SettingsParticipants />,
   },
   {
     id: "obs",
