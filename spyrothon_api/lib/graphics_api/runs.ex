@@ -338,9 +338,25 @@ defmodule GraphicsAPI.Runs do
   end
 
   def remove_schedule_entry(%Schedule{}, entry_id) do
-    ScheduleEntry
-    |> Repo.get!(entry_id)
-    |> Repo.delete()
+    Repo.transaction(fn ->
+      entry =
+        ScheduleEntry
+        |> Repo.get!(entry_id)
+        |> Repo.preload([:run, :interview])
+
+      entry
+      |> Repo.delete()
+
+      case entry.run do
+        nil -> nil
+        run -> Repo.delete!(run)
+      end
+
+      case entry.interview do
+        nil -> nil
+        interview -> Repo.delete!(interview)
+      end
+    end)
   end
 
   def transition_schedule_to_entry(schedule = %Schedule{}, new_entry_id) do

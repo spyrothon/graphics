@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import { useDrag, useDrop } from "react-dnd";
 import { Commentator, InterviewParticipant, Runner, ScheduleEntry } from "@spyrothon/api";
-import { Stack, Text } from "@spyrothon/sparx";
+import { openModal, Stack, Text } from "@spyrothon/sparx";
 import { formatDuration } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -12,6 +12,7 @@ import * as InterviewStore from "../interviews/InterviewStore";
 import getDisplayNameForParticipant from "../participants/getDisplayNameForParticipant";
 import * as RunStore from "../runs/RunStore";
 import { removeScheduleEntry, selectScheduleEntry } from "./ScheduleActions";
+import ScheduleEntryRemoveModal from "./ScheduleEntryRemoveModal";
 
 import styles from "./ScheduleList.module.css";
 
@@ -112,15 +113,14 @@ export default function ScheduleListEntry(props: ScheduleListEntryProps) {
     dispatch(selectScheduleEntry(scheduleEntry.id));
   }
 
-  async function handleDelete(event: React.SyntheticEvent<HTMLElement>) {
-    if (!window.confirm(`Are you sure you want to delete this entry? #${position}`)) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
+  async function handleDelete() {
+    async function doDelete() {
+      await dispatch(removeScheduleEntry(scheduleEntry.scheduleId, scheduleEntry.id));
     }
 
-    event.stopPropagation();
-    await dispatch(removeScheduleEntry(scheduleEntry.scheduleId, scheduleEntry.id));
+    openModal((props) => (
+      <ScheduleEntryRemoveModal scheduleEntry={scheduleEntry} {...props} onConfirm={doDelete} />
+    ));
   }
 
   const setup =
