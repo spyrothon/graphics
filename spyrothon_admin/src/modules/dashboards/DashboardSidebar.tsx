@@ -7,7 +7,7 @@ import { Routes } from "../../Constants";
 import { useSafeSelector } from "../../Store";
 import AuthStore from "../auth/AuthStore";
 
-const ICON_STYLE = { marginRight: 8, marginBottom: -2.5 };
+const ICON_STYLE = { marginRight: 12, marginBottom: -2.5 };
 
 export interface DashboardSidebarRoute extends RouteObject {
   id: string;
@@ -40,12 +40,14 @@ export default function DashboardSidebar(props: DashboardSidebarProps) {
                 <Tabs.Tab
                   key={id}
                   selected={location.pathname === path}
-                  icon={
-                    Icon != null
-                      ? (props) => <Icon size={18} strokeWidth="2" style={ICON_STYLE} {...props} />
-                      : undefined
+                  label={
+                    <>
+                      {Icon != null ? (
+                        <Icon size={18} strokeWidth="2" style={ICON_STYLE} />
+                      ) : undefined}
+                      {label}
+                    </>
                   }
-                  label={<>{label}</>}
                   onClick={() => navigate(path)}></Tabs.Tab>
               ) : null,
             )
@@ -53,7 +55,7 @@ export default function DashboardSidebar(props: DashboardSidebarProps) {
         </Tabs.Group>
         <div>
           <Anchor href={Routes.LOGOUT}>
-            <LogOut size={18} strokeWidth="2" style={ICON_STYLE} />
+            <LogOut size={16} strokeWidth="2" style={ICON_STYLE} />
             Logout
           </Anchor>
           <Text variant="text-xs/normal">
