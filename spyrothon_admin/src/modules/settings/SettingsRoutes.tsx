@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Airplay, Edit, PlusCircle, Settings, Twitch, User, Users } from "react-feather";
+import { Airplay, Edit, Settings, Twitch, User, Users } from "react-feather";
 
 import { Routes } from "../../Constants";
 import { DashboardSidebarRoute } from "../dashboards/DashboardSidebar";
-import SettingsCreateSchedule from "./SettingsCreateSchedule";
 import SettingsGeneral from "./SettingsGeneral";
 import SettingsManageSchedule from "./SettingsManageSchedule";
 import SettingsOBSHost from "./SettingsOBSHost";
@@ -25,13 +24,6 @@ const SETTINGS_ROUTES: DashboardSidebarRoute[] = [
     label: "Manage Schedule",
     path: Routes.SETTINGS_MANAGE_SCHEDULE,
     element: <SettingsManageSchedule />,
-  },
-  {
-    id: "create-schedule",
-    icon: PlusCircle,
-    label: "Create a Schedule",
-    path: Routes.SETTINGS_CREATE_SCHEDULE,
-    element: <SettingsCreateSchedule />,
   },
   {
     id: "participants",

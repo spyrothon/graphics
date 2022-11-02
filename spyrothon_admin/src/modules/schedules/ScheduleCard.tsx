@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Schedule } from "@spyrothon/api";
-import { Anchor, Button, Card, Stack, Text } from "@spyrothon/sparx";
+import { Anchor, Button, Card, Spacer, Stack, Text } from "@spyrothon/sparx";
 
 import CurrentScheduleContext from "./CurrentScheduleContext";
 
@@ -23,8 +23,18 @@ export default function ScheduleCard(props: ScheduleCardProps) {
 
   return (
     <Card className={className}>
-      <Stack direction="horizontal" justify="space-between">
-        <div className={styles.info}>
+      <Stack justify="space-between">
+        <Stack>
+          {schedule.logoUrl ? (
+            <img className={styles.logo} src={schedule.logoUrl} />
+          ) : (
+            <Text variant="text-lg/secondary">No Logo</Text>
+          )}
+          <Button variant="primary" onClick={onSelect} disabled={isCurrent}>
+            {isCurrent ? "Already Active" : "Use this Schedule"}
+          </Button>
+        </Stack>
+        <Stack spacing="space-xs">
           <Text variant="header-md/normal">{schedule.name}</Text>
           {schedule.twitchUrl != null ? (
             <Text>
@@ -32,6 +42,7 @@ export default function ScheduleCard(props: ScheduleCardProps) {
             </Text>
           ) : null}
           <Text>{schedule.series}</Text>
+          <Spacer size="space-md" />
           <Text>
             <strong>Starts:</strong> {timeString(schedule.startTime)}
             {schedule.endTime != null ? (
@@ -41,17 +52,6 @@ export default function ScheduleCard(props: ScheduleCardProps) {
               </>
             ) : null}
           </Text>
-        </div>
-
-        <Stack align="end" justify="space-between">
-          {schedule.logoUrl ? (
-            <img className={styles.logo} src={schedule.logoUrl} />
-          ) : (
-            <Text variant="text-lg/secondary">No Logo</Text>
-          )}
-          <Button variant="primary" onClick={onSelect} disabled={isCurrent}>
-            {isCurrent ? "Already Active" : "Use this Schedule"}
-          </Button>
         </Stack>
       </Stack>
     </Card>
