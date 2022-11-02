@@ -19,6 +19,7 @@ defmodule GraphicsAPIWeb.SchedulesController do
     schedule_params = conn.body_params
 
     with {:ok, schedule} <- Runs.create_schedule(schedule_params) do
+      schedule = Runs.get_schedule(schedule.id)
       GraphicsAPIWeb.SyncSocketHandler.update_schedule(schedule)
       json(conn, schedule)
     else
