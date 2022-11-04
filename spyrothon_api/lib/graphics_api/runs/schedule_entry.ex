@@ -53,17 +53,21 @@ defmodule GraphicsAPI.Runs.ScheduleEntry do
   def changeset(entry, params \\ %{}) do
     entry
     |> cast(params, @fields)
-    |> cast_assoc(:enter_transition_set)
-    |> cast_assoc(:exit_transition_set)
+    |> _cast_transition_sets()
     |> _update_duration()
   end
 
   def update_changeset(entry, params \\ %{}) do
     entry
     |> cast(params, @updatable_fields)
-    |> cast_assoc(:enter_transition_set)
-    |> cast_assoc(:exit_transition_set)
+    |> _cast_transition_sets()
     |> _update_duration()
+  end
+
+  defp _cast_transition_sets(changeset) do
+    changeset
+    |> cast_assoc(:enter_transition_set, required: true)
+    |> cast_assoc(:exit_transition_set, required: true)
   end
 
   defp _update_duration(changeset) do

@@ -33,7 +33,7 @@ export default function OBSMediaSelector(props: OBSMediaSelectorProps) {
       <SelectInput
         className={className}
         items={sourceOptions}
-        renderItem={(entry) => entry?.name ?? "(unnamed)"}
+        renderItem={(entry) => <Text>{entry?.name ?? "(unnamed)"}</Text>}
         selectedItem={selected}
         renderPlaceholder={() => <Text>Select an OBS Media Source</Text>}
         onSelect={(entry) => onSelect(entry?.value)}

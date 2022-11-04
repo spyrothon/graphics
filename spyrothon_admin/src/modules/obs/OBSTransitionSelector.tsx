@@ -36,7 +36,7 @@ export default function OBSTransitionSelector(props: OBSTransitionSelectorProps)
       <SelectInput
         className={className}
         items={transitionOptions}
-        renderItem={(entry) => entry?.name ?? "(unnamed)"}
+        renderItem={(entry) => <Text>{entry?.name ?? "(unnamed)"}</Text>}
         selectedItem={selected}
         renderPlaceholder={() => <Text>Select an OBS Transition</Text>}
         onSelect={(entry) => onSelect(entry?.value)}

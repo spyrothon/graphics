@@ -10,17 +10,6 @@
   flex: 1 1 auto;
 }
 
-.transition {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 0;
-}
-
-.transitionIcon {
-  flex: 0 0 24px;
-}
-
 .empty {
   align-self: center;
   margin: auto;

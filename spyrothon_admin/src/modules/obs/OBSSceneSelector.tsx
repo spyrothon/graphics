@@ -33,7 +33,7 @@ export default function OBSSceneSelector(props: OBSSceneSelectorProps) {
       <SelectInput
         className={className}
         items={sceneOptions}
-        renderItem={(entry) => entry?.name ?? "(unnamed)"}
+        renderItem={(entry) => <Text>{entry?.name ?? "(unnamed)"}</Text>}
         selectedItem={selected}
         renderPlaceholder={() => <Text>Select an OBS Scene</Text>}
         onSelect={(entry) => onSelect(entry?.value)}

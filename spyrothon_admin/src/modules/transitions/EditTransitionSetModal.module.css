@@ -1,5 +1,8 @@
-.flex {
-  flex-wrap: nowrap;
+.container {
+  max-height: 85vh;
+  min-width: 680px;
+  max-width: 90vw;
+  overflow: scroll;
 }
 
 .drag {
@@ -24,36 +27,14 @@
   }
 }
 
+.transitionText {
+  flex: 1 1 auto;
+}
+
 .remove {
   flex: 0 0 16px;
-  margin-left: 16px;
 
   &:hover {
     cursor: pointer;
   }
-}
-
-.transitionToScene {
-  display: flex;
-  align-items: center;
-}
-
-.transitionName {
-  flex: 1 1 auto;
-}
-
-.transitionArrow {
-  flex: 0 0 auto;
-  width: 72px;
-  padding: 0 24px;
-  justify-content: center;
-}
-
-.transitionScene {
-  flex: 1 1 auto;
-}
-
-.duration {
-  display: flex;
-  gap: 16px;
 }

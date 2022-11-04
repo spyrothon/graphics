@@ -320,7 +320,9 @@ defmodule GraphicsAPI.Runs do
 
     updated_entry =
       entry_params
-      |> Map.put("position", Map.get(entry_params, :position, next_position))
+      |> Map.put_new("enter_transition_set", %{})
+      |> Map.put_new("exit_transition_set", %{})
+      |> Map.put_new("position", next_position)
       |> Map.put("schedule_id", schedule.id)
 
     {:ok, entry} =

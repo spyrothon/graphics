@@ -1,6 +1,6 @@
 defmodule GraphicsAPI.Runs.Transitions do
   alias GraphicsAPI.Repo
-  alias GraphicsAPI.Runs.{TransitionSet, TransitionState}
+  alias GraphicsAPI.Runs.{ScheduleEntry, TransitionSet, TransitionState}
 
   def get_transition_set(transition_set_id) do
     Repo.get(TransitionSet, transition_set_id)
@@ -10,6 +10,20 @@ defmodule GraphicsAPI.Runs.Transitions do
     transition_set
     |> TransitionSet.changeset(params)
     |> Repo.update()
+  end
+
+  def get_schedule_id_for_transition_set(transition_set_id) do
+    entry =
+      [
+        Repo.get_by(ScheduleEntry, exit_transition_set_id: transition_set_id),
+        Repo.get_by(ScheduleEntry, enter_transition_set_id: transition_set_id)
+      ]
+      |> Enum.find(&(!is_nil(&1)))
+
+    case entry do
+      %{schedule_id: schedule_id} -> schedule_id
+      _ -> nil
+    end
   end
 
   def start_transition(set_id, transition_id) do

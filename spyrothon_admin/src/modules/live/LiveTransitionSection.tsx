@@ -1,7 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Check, Circle, Loader } from "react-feather";
-import { Transition, TransitionSet, TransitionState } from "@spyrothon/api";
+import { TransitionSet, TransitionState } from "@spyrothon/api";
 import { Button, Card, Stack, Text } from "@spyrothon/sparx";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
@@ -9,19 +8,9 @@ import useSafeDispatch from "@admin/hooks/useDispatch";
 import OBS from "../obs/OBS";
 import { useOBSConnected } from "../obs/OBSStore";
 import { resetTransitionSet } from "../schedules/ScheduleActions";
+import TransitionText from "./TransitionText";
 
 import styles from "./LiveTransitionSection.module.css";
-
-function getIconForTransitionState(state?: TransitionState) {
-  switch (state) {
-    case TransitionState.DONE:
-      return Check;
-    case TransitionState.IN_PROGRESS:
-      return Loader;
-    default:
-      return Circle;
-  }
-}
 
 interface LiveTransitionSectionProps {
   transitionSet?: TransitionSet;
@@ -35,27 +24,7 @@ export default function LiveTransitionSection(props: LiveTransitionSectionProps)
   const { transitionSet, label, className } = props;
   const [obsConnected] = useOBSConnected();
 
-  function renderTransitionText(transition: Transition) {
-    const Icon = getIconForTransitionState(transition.state);
-    return (
-      <Text className={styles.transition}>
-        {Icon != null ? (
-          <Icon className={styles.transitionIcon} size={16} strokeWidth="3" />
-        ) : (
-          <div className={styles.transitionIcon} />
-        )}
-        {transition.obsTransitionInName} to <strong>{transition.obsSceneName}</strong>
-        {transition.obsMediaSourceName != null ? (
-          <>
-            {" - Play "}
-            <strong>{transition.obsMediaSourceName}</strong>
-          </>
-        ) : null}
-      </Text>
-    );
-  }
-
-  if (transitionSet == null) {
+  if (transitionSet == null || transitionSet.transitions.length === 0) {
     return (
       <div className={classNames(styles.container, className)}>
         <Text className={styles.empty} variant="text-md/secondary">
@@ -72,11 +41,13 @@ export default function LiveTransitionSection(props: LiveTransitionSectionProps)
   );
 
   return (
-    <Card className={className}>
+    <Card className={className} level={2}>
       <Stack direction="horizontal" align="start" justify="space-between">
         <div className={styles.readout}>
           <Text>{inProgress ? "Sequence (in progress):" : "Sequence:"}</Text>
-          {transitions.map((transition) => renderTransitionText(transition))}
+          {transitions.map((transition) => (
+            <TransitionText key={transition.id} transition={transition} />
+          ))}
         </div>
         <Stack className={styles.info}>
           <Button

@@ -1,19 +1,23 @@
 import * as React from "react";
-import { v4 as uuid } from "uuid";
+import { ScheduleEntry, TransitionSet } from "@spyrothon/api";
 import {
-  InitialScheduleEntry,
-  InitialTransition,
-  InitialTransitionSet,
-  ScheduleEntry,
-} from "@spyrothon/api";
-import { Button, Card, DurationInput, FormControl, Header, Stack } from "@spyrothon/sparx";
+  Button,
+  Card,
+  DurationInput,
+  FormControl,
+  Header,
+  openModal,
+  Stack,
+} from "@spyrothon/sparx";
 import { SaveState, useSaveable } from "@spyrothon/utils";
 
 import useSafeDispatch from "@admin/hooks/useDispatch";
 
+import TransitionText from "../live/TransitionText";
 import OBSSceneSelector from "../obs/OBSSceneSelector";
+import EditTransitionSetModal from "../transitions/EditTransitionSetModal";
+import { updateTransitionSet } from "../transitions/TransitionActions";
 import { updateScheduleEntry } from "./ScheduleActions";
-import TransitionEditor from "./TransitionEditor";
 
 interface ScheduleEntryEditorProps {
   scheduleEntry: ScheduleEntry;
@@ -23,7 +27,7 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
   const { scheduleEntry } = props;
 
   const dispatch = useSafeDispatch();
-  const [editedEntry, setEditedEntry] = React.useState<InitialScheduleEntry>(scheduleEntry);
+  const [editedEntry, setEditedEntry] = React.useState<ScheduleEntry>(scheduleEntry);
   const hasChanges = JSON.stringify(editedEntry) !== JSON.stringify(scheduleEntry);
 
   React.useEffect(() => setEditedEntry(scheduleEntry), [scheduleEntry]);
@@ -32,119 +36,76 @@ export default function ScheduleEntryEditor(props: ScheduleEntryEditorProps) {
     dispatch(updateScheduleEntry(editedEntry as ScheduleEntry)),
   );
 
-  function updateTransition(
-    kind: "enterTransitionSet" | "exitTransitionSet",
-    newTransition: InitialTransition,
-    index: number,
-  ) {
-    const set = editedEntry[kind] ?? ({} as InitialTransitionSet);
-    const transitions = Array.from(set.transitions ?? []);
-    transitions[index] = newTransition;
-    setEditedEntry({ ...editedEntry, [kind]: { ...set, transitions } });
-  }
-
-  function removeTransition(kind: "enterTransitionSet" | "exitTransitionSet", index: number) {
-    const set = editedEntry[kind] ?? ({} as InitialTransitionSet);
-    const transitions = Array.from(set.transitions ?? []);
-    transitions.splice(index, 1);
-    setEditedEntry({ ...editedEntry, [kind]: { ...set, transitions } });
-  }
-
-  function addTransition(kind: "enterTransitionSet" | "exitTransitionSet") {
-    const set = editedEntry[kind] ?? ({} as InitialTransitionSet);
-    const transitions = Array.from(set.transitions ?? []);
-    transitions.push({ id: uuid() });
-    setEditedEntry({ ...editedEntry, [kind]: { ...set, transitions } });
-  }
-
-  function reorderTransitions(
-    kind: "enterTransitionSet" | "exitTransitionSet",
-    direction: "up" | "down",
-    index: number,
-  ) {
-    const set = editedEntry[kind] ?? ({} as InitialTransitionSet);
-    const transitions = Array.from(set.transitions ?? []);
-    const [item] = transitions.splice(index, 1);
-    switch (direction) {
-      case "up":
-        transitions.splice(index - 1, 0, item);
-        break;
-      case "down":
-        transitions.splice(index + 1, 0, item);
-        break;
-    }
-    setEditedEntry({ ...editedEntry, [kind]: { ...set, transitions } });
+  function openEditTransitionSetModal(transitionSet: TransitionSet, title: string) {
+    openModal((props) => (
+      <EditTransitionSetModal
+        title={title}
+        transitionSet={transitionSet}
+        onSave={async (set) => {
+          await updateTransitionSet(transitionSet.id, set);
+          props.onClose();
+        }}
+      />
+    ));
   }
 
   return (
-    <div>
+    <Stack direction="horizontal" spacing="space-lg" justify="stretch" align="start">
+      <Card>
+        <Stack spacing="space-lg">
+          <Header tag="h2">Entry Setup</Header>
+          <FormControl label="Estimated Setup Time">
+            <DurationInput
+              value={editedEntry.setupSeconds}
+              onChange={(value) => setEditedEntry({ ...editedEntry, setupSeconds: value })}
+            />
+          </FormControl>
+          <OBSSceneSelector
+            selectedSceneName={editedEntry.obsSceneName}
+            note="Name of the scene to use for this run in OBS."
+            onSelect={(scene) => setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })}
+          />
+          <Button
+            variant="primary"
+            onClick={handleSave}
+            disabled={!hasChanges || saveState === SaveState.SAVING}>
+            {getSaveText()}
+          </Button>
+        </Stack>
+      </Card>
       <Stack spacing="space-lg">
-        <Button
-          variant="primary"
-          onClick={handleSave}
-          disabled={!hasChanges || saveState === SaveState.SAVING}>
-          {getSaveText()}
-        </Button>
+        <Header tag="h2">Transitions</Header>
         <Card>
-          <Stack direction="horizontal" spacing="space-lg" justify="stretch">
-            <Stack>
-              <Header tag="h2">Timing</Header>
-              <FormControl label="Estimated Setup Time">
-                <DurationInput
-                  value={editedEntry.setupSeconds}
-                  onChange={(value) => setEditedEntry({ ...editedEntry, setupSeconds: value })}
-                />
-              </FormControl>
-            </Stack>
-
-            <Stack>
-              <Header tag="h2">OBS Scene Setup</Header>
-              <OBSSceneSelector
-                selectedSceneName={editedEntry.obsSceneName}
-                note="Name of the scene to use for this run in OBS."
-                onSelect={(scene) =>
-                  setEditedEntry({ ...editedEntry, obsSceneName: scene?.sceneName })
-                }
-              />
-            </Stack>
+          <Stack spacing="space-lg">
+            <Button
+              onClick={() =>
+                openEditTransitionSetModal(editedEntry.enterTransitionSet, "Edit Enter Transitions")
+              }>
+              Edit Enter Transitions
+            </Button>
+            <div>
+              {editedEntry.enterTransitionSet.transitions.map((transition) => (
+                <TransitionText key={transition.id} transition={transition} />
+              ))}
+            </div>
           </Stack>
         </Card>
-
-        <Stack spacing="space-lg">
-          <Stack direction="horizontal" justify="space-between">
-            <Header tag="h2">Enter Transition</Header>
-            <Button variant="primary" onClick={() => addTransition("enterTransitionSet")}>
-              Add Transition
+        <Card>
+          <Stack spacing="space-lg">
+            <Button
+              onClick={() =>
+                openEditTransitionSetModal(editedEntry.exitTransitionSet, "Edit Exit Transitions")
+              }>
+              Edit Exit Transitions
             </Button>
+            <div>
+              {editedEntry.exitTransitionSet.transitions.map((transition) => (
+                <TransitionText key={transition.id} transition={transition} />
+              ))}
+            </div>
           </Stack>
-          {editedEntry.enterTransitionSet?.transitions.map((transition, index) => (
-            <TransitionEditor
-              key={transition.id}
-              onMoveUp={() => reorderTransitions("enterTransitionSet", "up", index)}
-              onMoveDown={() => reorderTransitions("enterTransitionSet", "down", index)}
-              transition={transition}
-              onChange={(transition) => updateTransition("enterTransitionSet", transition, index)}
-              onRemove={() => removeTransition("enterTransitionSet", index)}
-            />
-          ))}
-          <Stack direction="horizontal" justify="space-between">
-            <Header tag="h2">Exit Transition</Header>
-            <Button variant="primary" onClick={() => addTransition("exitTransitionSet")}>
-              Add Transition
-            </Button>
-          </Stack>
-          {editedEntry.exitTransitionSet?.transitions.map((transition, index) => (
-            <TransitionEditor
-              key={transition.id}
-              onMoveUp={() => reorderTransitions("exitTransitionSet", "up", index)}
-              onMoveDown={() => reorderTransitions("exitTransitionSet", "down", index)}
-              transition={transition}
-              onChange={(transition) => updateTransition("exitTransitionSet", transition, index)}
-              onRemove={() => removeTransition("exitTransitionSet", index)}
-            />
-          ))}
-        </Stack>
+        </Card>
       </Stack>
-    </div>
+    </Stack>
   );
 }

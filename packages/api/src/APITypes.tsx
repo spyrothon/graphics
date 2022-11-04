@@ -88,8 +88,8 @@ export interface ScheduleEntry {
   enteredAt?: Date;
   exitedAt?: Date;
   durationSeconds?: number;
-  enterTransitionSet?: TransitionSet;
-  exitTransitionSet?: TransitionSet;
+  enterTransitionSet: TransitionSet;
+  exitTransitionSet: TransitionSet;
   obsSceneName?: string;
   runId?: string;
   interviewId?: string;
